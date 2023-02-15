@@ -7,11 +7,10 @@ class SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Badge badge;
     return Container(
       margin: EdgeInsets.only(
-        top: 20,
-        bottom: 20,
+        top: 35,
+        bottom: 5,
       ),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -23,27 +22,31 @@ class SearchBar extends StatelessWidget {
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.white,
+              color: Colors.orangeAccent,
             ),
-            borderRadius: const BorderRadius.all(
+            borderRadius:  BorderRadius.all(
               const Radius.circular(
-                10.0,
+                20.0,
               ),
             ),
           ),
+
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.white,
+              color: Colors.orangeAccent,
             ),
             borderRadius: const BorderRadius.all(
               const Radius.circular(
-                10.0,
+                20.0,
               ),
             ),
           ),
-          hintText: 'Buscar mochilas,bolsos,camisetas...',
-          prefixIcon: Icon(
-            Icons.menu,
+          hintText: 'Buscar ...',
+          prefixIcon: InkWell(
+            onTap: ()=> Scaffold.of(context).openDrawer(),
+            child: Icon(
+              Icons.menu,
+            ),
           ),
           suffixIcon: Stack(
             children: [
@@ -52,7 +55,7 @@ class SearchBar extends StatelessWidget {
                   top: 8,
                 ),
                 child: Icon(
-                  Icons.notifications,
+                  Icons.shopping_cart,
                   size: 30,
                 ),
               ),

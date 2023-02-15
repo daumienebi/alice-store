@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'Alice Store',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       routes: {
         'home' : (_)=> const HomePage()
