@@ -1,0 +1,23 @@
+{
+  "language" : "Spanish",
+  "@language" : {
+    "description" : "The current Language"
+  },
+
+  "favourite" : "Favoritos",
+
+  "cart" : "Cesta",
+
+  "parameterTest" : "Parameter Test {parameter}",
+  "@parameterTest": {
+    "description" : "Just in case i use it later",
+    "placeholders": {
+      "parameterTest" : {
+        "type" : "String"
+      }
+    }
+  },
+  "theProject" : "El Proyecto",
+  "home" : "Inicio"
+
+}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,16 +12,16 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold,color: Colors.teal);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Product(),
-    Text("Cesta",style: optionStyle),
-    Text("Favoritos",style: optionStyle),
-    Text("Sobre el proyecto",style: optionStyle),
-  ];
-
 
   @override
   Widget build(BuildContext context) {
+
+    List<Widget> _widgetOptions = <Widget>[
+      Product(),
+      Text(AppLocalizations.of(context)!.cart,style: optionStyle),
+      Text(AppLocalizations.of(context)!.favourite,style: optionStyle),
+      Text(AppLocalizations.of(context)!.theProject,style: optionStyle),
+    ];
     return Scaffold(
       appBar: AppBar(
         title: const Text("Alice"),
@@ -48,22 +49,22 @@ class _HomePageState extends State<HomePage> {
 
   BottomNavigationBar _bottomNavigationBar(){
     return BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
+      items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: "Inicio"
+            icon: const Icon(Icons.home_outlined),
+            label: AppLocalizations.of(context)!.home
         ),
         BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
-            label :"Cesta"
+            icon: const Icon(Icons.shopping_cart_outlined),
+            label :AppLocalizations.of(context)!.cart
         ),
         BottomNavigationBarItem(
-            icon: Icon(Icons.favorite,color: Colors.red,),
-            label :"Favoritos"
+            icon: const Icon(Icons.favorite,color: Colors.red,),
+            label :AppLocalizations.of(context)!.favourite
         ),
         BottomNavigationBarItem(
-            icon: Icon(Icons.menu_book_sharp),
-            label :"El Projecto"
+            icon: const Icon(Icons.menu_book_sharp),
+            label :AppLocalizations.of(context)!.theProject
         )
       ],
       currentIndex: _selectedIndex,
