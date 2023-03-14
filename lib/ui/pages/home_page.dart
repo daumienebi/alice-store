@@ -1,3 +1,6 @@
+import 'package:alice_store/ui/pages/pages.dart';
+import 'package:alice_store/ui/widgets/widgets.dart';
+import 'package:alice_store/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -16,30 +19,43 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
 
-    List<Widget> _widgetOptions = <Widget>[
-      Product(),
+    List<Widget> widgetOptions = <Widget>[
+      const Product(),
       Text(AppLocalizations.of(context)!.cart,style: optionStyle),
-      Text(AppLocalizations.of(context)!.favourite,style: optionStyle),
-      Text(AppLocalizations.of(context)!.theProject,style: optionStyle),
+      const AboutProjectPage()
     ];
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Alice"),
-        actions: [
-          Icon(Icons.search)
-        ],
-      ),
-      drawer: const Drawer(
-        backgroundColor: Colors.green,
-      ),
       bottomNavigationBar: _bottomNavigationBar(),
       body: Padding(
-        padding: const EdgeInsets.only(left: 7,right: 7),
-        child: Column(
+        padding: const EdgeInsets.only(top: 15,left: 10,right: 10),
+        child: ListView(
           children: [
-
-            Center(
-              child: _widgetOptions.elementAt(_selectedIndex),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Alice",
+                      style: TextStyle(
+                          fontSize: 40,
+                          //color: Colors.white,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    CustomButton(
+                      iconData: Icons.favorite_border,
+                      onPressed: () => Navigator.of(context).pushNamed(
+                          AppRoutes.routeStrings.favouritesPage
+                      ),
+                    )
+                  ],
+                ),
+                Center(
+                  child: widgetOptions.elementAt(_selectedIndex),
+                ),
+              ],
             ),
           ],
         ),
@@ -49,6 +65,14 @@ class _HomePageState extends State<HomePage> {
 
   BottomNavigationBar _bottomNavigationBar(){
     return BottomNavigationBar(
+      iconSize: 20,
+      selectedIconTheme: const IconThemeData(
+        color: Colors.black87,
+        size: 27
+      ),
+      selectedFontSize: 15,
+      backgroundColor: Colors.cyan[200],
+      selectedItemColor: Colors.white,
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
             icon: const Icon(Icons.home_outlined),
@@ -57,10 +81,6 @@ class _HomePageState extends State<HomePage> {
         BottomNavigationBarItem(
             icon: const Icon(Icons.shopping_cart_outlined),
             label :AppLocalizations.of(context)!.cart
-        ),
-        BottomNavigationBarItem(
-            icon: const Icon(Icons.favorite,color: Colors.red,),
-            label :AppLocalizations.of(context)!.favourite
         ),
         BottomNavigationBarItem(
             icon: const Icon(Icons.menu_book_sharp),
@@ -85,7 +105,6 @@ class _HomePageState extends State<HomePage> {
     for(int i = 0; i<10; i++){
       movies.add(itemCard("Zapato de prueba ${i}"));
     }
-
     return Padding(
       padding: EdgeInsets.only(top: 10),
       child: ListView.separated(

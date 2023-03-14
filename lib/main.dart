@@ -1,4 +1,4 @@
-import 'package:alice_store/ui/pages/home_page.dart';
+import 'package:alice_store/utils/app_routes.dart';
 import 'package:alice_store/utils/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -16,14 +16,14 @@ class MyApp extends StatelessWidget {
       title: 'Alice Store',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.amber,
+        //scaffoldBackgroundColor: Colors.white
+        scaffoldBackgroundColor: Colors.cyan[200]
       ),
-      routes: {
-        'home' : (_)=> const HomePage()
-      },
-      initialRoute: 'home',
+      routes: AppRoutes.allRoutes,
+      initialRoute: AppRoutes.routeStrings.homepage,
       supportedLocales: L10n.all,
-      localizationsDelegates: [
+      localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
