@@ -284,7 +284,6 @@ class _HomePageState extends State<HomePage> {
       greetingsText = 'Buenas tardes,';
       //greetingsText = AppLocalizations.of(context)!.goodEvening;
     }
-
     return greetingsText;
   }
 

@@ -1,12 +1,14 @@
+import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/utils/app_routes.dart';
 import 'package:alice_store/utils/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const AppState());
 }
 
 class MyApp extends StatelessWidget {
@@ -33,3 +35,18 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+class AppState extends StatelessWidget {
+  const AppState({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => ProductProvider())
+        ],
+      child: const MyApp(),
+    );
+  }
+}
+

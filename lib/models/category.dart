@@ -29,6 +29,8 @@ class Category{
 
   /// Convert a Map<String,dynamic> to a [Product] object
   factory Category.fromMap(Map<String,dynamic> value){
+    //print(Colors.red.value);
+    //print(Colors.pink[50]!.value);
     return Category(
         id: value['id'],
         name: value['name'],
@@ -37,6 +39,7 @@ class Category{
         //Set the default color to white if no background color is given
         bgColor: value['bgColor'] ?? Colors.white.value,
     );
+
   }
 
   /// Convert a [Product] object to a Map<String,dynamic>

@@ -1,12 +1,21 @@
 import 'package:alice_store/models/product.dart';
+import 'package:alice_store/provider/product_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class ShoppingItem extends StatelessWidget {
+class ShoppingItem extends StatefulWidget {
   final Product product;
   const ShoppingItem({Key? key,required this.product}) : super(key: key);
 
   @override
+  State<ShoppingItem> createState() => _ShoppingItemState();
+}
+
+class _ShoppingItemState extends State<ShoppingItem> {
+  @override
   Widget build(BuildContext context) {
+    ProductProvider provider =
+    Provider.of<ProductProvider>(context, listen: false);
     return Container(
       height: 200,
       decoration: BoxDecoration(
@@ -22,25 +31,27 @@ class ShoppingItem extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: Image.asset(
-                    product.image,
+                    widget.product.image,
                   fit: BoxFit.fitWidth,
                 ),
               ),
             ),
           ),
           Text(
-            product.name,
+            widget.product.name,
             style: const TextStyle(fontSize: 15),
           ),
-          const Text(
-            '25€',
-            style: TextStyle(fontSize: 14,color: Colors.black54),
+          Text(
+            '${widget.product.price.toInt()}€',
+            style: const TextStyle(fontSize: 14,color: Colors.black54),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    provider.addToFavourites(widget.product);
+                  },
                   icon: const Icon(Icons.favorite_border)
               ),
               IconButton(

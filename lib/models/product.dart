@@ -6,6 +6,7 @@ class ProductFields{
   static const String name = 'name';
   static const String categoryId = 'categoryId';
   static const String image = 'image';
+  static const String price = 'price';
   static const String description = 'description';
   static const String isFavourite = 'isFavourite';
 
@@ -18,6 +19,7 @@ class Product{
   final String name;
   final int categoryId;
   final String image;
+  final double price;
   final String description;
   final bool isFavourite;
 
@@ -27,6 +29,7 @@ class Product{
     required this.name,
     required this.categoryId,
     required this.image,
+    required this.price,
     required this.description,
     required this.isFavourite
   });
@@ -38,6 +41,7 @@ class Product{
         name: value['name'],
         categoryId: value['categoryId'],
         image: value['image'],
+        price: value['price'],
         description: value['description'],
         isFavourite: value['isFavourite'] == 1 ? true : false
     );
@@ -50,6 +54,7 @@ class Product{
       ProductFields.name : name,
       ProductFields.categoryId : categoryId,
       ProductFields.image : image,
+      ProductFields.price : price,
       ProductFields.description : description,
       ProductFields.isFavourite : isFavourite ? 1 : 0
     };
