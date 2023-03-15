@@ -3,6 +3,7 @@ import 'package:alice_store/utils/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,9 +17,9 @@ class MyApp extends StatelessWidget {
       title: 'Alice Store',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.amber,
         //scaffoldBackgroundColor: Colors.white
-        scaffoldBackgroundColor: Colors.cyan[200]
+        scaffoldBackgroundColor: Colors.cyan[100],
+        textTheme: GoogleFonts.varelaTextTheme()
       ),
       routes: AppRoutes.allRoutes,
       initialRoute: AppRoutes.routeStrings.homepage,
