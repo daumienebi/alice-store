@@ -1,3 +1,4 @@
+import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/utils/app_routes.dart';
 import 'package:alice_store/utils/l10n/l10n.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         //scaffoldBackgroundColor: Colors.white
         scaffoldBackgroundColor: Colors.cyan[100],
-        textTheme: GoogleFonts.varelaTextTheme()
+        textTheme: GoogleFonts.varelaRoundTextTheme()
       ),
       routes: AppRoutes.allRoutes,
       initialRoute: AppRoutes.routeStrings.homepage,
@@ -43,7 +44,8 @@ class AppState extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (_) => ProductProvider())
+          ChangeNotifierProvider(create: (_) => ProductProvider()),
+          ChangeNotifierProvider(create: (_) => CartProvider())
         ],
       child: const MyApp(),
     );

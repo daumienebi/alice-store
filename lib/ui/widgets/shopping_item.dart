@@ -1,4 +1,5 @@
 import 'package:alice_store/models/product.dart';
+import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +17,8 @@ class _ShoppingItemState extends State<ShoppingItem> {
   Widget build(BuildContext context) {
     ProductProvider provider =
     Provider.of<ProductProvider>(context, listen: false);
+    CartProvider cartProvider =
+    Provider.of<CartProvider>(context, listen: false);
     return Container(
       height: 200,
       decoration: BoxDecoration(
@@ -55,7 +58,9 @@ class _ShoppingItemState extends State<ShoppingItem> {
                   icon: const Icon(Icons.favorite_border)
               ),
               IconButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    cartProvider.addProduct(widget.product);
+                  },
                   icon: const Icon(Icons.add_shopping_cart_outlined)
               )
             ],

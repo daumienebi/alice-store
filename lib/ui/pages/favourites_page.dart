@@ -22,7 +22,7 @@ class _FavouritesPageState extends State<FavouritesPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "A L I C E S T O R E",
+          "Productos favoritos",
           style: GoogleFonts.albertSans(
             color: Colors.black,
             fontSize: 20,
@@ -42,16 +42,8 @@ class _FavouritesPageState extends State<FavouritesPage> {
         child:
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text(
-                    'Productos favoritos',
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
                 _favouriteProducts.isEmpty
                     ? const Center(child: Text('No hay productos favoritos'))
                     : Expanded(
@@ -67,7 +59,7 @@ class _FavouritesPageState extends State<FavouritesPage> {
                             ),
                             leading: Image.asset(
                               _favouriteProducts[index].image,
-                              fit: BoxFit.fill,
+                              fit: BoxFit.contain,
                             ),
                           );
                         },
@@ -80,3 +72,4 @@ class _FavouritesPageState extends State<FavouritesPage> {
     );
   }
 }
+

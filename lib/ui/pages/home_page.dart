@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
     List<Widget> widgetOptions = <Widget>[
       CategoryCardSwiper(categories: categories),
       const ShoppingPage(),
-      Text(AppLocalizations.of(context)!.cart, style: optionStyle),
+      const CartPage(),
       const AboutProjectPage()
     ];
     return Scaffold(
@@ -118,10 +118,10 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
                     child: Text(
                       getGreetingText(),
-                      style: const TextStyle(fontSize: 25,fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontSize: 19),
                     ),
                   ),
                   const Padding(
@@ -133,8 +133,11 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ) : Container(),
-              Center(
-                child: widgetOptions[_selectedIndex],
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.80,
+                child: Center(
+                  child: widgetOptions[_selectedIndex],
+                ),
               ),
             ],
           ),
