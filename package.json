@@ -1,0 +1,16 @@
+{
+  "name": "alice_store",
+  "version": "1.0.0",
+  "description": "Fake server to serve the store",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "^0.17.2"
+  }
+}
