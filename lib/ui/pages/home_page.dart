@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
             child: CustomButton(
               iconData: Icons.favorite_border,
               onPressed: () => Navigator.of(context)
-                  .pushNamed(AppRoutes.routeStrings.favouritesPage),
+                  .pushNamed(AppRoutes.routeStrings.wishListPage),
             ),
           )
         ],
@@ -277,9 +277,10 @@ class _HomePageState extends State<HomePage> {
     if(formattedString.endsWith('AM')){
       greetingsText = 'Buenos días,';
       //greetingsText = AppLocalizations.of(context)!.goodMorning;
+
+      //Example of a formattedString could be 6:54 PM, so we split the string
+      //to get the item at the first index and compare if its past 8 o'clock
     }else if(formattedString.endsWith('PM') &&
-        //Example of a formattedString could be 6:54 PM, so we split the string
-        //to get the item at the first index and compare if its past 8 o'clock
         int.parse(formattedString.split(":")[0]) > 8){
       greetingsText = 'Buenas noches,';
       //greetingsText = AppLocalizations.of(context)!.goodNight;

@@ -26,14 +26,10 @@ class _CartPageState extends State<CartPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            /*
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
-                child: Text('Productos de la cesta',style: TextStyle(fontSize: 17),)
-            ),
-             */
             _cartProducts.isEmpty
-                ? const Center(child: Text('No hay productos en la cesta'))
+                ? const Center(
+                child: Text('No hay productos en la cesta')
+            )
                 : Expanded(
               child: ListView.builder(
                 itemBuilder: (BuildContext context, index) {
@@ -52,9 +48,9 @@ class _CartPageState extends State<CartPage> {
                           icon:const Icon(Icons.delete_outline,color: Colors.red,),
                           onPressed: () => provider.removeProduct(_cartProducts[index]),
                         ),
-                        leading: Image.asset(
-                          _cartProducts[index].image,
-                          fit: BoxFit.contain,
+                        leading: FadeInImage.assetNetwork(
+                            placeholder: 'assets/gifs/loading.gif',
+                            image: _cartProducts[index].image
                         ),
                       ),
                     ),
@@ -66,7 +62,6 @@ class _CartPageState extends State<CartPage> {
             ),
             //Show the payment widget if the cart is not empty
             _cartProducts.isEmpty ? Container() : _payNowWidget(provider)
-
           ],
         ),
       ),
@@ -97,7 +92,7 @@ class _CartPageState extends State<CartPage> {
                       fontWeight: FontWeight.bold
                   ),
                 ),
-                const SizedBox(height: 5,),
+                const SizedBox(height: 5),
                 Text(
                   '${provider.getTotalPrice}€',
                   style: const TextStyle(

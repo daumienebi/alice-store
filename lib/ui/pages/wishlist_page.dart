@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class FavouritesPage extends StatefulWidget {
-  const FavouritesPage({Key? key}) : super(key: key);
+class WishListPage extends StatefulWidget {
+  const WishListPage({Key? key}) : super(key: key);
 
   @override
-  State<FavouritesPage> createState() => _FavouritesPageState();
+  State<WishListPage> createState() => _WishListPageState();
 }
 
-class _FavouritesPageState extends State<FavouritesPage> {
+class _WishListPageState extends State<WishListPage> {
   List<Product> _favouriteProducts = [];
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class _FavouritesPageState extends State<FavouritesPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Productos favoritos",
+          "Lista de deseos",
           style: GoogleFonts.albertSans(
             color: Colors.black,
             fontSize: 20,
@@ -57,9 +57,9 @@ class _FavouritesPageState extends State<FavouritesPage> {
                                 icon:const Icon(Icons.delete_outline,color: Colors.red,),
                               onPressed: () => provider.removeFromFavourites(_favouriteProducts[index]),
                             ),
-                            leading: Image.asset(
-                              _favouriteProducts[index].image,
-                              fit: BoxFit.contain,
+                            leading: FadeInImage.assetNetwork(
+                                placeholder: 'assets/gifs/loading.gif',
+                                image: _favouriteProducts[index].image
                             ),
                           );
                         },

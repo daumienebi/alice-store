@@ -1,6 +1,6 @@
 import 'package:alice_store/models/category.dart';
 import 'package:alice_store/models/product.dart';
-import 'package:alice_store/ui/pages/favourites_page.dart';
+import 'package:alice_store/ui/pages/wishlist_page.dart';
 import 'package:alice_store/utils/app_routes.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ class CategoryCardSwiper extends StatelessWidget {
     return Column(children: [
       SizedBox(
         width: double.infinity,
-        height: size.height * 0.45,
+        height: size.height * 0.42,
         child: Swiper(
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
@@ -38,32 +38,12 @@ class CategoryCardSwiper extends StatelessWidget {
                         ),
                         padding: const EdgeInsets.all(5),
                         decoration:BoxDecoration(
-                          image: DecorationImage(
-                          image: AssetImage(categories[index].image),
-                              fit: BoxFit.contain,
-                            ),
                           color: Color(categories[index].bgColor!),
                           borderRadius: BorderRadius.circular(20)
                         ),
-                        child: Column(
-                          //mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
-                            /* Hide the name of the category for now
-                            Text(
-                              categories[index].name,
-                              style: GoogleFonts.alegreyaSansSc(
-                                color: Colors.black54,
-                                fontSize: 30,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(height: 6),
-                             */
-                            //Text(
-                            //  categories[index].description,
-                            //  textAlign: TextAlign.center,
-                            //)
-                          ],
+                        child: FadeInImage.assetNetwork(
+                            placeholder: 'assets/gifs/loading.gif',
+                            image: categories[index].image
                         )
                     ) ,
                   ));
@@ -95,11 +75,11 @@ class CategoryCardSwiper extends StatelessWidget {
   Route _createRoute({required Object? arguments}) {
     return PageRouteBuilder(
       settings: RouteSettings(
-          name: AppRoutes.routeStrings.favouritesPage,
+          name: AppRoutes.routeStrings.wishListPage,
           arguments: arguments
       ),
       pageBuilder: (context, animation, secondaryAnimation) =>
-      const FavouritesPage(),
+      const WishListPage(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return FadeTransition(
           opacity: animation,
@@ -108,7 +88,6 @@ class CategoryCardSwiper extends StatelessWidget {
       },
     );
   }
-
 
   /// Shit method for now
   CustomLayoutOption getCustomLayoutOption({required int startIndex,required int stateCount}){

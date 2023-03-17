@@ -24,7 +24,7 @@ class ProductProvider with ChangeNotifier{
   }
 
   removeFromFavourites (Product product) async{
-    _favouriteProducts.remove(product);
+    _favouriteProducts.removeWhere((element) => element.id == product.id);
     notifyListeners();
   }
 }

@@ -3,14 +3,16 @@ class AppRoutes{
   static RouteStrings routeStrings = RouteStrings();
   static final allRoutes = {
     routeStrings.homepage : (_) => const HomePage(),
-    routeStrings.favouritesPage: (_) => const FavouritesPage(),
+    routeStrings.wishListPage: (_) => const WishListPage(),
     routeStrings.aboutProjectPage: (_) => const AboutProjectPage(),
+    routeStrings.productPage: (_) => const ProductDetailPage(),
   };
 }
 
 /// Class to map all the pages in the app
 class RouteStrings {
   String get homepage => 'home';
-  String get favouritesPage => 'favourites';
-  String get aboutProjectPage => 'aboutproject';
+  String get wishListPage => 'wishList';
+  String get aboutProjectPage => 'aboutProject';
+  String get productPage => 'productDetails';
 }

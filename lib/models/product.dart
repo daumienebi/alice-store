@@ -8,10 +8,9 @@ class ProductFields{
   static const String image = 'image';
   static const String price = 'price';
   static const String description = 'description';
-  static const String isFavourite = 'isFavourite';
 
   //Static list with the name values to easily retrieve fields names from the DB
-  static final List <String> values =[id,name,categoryId,image,description,isFavourite];
+  static final List <String> values =[id,name,categoryId,image,description];
 }
 
 class Product{
@@ -21,7 +20,6 @@ class Product{
   final String image;
   final double price;
   final String description;
-  final bool isFavourite;
 
   /// Create the constructor
   Product({
@@ -31,7 +29,6 @@ class Product{
     required this.image,
     required this.price,
     required this.description,
-    required this.isFavourite
   });
 
   /// Convert a Map<String,dynamic> to a [Product] object
@@ -43,7 +40,6 @@ class Product{
         image: value['image'],
         price: value['price'],
         description: value['description'],
-        isFavourite: value['isFavourite'] == 1 ? true : false
     );
   }
 
@@ -56,7 +52,11 @@ class Product{
       ProductFields.image : image,
       ProductFields.price : price,
       ProductFields.description : description,
-      ProductFields.isFavourite : isFavourite ? 1 : 0
     };
+  }
+  @override
+  String toString(){
+    return 'Product{id : $id,description : $description,category : $categoryId,'
+        'Image : $image}';
   }
 }

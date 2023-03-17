@@ -23,7 +23,7 @@ class CartProvider with ChangeNotifier{
   }
 
   removeProduct(Product oldProduct){
-    _products.remove(oldProduct);
+    _products.removeWhere((element) => element.id == oldProduct.id);
     calculateTotalPrice();
     notifyListeners();
   }
