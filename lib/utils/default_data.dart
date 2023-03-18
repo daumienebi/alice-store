@@ -24,22 +24,19 @@ class DefaultData{
       'id' : 1,
       'name' : 'Bolsas',
       'image' : 'https://raw.githubusercontent.com/daumienebi/alice_store/d3647e67ee17389ba2e22d30fe9f6b83dd089253/images/categories/bag.png',
-      'description' : 'Descripcion detallada de las bolsas hechas a mano.',
-      'bgColor' : Colors.white30.value,
+      'description' : 'Descripcion detallada de las bolsas hechas a mano.'
     },
     {
       'id' : 2,
       'name' : 'Camisetas',
       'image' : 'https://raw.githubusercontent.com/daumienebi/alice_store/d3647e67ee17389ba2e22d30fe9f6b83dd089253/images/categories/shirt.png',
-      'description' : 'Camisetas Alice con un diseño curado combinando los penkos.',
-      'bgColor' : Colors.white30.value,
+      'description' : 'Camisetas Alice con un diseño curado combinando los penkos.'
     },
     {
       'id' : 3,
       'name' : 'Tejido de punto',
       'image' : 'https://raw.githubusercontent.com/daumienebi/alice_store/d3647e67ee17389ba2e22d30fe9f6b83dd089253/images/categories/knitting.png',
-      'description' : 'Tejido de punto, bolsas especiales.',
-      'bgColor' : Colors.white30.value,
+      'description' : 'Tejido de punto, bolsas especiales.'
     }
   ];
 

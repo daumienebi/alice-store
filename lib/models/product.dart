@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
 class ProductFields{
 
@@ -38,7 +38,7 @@ class Product{
         name: value['name'],
         categoryId: value['categoryId'],
         image: value['image'],
-        price: value['price'],
+        price: value['price'] as double,
         description: value['description'],
     );
   }
@@ -54,6 +54,28 @@ class Product{
       ProductFields.description : description,
     };
   }
+
+  factory Product.fromJson(dynamic json) {
+    return
+      Product(
+          id: json[ProductFields.id],
+          name: json[ProductFields.name],
+          categoryId: json[ProductFields.categoryId],
+          description: json[ProductFields.description],
+          image: json[ProductFields.image],
+          price: double.parse(json[ProductFields.price].toString()),
+      );
+  }
+
+  /// Returns a list of Product from each string of the decoded json
+  static List<Product> productModelFromJson(var jsonResponse) {
+    List<Product> products = [];
+    for (var category in jsonResponse) {
+      products.add(Product.fromJson(category));
+    }
+    return products;
+  }
+
   @override
   String toString(){
     return 'Product{id : $id,description : $description,category : $categoryId,'

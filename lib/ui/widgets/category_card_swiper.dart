@@ -38,7 +38,7 @@ class CategoryCardSwiper extends StatelessWidget {
                         ),
                         padding: const EdgeInsets.all(5),
                         decoration:BoxDecoration(
-                          color: Color(categories[index].bgColor!),
+                          color: Colors.white30,
                           borderRadius: BorderRadius.circular(20)
                         ),
                         child: FadeInImage.assetNetwork(

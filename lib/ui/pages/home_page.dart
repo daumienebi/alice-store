@@ -1,4 +1,6 @@
 import 'package:alice_store/models/category.dart';
+import 'package:alice_store/services/category_service.dart';
+import 'package:alice_store/services/product_service.dart';
 import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/ui/widgets/widgets.dart';
 import 'package:alice_store/utils/app_routes.dart';
@@ -25,6 +27,15 @@ class _HomePageState extends State<HomePage> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.teal);
   DefaultData defaultData = DefaultData();
   List<Category> categories = [];
+  final CategoryService _categoryService = CategoryService();
+  final ProductService _productService = ProductService();
+
+  @override
+  void initState(){
+    super.initState();
+    _categoryService.fetchAllCategories();
+    _productService.fetchAllProducts();
+  }
 
   @override
   Widget build(BuildContext context) {
