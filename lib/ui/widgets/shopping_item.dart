@@ -37,7 +37,7 @@ class ShoppingItem extends StatelessWidget {
           children: [
             SizedBox(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: FadeInImage.assetNetwork(

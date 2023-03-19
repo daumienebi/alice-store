@@ -3,6 +3,7 @@ import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class WishListPage extends StatefulWidget {
@@ -39,37 +40,49 @@ class _WishListPageState extends State<WishListPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 10, right: 10),
-        child:
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _favouriteProducts.isEmpty
-                    ? const Center(child: Text('No hay productos favoritos'))
-                    : Expanded(
-                      child: ListView.builder(
-                          itemBuilder: (BuildContext context, index) {
-                          return ListTile(
-                            title: Text(_favouriteProducts[index].name),
-                            subtitle:
-                                Text('${_favouriteProducts[index].price.toInt()}€'),
-                            trailing: IconButton(
-                                icon:const Icon(Icons.delete_outline,color: Colors.red,),
-                              onPressed: () => provider.removeFromFavourites(_favouriteProducts[index]),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _favouriteProducts.isEmpty
+                ? Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                    Lottie.asset(
+                      'assets/lottie_animations/no-item-in-box.json',
+                    ),
+                  const Text(
+                    'No hay productos en la lista de deseos',
+                    style: TextStyle(fontSize: 15),
+                  ),
+
+                  ])
+                : Expanded(
+                    child: ListView.builder(
+                      itemBuilder: (BuildContext context, index) {
+                        return ListTile(
+                          title: Text(_favouriteProducts[index].name),
+                          subtitle: Text(
+                              '${_favouriteProducts[index].price.toInt()}€'),
+                          trailing: IconButton(
+                            icon: const Icon(
+                              Icons.delete_outline,
+                              color: Colors.red,
                             ),
-                            leading: FadeInImage.assetNetwork(
-                                placeholder: 'assets/gifs/loading.gif',
-                                image: _favouriteProducts[index].image
-                            ),
-                          );
-                        },
-                        itemCount: _favouriteProducts.length,
-                        ),
-                    )
-              ],
-            ),
+                            onPressed: () => provider.removeFromFavourites(
+                                _favouriteProducts[index]),
+                          ),
+                          leading: FadeInImage.assetNetwork(
+                              placeholder: 'assets/gifs/loading.gif',
+                              image: _favouriteProducts[index].image),
+                        );
+                      },
+                      itemCount: _favouriteProducts.length,
+                    ),
+                  )
+          ],
+        ),
       ),
     );
   }
 }
-

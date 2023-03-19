@@ -2,6 +2,7 @@ import 'package:alice_store/models/product.dart';
 import 'package:alice_store/services/product_service.dart';
 import 'package:alice_store/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class ShoppingPage extends StatefulWidget {
   const ShoppingPage({Key? key}) : super(key: key);
@@ -64,7 +65,14 @@ class _ShoppingPageState extends State<ShoppingPage> {
         }
 
         //Default
-        return const Text('Erorr cargando los productos!');
+        return Column(
+          children: [
+            Lottie.asset(
+              'assets/lottie_animations/error.json',
+            ),
+            const Text('Erorr cargando los productos desde el servidor!')
+          ],
+        );
       },
 
     );

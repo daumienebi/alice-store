@@ -1,6 +1,7 @@
 import 'package:alice_store/models/category.dart';
+import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/services/category_service.dart';
-import 'package:alice_store/services/product_service.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/ui/widgets/widgets.dart';
 import 'package:alice_store/utils/app_routes.dart';
@@ -11,6 +12,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,89 +24,93 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late Future<List<Category>> fetchCategoriesFuture;
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.teal);
   //DefaultData defaultData = DefaultData();
   List<Category> categories = [];
-  final CategoryService _categoryService = CategoryService();
+  final CategoryService categoryService = CategoryService();
 
-  void fetchAllCategories() async {
-    categories = await _categoryService.fetchAllCategories();
+  Future<List<Category>> fetchAllCategories() async {
+    List<Category> categories = await categoryService.fetchAllCategories();
+    return categories;
   }
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
-    fetchAllCategories();
+    fetchCategoriesFuture = fetchAllCategories();
   }
 
   @override
   Widget build(BuildContext context) {
-    //categories = defaultData.getProductCategories;
+
     List<Widget> widgetOptions = <Widget>[
-      CategoryCardSwiper(categories: categories),
+      categoriesFutureBuilder(),
       const ShoppingPage(),
       const CartPage(),
       const AboutProjectPage()
     ];
+
     return Scaffold(
       //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: _selectedIndex == 0 ? FloatingActionButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        backgroundColor: Colors.white,
-        child: const Icon(Icons.share_sharp,color: Colors.black),
-        onPressed: () {
-          showModalBottomSheet(
-              context: context,
-              builder: (BuildContext context) {
-                return Container(
-                  height: 110,
-                  color: Colors.white,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Compartir la app',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(color: Colors.black54, fontSize: 20),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Expanded(
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: socialMediaButtons(context),
-                          ),
-                        ),
-                      ]),
-                );
-              });
-        },
-      ) : Container(),
+      floatingActionButton: _selectedIndex == 0
+          ? FloatingActionButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)),
+              backgroundColor: Colors.white,
+              child: const Icon(Icons.share_sharp, color: Colors.black),
+              onPressed: () {
+                showModalBottomSheet(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Container(
+                        height: 110,
+                        color: Colors.white,
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Compartir la app',
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                    color: Colors.black54, fontSize: 20),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Expanded(
+                                child: ListView(
+                                  scrollDirection: Axis.horizontal,
+                                  children: socialMediaButtons(context),
+                                ),
+                              ),
+                            ]),
+                      );
+                    });
+              },
+            )
+          : Container(),
       drawer: const Drawer(
-        child:  DrawerPage(),
+        child: DrawerPage(),
       ),
       appBar: AppBar(
-        title: Text(
-          "A L I C E S T O R E",
-          style: GoogleFonts.albertSans(
+        title: Text("A L I C E S T O R E",
+            style: GoogleFonts.albertSans(
               color: Colors.black,
               fontSize: 20,
-          )
-        ),
+            )),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: Builder(
-          builder: (BuildContext context){
+          builder: (BuildContext context) {
             return Padding(
               padding: const EdgeInsets.only(left: 10, top: 10),
               child: CustomButton(
                   iconData: Icons.menu,
-                  onPressed: Scaffold.of(context).openDrawer
-              ),
+                  onPressed: Scaffold.of(context).openDrawer),
             );
           },
         ),
@@ -126,25 +133,30 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             //mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _selectedIndex == 0 ? Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: Text(
-                      getGreetingText(),
-                      style: const TextStyle(fontSize: 19),
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 40,),
-                    child: Text(
-                      'Desliza para explorar las categorías',
-                      style: TextStyle(fontSize: 17,color: Colors.black54),
-                    ),
-                  ),
-                ],
-              ) : Container(),
+              _selectedIndex == 0
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10.0),
+                          child: Text(
+                            getGreetingText(),
+                            style: const TextStyle(fontSize: 19),
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(
+                            bottom: 40,
+                          ),
+                          child: Text(
+                            'Desliza para explorar las categorías',
+                            style:
+                                TextStyle(fontSize: 17, color: Colors.black54),
+                          ),
+                        ),
+                      ],
+                    )
+                  : Container(),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.80,
                 child: Center(
@@ -169,13 +181,26 @@ class _HomePageState extends State<HomePage> {
       selectedItemColor: Colors.black,
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-            icon: const Icon(Icons.home_outlined),
-            label: AppLocalizations.of(context)!.home),
+          icon: const Icon(Icons.home_outlined),
+          label: AppLocalizations.of(context)!.home,
+        ),
         const BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag_outlined),
-            label: 'Shop'),
+          icon: Icon(Icons.shopping_bag_outlined),
+          label: 'Shop',
+        ),
         BottomNavigationBarItem(
-            icon: const Icon(Icons.shopping_cart_outlined),
+            icon: badges.Badge(
+              badgeContent: Consumer<CartProvider>(
+                builder: (context, cartProvider, child) {
+                  return Text(
+                    '${cartProvider.getProducts.length}',
+                    style: const TextStyle(color: Colors.white),
+                  );
+                },
+              ),
+              position: badges.BadgePosition.topEnd(top: -18),
+              child: const Icon(Icons.shopping_cart_outlined),
+            ),
             label: AppLocalizations.of(context)!.cart),
         BottomNavigationBarItem(
             icon: const Icon(Icons.work_outline),
@@ -263,7 +288,9 @@ class _HomePageState extends State<HomePage> {
     return items;
   }
 
-  socialButton({required String socialMedia, required Icon icon,
+  socialButton(
+      {required String socialMedia,
+      required Icon icon,
       Function()? onClicked}) {
     const listTextStyle = TextStyle(color: Colors.black54);
     return Column(
@@ -280,23 +307,59 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  FutureBuilder categoriesFutureBuilder() {
+    //Try to use setState to rebuild the widget
+    return FutureBuilder(
+      future: fetchCategoriesFuture,
+      builder: (context, AsyncSnapshot snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Column(
+            //mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              LinearProgressIndicator(color: Colors.cyan),
+              SizedBox(height: 10),
+              Text('Cargando categorias')
+            ],
+          );
+        }
+        // On error
+        if (snapshot.hasError) {
+          return Column(
+            children: [Text(snapshot.error.toString())],
+          );
+        }
+        if (snapshot.hasData) {
+          return CategoryCardSwiper(categories: snapshot.data);
+        }
+        return Column(
+          children: [
+            Lottie.asset(
+              'assets/lottie_animations/error.json',
+            ),
+            const Text('Erorr cargando las categorias desde el servidor!')
+          ],
+        );
+      },
+    );
+  }
+
   /// Get the greeting text depending on the time of the day
-  String getGreetingText (){
+  String getGreetingText() {
     String greetingsText = ' ';
     final DateTime now = DateTime.now();
     final format = DateFormat.jm();
     String formattedString = format.format(now);
-    if(formattedString.endsWith('AM')){
+    if (formattedString.endsWith('AM')) {
       greetingsText = 'Buenos días,';
       //greetingsText = AppLocalizations.of(context)!.goodMorning;
 
       //Example of a formattedString could be 6:54 PM, so we split the string
       //to get the item at the first index and compare if its past 8 o'clock
-    }else if(formattedString.endsWith('PM') &&
-        int.parse(formattedString.split(":")[0]) > 8){
+    } else if (formattedString.endsWith('PM') &&
+        int.parse(formattedString.split(":")[0]) > 8) {
       greetingsText = 'Buenas noches,';
       //greetingsText = AppLocalizations.of(context)!.goodNight;
-    }else{
+    } else {
       greetingsText = 'Buenas tardes,';
       //greetingsText = AppLocalizations.of(context)!.goodEvening;
     }

@@ -1,8 +1,7 @@
 import 'package:alice_store/models/product.dart';
 import 'package:alice_store/provider/cart_provider.dart';
-import 'package:alice_store/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class CartPage extends StatefulWidget {
@@ -16,8 +15,7 @@ class _CartPageState extends State<CartPage> {
   List<Product> _cartProducts = [];
   @override
   Widget build(BuildContext context) {
-    CartProvider provider =
-    Provider.of<CartProvider>(context, listen: true);
+    CartProvider provider = Provider.of<CartProvider>(context, listen: true);
     _cartProducts = provider.getProducts;
     return Scaffold(
       body: SizedBox(
@@ -27,39 +25,50 @@ class _CartPageState extends State<CartPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _cartProducts.isEmpty
-                ? const Center(
-                child: Text('No hay productos en la cesta')
-            )
-                : Expanded(
-              child: ListView.builder(
-                itemBuilder: (BuildContext context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12)
-                      ),
-                      child: ListTile(
-                        tileColor: Colors.white38,
-                        title: Text(_cartProducts[index].name),
-                        subtitle:
-                        Text('${_cartProducts[index].price.toInt()}€'),
-                        trailing: IconButton(
-                          icon:const Icon(Icons.delete_outline,color: Colors.red,),
-                          onPressed: () => provider.removeProduct(_cartProducts[index]),
+                ? Center(
+                    child: Column(
+                      children: [
+                        Lottie.asset(
+                          'assets/lottie_animations/empty-cart.json',
                         ),
-                        leading: FadeInImage.assetNetwork(
-                            placeholder: 'assets/gifs/loading.gif',
-                            image: _cartProducts[index].image
-                        ),
-                      ),
+                        const Text(
+                          'No hay productos en la cesta',
+                          style: TextStyle(fontSize: 15)
+                        )
+                      ],
                     ),
-                  );
-                },
-                itemCount: _cartProducts.length,
-              ),
-
-            ),
+                  )
+                : Expanded(
+                    child: ListView.builder(
+                      itemBuilder: (BuildContext context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12)),
+                            child: ListTile(
+                              tileColor: Colors.white38,
+                              title: Text(_cartProducts[index].name),
+                              subtitle: Text(
+                                  '${_cartProducts[index].price.toInt()}€'),
+                              trailing: IconButton(
+                                icon: const Icon(
+                                  Icons.delete_outline,
+                                  color: Colors.red,
+                                ),
+                                onPressed: () => provider
+                                    .removeProduct(_cartProducts[index]),
+                              ),
+                              leading: FadeInImage.assetNetwork(
+                                  placeholder: 'assets/gifs/loading.gif',
+                                  image: _cartProducts[index].image),
+                            ),
+                          ),
+                        );
+                      },
+                      itemCount: _cartProducts.length,
+                    ),
+                  ),
             //Show the payment widget if the cart is not empty
             _cartProducts.isEmpty ? Container() : _payNowWidget(provider)
           ],
@@ -68,15 +77,13 @@ class _CartPageState extends State<CartPage> {
     );
   }
 
-  Widget _payNowWidget(CartProvider provider){
+  Widget _payNowWidget(CartProvider provider) {
     return Padding(
-      padding: const EdgeInsets.only(left: 30,right: 30,bottom: 5),
+      padding: const EdgeInsets.only(left: 30, right: 30, bottom: 5),
       child: Container(
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            color: Colors.green[400]
-        ),
+            borderRadius: BorderRadius.circular(15), color: Colors.green[400]),
         height: 75,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,8 +96,7 @@ class _CartPageState extends State<CartPage> {
                   style: TextStyle(
                       fontSize: 14,
                       color: Colors.white70,
-                      fontWeight: FontWeight.bold
-                  ),
+                      fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 5),
                 Text(
@@ -98,8 +104,7 @@ class _CartPageState extends State<CartPage> {
                   style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 16
-                  ),
+                      fontSize: 16),
                 )
               ],
             ),
@@ -107,20 +112,24 @@ class _CartPageState extends State<CartPage> {
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(13),
-                    border: Border.all(color: Colors.white70)
-                ),
+                    border: Border.all(color: Colors.white70)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const[
-                    Text('Pagar',style: TextStyle(color: Colors.white),),
-                    Icon(Icons.arrow_forward_ios_sharp,size: 15,color: Colors.white,)
+                  children: const [
+                    Text(
+                      'Pagar',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios_sharp,
+                      size: 15,
+                      color: Colors.white,
+                    )
                   ],
-                )
-            )
+                ))
           ],
         ),
       ),
     );
   }
 }
-
