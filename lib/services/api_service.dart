@@ -15,9 +15,9 @@ class ApiService{
       responseJson = jsonDecode(response.body);
     } on SocketException catch (e){
       // Handle the SocketException
-      dev.log('There was a problem with the network connection: $e');
+      dev.log('Network connection error: $e');
     }catch(e){
-      dev.log('random exception $e');
+      dev.log('Random Exception $e');
     }
     return responseJson;
   }

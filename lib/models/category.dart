@@ -1,6 +1,5 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 //I didn't know methods could be declared here
+
 /*
 List<Category> categoryModelFromJson(String string) {
   List<Category> categories = [];
@@ -54,7 +53,7 @@ class Category{
     };
   }
 
-  factory Category.fromJson(dynamic json) {
+  factory Category.fromJson(dynamic json){
     return
       Category(
           id: json[CategoryFields.id],
@@ -65,7 +64,7 @@ class Category{
   }
 
   /// Returns a list of Categories from each string of the decoded json
-  static List<Category> categoryModelFromJson(var jsonResponse) {
+  static List<Category> categoryModelFromJson(var jsonResponse){
     //categories = jsonResponse.forEach((element) => Category.fromJson(element));
     List<Category> categories = [];
     for (var category in jsonResponse) {
@@ -73,6 +72,7 @@ class Category{
     }
     return categories;
   }
+
   @override
   String toString() {
     return 'Category{id: $id, name: $name, image: $image, description: $description}';

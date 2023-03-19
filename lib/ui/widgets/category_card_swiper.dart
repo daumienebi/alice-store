@@ -14,7 +14,7 @@ class CategoryCardSwiper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SwiperController _swiperController = SwiperController();
+    //final SwiperController _swiperController = SwiperController();
     final size = MediaQuery.of(context).size;
     return Column(children: [
       SizedBox(
@@ -56,7 +56,7 @@ class CategoryCardSwiper extends StatelessWidget {
             itemHeight: size.height * 0.50,
             itemWidth: size.width * 0.75,
             duration: 1000,
-            controller: _swiperController,
+            //controller: _swiperController,
             curve: Curves.easeInOut,
             /*
             customLayoutOption: getCustomLayoutOption(

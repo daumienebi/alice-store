@@ -5,7 +5,6 @@ import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/ui/widgets/widgets.dart';
 import 'package:alice_store/utils/app_routes.dart';
 import 'package:alice_store/utils/constants.dart';
-import 'package:alice_store/utils/default_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -25,21 +24,23 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.teal);
-  DefaultData defaultData = DefaultData();
+  //DefaultData defaultData = DefaultData();
   List<Category> categories = [];
   final CategoryService _categoryService = CategoryService();
-  final ProductService _productService = ProductService();
+
+  void fetchAllCategories() async {
+    categories = await _categoryService.fetchAllCategories();
+  }
 
   @override
   void initState(){
     super.initState();
-    _categoryService.fetchAllCategories();
-    _productService.fetchAllProducts();
+    fetchAllCategories();
   }
 
   @override
   Widget build(BuildContext context) {
-    categories = defaultData.getProductCategories;
+    //categories = defaultData.getProductCategories;
     List<Widget> widgetOptions = <Widget>[
       CategoryCardSwiper(categories: categories),
       const ShoppingPage(),
