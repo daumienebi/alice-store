@@ -2,6 +2,7 @@ import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/utils/app_routes.dart';
 import 'package:alice_store/utils/l10n/l10n.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -12,8 +13,31 @@ void main() async{
   runApp(const AppState());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  bool _hasInternetConnection = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkInternetConnection();
+  }
+
+  Future<void> _checkInternetConnection() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    setState(() {
+      _hasInternetConnection = connectivityResult == ConnectivityResult.mobile;
+      _hasInternetConnection = connectivityResult == ConnectivityResult.wifi;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,7 +49,8 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.varelaRoundTextTheme()
       ),
       routes: AppRoutes.allRoutes,
-      initialRoute: AppRoutes.routeStrings.homepage,
+      initialRoute: _hasInternetConnection ? AppRoutes.routeStrings.homepage
+          : AppRoutes.routeStrings.noInternetPage,
       supportedLocales: L10n.all,
       localizationsDelegates: const [
         AppLocalizations.delegate,

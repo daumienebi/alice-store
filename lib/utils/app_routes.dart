@@ -6,6 +6,7 @@ class AppRoutes{
     routeStrings.wishListPage: (_) => const WishListPage(),
     routeStrings.aboutProjectPage: (_) => const AboutProjectPage(),
     routeStrings.productPage: (_) => const ProductDetailPage(),
+    routeStrings.noInternetPage: (_) => const NoInternetPage()
   };
 }
 
@@ -15,4 +16,5 @@ class RouteStrings {
   String get wishListPage => 'wishList';
   String get aboutProjectPage => 'aboutProject';
   String get productPage => 'productDetails';
+  String get noInternetPage => 'noInternet';
 }

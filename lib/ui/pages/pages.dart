@@ -5,3 +5,4 @@ export 'package:alice_store/ui/pages/drawer_page.dart';
 export 'package:alice_store/ui/pages/shopping_page.dart';
 export 'package:alice_store/ui/pages/cart_page.dart';
 export 'package:alice_store/ui/pages/product_detail_page.dart';
+export 'package:alice_store/ui/pages/no_internet_page.dart';

@@ -6,7 +6,8 @@ import 'dart:developer' as dev;
 
 //Util class to get general response from the API
 class ApiService{
-  final String baseApiUrl = 'http://${PrivateConstants.ip}:3000';
+  //final String baseApiUrl = 'http://${PrivateConstants.ip}:3000';
+  final String baseApiUrl = PrivateConstants.serverLink;
   Future<dynamic> getResponse(String url) async{
     dynamic responseJson;
     try {

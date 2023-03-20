@@ -52,7 +52,6 @@ class _HomePageState extends State<HomePage> {
       const CartPage(),
       const AboutProjectPage()
     ];
-
     return Scaffold(
       //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: _selectedIndex == 0

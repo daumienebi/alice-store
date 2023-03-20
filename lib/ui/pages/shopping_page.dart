@@ -63,7 +63,6 @@ class _ShoppingPageState extends State<ShoppingPage> {
                     child: ShoppingItem(product: snapshot.data[index])),
               ));
         }
-
         //Default
         return Column(
           children: [
