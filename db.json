@@ -4,19 +4,19 @@
     {
       "id" : 1,
       "name" : "Bolsas",
-      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/d3647e67ee17389ba2e22d30fe9f6b83dd089253/images/categories/bag.png",
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/categories/bag.png",
       "description" : "Descripcion detallada de las bolsas hechas a mano."
     },
     {
       "id" : 2,
       "name" : "Camisetas",
-      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/d3647e67ee17389ba2e22d30fe9f6b83dd089253/images/categories/shirt.png",
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/categories/shirt.png",
       "description" : "Camisetas Alice con un diseño curado combinando los penkos."
     },
     {
       "id" : 3,
       "name" : "Tejido de punto",
-      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/d3647e67ee17389ba2e22d30fe9f6b83dd089253/images/categories/knitting.png",
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/categories/categoria_tejido.png",
       "description" : "Tejido de punto, bolsas especiales."
     }
   ],
@@ -27,7 +27,7 @@
       "id" : 1,
       "name" : "Bolsa 1",
       "categoryId" : 1,
-      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/d3647e67ee17389ba2e22d30fe9f6b83dd089253/images/categories/bag.png",
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bag.png",
       "price" : 15.50,
       "description" : "Descripcion detallada de las bolsas hechas a mano."
     },
@@ -36,41 +36,119 @@
       "name" : "Bolsa 2",
       "categoryId" : 1,
       "price" : 15.50,
-      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/d3647e67ee17389ba2e22d30fe9f6b83dd089253/images/categories/bag.png",
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tela_prod1.png",
       "description" : "Descripcion detallada ."
     },
     {
       "id" : 3,
-      "name" : "Camiseta 1",
-      "categoryId" : 2,
-      "price" : 25.00,
-      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/d3647e67ee17389ba2e22d30fe9f6b83dd089253/images/categories/shirt.png",
+      "name" : "Bolsa 3",
+      "categoryId" : 1,
+      "price" : 17.00,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tela_prod2.png",
       "description" : "Descripcion detallada ."
     },
     {
       "id" : 4,
-      "name" : "Camiseta 2",
-      "categoryId" : 2,
-      "price" : 25.00,
-      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/d3647e67ee17389ba2e22d30fe9f6b83dd089253/images/categories/shirt.png",
+      "name" : "Bolsa 4",
+      "categoryId" : 1,
+      "price" : 19.00,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tela_prod5.png",
       "description" : "Descripcion detallada ."
     },
     {
       "id" : 5,
-      "name" : "Tejido 1",
-      "categoryId" : 3,
+      "name" : "Camiseta 1",
+      "categoryId" : 2,
       "price" : 17.00,
-      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/d3647e67ee17389ba2e22d30fe9f6b83dd089253/images/categories/knitting.png",
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/shirt.png",
       "description" : "Descripcion detallada ."
     },
     {
       "id" : 6,
-      "name" : "Tejido 2",
+      "name" : "Camiseta 2",
+      "categoryId" : 2,
+      "price" : 17.00,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/camiseta_prod6.png",
+      "description" : "Descripcion detallada ."
+    },
+    {
+      "id" : 7,
+      "name" : "Camiseta 3",
+      "categoryId" : 2,
+      "price" : 17.00,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/camiseta_prod8.png",
+      "description" : "Descripcion detallada ."
+    },
+    {
+      "id" : 8,
+      "name" : "Bolsa Tejido 1",
       "categoryId" : 3,
       "price" : 17.00,
-      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/d3647e67ee17389ba2e22d30fe9f6b83dd089253/images/categories/knitting.png",
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tejido_prod4.png",
+      "description" : "Descripcion detallada ."
+    },
+    {
+      "id" : 9,
+      "name" : "Bolsa Tejido 2",
+      "categoryId" : 3,
+      "price" : 17.00,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/knitting.png",
       "description" : "Descripcion detallada ."
     }
 
+  ],
+
+  "project_feed" :
+  [
+    { 
+      "id" : 1,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image1.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 2,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image2.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 3,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image3.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 4,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image4.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 5,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image5.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 6,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image6.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 7,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image7.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 8,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image8.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 9,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image9.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 10,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image10.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    }
   ]
 }
