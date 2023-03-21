@@ -94,20 +94,44 @@
       "price" : 17.00,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/knitting.png",
       "description" : "Descripcion detallada ."
+    },
+    {
+      "id" : 10,
+      "name" : "Bolsa Tejido 3",
+      "categoryId" : 3,
+      "price" : 17.00,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tejido_prod9.png",
+      "description" : "Descripcion detallada ."
+    },
+    {
+      "id" : 11,
+      "name" : "Bolsa Tejido 4",
+      "categoryId" : 3,
+      "price" : 20.00,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tejido_prod10.png",
+      "description" : "Descripcion detallada ."
+    },
+    {
+      "id" : 12,
+      "name" : "Bolsa Tejido 5",
+      "categoryId" : 3,
+      "price" : 13.00,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tejido_prod11.png",
+      "description" : "Descripcion detallada ."
     }
 
   ],
 
-  "project_feed" :
+  "project_feeds" :
   [
     { 
       "id" : 1,
-      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image1.jpg",
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image11.jpg",
       "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
     },
     { 
       "id" : 2,
-      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image2.jpg",
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image12.jpg",
       "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
     },
     { 
@@ -147,7 +171,32 @@
     },
     { 
       "id" : 10,
-      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image10.jpg",
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image13.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 11,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image14.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 12,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image15.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 13,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image16.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 14,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image17.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 15,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image18.jpg",
       "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
     }
   ]
