@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -10,21 +12,29 @@ class NoInternetPage extends StatefulWidget {
 }
 
 class _NoInternetPageState extends State<NoInternetPage> {
-
-  bool _hasInternetConnection = false;
+  late StreamSubscription connectivityStream;
+  bool _isConnected = true;
 
   @override
   void initState() {
     super.initState();
-    _checkInternetConnection();
+    setConnectivitySubscription();
   }
 
-  Future<void> _checkInternetConnection() async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    setState(() {
-      _hasInternetConnection = connectivityResult == ConnectivityResult.mobile;
-      _hasInternetConnection = connectivityResult == ConnectivityResult.wifi;
-    });
+  @override
+  void dispose() {
+    connectivityStream.cancel();
+    super.dispose();
+  }
+
+  void setConnectivitySubscription() {
+    connectivityStream = Connectivity().onConnectivityChanged.listen(
+          (ConnectivityResult result) {
+        setState(() {
+          _isConnected = (result != ConnectivityResult.none);
+        });
+      },
+    );
   }
 
   @override
@@ -45,17 +55,17 @@ class _NoInternetPageState extends State<NoInternetPage> {
               'Sin conexion a internet',
               style: TextStyle(fontSize: 18),
             ),
-            !_hasInternetConnection ?
+            !_isConnected ?
             ElevatedButton(
               onPressed: (){
                 //Not working correctly yet
                 setState(() {
-                  if(_hasInternetConnection){
+                  if(_isConnected){
                     Navigator.of(context).pop();
                   }
                 });
               },
-              child: Text('Retry'),
+              child: const Text('Recargar'),
             )
                 : const SizedBox(),
           ],

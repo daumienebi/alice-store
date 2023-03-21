@@ -6,25 +6,25 @@ class ProductProvider with ChangeNotifier{
 
   final DefaultData _defaultData = DefaultData();
   List<Product> _products = [];
-  final List<Product> _favouriteProducts = [];
+  final List<Product> _wishListProducts = [];
 
   List<Product> get getProducts{
     return _products = _defaultData.getProducts;
   }
 
-  List<Product> get getFavouriteProducts{
-    return _favouriteProducts;
+  List<Product> get getWishListProducts{
+    return _wishListProducts;
   }
 
-  addToFavourites (Product product) async{
-    if(!_favouriteProducts.contains(product)){
-      _favouriteProducts.add(product);
+  addToWishList (Product product) async{
+    if(!_wishListProducts.contains(product)){
+      _wishListProducts.add(product);
     }
     notifyListeners();
   }
 
-  removeFromFavourites (Product product) async{
-    _favouriteProducts.removeWhere((element) => element.id == product.id);
+  removeFromWishList (Product product) async{
+    _wishListProducts.removeWhere((element) => element.id == product.id);
     notifyListeners();
   }
 }

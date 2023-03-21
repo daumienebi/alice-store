@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/utils/app_routes.dart';
@@ -21,21 +23,30 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
-  bool _hasInternetConnection = false;
+  late StreamSubscription connectivityStream;
+  //Connectivity connectivity = Connectivity();
+  bool _isConnected = true;
 
   @override
   void initState() {
     super.initState();
-    _checkInternetConnection();
+    setConnectivitySubscription();
   }
 
-  Future<void> _checkInternetConnection() async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    setState(() {
-      _hasInternetConnection = connectivityResult == ConnectivityResult.mobile;
-      _hasInternetConnection = connectivityResult == ConnectivityResult.wifi;
-    });
+  @override
+  void dispose() {
+    connectivityStream.cancel();
+    super.dispose();
+  }
+
+  void setConnectivitySubscription() {
+    connectivityStream = Connectivity().onConnectivityChanged.listen(
+          (ConnectivityResult result) {
+        setState(() {
+          _isConnected = (result != ConnectivityResult.none);
+        });
+      },
+    );
   }
 
   @override
@@ -49,7 +60,7 @@ class _MyAppState extends State<MyApp> {
         textTheme: GoogleFonts.varelaRoundTextTheme()
       ),
       routes: AppRoutes.allRoutes,
-      initialRoute: _hasInternetConnection ? AppRoutes.routeStrings.homepage
+      initialRoute: _isConnected ? AppRoutes.routeStrings.homepage
           : AppRoutes.routeStrings.noInternetPage,
       supportedLocales: L10n.all,
       localizationsDelegates: const [

@@ -19,7 +19,7 @@ class _WishListPageState extends State<WishListPage> {
   Widget build(BuildContext context) {
     ProductProvider provider =
         Provider.of<ProductProvider>(context, listen: true);
-    _favouriteProducts = provider.getFavouriteProducts;
+    _favouriteProducts = provider.getWishListProducts;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -69,7 +69,7 @@ class _WishListPageState extends State<WishListPage> {
                               Icons.delete_outline,
                               color: Colors.red,
                             ),
-                            onPressed: () => provider.removeFromFavourites(
+                            onPressed: () => provider.removeFromWishList(
                                 _favouriteProducts[index]),
                           ),
                           leading: FadeInImage.assetNetwork(

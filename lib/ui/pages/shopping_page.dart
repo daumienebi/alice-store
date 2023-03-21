@@ -2,6 +2,7 @@ import 'package:alice_store/models/product.dart';
 import 'package:alice_store/services/product_service.dart';
 import 'package:alice_store/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:lottie/lottie.dart';
 
 class ShoppingPage extends StatefulWidget {
@@ -35,7 +36,14 @@ class _ShoppingPageState extends State<ShoppingPage> {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              CircularProgressIndicator(color: Colors.cyan),
+              SizedBox(
+                height: 50,
+                width: 100,
+                child: LoadingIndicator(
+                  indicatorType: Indicator.ballPulseRise,
+                  strokeWidth: 5,
+                ),
+              ),
               SizedBox(height: 5),
               Text('Cargando prductos')
             ],

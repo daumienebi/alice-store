@@ -8,5 +8,5 @@ class Constants{
 class Api{
   String get categoriesEndPoint => '/categories';
   String get productsEndPoint => '/products';
-  String get projectEndPoint => '/project';
+  String get projectFeedsEndPoint => '/project_feeds';
 }

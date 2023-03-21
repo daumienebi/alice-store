@@ -2,6 +2,7 @@ import 'package:alice_store/models/category.dart';
 import 'package:alice_store/models/product.dart';
 import 'package:alice_store/ui/pages/wishlist_page.dart';
 import 'package:alice_store/utils/app_routes.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -38,12 +39,14 @@ class CategoryCardSwiper extends StatelessWidget {
                         ),
                         padding: const EdgeInsets.all(5),
                         decoration:BoxDecoration(
-                          color: Colors.white30,
+                          color: Colors.white54,
                           borderRadius: BorderRadius.circular(20)
                         ),
-                        child: FadeInImage.assetNetwork(
-                            placeholder: 'assets/gifs/loading.gif',
-                            image: categories[index].image
+                        child: CachedNetworkImage(
+                            placeholder:((context, url) => Image.asset(
+                                'assets/gifs/loading.gif'
+                            )),
+                            imageUrl: categories[index].image
                         )
                     ) ,
                   ));
