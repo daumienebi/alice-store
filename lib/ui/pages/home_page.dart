@@ -12,6 +12,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -26,15 +27,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late Future<List<Category>> fetchCategoriesFuture;
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.teal);
-  //DefaultData defaultData = DefaultData();
-  List<Category> categories = [];
   final CategoryService categoryService = CategoryService();
 
   Future<List<Category>> fetchAllCategories() async {
     List<Category> categories = await categoryService.fetchAllCategories();
-    return categories;
+    return Future.delayed(const Duration(seconds: 2),()=> categories);
   }
 
   @override
@@ -53,7 +50,6 @@ class _HomePageState extends State<HomePage> {
       const AboutProjectPage()
     ];
     return Scaffold(
-      //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: _selectedIndex == 0
           ? FloatingActionButton(
               shape: RoundedRectangleBorder(
@@ -95,14 +91,18 @@ class _HomePageState extends State<HomePage> {
         child: DrawerPage(),
       ),
       appBar: AppBar(
-        title: Text("A L I C E S T O R E",
+        title: Text(
+            "A L I C E S T O R E",
             style: GoogleFonts.albertSans(
               color: Colors.black,
               fontSize: 20,
-            )),
+            )
+        ),
         centerTitle: true,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.cyan[100],
         elevation: 0,
+        // Need to use a Builder to obtain the context, if not it throws an
+        // error
         leading: Builder(
           builder: (BuildContext context) {
             return Padding(
@@ -179,20 +179,21 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.cyan[200],
       selectedItemColor: Colors.black,
       items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: const Icon(Icons.home_outlined),
-          label: AppLocalizations.of(context)!.home,
+        const BottomNavigationBarItem(
+          icon: Icon(Icons.home_outlined),
+          label: 'Inicio',
         ),
         const BottomNavigationBarItem(
           icon: Icon(Icons.shopping_bag_outlined),
-          label: 'Shop',
+          label: 'Tienda',
         ),
         BottomNavigationBarItem(
             icon: badges.Badge(
               badgeContent: Consumer<CartProvider>(
                 builder: (context, cartProvider, child) {
+                  int productCount = cartProvider.getProducts.length;
                   return Text(
-                    '${cartProvider.getProducts.length}',
+                    productCount <= 9 ? productCount.toString() : '9+',
                     style: const TextStyle(color: Colors.white),
                   );
                 },
@@ -200,10 +201,12 @@ class _HomePageState extends State<HomePage> {
               position: badges.BadgePosition.topEnd(top: -18),
               child: const Icon(Icons.shopping_cart_outlined),
             ),
-            label: AppLocalizations.of(context)!.cart),
+            label: AppLocalizations.of(context)!.cart
+        ),
         BottomNavigationBarItem(
             icon: const Icon(Icons.work_outline),
-            label: AppLocalizations.of(context)!.theProject)
+            label: AppLocalizations.of(context)!.theProject
+        )
       ],
       currentIndex: _selectedIndex,
       onTap: _onItemTapped,
@@ -218,6 +221,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  /// List of the [SocialMedia] buttons
   List<Widget> socialMediaButtons(context) {
     //Very shitty work around
     // TODO : Change it later on
@@ -287,9 +291,8 @@ class _HomePageState extends State<HomePage> {
     return items;
   }
 
-  socialButton(
-      {required String socialMedia,
-      required Icon icon,
+  /// [SocialMedia] button
+  Widget socialButton({required String socialMedia,required Icon icon,
       Function()? onClicked}) {
     const listTextStyle = TextStyle(color: Colors.black54);
     return Column(
@@ -306,6 +309,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  /// FutureBuilder for the [Category] card swiper, it returns the available
+  /// categories or an error depending on the response
   FutureBuilder categoriesFutureBuilder() {
     //Try to use setState to rebuild the widget
     return FutureBuilder(
@@ -314,10 +319,17 @@ class _HomePageState extends State<HomePage> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Column(
             //mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              LinearProgressIndicator(color: Colors.cyan),
-              SizedBox(height: 10),
-              Text('Cargando categorias')
+            children: [
+              SizedBox(
+                height: 50,
+                width: 100,
+                child: LoadingIndicator(
+                  indicatorType: Indicator.ballPulseRise,
+                  colors: Constants.loadingIndicatorColors,
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Text('Cargando categorias...')
             ],
           );
         }
@@ -327,15 +339,39 @@ class _HomePageState extends State<HomePage> {
             children: [Text(snapshot.error.toString())],
           );
         }
-        if (snapshot.hasData) {
+        if (snapshot.hasData && snapshot.data.length > 1) {
           return CategoryCardSwiper(categories: snapshot.data);
         }
+        //When there is no data or server error
         return Column(
           children: [
             Lottie.asset(
               'assets/lottie_animations/error.json',
             ),
-            const Text('Erorr cargando las categorias desde el servidor!')
+            const Text(
+              'El servidor no se encuentra disponible en este momento!',
+              textAlign: TextAlign.center,
+            ),
+            const Text('Revise su conexion de internet y reinicie la app.'),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: (){
+                setState(() {
+                  fetchCategoriesFuture = fetchAllCategories();
+                });
+              },
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.greenAccent,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                  fixedSize: const Size(200,50)
+              ),
+              child: const Text(
+                  'Reintentar',
+                  style: TextStyle(color: Colors.black87,
+                      fontSize:18
+                  )
+              ),
+            )
           ],
         );
       },

@@ -31,10 +31,8 @@ class _CartPageState extends State<CartPage> {
                         Lottie.asset(
                           'assets/lottie_animations/empty-cart.json',
                         ),
-                        const Text(
-                          'No hay productos en la cesta',
-                          style: TextStyle(fontSize: 15)
-                        )
+                        const Text('No hay productos en la cesta',
+                            style: TextStyle(fontSize: 15))
                       ],
                     ),
                   )
@@ -45,23 +43,46 @@ class _CartPageState extends State<CartPage> {
                           padding: const EdgeInsets.all(10),
                           child: Container(
                             decoration: BoxDecoration(
+                                color: Colors.white70,
                                 borderRadius: BorderRadius.circular(12)),
-                            child: ListTile(
-                              tileColor: Colors.white38,
-                              title: Text(_cartProducts[index].name),
-                              subtitle: Text(
-                                  '${_cartProducts[index].price.toInt()}€'),
-                              trailing: IconButton(
-                                icon: const Icon(
-                                  Icons.delete_outline,
-                                  color: Colors.red,
-                                ),
-                                onPressed: () => provider
-                                    .removeProduct(_cartProducts[index]),
-                              ),
-                              leading: FadeInImage.assetNetwork(
+                            child: Row(
+                              children: [
+                                FadeInImage.assetNetwork(
                                   placeholder: 'assets/gifs/loading.gif',
-                                  image: _cartProducts[index].image),
+                                  image: _cartProducts[index].image,
+                                  height: 120,
+                                  width: 100,
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        _cartProducts[index].name,
+                                        style: const TextStyle(fontSize: 18),
+                                      ),
+                                      SizedBox(height: 5),
+                                      Text(
+                                          '${_cartProducts[index].price.
+                                          toString()}€',
+                                        style: const TextStyle(
+                                          color: Colors.black54,
+                                          fontSize: 16
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.delete_outline,
+                                    color: Colors.red,
+                                  ),
+                                  onPressed: () => provider
+                                      .removeProduct(_cartProducts[index]),
+                                ),
+                              ],
                             ),
                           ),
                         );
@@ -94,7 +115,7 @@ class _CartPageState extends State<CartPage> {
                 const Text(
                   'Precio Total',
                   style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 15,
                       color: Colors.white70,
                       fontWeight: FontWeight.bold),
                 ),
@@ -104,7 +125,7 @@ class _CartPageState extends State<CartPage> {
                   style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 16),
+                      fontSize: 17),
                 )
               ],
             ),

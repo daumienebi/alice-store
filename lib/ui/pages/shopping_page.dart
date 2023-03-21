@@ -1,6 +1,7 @@
 import 'package:alice_store/models/product.dart';
 import 'package:alice_store/services/product_service.dart';
 import 'package:alice_store/ui/widgets/widgets.dart';
+import 'package:alice_store/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:lottie/lottie.dart';
@@ -35,17 +36,17 @@ class _ShoppingPageState extends State<ShoppingPage> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               SizedBox(
                 height: 50,
                 width: 100,
                 child: LoadingIndicator(
                   indicatorType: Indicator.ballPulseRise,
-                  strokeWidth: 5,
+                  colors: Constants.loadingIndicatorColors,
                 ),
               ),
-              SizedBox(height: 5),
-              Text('Cargando prductos')
+              const SizedBox(height: 5),
+              const Text('Cargando prductos')
             ],
           );
         }
@@ -58,7 +59,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
           );
         }
         //If data exists
-        if(snapshot.hasData){
+        if(snapshot.hasData && snapshot.data.length > 0){
           return SizedBox(
               height: MediaQuery.of(context).size.height * 0.80,
               width: double.infinity,
@@ -73,11 +74,35 @@ class _ShoppingPageState extends State<ShoppingPage> {
         }
         //Default
         return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Lottie.asset(
               'assets/lottie_animations/error.json',
             ),
-            const Text('Erorr cargando los productos desde el servidor!')
+            const Text(
+                'El servidor no se encuentra disponible en este momento!',
+              textAlign: TextAlign.center,
+            ),
+            const Text('Revise su conexion de internet y reinicie la app.'),
+            const SizedBox(height: 20),
+            ElevatedButton(
+                onPressed: (){
+                  setState(() {
+                    fetchProductsFuture = fetchProducts();
+                  });
+                },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.greenAccent,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                fixedSize: const Size(200,50)
+              ),
+                child: const Text(
+                  'Reintentar',
+                  style: TextStyle(color: Colors.black87,
+                    fontSize:18
+                  )
+                ),
+            )
           ],
         );
       },

@@ -1,5 +1,6 @@
 import 'package:alice_store/models/project_feed.dart';
 import 'package:alice_store/services/project_feed_service.dart';
+import 'package:alice_store/utils/constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -41,18 +42,18 @@ class _AboutProjectPageState extends State<AboutProjectPage> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children:const [
+              children: [
                 SizedBox(
                   height: 50,
                   width: 100,
                   child: LoadingIndicator(
-                      indicatorType: Indicator.ballPulseRise,
-                    strokeWidth: 5,
+                    indicatorType: Indicator.ballPulseRise,
+                    colors: Constants.loadingIndicatorColors,
                   ),
                 ),
                 //LinearProgressIndicator(color: Colors.cyan),
-                SizedBox(height: 5),
-                Text('Cargando...')
+                const SizedBox(height: 5),
+                const Text('Cargando...')
               ],
             );
           }
@@ -81,21 +82,21 @@ class _AboutProjectPageState extends State<AboutProjectPage> {
                       child: GridView.builder(
                           itemCount: snapshot.data!.length,
                           gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              childAspectRatio: 0.9,
-                                  crossAxisCount: 2),
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  childAspectRatio: 0.9, crossAxisCount: 2),
                           itemBuilder: (context, index) => Padding(
-                                padding: const EdgeInsets.only(left: 2, right: 2, top: 4),
+                                padding: const EdgeInsets.only(
+                                    left: 2, right: 2, top: 4),
                                 child: InkWell(
                                   onTap: () => imageViewer(
                                       snapshot.data![index], context),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
                                     child: CachedNetworkImage(
-                                        placeholder:((context, url) => Image.asset(
-                                            'assets/gifs/loading.gif'
-                                        )),
-                                        imageUrl: snapshot.data![index].image,
+                                      placeholder: ((context, url) =>
+                                          Image.asset(
+                                              'assets/gifs/loading.gif')),
+                                      imageUrl: snapshot.data![index].image,
                                       height: 300,
                                       width: 300,
                                       fit: BoxFit.fitHeight,
