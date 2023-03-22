@@ -39,11 +39,11 @@ class ShoppingItem extends StatelessWidget {
             ),
             Text(
               product.name,
-              style: const TextStyle(fontSize: 15),
+              style: const TextStyle(fontSize: 17),
             ),
             Text(
               '${product.price.toInt()}€',
-              style: const TextStyle(fontSize: 14,color: Colors.black54),
+              style: const TextStyle(fontSize: 15,color: Colors.black54),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

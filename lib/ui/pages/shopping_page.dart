@@ -80,11 +80,16 @@ class _ShoppingPageState extends State<ShoppingPage> {
               'assets/lottie_animations/error.json',
             ),
             const Text(
-                'El servidor no se encuentra disponible en este momento!',
+              'Servidor indisponible.',
               textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 17,
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold
+              ),
             ),
-            const Text('Revise su conexion de internet y reinicie la app.'),
-            const SizedBox(height: 20),
+            const Text('Asegurese de disponer de conexión a internet.'),
+            const SizedBox(height: 5),
             ElevatedButton(
                 onPressed: (){
                   setState(() {
@@ -93,20 +98,21 @@ class _ShoppingPageState extends State<ShoppingPage> {
                 },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.greenAccent,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-                fixedSize: const Size(200,50)
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25)
+                ),
+                fixedSize: const Size(140,40)
               ),
                 child: const Text(
                   'Reintentar',
                   style: TextStyle(color: Colors.black87,
-                    fontSize:18
+                    fontSize:16
                   )
                 ),
             )
           ],
         );
       },
-
     );
   }
 

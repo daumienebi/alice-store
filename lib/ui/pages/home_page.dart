@@ -100,6 +100,7 @@ class _HomePageState extends State<HomePage> {
         ),
         centerTitle: true,
         backgroundColor: Colors.cyan[100],
+        //systemOverlayStyle: SystemUiOverlayStyle.dark,
         elevation: 0,
         // Need to use a Builder to obtain the context, if not it throws an
         // error
@@ -349,11 +350,16 @@ class _HomePageState extends State<HomePage> {
               'assets/lottie_animations/error.json',
             ),
             const Text(
-              'El servidor no se encuentra disponible en este momento!',
+              'Servidor indisponible.',
               textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 17,
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold
+              ),
             ),
-            const Text('Revise su conexion de internet y reinicie la app.'),
-            const SizedBox(height: 20),
+            const Text('Asegurese de disponer de conexión a internet.'),
+            const SizedBox(height: 5),
             ElevatedButton(
               onPressed: (){
                 setState(() {
@@ -363,12 +369,12 @@ class _HomePageState extends State<HomePage> {
               style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.greenAccent,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-                  fixedSize: const Size(200,50)
+                  fixedSize: const Size(150,50)
               ),
               child: const Text(
                   'Reintentar',
                   style: TextStyle(color: Colors.black87,
-                      fontSize:18
+                      fontSize:16
                   )
               ),
             )

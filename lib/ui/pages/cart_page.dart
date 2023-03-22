@@ -1,5 +1,6 @@
 import 'package:alice_store/models/product.dart';
 import 'package:alice_store/provider/cart_provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -39,48 +40,78 @@ class _CartPageState extends State<CartPage> {
                 : Expanded(
                     child: ListView.builder(
                       itemBuilder: (BuildContext context, index) {
+                        String price1 = '';
+                        String price2 = '';
+                        var split = _cartProducts[index]
+                            .price
+                            .toString()
+                            .split('.');
+                        price1 = split[0];
+                        price2 = split[1];
                         return Padding(
-                          padding: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.symmetric(vertical: 10),
                           child: Container(
                             decoration: BoxDecoration(
-                                color: Colors.white70,
+                                color: Colors.white54,
                                 borderRadius: BorderRadius.circular(12)),
                             child: Row(
                               children: [
-                                FadeInImage.assetNetwork(
-                                  placeholder: 'assets/gifs/loading.gif',
-                                  image: _cartProducts[index].image,
+                                CachedNetworkImage(
+                                  placeholder: ((context, url) => Image.asset(
+                                      'assets/gifs/loading.gif'
+                                  )),
+                                  imageUrl: _cartProducts[index].image,
                                   height: 120,
                                   width: 100,
                                 ),
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         _cartProducts[index].name,
                                         style: const TextStyle(fontSize: 18),
                                       ),
-                                      SizedBox(height: 5),
-                                      Text(
-                                          '${_cartProducts[index].price.
-                                          toString()}€',
-                                        style: const TextStyle(
-                                          color: Colors.black54,
-                                          fontSize: 16
-                                        ),
+                                      const SizedBox(height: 5),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            price1,
+                                            style: const TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 22,
+                                                fontWeight:
+                                                FontWeight.bold),
+                                          ),
+                                          Text(
+                                            '.$price2€',
+                                            style: const TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 15
+                                            ),
+                                          ),
+                                        ],
                                       ),
+                                      TextButton(
+                                          onPressed: () => provider
+                                              .removeProduct(_cartProducts[index]),
+                                          style: TextButton.styleFrom(
+                                              backgroundColor:
+                                              Colors.white,
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                  BorderRadius.circular(10)
+                                              )
+                                          ),
+                                          child: Text(
+                                              'Eliminar producto',
+                                            style: TextStyle(
+                                                color: Colors.redAccent[200]
+                                            ),
+                                          )
+                                      )
                                     ],
                                   ),
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.delete_outline,
-                                    color: Colors.red,
-                                  ),
-                                  onPressed: () => provider
-                                      .removeProduct(_cartProducts[index]),
                                 ),
                               ],
                             ),
@@ -100,12 +131,12 @@ class _CartPageState extends State<CartPage> {
 
   Widget _payNowWidget(CartProvider provider) {
     return Padding(
-      padding: const EdgeInsets.only(left: 30, right: 30, bottom: 5),
+      padding: const EdgeInsets.only(left: 5, right: 5),
       child: Container(
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15), color: Colors.green[400]),
-        height: 75,
+            borderRadius: BorderRadius.circular(15), color: Colors.green[500]),
+        height: 85,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -121,11 +152,11 @@ class _CartPageState extends State<CartPage> {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  '${provider.getTotalPrice}€',
+                  '${provider.getTotalPrice} €',
                   style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 17),
+                      fontSize: 23),
                 )
               ],
             ),

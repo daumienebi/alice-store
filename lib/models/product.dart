@@ -4,10 +4,11 @@ class ProductFields {
   static const String categoryId = 'categoryId';
   static const String image = 'image';
   static const String price = 'price';
+  static const String inStock = 'in_stock';
   static const String description = 'description';
 
   //Static list with the name values to easily retrieve fields names from the DB
-  static final List<String> values = [id, name, categoryId, image, description];
+  static final List<String> values = [id, name, categoryId, image,price,inStock, description];
 }
 
 class Product {
@@ -16,6 +17,7 @@ class Product {
   final int categoryId;
   final String image;
   final double price;
+  final bool inStock;
   final String description;
 
   /// Create the constructor
@@ -25,6 +27,7 @@ class Product {
     required this.categoryId,
     required this.image,
     required this.price,
+    required this.inStock,
     required this.description,
   });
 
@@ -36,6 +39,7 @@ class Product {
       categoryId: value['categoryId'],
       image: value['image'],
       price: value['price'] as double,
+      inStock: value['inStock'],
       description: value['description'],
     );
   }
@@ -48,6 +52,7 @@ class Product {
       ProductFields.categoryId: categoryId,
       ProductFields.image: image,
       ProductFields.price: price,
+      ProductFields.inStock: inStock,
       ProductFields.description: description,
     };
   }
@@ -59,6 +64,7 @@ class Product {
       categoryId: json[ProductFields.categoryId],
       description: json[ProductFields.description],
       image: json[ProductFields.image],
+      inStock: json[ProductFields.inStock],
       price: double.parse(json[ProductFields.price].toString()),
     );
   }

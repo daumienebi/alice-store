@@ -3,10 +3,8 @@ import 'package:alice_store/services/project_feed_service.dart';
 import 'package:alice_store/utils/constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'dart:developer' as dev;
-
 import 'package:lottie/lottie.dart';
 
 class AboutProjectPage extends StatefulWidget {
@@ -20,7 +18,7 @@ class _AboutProjectPageState extends State<AboutProjectPage> {
   final ProjectFeedService projectFeedService = ProjectFeedService();
   late Future<List<ProjectFeed>> projectFeedsFuture;
 
-  Future<List<ProjectFeed>> fetchProducts() async {
+  Future<List<ProjectFeed>> fetchProjectFeeds() async {
     List<ProjectFeed> projectFeeds =
         await projectFeedService.fetchProjectFeeds();
     return Future.delayed(const Duration(seconds: 1), () => projectFeeds);
@@ -29,7 +27,7 @@ class _AboutProjectPageState extends State<AboutProjectPage> {
   @override
   void initState() {
     super.initState();
-    projectFeedsFuture = fetchProducts();
+    projectFeedsFuture = fetchProjectFeeds();
   }
 
   @override
@@ -64,7 +62,7 @@ class _AboutProjectPageState extends State<AboutProjectPage> {
             );
           }
           //If data exists
-          if (snapshot.hasData) {
+          if (snapshot.hasData && snapshot.data!.isNotEmpty) {
             return Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: Column(
@@ -110,11 +108,42 @@ class _AboutProjectPageState extends State<AboutProjectPage> {
           }
           //Default
           return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Lottie.asset(
                 'assets/lottie_animations/error.json',
               ),
-              const Text('Erorr cargando los productos desde el servidor!')
+              const Text(
+                'Servidor indisponible.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 17,
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold
+                ),
+              ),
+              const Text('Asegurese de disponer de conexión a internet.'),
+              const SizedBox(height: 5),
+              ElevatedButton(
+                onPressed: (){
+                  setState(() {
+                    projectFeedsFuture = fetchProjectFeeds();
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.greenAccent,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25)
+                    ),
+                    fixedSize: const Size(140,40)
+                ),
+                child: const Text(
+                    'Reintentar',
+                    style: TextStyle(color: Colors.black87,
+                        fontSize:16
+                    )
+                ),
+              )
             ],
           );
         },

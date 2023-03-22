@@ -1,6 +1,8 @@
 import 'package:alice_store/models/product.dart';
 import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/ui/widgets/widgets.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -20,6 +22,7 @@ class _WishListPageState extends State<WishListPage> {
     ProductProvider provider =
         Provider.of<ProductProvider>(context, listen: true);
     _wishListProducts = provider.getWishListProducts;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -39,7 +42,7 @@ class _WishListPageState extends State<WishListPage> {
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 10, right: 10),
+        padding: const EdgeInsets.only(left: 7, right: 7),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -57,55 +60,20 @@ class _WishListPageState extends State<WishListPage> {
                         ),
                       ])
                 : Expanded(
-                    child: ListView.builder(
-                      itemBuilder: (BuildContext context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white70,
-                                borderRadius: BorderRadius.circular(12)),
-                            child: Row(
-                              children: [
-                                FadeInImage.assetNetwork(
-                                  placeholder: 'assets/gifs/loading.gif',
-                                  image: _wishListProducts[index].image,
-                                  height: 120,
-                                  width: 100,
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        _wishListProducts[index].name,
-                                        style: const TextStyle(fontSize: 20),
-                                      ),
-                                      Text(
-                                          '${_wishListProducts[index].price.toString()}€'),
-                                      Text(
-                                        _wishListProducts[index].description,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      //const Text('A L I C E S T O R E',),
-                                    ],
-                                  ),
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.delete_outline,
-                                    color: Colors.red,
-                                  ),
-                                  onPressed: () => provider.removeFromWishList(
-                                      _wishListProducts[index]),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                      itemCount: _wishListProducts.length,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: ListView.separated(
+                        itemBuilder: (BuildContext context, index) {
+                          //List element (tile)
+                          return wishListTile(
+                              _wishListProducts[index], provider);
+                        },
+                        separatorBuilder: (context, index) => const Divider(
+                          height: 10,
+                          color: Colors.transparent,
+                        ),
+                        itemCount: _wishListProducts.length,
+                      ),
                     ),
                   )
           ],
@@ -113,4 +81,162 @@ class _WishListPageState extends State<WishListPage> {
       ),
     );
   }
+
+  Widget wishListTile(Product product, ProductProvider provider) {
+    String price1 = '';
+    String price2 = '';
+    var splitValue = product.price.toString().split('.');
+    price1 = splitValue[0];
+    price2 = splitValue[1];
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+          color: Colors.white54, borderRadius: BorderRadius.circular(12)),
+      //Main column for the whole content
+      child: Column(
+        children: [
+          Row(
+            children: [
+              CachedNetworkImage(
+                placeholder: ((context, url) =>
+                    Image.asset('assets/gifs/loading.gif')),
+                imageUrl: product.image,
+                height: 120,
+                width: 100,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      product.name,
+                      style: const TextStyle(
+                          fontSize: 20, overflow: TextOverflow.ellipsis),
+                    ),
+                    const SizedBox(height: 5),
+                    Row(
+                      children: [
+                        Text(
+                          price1,
+                          style: const TextStyle(
+                              color: Colors.black54,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          '.$price2€',
+                          style: const TextStyle(
+                              color: Colors.black54, fontSize: 15),
+                        )
+                      ],
+                    ),
+                    stockText(product.inStock),
+                    const SizedBox(height: 5),
+                    Text(
+                      product.description,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(
+                      //use the available width, with the kValue
+                      width: kMaxValue.toDouble(),
+                      child: TextButton(
+                        onPressed: () {
+                          //TODO : Fetch similar products
+                        },
+                        style: TextButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12))),
+                        child: const Text(
+                          'Ver Productos similares',
+                          style: TextStyle(color: Colors.black54),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      //use the available width, with the kValue
+                      width: kMaxValue.toDouble(),
+                      child: TextButton(
+                        onPressed: () {
+                          //TODO : Add the product to the cart
+                        },
+                        style: TextButton.styleFrom(
+                            backgroundColor: Colors.amber[600],
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12))),
+                        child: const Text(
+                          'Mover a carrito',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          //Delete product button, after the previous row
+          SizedBox(
+            //use the available width, with the kValue
+            height: 40,
+            width: kMaxValue.toDouble(),
+            child: TextButton(
+                onPressed: () {
+                  provider.removeFromWishList(product);
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content:
+                          Text('Producto eliminado de la lista de deseos !'),
+                      duration: Duration(seconds: 2)));
+                },
+                style: TextButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10))),
+                child: Text('Eliminar producto',
+                    style: TextStyle(color: Colors.redAccent[200]))),
+          )
+        ],
+      ),
+    );
+  }
+
+  Text stockText(bool inStock) {
+    var inStockText = const Text(
+      'En Stock',
+      style: TextStyle(color: Colors.green),
+    );
+    var notInStockText = const Text(
+      'No disponible',
+      style: TextStyle(color: Colors.red),
+    );
+
+    return inStock ? inStockText : notInStockText;
+  }
 }
+
+/*
+Stack(
+  alignment: Alignment.topRight,
+  children: [
+    Text(
+      price1,
+      style: const TextStyle(
+          color: Colors.black87,
+          fontSize: 30,
+          height: 0.8, // adjust the line height to align with the second text
+      ),
+      textAlign: TextAlign.right, // align the text to the right
+    ),
+    Text(
+      '.$price2€',
+      style: const TextStyle(
+          color: Colors.black54,
+          fontSize: 14,
+          height: 1, // adjust the line height to align with the first text
+      ),
+      textAlign: TextAlign.right, // align the text to the right
+    )
+  ],
+)
+
+* */

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/utils/app_routes.dart';
@@ -12,6 +11,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 void main() async{
+
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const AppState());
 }
 
@@ -24,7 +25,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late StreamSubscription connectivityStream;
-  //Connectivity connectivity = Connectivity();
   bool _isConnected = true;
 
   @override
