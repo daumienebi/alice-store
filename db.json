@@ -29,6 +29,7 @@
       "categoryId" : 1,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bag.png",
       "price" : 15.50,
+      "in_stock" : true,
       "description" : "Descripcion detallada de las bolsas hechas a mano."
     },
     {
@@ -36,6 +37,7 @@
       "name" : "Bolsa 2",
       "categoryId" : 1,
       "price" : 15.50,
+      "in_stock" : true,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tela_prod1.png",
       "description" : "Descripcion detallada ."
     },
@@ -44,6 +46,7 @@
       "name" : "Bolsa 3",
       "categoryId" : 1,
       "price" : 17.00,
+      "in_stock" : true,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tela_prod2.png",
       "description" : "Descripcion detallada ."
     },
@@ -52,6 +55,7 @@
       "name" : "Bolsa 4",
       "categoryId" : 1,
       "price" : 19.00,
+      "in_stock" : true,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tela_prod5.png",
       "description" : "Descripcion detallada ."
     },
@@ -60,6 +64,7 @@
       "name" : "Camiseta 1",
       "categoryId" : 2,
       "price" : 17.00,
+      "in_stock" : true,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/shirt.png",
       "description" : "Descripcion detallada ."
     },
@@ -68,6 +73,7 @@
       "name" : "Camiseta 2",
       "categoryId" : 2,
       "price" : 17.00,
+      "in_stock" : true,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/camiseta_prod6.png",
       "description" : "Descripcion detallada ."
     },
@@ -76,6 +82,7 @@
       "name" : "Camiseta 3",
       "categoryId" : 2,
       "price" : 17.00,
+      "in_stock" : true,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/camiseta_prod8.png",
       "description" : "Descripcion detallada ."
     },
@@ -84,6 +91,7 @@
       "name" : "Bolsa Tejido 1",
       "categoryId" : 3,
       "price" : 17.00,
+      "in_stock" : false,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tejido_prod4.png",
       "description" : "Descripcion detallada ."
     },
@@ -92,6 +100,7 @@
       "name" : "Bolsa Tejido 2",
       "categoryId" : 3,
       "price" : 17.00,
+      "in_stock" : true,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/knitting.png",
       "description" : "Descripcion detallada ."
     },
@@ -100,6 +109,7 @@
       "name" : "Bolsa Tejido 3",
       "categoryId" : 3,
       "price" : 17.00,
+      "in_stock" : true,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tejido_prod9.png",
       "description" : "Descripcion detallada ."
     },
@@ -108,6 +118,7 @@
       "name" : "Bolsa Tejido 4",
       "categoryId" : 3,
       "price" : 20.00,
+      "in_stock" : false,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tejido_prod10.png",
       "description" : "Descripcion detallada ."
     },
@@ -116,6 +127,7 @@
       "name" : "Bolsa Tejido 5",
       "categoryId" : 3,
       "price" : 13.00,
+      "in_stock" : true,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tejido_prod11.png",
       "description" : "Descripcion detallada ."
     }
