@@ -5,6 +5,7 @@ import 'package:alice_store/utils/app_routes.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../pages/pages.dart';
 
 class ShoppingItem extends StatelessWidget {
   final Product product;
@@ -13,7 +14,12 @@ class ShoppingItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(AppRoutes.routeStrings.productPage),
+      onTap: () => Navigator.of(context).push(
+          AppRoutes.createRoute(
+              arguments: product,
+              newPage: const ProductDetailPage()
+          )
+      ),
       child: Container(
         height: 200,
         decoration: BoxDecoration(
@@ -37,9 +43,15 @@ class ShoppingItem extends StatelessWidget {
                 ),
               ),
             ),
-            Text(
-              product.name,
-              style: const TextStyle(fontSize: 17),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Text(
+                  '${product.name}Modelo Nuevo Pantera con funda XL (Verde)',
+                  style: const TextStyle(fontSize: 17),
+                  overflow: TextOverflow.ellipsis
+                ),
+              ),
             ),
             Text(
               '${product.price.toInt()}€',
@@ -87,7 +99,9 @@ class ShoppingItem extends StatelessWidget {
                 children: [
                   const Text('Producto elimindado a la lista de deseos'),
                   TextButton(onPressed: (){
-                    Navigator.of(context).pushNamed(AppRoutes.routeStrings.wishListPage);
+                    Navigator.of(context).push(
+                        AppRoutes.createRoute(newPage: const WishListPage())
+                    );
                   },
                       child: const Text(
                         'Ver lista',
@@ -108,8 +122,11 @@ class ShoppingItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text('Producto agregado a la lista de deseos'),
+
                   TextButton(onPressed: (){
-                    Navigator.of(context).pushNamed(AppRoutes.routeStrings.wishListPage);
+                    Navigator.of(context).push(
+                        AppRoutes.createRoute(newPage: const WishListPage())
+                    );
                   },
                       child: const Text(
                         'Ver lista',
@@ -143,14 +160,14 @@ class ShoppingItem extends StatelessWidget {
             cartProvider.removeProduct(product);
             snackBar = const SnackBar(
               duration: Duration(seconds: 2),
-              content: Text('Producto eliminado del carrito'),
+              content: Text('Producto eliminado de la cesta'),
             );
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }else{
             cartProvider.addProduct(product);
             snackBar = const SnackBar(
               duration: Duration(seconds: 2),
-              content: Text('Producto agregado al carrito'),
+              content: Text('Producto agregado a la cesta'),
             );
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }

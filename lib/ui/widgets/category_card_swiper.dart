@@ -24,8 +24,6 @@ class CategoryCardSwiper extends StatelessWidget {
         child: Swiper(
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
-                //onTap: () => Navigator.of(context).pushNamed(
-                //Constants.routes.questionsPage, arguments: categories[index]),
                   onTap: () async {
                     Navigator.of(context)
                         .push(_createRoute(arguments: categories[index]));

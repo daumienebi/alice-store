@@ -19,3 +19,9 @@ class Api{
   String get productsEndPoint => '/products';
   String get projectFeedsEndPoint => '/project_feeds';
 }
+
+class CategoryCode{
+  int get normalBags => 1;
+  int get shirts => 2;
+  int get knittedBags => 3;
+}

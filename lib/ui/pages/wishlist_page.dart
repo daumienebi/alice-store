@@ -1,4 +1,5 @@
 import 'package:alice_store/models/product.dart';
+import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/ui/widgets/widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -138,6 +139,7 @@ class _WishListPageState extends State<WishListPage> {
                     ),
                     SizedBox(
                       //use the available width, with the kValue
+                      //2000000000 from the card_swiper value
                       width: kMaxValue.toDouble(),
                       child: TextButton(
                         onPressed: () {
@@ -155,17 +157,18 @@ class _WishListPageState extends State<WishListPage> {
                     ),
                     SizedBox(
                       //use the available width, with the kValue
+                      //2000000000 from the card_swiper value
                       width: kMaxValue.toDouble(),
                       child: TextButton(
                         onPressed: () {
-                          //TODO : Add the product to the cart
+                          Provider.of<CartProvider>(context,listen: false).addProduct(product);
                         },
                         style: TextButton.styleFrom(
                             backgroundColor: Colors.amber[600],
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12))),
                         child: const Text(
-                          'Mover a carrito',
+                          'Mover a cesta',
                           style: TextStyle(color: Colors.white),
                         ),
                       ),

@@ -119,8 +119,9 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.only(right: 10, top: 10),
             child: CustomButton(
               iconData: Icons.favorite_border,
-              onPressed: () => Navigator.of(context)
-                  .pushNamed(AppRoutes.routeStrings.wishListPage),
+              onPressed: () =>  Navigator.of(context).push(
+                  AppRoutes.createRoute(newPage: const WishListPage())
+              ),
             ),
           )
         ],
@@ -424,4 +425,5 @@ class _HomePageState extends State<HomePage> {
     final url = Uri.parse(urls[platform]!);
     await launchUrl(url, mode: LaunchMode.externalApplication);
   }
+
 }
