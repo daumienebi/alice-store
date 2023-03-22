@@ -1,7 +1,9 @@
 import 'package:alice_store/models/product.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
+import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/ui/widgets/widgets.dart';
+import 'package:alice_store/utils/app_routes.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
@@ -143,7 +145,13 @@ class _WishListPageState extends State<WishListPage> {
                       width: kMaxValue.toDouble(),
                       child: TextButton(
                         onPressed: () {
-                          //TODO : Fetch similar products
+                          Navigator.of(context).push(
+                            AppRoutes.createRoute(
+                              //Pass the categoryId to fetch products of the
+                              //same category
+                                newPage: SimilarProductsPage(categoryId: product.categoryId,)
+                            )
+                          );
                         },
                         style: TextButton.styleFrom(
                             backgroundColor: Colors.white,

@@ -20,7 +20,7 @@ class CategoryCardSwiper extends StatelessWidget {
     return Column(children: [
       SizedBox(
         width: double.infinity,
-        height: size.height * 0.42,
+        height: size.height * 0.40,
         child: Swiper(
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(

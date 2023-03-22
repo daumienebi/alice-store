@@ -27,4 +27,15 @@ class ProductService{
     dev.log('PRODUCT : ${product.toString()}');
     return product;
   }
+
+  /// Fetch products that match a certain category
+  Future<List<Product>> fetchProducts(int categoryId) async{
+    late List<Product> products;
+    dynamic response = await _apiService.getResponse('${Constants.api.productsEndPoint}/?categoryId=$categoryId');
+    if(response != null){
+      products = Product.productModelFromJson(response);
+    }
+    dev.log('PRODUCT : ${products.toString()}');
+    return products;
+  }
 }

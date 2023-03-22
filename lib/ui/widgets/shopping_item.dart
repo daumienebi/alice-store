@@ -85,7 +85,13 @@ class ShoppingItem extends StatelessWidget {
                           width: kMaxValue.toDouble(),
                           child: TextButton(
                             onPressed: () {
-                              //TODO : Fetch similar products
+                              Navigator.of(context).push(
+                                  AppRoutes.createRoute(
+                                    //Pass the categoryId to fetch products of the
+                                    //same category
+                                      newPage: SimilarProductsPage(categoryId: product.categoryId,)
+                                  )
+                              );
                             },
                             style: TextButton.styleFrom(
                                 backgroundColor: Colors.white,
