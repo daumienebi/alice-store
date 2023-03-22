@@ -162,6 +162,12 @@ class _WishListPageState extends State<WishListPage> {
                       child: TextButton(
                         onPressed: () {
                           Provider.of<CartProvider>(context,listen: false).addProduct(product);
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                            duration: Duration(seconds: 2),
+                            content: Text(
+                              'Producto añadido a la cesta',
+                            ),
+                          ));
                         },
                         style: TextButton.styleFrom(
                             backgroundColor: Colors.amber[600],
@@ -216,30 +222,3 @@ class _WishListPageState extends State<WishListPage> {
     return inStock ? inStockText : notInStockText;
   }
 }
-
-/*
-Stack(
-  alignment: Alignment.topRight,
-  children: [
-    Text(
-      price1,
-      style: const TextStyle(
-          color: Colors.black87,
-          fontSize: 30,
-          height: 0.8, // adjust the line height to align with the second text
-      ),
-      textAlign: TextAlign.right, // align the text to the right
-    ),
-    Text(
-      '.$price2€',
-      style: const TextStyle(
-          color: Colors.black54,
-          fontSize: 14,
-          height: 1, // adjust the line height to align with the first text
-      ),
-      textAlign: TextAlign.right, // align the text to the right
-    )
-  ],
-)
-
-* */

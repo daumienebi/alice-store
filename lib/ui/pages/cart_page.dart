@@ -92,6 +92,14 @@ class _CartPageState extends State<CartPage> {
                                           ),
                                         ],
                                       ),
+                                      const SizedBox(height: 5),
+                                      const Text(
+                                        'Cantidad : 1',
+                                        style: TextStyle(
+                                            color: Colors.black54,
+                                            fontSize: 15
+                                        ),
+                                      ),
                                       TextButton(
                                           onPressed: () => provider
                                               .removeProduct(_cartProducts[index]),

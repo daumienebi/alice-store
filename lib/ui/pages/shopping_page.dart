@@ -61,12 +61,15 @@ class _ShoppingPageState extends State<ShoppingPage> {
         //If data exists
         if(snapshot.hasData && snapshot.data.length > 0){
           return SizedBox(
-              height: MediaQuery.of(context).size.height * 0.80,
+              height: MediaQuery.of(context).size.height * 0.90,
               width: double.infinity,
               child: GridView.builder(
                 itemCount: snapshot.data.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, childAspectRatio: 1 / 1.5),
+                    crossAxisCount: 1,
+                    //I don't understand this line but it works
+                    childAspectRatio: 1/0.55
+                ),
                 itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.only(left: 2, right: 2, top: 10),
                     child: ShoppingItem(product: snapshot.data[index])),
@@ -115,5 +118,4 @@ class _ShoppingPageState extends State<ShoppingPage> {
       },
     );
   }
-
 }

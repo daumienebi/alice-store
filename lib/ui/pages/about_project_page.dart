@@ -97,7 +97,7 @@ class _AboutProjectPageState extends State<AboutProjectPage> {
                                       imageUrl: snapshot.data![index].image,
                                       height: 300,
                                       width: 300,
-                                      fit: BoxFit.fitHeight,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),
