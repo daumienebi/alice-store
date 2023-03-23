@@ -206,7 +206,7 @@ class ShoppingItem extends StatelessWidget {
         onPressed: () {
           cartProvider.addProduct(product);
           snackBar = const SnackBar(
-            duration: Duration(seconds: 2),
+            duration: Duration(seconds: 1),
             content: Text(
               'Producto añadido a la cesta',
             ),
@@ -214,7 +214,7 @@ class ShoppingItem extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         },
         style: TextButton.styleFrom(
-            backgroundColor: Colors.amber[600], shape: StadiumBorder()),
+            backgroundColor: Colors.amber[600], shape: const StadiumBorder()),
         child: const Text(
           'Añadir a cesta',
           style: TextStyle(color: Colors.white),

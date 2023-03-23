@@ -79,7 +79,8 @@ class _ShoppingPageState extends State<ShoppingPage> {
                         showSimilarProductButton: true,
                     )
                 ),
-              ));
+              )
+          );
         }
         //Default
         return Column(

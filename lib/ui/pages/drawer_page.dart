@@ -1,4 +1,7 @@
+import 'package:alice_store/utils/app_routes.dart';
 import 'package:flutter/material.dart';
+
+import 'pages.dart';
 
 class DrawerPage extends StatelessWidget {
   const DrawerPage({Key? key}) : super(key: key);
@@ -14,15 +17,26 @@ class DrawerPage extends StatelessWidget {
         ),
         Expanded(
           child: ListView(
-            children: const [
+            children: [
+              const ListTile(
+                leading: Icon(Icons.person_outline),
+                title: Text('Mi Perfil'),
+              ),
               ListTile(
+                leading: const Icon(Icons.favorite_border),
+                title: const Text('Lista de deseos'),
+                onTap: ()=> Navigator.of(context).push(
+                    AppRoutes.createRoute(newPage: const WishListPage())
+                ),
+              ),
+              const ListTile(
                 leading: Icon(Icons.people_outline),
                 title: Text('Créditos'),
               ),
-              ListTile(
+              const ListTile(
                 leading: Icon(Icons.privacy_tip_outlined),
                 title: Text('Privacidad'),
-              ),ListTile(
+              ),const ListTile(
                 leading: Icon(Icons.info_outline),
                 title: Text('Sobre la app'),
               )

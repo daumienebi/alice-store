@@ -1,6 +1,7 @@
 import 'package:alice_store/models/category.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/services/category_service.dart';
+import 'package:alice_store/ui/widgets/product_search_delegate.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/ui/widgets/widgets.dart';
@@ -42,7 +43,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     List<Widget> widgetOptions = <Widget>[
       categoriesFutureBuilder(),
       const ShoppingPage(),
@@ -118,10 +118,13 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.only(right: 10, top: 10),
             child: CustomButton(
-              iconData: Icons.favorite_border,
-              onPressed: () =>  Navigator.of(context).push(
-                  AppRoutes.createRoute(newPage: const WishListPage())
-              ),
+              iconData: Icons.search,
+              onPressed: (){
+                showSearch(
+                    context: context,
+                    delegate:
+                    ProductSearchDelegate(hintText: 'Search products'));
+              },
             ),
           )
         ],

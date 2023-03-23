@@ -1,60 +1,176 @@
 import 'package:alice_store/models/product.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
-import 'package:alice_store/ui/widgets/custom_button.dart';
+import 'package:alice_store/services/product_service.dart';
+import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/utils/app_routes.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// ignore_for_file: prefer_const_constructors
 
-import 'pages.dart';
+class ProductSearchDelegate extends SearchDelegate {
+  //Add a hint text to override the default one
+  final String? hintText;
+  ProductSearchDelegate({required this.hintText});
 
-class ProductDetailPage extends StatelessWidget {
-  const ProductDetailPage({Key? key}) : super(key: key);
+  @override
+  String? get searchFieldLabel => hintText;
+
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(
+        onPressed: () {
+          query = '';
+        },
+        icon: Icon(Icons.clear),
+        tooltip: 'Close',
+      )
+    ];
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.arrow_back),
+      onPressed: () {
+        close(context, null); //close the search bar
+      },
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    ProductProvider provider =
+        Provider.of<ProductProvider>(context, listen: true);
+    provider.fetchAllProducts();
+    //get the category names from the database
+    List<Product> suggestions = provider.getProducts;
+    late Product product;
+    final suggestionList = query.isEmpty
+        ? []
+        : suggestions.where((product) => product.name.contains(query)).toList();
+    if (suggestionList.isNotEmpty) {
+      product = suggestionList[0];
+    } else if (suggestionList.isEmpty || query.isEmpty) {
+      print('Hello');
+      //To avoid an error when the searched item is not found, create a dummy
+      //product
+      product = Product(
+          id: 0,
+          name: '',
+          categoryId: 0,
+          inStock: false,
+          price: 0.0,
+          description: '',
+          image: '');
+    }
+
+    //Since the id of the dummy product is 0 if no results were found, we carry
+    //out a simple check to return a widget depending on the situation
+    return SingleChildScrollView(
+        child: product.id != 0
+            ? ProductDetail(product: product)
+            : resultNotFoundWidget());
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    ProductService productService = ProductService();
+    ProductProvider provider =
+        Provider.of<ProductProvider>(context, listen: false);
+    //get the category names from the database to use them as suggestions
+    List<Product> productList = provider.getProducts;
+    List<Product> suggestions = productList.where((product) {
+      final productName = product.name.toLowerCase();
+      final userInput = query.toLowerCase();
+      return productName.contains(userInput);
+    }).toList();
+    return FutureBuilder(
+        future: productService.fetchAllProducts(),
+        builder: (_, AsyncSnapshot data) {
+          return ListView.builder(
+              itemBuilder: (BuildContext context, int index) {
+                final suggestion = suggestions[index];
+                return ListTile(
+                  title: Text(
+                    suggestion.name.toLowerCase(),
+                    style: TextStyle(color: Colors.black54),
+                  ),
+                  onTap: () {
+                    query = suggestion.name;
+                    showResults(context);
+                  },
+                );
+              },
+              itemCount: suggestions.length ~/ 2);
+        });
+  }
+
+  Widget resultNotFoundWidget() {
+    return Center(
+      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Lottie.asset(
+          'assets/lottie_animations/search-not-found.json',
+        ),
+        const Text(
+          'No results found.',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 17, color: Colors.black87),
+        ),
+      ]),
+    );
+  }
+}
+
+class ProductDetail extends StatelessWidget {
+  final Product product;
+  const ProductDetail({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Product product = ModalRoute.of(context)!.settings.arguments as Product;
-    return Scaffold(
-        body: CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          backgroundColor: Colors.cyan[100],
-          expandedHeight: MediaQuery.of(context).size.height * 0.50,
-          floating: true,
-          pinned: true,
-          elevation: 0,
-          actions: [productInWishListIcon(product, context)],
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 10, top: 10),
-            child: CustomButton(
-                iconData: Icons.arrow_back,
-                onPressed: Navigator.of(context).pop),
-          ),
-          flexibleSpace: FlexibleSpaceBar(
-            //collapseMode: CollapseMode.pin,
-            centerTitle: true,
-            //make the title adjust properly and not fill the whole place
-            expandedTitleScale: 1, //
-            titlePadding: const EdgeInsets.only(top: 20, left: 10, right: 10),
-            background: CachedNetworkImage(
-                placeholder: ((context, url) =>
-                    Image.asset('assets/gifs/loading.gif')),
-                imageUrl: product.image),
-            //centerTitle: true,
-            title: Text(
-              '${product.name} Modelo Nuevo Pantera con funda XL (Verde)',
-              style:
-                  GoogleFonts.varelaRound(fontSize: 18, color: Colors.black87),
-              textAlign: TextAlign.left,
+    // Product product = ModalRoute.of(context)!.settings.arguments as Product;
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.80,
+      child: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            backgroundColor: Colors.cyan[100],
+            expandedHeight: MediaQuery.of(context).size.height * 0.50,
+            floating: true,
+            pinned: true,
+            elevation: 0,
+            actions: [productInWishListIcon(product, context)],
+            leading: Container(),
+            flexibleSpace: FlexibleSpaceBar(
+              //collapseMode: CollapseMode.pin,
+              centerTitle: true,
+              //make the title adjust properly and not fill the whole place
+              expandedTitleScale: 1, //
+              titlePadding: const EdgeInsets.only(top: 20, left: 10, right: 10),
+              background: CachedNetworkImage(
+                  placeholder: ((context, url) =>
+                      Image.asset('assets/gifs/loading.gif')),
+                  imageUrl: product.image),
+              //centerTitle: true,
+              title: Text(
+                '${product.name} Modelo Nuevo Pantera con funda XL (Verde)',
+                style: GoogleFonts.varelaRound(
+                    fontSize: 18, color: Colors.black87),
+                textAlign: TextAlign.left,
+              ),
             ),
           ),
-        ),
-        productDetails(product, context)
-      ],
-    ));
+          productDetails(product, context)
+        ],
+      ),
+    );
   }
 
   productDetails(Product product, BuildContext context) {

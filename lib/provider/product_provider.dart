@@ -1,15 +1,17 @@
 import 'package:alice_store/models/product.dart';
+import 'package:alice_store/services/product_service.dart';
 import 'package:alice_store/utils/default_data.dart';
 import 'package:flutter/material.dart';
 
 class ProductProvider with ChangeNotifier{
 
   final DefaultData _defaultData = DefaultData();
+  final ProductService productService = ProductService();
   List<Product> _products = [];
   final List<Product> _wishListProducts = [];
 
   List<Product> get getProducts{
-    return _products = _defaultData.getProducts;
+    return _products;
   }
 
   List<Product> get getWishListProducts{
@@ -27,4 +29,11 @@ class ProductProvider with ChangeNotifier{
     _wishListProducts.removeWhere((element) => element.id == product.id);
     notifyListeners();
   }
+
+  fetchAllProducts() async{
+    final products =  await productService.fetchAllProducts();
+    _products = products;
+    //notifyListeners(); unnecessary rebuilds for the widget
+  }
+
 }
