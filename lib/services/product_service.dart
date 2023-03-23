@@ -38,4 +38,15 @@ class ProductService{
     dev.log('PRODUCT : ${products.toString()}');
     return products;
   }
+
+  /// Search for products with the given name
+  Future<List<Product>> searchProductsByName(String name) async{
+    late List<Product> products;
+    dynamic response = await _apiService.getResponse('${Constants.api.productsEndPoint}/?name=$name');
+    if(response != null){
+      products = Product.productModelFromJson(response);
+    }
+    dev.log('PRODUCT : ${products.toString()}');
+    return products;
+  }
 }

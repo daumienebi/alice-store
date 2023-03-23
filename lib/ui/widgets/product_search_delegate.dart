@@ -1,7 +1,6 @@
 import 'package:alice_store/models/product.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
-import 'package:alice_store/services/product_service.dart';
 import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/utils/app_routes.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -20,6 +19,18 @@ class ProductSearchDelegate extends SearchDelegate {
 
   @override
   String? get searchFieldLabel => hintText;
+
+  @override
+  TextStyle get searchFieldStyle => TextStyle(
+    fontSize: 16,
+    color: Colors.grey[800],
+  );
+
+  @override
+  TextInputType get keyboardType => TextInputType.name;
+
+  @override
+  TextInputAction get textInputAction => TextInputAction.search;
 
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -46,6 +57,11 @@ class ProductSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
+
+    if (query.isEmpty) {
+      return Container();
+    }
+
     ProductProvider provider =
         Provider.of<ProductProvider>(context, listen: true);
     provider.fetchAllProducts();
@@ -81,35 +97,61 @@ class ProductSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    ProductService productService = ProductService();
+    if (query.isEmpty) {
+      return Container();
+    }
+
     ProductProvider provider =
         Provider.of<ProductProvider>(context, listen: false);
-    //get the category names from the database to use them as suggestions
-    List<Product> productList = provider.getProducts;
-    List<Product> suggestions = productList.where((product) {
-      final productName = product.name.toLowerCase();
-      final userInput = query.toLowerCase();
-      return productName.contains(userInput);
-    }).toList();
-    return FutureBuilder(
-        future: productService.fetchAllProducts(),
-        builder: (_, AsyncSnapshot data) {
-          return ListView.builder(
-              itemBuilder: (BuildContext context, int index) {
-                final suggestion = suggestions[index];
-                return ListTile(
-                  title: Text(
-                    suggestion.name.toLowerCase(),
-                    style: TextStyle(color: Colors.black54),
-                  ),
-                  onTap: () {
-                    query = suggestion.name;
-                    showResults(context);
-                  },
-                );
-              },
-              itemCount: suggestions.length ~/ 2);
-        });
+    //List<Product> productList = provider.getProducts;
+    //List<Product> suggestions = productList.where((product) {
+      //final productName = product.name.toLowerCase();
+      //final userInput = query.toLowerCase();
+      //return productName.contains(userInput);
+    //}).toList();
+    //Checkout for FutureBuilder vs StreamBuilder
+    return StreamBuilder(
+        stream: provider.searchProductsByName(query).asStream(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if(snapshot.hasData){
+            return ListView.builder(
+                itemBuilder: (BuildContext context, int index) {
+                  final Product suggestion = snapshot.data[index];
+                  return ListTile(
+                    title: Text(
+                      suggestion.name,
+                      style: TextStyle(color: Colors.black54),
+                    ),
+                    leading: Container(
+                      padding: EdgeInsets.symmetric(vertical: 5),
+                      child: CachedNetworkImage(
+                        placeholder: (context, url) => Image.asset(
+                          'assets/gifs/loading.gif'
+                        ),
+                        imageUrl: suggestion.image,
+                      ),
+                    ),
+                    onTap: () {
+                      /*
+                      String temp = suggestion.name;
+                      String uC = temp[0].toUpperCase();
+                      query = uC + temp.substring(1);
+                       */
+                      query = suggestion.name;
+                      showResults(context);
+                    },
+                  );
+                },
+                itemCount: snapshot.data.length
+            );
+          }else{
+            return Container();
+          }
+        }
+        );
+
+    //NOTE :  snapshot.data.length ~/ 2 (Integer truncate value)
+    // Round up to the nearest int without remainders
   }
 
   Widget resultNotFoundWidget() {
@@ -135,40 +177,41 @@ class ProductDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Product product = ModalRoute.of(context)!.settings.arguments as Product;
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.80,
-      child: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            backgroundColor: Colors.cyan[100],
-            expandedHeight: MediaQuery.of(context).size.height * 0.50,
-            floating: true,
-            pinned: true,
-            elevation: 0,
-            actions: [productInWishListIcon(product, context)],
-            leading: Container(),
-            flexibleSpace: FlexibleSpaceBar(
-              //collapseMode: CollapseMode.pin,
-              centerTitle: true,
-              //make the title adjust properly and not fill the whole place
-              expandedTitleScale: 1, //
-              titlePadding: const EdgeInsets.only(top: 20, left: 10, right: 10),
-              background: CachedNetworkImage(
-                  placeholder: ((context, url) =>
-                      Image.asset('assets/gifs/loading.gif')),
-                  imageUrl: product.image),
-              //centerTitle: true,
-              title: Text(
-                '${product.name} Modelo Nuevo Pantera con funda XL (Verde)',
-                style: GoogleFonts.varelaRound(
-                    fontSize: 18, color: Colors.black87),
-                textAlign: TextAlign.left,
+    return SingleChildScrollView(
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.90,
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              backgroundColor: Colors.cyan[100],
+              expandedHeight: MediaQuery.of(context).size.height * 0.55,
+              floating: true,
+              pinned: true,
+              elevation: 0,
+              actions: [productInWishListIcon(product, context)],
+              leading: Container(),
+              flexibleSpace: FlexibleSpaceBar(
+                //collapseMode: CollapseMode.pin,
+                centerTitle: true,
+                //make the title adjust properly and not fill the whole place
+                expandedTitleScale: 1, //
+                titlePadding: const EdgeInsets.only(top: 10, left: 10, right: 10),
+                background: CachedNetworkImage(
+                    placeholder: ((context, url) =>
+                        Image.asset('assets/gifs/loading.gif')),
+                    imageUrl: product.image),
+                //centerTitle: true,
+                title: Text(
+                  '${product.name} Modelo Nuevo Pantera con funda XL (Verde)',
+                  style: GoogleFonts.varelaRound(
+                      fontSize: 18, color: Colors.black87),
+                  textAlign: TextAlign.left,
+                ),
               ),
             ),
-          ),
-          productDetails(product, context)
-        ],
+            productDetails(product, context)
+          ],
+        ),
       ),
     );
   }

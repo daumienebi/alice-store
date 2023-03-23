@@ -94,7 +94,7 @@ class _WishListPageState extends State<WishListPage> {
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-          color: Colors.white54, borderRadius: BorderRadius.circular(12)),
+          color: Colors.white54 , borderRadius: BorderRadius.circular(12)),
       //Main column for the whole content
       child: Column(
         children: [

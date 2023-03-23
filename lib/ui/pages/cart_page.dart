@@ -49,8 +49,9 @@ class _CartPageState extends State<CartPage> {
                         price1 = split[0];
                         price2 = split[1];
                         return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          padding: const EdgeInsets.symmetric(vertical: 7),
                           child: Container(
+                            padding: const EdgeInsets.symmetric(vertical: 7),
                             decoration: BoxDecoration(
                                 color: Colors.white54,
                                 borderRadius: BorderRadius.circular(12)),

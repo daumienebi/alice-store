@@ -30,7 +30,12 @@ class ProductProvider with ChangeNotifier{
     notifyListeners();
   }
 
-  fetchAllProducts() async{
+  Future<List<Product>> searchProductsByName(String name) async{
+    final products = await productService.searchProductsByName(name);
+    return products;
+  }
+
+  void fetchAllProducts() async{
     final products =  await productService.fetchAllProducts();
     _products = products;
     //notifyListeners(); unnecessary rebuilds for the widget
