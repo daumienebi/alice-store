@@ -8,7 +8,7 @@ class ProjectFeedService{
 
   Future<List<ProjectFeed>> fetchProjectFeeds() async{
     List<ProjectFeed> projectFeeds= [];
-    dynamic response = await _apiService.getResponse(Constants.api.projectFeedsEndPoint);
+    dynamic response = await _apiService.getResponse(Constants.apiEndPoints.projectFeedsEndPoint);
     if (response != null) {
       projectFeeds = ProjectFeed.projectFeedModelFromJson(response);
     }

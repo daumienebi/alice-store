@@ -10,22 +10,22 @@ class CategoryService{
   /// Fetch all the available Categories
   Future<List<Category>> fetchAllCategories() async{
     List<Category> categories = [];
-    dynamic response = await _apiService.getResponse(Constants.api.categoriesEndPoint);
+    dynamic response = await _apiService.getResponse(Constants.apiEndPoints.categoriesEndPoint);
     if (response != null) {
       categories = Category.categoryModelFromJson(response);
     }
-    dev.log('CATEGORIES :${categories.toString()}');
+    //dev.log('CATEGORIES :${categories.toString()}');
     return categories;
   }
 
   /// Fetch a specific Category
   Future<Category> fetchCategory(int id) async{
     late Category category;
-    dynamic response = await _apiService.getResponse('${Constants.api.categoriesEndPoint}/$id');
+    dynamic response = await _apiService.getResponse('${Constants.apiEndPoints.categoriesEndPoint}/$id');
     if(response != null){
       category = Category.categoryModelFromJson(response).first;
     }
-    dev.log('CATEGORY : ${category.toString()}');
+    //dev.log('CATEGORY : ${category.toString()}');
     return category;
   }
 }

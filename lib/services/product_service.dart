@@ -10,7 +10,7 @@ class ProductService{
 
   Future<List<Product>> fetchAllProducts() async{
     List<Product> products= [];
-    dynamic response = await _apiService.getResponse(Constants.api.productsEndPoint);
+    dynamic response = await _apiService.getResponse(Constants.apiEndPoints.productsEndPoint);
     if (response != null) {
       products = Product.productModelFromJson(response);
     }
@@ -20,7 +20,7 @@ class ProductService{
 
   Future<Product> fetchProduct(int id) async{
     late Product product;
-    dynamic response = await _apiService.getResponse('${Constants.api.productsEndPoint}/$id');
+    dynamic response = await _apiService.getResponse('${Constants.apiEndPoints.productsEndPoint}/$id');
     if(response != null){
       product = Product.productModelFromJson(response).first;
     }
@@ -31,7 +31,7 @@ class ProductService{
   /// Fetch products that match a certain category
   Future<List<Product>> fetchProducts(int categoryId) async{
     late List<Product> products;
-    dynamic response = await _apiService.getResponse('${Constants.api.productsEndPoint}/?categoryId=$categoryId');
+    dynamic response = await _apiService.getResponse('${Constants.apiEndPoints.productsEndPoint}/?categoryId=$categoryId');
     if(response != null){
       products = Product.productModelFromJson(response);
     }
@@ -42,7 +42,7 @@ class ProductService{
   /// Search for products with the given name
   Future<List<Product>> searchProductsByName(String name) async{
     late List<Product> products;
-    dynamic response = await _apiService.getResponse('${Constants.api.productsEndPoint}/?name=$name');
+    dynamic response = await _apiService.getResponse('${Constants.apiEndPoints.productsEndPoint}/?name=$name');
     if(response != null){
       products = Product.productModelFromJson(response);
     }

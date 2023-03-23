@@ -69,7 +69,8 @@ class _WishListPageState extends State<WishListPage> {
                         itemBuilder: (BuildContext context, index) {
                           //List element (tile)
                           return wishListTile(
-                              _wishListProducts[index], provider);
+                              _wishListProducts[index], provider
+                          );
                         },
                         separatorBuilder: (context, index) => const Divider(
                           height: 10,
@@ -91,128 +92,138 @@ class _WishListPageState extends State<WishListPage> {
     var splitValue = product.price.toString().split('.');
     price1 = splitValue[0];
     price2 = splitValue[1];
-    return Container(
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-          color: Colors.white54 , borderRadius: BorderRadius.circular(12)),
-      //Main column for the whole content
-      child: Column(
-        children: [
-          Row(
-            children: [
-              CachedNetworkImage(
-                placeholder: ((context, url) =>
-                    Image.asset('assets/gifs/loading.gif')),
-                imageUrl: product.image,
-                height: 120,
-                width: 100,
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      product.name,
-                      style: const TextStyle(
-                          fontSize: 20, overflow: TextOverflow.ellipsis),
-                    ),
-                    const SizedBox(height: 5),
-                    Row(
-                      children: [
-                        Text(
-                          price1,
-                          style: const TextStyle(
-                              color: Colors.black54,
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          '.$price2€',
-                          style: const TextStyle(
-                              color: Colors.black54, fontSize: 15),
-                        )
-                      ],
-                    ),
-                    stockText(product.inStock),
-                    const SizedBox(height: 5),
-                    Text(
-                      product.description,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    SizedBox(
-                      //use the available width, with the kValue
-                      //2000000000 from the card_swiper value
-                      width: kMaxValue.toDouble(),
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            AppRoutes.createRoute(
-                              //Pass the categoryId to fetch products of the
-                              //same category
-                                newPage: SimilarProductsPage(categoryId: product.categoryId,)
-                            )
-                          );
-                        },
-                        style: TextButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12))),
-                        child: const Text(
-                          'Ver Productos similares',
-                          style: TextStyle(color: Colors.black54),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      //use the available width, with the kValue
-                      //2000000000 from the card_swiper value
-                      width: kMaxValue.toDouble(),
-                      child: TextButton(
-                        onPressed: () {
-                          Provider.of<CartProvider>(context,listen: false).addProduct(product);
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                            duration: Duration(seconds: 2),
-                            content: Text(
-                              'Producto añadido a la cesta',
-                            ),
-                          ));
-                        },
-                        style: TextButton.styleFrom(
-                            backgroundColor: Colors.amber[600],
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12))),
-                        child: const Text(
-                          'Mover a cesta',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ],
+
+    return GestureDetector(
+      onTap: ()=> Navigator.of(context).push(
+          AppRoutes.createRoute(
+          newPage: const ProductDetailPage(),
+          arguments: product)
+      ),
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            color: Colors.white54,
+            borderRadius: BorderRadius.circular(12),
+        ),
+        //Main column for the whole content
+        child: Column(
+          children: [
+            Row(
+              children: [
+                CachedNetworkImage(
+                  placeholder: ((context, url) =>
+                      Image.asset('assets/gifs/loading.gif')),
+                  imageUrl: product.image,
+                  height: 120,
+                  width: 100,
                 ),
-              ),
-            ],
-          ),
-          //Delete product button, after the previous row
-          SizedBox(
-            //use the available width, with the kValue
-            height: 40,
-            width: kMaxValue.toDouble(),
-            child: TextButton(
-                onPressed: () {
-                  provider.removeFromWishList(product);
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content:
-                          Text('Producto eliminado de la lista de deseos !'),
-                      duration: Duration(seconds: 2)));
-                },
-                style: TextButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10))),
-                child: Text('Eliminar producto',
-                    style: TextStyle(color: Colors.redAccent[200]))),
-          )
-        ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        product.name,
+                        style: const TextStyle(
+                            fontSize: 20, overflow: TextOverflow.ellipsis),
+                      ),
+                      const SizedBox(height: 5),
+                      Row(
+                        children: [
+                          Text(
+                            price1,
+                            style: const TextStyle(
+                                color: Colors.black54,
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            '.$price2€',
+                            style: const TextStyle(
+                                color: Colors.black54, fontSize: 15),
+                          )
+                        ],
+                      ),
+                      stockText(product.inStock),
+                      const SizedBox(height: 5),
+                      Text(
+                        product.description,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      SizedBox(
+                        //use the available width, with the kValue
+                        //2000000000 from the card_swiper value
+                        width: kMaxValue.toDouble(),
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              AppRoutes.createRoute(
+                                //Pass the categoryId to fetch products of the
+                                //same category
+                                  newPage: SimilarProductsPage(categoryId: product.categoryId,)
+                              )
+                            );
+                          },
+                          style: TextButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12))),
+                          child: const Text(
+                            'Ver Productos similares',
+                            style: TextStyle(color: Colors.black54),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        //use the available width, with the kValue
+                        //2000000000 from the card_swiper value
+                        width: kMaxValue.toDouble(),
+                        child: TextButton(
+                          onPressed: () {
+                            Provider.of<CartProvider>(context,listen: false).addProduct(product);
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                              duration: Duration(seconds: 2),
+                              content: Text(
+                                'Producto añadido a la cesta',
+                              ),
+                            ));
+                          },
+                          style: TextButton.styleFrom(
+                              backgroundColor: Colors.amber[600],
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12))),
+                          child: const Text(
+                            'Mover a cesta',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            //Delete product button, after the previous row
+            SizedBox(
+              //use the available width, with the kValue
+              height: 40,
+              width: kMaxValue.toDouble(),
+              child: TextButton(
+                  onPressed: () {
+                    provider.removeFromWishList(product);
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content:
+                            Text('Producto eliminado de la lista de deseos !'),
+                        duration: Duration(seconds: 2)));
+                  },
+                  style: TextButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                  child: Text('Eliminar producto',
+                      style: TextStyle(color: Colors.redAccent[200]))),
+            )
+          ],
+        ),
       ),
     );
   }

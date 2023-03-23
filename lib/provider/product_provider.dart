@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class ProductProvider with ChangeNotifier{
 
   final DefaultData _defaultData = DefaultData();
-  final ProductService productService = ProductService();
+  final ProductService _productService = ProductService();
   List<Product> _products = [];
   final List<Product> _wishListProducts = [];
 
@@ -31,12 +31,12 @@ class ProductProvider with ChangeNotifier{
   }
 
   Future<List<Product>> searchProductsByName(String name) async{
-    final products = await productService.searchProductsByName(name);
+    final products = await _productService.searchProductsByName(name);
     return products;
   }
 
   void fetchAllProducts() async{
-    final products =  await productService.fetchAllProducts();
+    final products =  await _productService.fetchAllProducts();
     _products = products;
     //notifyListeners(); unnecessary rebuilds for the widget
   }

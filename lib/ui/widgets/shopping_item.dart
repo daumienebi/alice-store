@@ -27,7 +27,11 @@ class ShoppingItem extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(12)),
+            // Set a different shade of white depending if this widget will be
+            // viewed from the SimilarProductPage or shoppingPage
+              color: showSimilarProductButton ? Colors.white : Colors.white70,
+              borderRadius: BorderRadius.circular(12)
+          ),
           //Main column for the whole content
           child: Column(
             children: [

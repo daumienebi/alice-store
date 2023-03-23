@@ -97,26 +97,37 @@ class ProductSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    //About the suggestion :
+    //There was an attempt to filter the json response by filtering according to
+    //the query/userSearchInput but i couldn't find a way to query the json
+    //directly through the url. An option might be to filter it on the server
+    //side or use a db and then run the query in a different way
+
     if (query.isEmpty) {
       return Container();
     }
 
-    ProductProvider provider =
-        Provider.of<ProductProvider>(context, listen: false);
-    //List<Product> productList = provider.getProducts;
-    //List<Product> suggestions = productList.where((product) {
-      //final productName = product.name.toLowerCase();
-      //final userInput = query.toLowerCase();
-      //return productName.contains(userInput);
-    //}).toList();
+    ProductProvider provider = Provider.of<ProductProvider>(context, listen: false);
+    //Fetch the products with the void method
+    provider.fetchAllProducts();
+    List<Product> productList = provider.getProducts;
+    //Get the the products that match with the user input and return it in the
+    //suggestionsList
+    List<Product> suggestionsList = productList.where((product) {
+      final productName = product.name.toLowerCase();
+      final userSearchInput = query.toLowerCase();
+      return productName.contains(userSearchInput);
+    }).toList();
     //Checkout for FutureBuilder vs StreamBuilder
     return StreamBuilder(
-        stream: provider.searchProductsByName(query).asStream(),
+        initialData: provider.getProducts, //the initialData line below also works
+        //initialData: const [],
+        //stream: provider.searchProductsByName(query).asStream(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if(snapshot.hasData){
             return ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
-                  final Product suggestion = snapshot.data[index];
+                  final Product suggestion = suggestionsList[index];
                   return ListTile(
                     title: Text(
                       suggestion.name,
@@ -129,29 +140,25 @@ class ProductSearchDelegate extends SearchDelegate {
                           'assets/gifs/loading.gif'
                         ),
                         imageUrl: suggestion.image,
+                        height: 50,
+                        width: 50,
                       ),
                     ),
                     onTap: () {
-                      /*
-                      String temp = suggestion.name;
-                      String uC = temp[0].toUpperCase();
-                      query = uC + temp.substring(1);
-                       */
                       query = suggestion.name;
                       showResults(context);
                     },
                   );
                 },
-                itemCount: snapshot.data.length
+                itemCount: suggestionsList.length
             );
           }else{
             return Container();
           }
         }
         );
-
-    //NOTE :  snapshot.data.length ~/ 2 (Integer truncate value)
-    // Round up to the nearest int without remainders
+    //NOTE :  snapshot.data.length ~/ 2 (Integer truncate value).
+    //Round up to the nearest int without remainders
   }
 
   Widget resultNotFoundWidget() {
@@ -219,7 +226,7 @@ class ProductDetail extends StatelessWidget {
   productDetails(Product product, BuildContext context) {
     //Not sure if this is the best way to implement this stuff
     //Current approach : Adding all the widgets in this block to the "widgets"
-    // list then later passing the list to the SliverChildListDelegate
+    //list then later passing the list to the SliverChildListDelegate
 
     List<Widget> widgets = [];
 
