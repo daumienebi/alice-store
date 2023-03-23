@@ -67,12 +67,18 @@ class _ShoppingPageState extends State<ShoppingPage> {
                 itemCount: snapshot.data.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 1,
-                    //I don't understand this line but it works
-                    childAspectRatio: 1/0.55
+                    //Set the Width to Height ration, the height of the element
+                    //should be 0.55% of the width. In this case it will be
+                    //"1 : 0.55" the height of the item will be 55% of the width,
+                    childAspectRatio: 1 / 0.55
                 ),
                 itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.only(left: 2, right: 2, top: 10),
-                    child: ShoppingItem(product: snapshot.data[index])),
+                    child: ShoppingItem(
+                        product: snapshot.data[index],
+                        showSimilarProductButton: true,
+                    )
+                ),
               ));
         }
         //Default

@@ -100,7 +100,11 @@ class _SimilarProductsPageState extends State<SimilarProductsPage> {
                     ),
                     itemBuilder: (context, index) => Padding(
                         padding: const EdgeInsets.only(left: 2, right: 2, top: 10),
-                        child: ShoppingItem(product: snapshot.data[index])),
+                        child: ShoppingItem(
+                            product: snapshot.data[index],
+                            showSimilarProductButton: false,
+                        )
+                    ),
                   ));
             }
             //Default

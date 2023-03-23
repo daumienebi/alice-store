@@ -10,7 +10,9 @@ import '../pages/pages.dart';
 
 class ShoppingItem extends StatelessWidget {
   final Product product;
-  const ShoppingItem({Key? key, required this.product}) : super(key: key);
+  final bool showSimilarProductButton;
+  const ShoppingItem({Key? key, required this.product,
+    required this.showSimilarProductButton}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class ShoppingItem extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-              color: Colors.white54, borderRadius: BorderRadius.circular(12)),
+              color: Colors.white, borderRadius: BorderRadius.circular(12)),
           //Main column for the whole content
           child: Column(
             children: [
@@ -70,6 +72,7 @@ class ShoppingItem extends StatelessWidget {
                           product.description,
                           overflow: TextOverflow.ellipsis,
                         ),
+                        showSimilarProductButton ? const SizedBox() : const SizedBox(height: 50),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -79,6 +82,10 @@ class ShoppingItem extends StatelessWidget {
                             addToCartButton(product, context)
                           ],
                         ),
+                        //View Similar products button
+                        //Show the button if the bool values is set to 'true',
+                        //else return an empty SizedBox
+                        showSimilarProductButton ?
                         SizedBox(
                           //use the available width, with the kValue
                           //2000000000 from the card_swiper value
@@ -89,20 +96,22 @@ class ShoppingItem extends StatelessWidget {
                                   AppRoutes.createRoute(
                                     //Pass the categoryId to fetch products of the
                                     //same category
-                                      newPage: SimilarProductsPage(categoryId: product.categoryId,)
+                                      newPage: SimilarProductsPage(
+                                        categoryId: product.categoryId
+                                      )
                                   )
                               );
                             },
                             style: TextButton.styleFrom(
-                                backgroundColor: Colors.white,
+                                backgroundColor: Colors.blueGrey[400],
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12))),
                             child: const Text(
                               'Ver Productos similares',
-                              style: TextStyle(color: Colors.black54),
+                              style: TextStyle(color: Colors.white),
                             ),
                           ),
-                        ),
+                        ) : const SizedBox(),
                       ],
                     ),
                   ),
@@ -184,7 +193,8 @@ class ShoppingItem extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }
         },
-        icon: isInWishList ? removeFromFavIcon : addToFavIcon);
+        icon: isInWishList ? removeFromFavIcon : addToFavIcon
+    );
   }
 
   /// Add to cart button
