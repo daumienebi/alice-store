@@ -64,8 +64,8 @@ class ProductSearchDelegate extends SearchDelegate {
 
     ProductProvider provider =
         Provider.of<ProductProvider>(context, listen: true);
-    provider.fetchAllProducts();
-    //get the category names from the database
+    //Fetch the products and use them as suggestions
+    provider.initializeProductsList();
     List<Product> suggestions = provider.getProducts;
     late Product product;
     final suggestionList = query.isEmpty
@@ -74,7 +74,6 @@ class ProductSearchDelegate extends SearchDelegate {
     if (suggestionList.isNotEmpty) {
       product = suggestionList[0];
     } else if (suggestionList.isEmpty || query.isEmpty) {
-      print('Hello');
       //To avoid an error when the searched item is not found, create a dummy
       //product
       product = Product(
@@ -92,7 +91,8 @@ class ProductSearchDelegate extends SearchDelegate {
     return SingleChildScrollView(
         child: product.id != 0
             ? ProductDetail(product: product)
-            : resultNotFoundWidget());
+            : resultNotFoundWidget()
+    );
   }
 
   @override
@@ -109,7 +109,7 @@ class ProductSearchDelegate extends SearchDelegate {
 
     ProductProvider provider = Provider.of<ProductProvider>(context, listen: false);
     //Fetch the products with the void method
-    provider.fetchAllProducts();
+    provider.initializeProductsList();
     List<Product> productList = provider.getProducts;
     //Get the the products that match with the user input and return it in the
     //suggestionsList
@@ -120,7 +120,7 @@ class ProductSearchDelegate extends SearchDelegate {
     }).toList();
     //Checkout for FutureBuilder vs StreamBuilder
     return StreamBuilder(
-        initialData: provider.getProducts, //the initialData line below also works
+        initialData: productList,//the initialData line below also works,IDKW
         //initialData: const [],
         //stream: provider.searchProductsByName(query).asStream(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {

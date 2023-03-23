@@ -29,7 +29,7 @@ class ProductService{
   }
 
   /// Fetch products that match a certain category
-  Future<List<Product>> fetchProducts(int categoryId) async{
+  Future<List<Product>> fetchProductsFromCategory(int categoryId) async{
     late List<Product> products;
     dynamic response = await _apiService.getResponse('${Constants.apiEndPoints.productsEndPoint}/?categoryId=$categoryId');
     if(response != null){

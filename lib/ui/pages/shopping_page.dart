@@ -1,4 +1,5 @@
 import 'package:alice_store/models/product.dart';
+import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/services/product_service.dart';
 import 'package:alice_store/ui/widgets/widgets.dart';
 import 'package:alice_store/utils/constants.dart';
@@ -14,11 +15,11 @@ class ShoppingPage extends StatefulWidget {
 }
 
 class _ShoppingPageState extends State<ShoppingPage> {
-  final ProductService productService = ProductService();
+  final ProductProvider productProvider = ProductProvider();
   late Future<List<Product>> fetchProductsFuture;
 
   Future<List<Product>> fetchProducts() async {
-    List<Product> products = await productService.fetchAllProducts();
+    List<Product> products = await productProvider.fetchAllProducts();
     return Future.delayed(const Duration(seconds: 1),()=> products);
   }
 

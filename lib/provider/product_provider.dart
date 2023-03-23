@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 
 class ProductProvider with ChangeNotifier{
 
-  final DefaultData _defaultData = DefaultData();
   final ProductService _productService = ProductService();
   List<Product> _products = [];
   final List<Product> _wishListProducts = [];
 
+  /// The fetchAllProducts() method needs to be called first to access the
+  /// [Product]s this way
   List<Product> get getProducts{
     return _products;
   }
@@ -30,15 +31,27 @@ class ProductProvider with ChangeNotifier{
     notifyListeners();
   }
 
+  /// Method to initialize the products
+  void initializeProductsList() async{
+    final products =  await _productService.fetchAllProducts();
+    _products = products;
+  }
+
   Future<List<Product>> searchProductsByName(String name) async{
     final products = await _productService.searchProductsByName(name);
     return products;
   }
 
-  void fetchAllProducts() async{
-    final products =  await _productService.fetchAllProducts();
-    _products = products;
-    //notifyListeners(); unnecessary rebuilds for the widget
+  Future<List<Product>> fetchAllProducts() async{
+    return await _productService.fetchAllProducts();
+  }
+
+  Future<List<Product>> fetchProductsFromCategory(int categoryId) async{
+    return await _productService.fetchProductsFromCategory(categoryId);
+  }
+
+  Future<Product> fetchProduct(int id) async{
+    return await _productService.fetchProduct(id);
   }
 
 }
