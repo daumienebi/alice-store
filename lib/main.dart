@@ -1,5 +1,5 @@
 import 'package:alice_store/provider/cart_provider.dart';
-import 'package:alice_store/provider/google_sign_provider.dart';
+import 'package:alice_store/provider/google_signin_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/utils/app_routes.dart';
 import 'package:alice_store/utils/l10n/l10n.dart';
@@ -32,7 +32,8 @@ class MyApp extends StatelessWidget {
           textTheme: GoogleFonts.varelaRoundTextTheme()
       ),
       routes: AppRoutes.allRoutes,
-      initialRoute: isLoggedIn ? AppRoutes.routeStrings.homepage : AppRoutes.routeStrings.loginPage,
+      initialRoute: AppRoutes.routeStrings.xPage,
+      //initialRoute: isLoggedIn ? AppRoutes.routeStrings.homepage : AppRoutes.routeStrings.loginPage,
       supportedLocales: L10n.all,
       localizationsDelegates: const [
         AppLocalizations.delegate,

@@ -1,4 +1,4 @@
-import 'package:alice_store/provider/google_sign_provider.dart';
+import 'package:alice_store/provider/google_signin_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/ui/widgets/my_text_field.dart';
 import 'package:alice_store/utils/app_routes.dart';
