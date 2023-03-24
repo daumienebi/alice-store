@@ -1,4 +1,5 @@
 import 'package:alice_store/provider/cart_provider.dart';
+import 'package:alice_store/provider/google_sign_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/utils/app_routes.dart';
 import 'package:alice_store/utils/l10n/l10n.dart';
@@ -51,7 +52,8 @@ class AppState extends StatelessWidget {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => ProductProvider()),
-          ChangeNotifierProvider(create: (_) => CartProvider())
+          ChangeNotifierProvider(create: (_) => CartProvider()),
+          ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
         ],
       child: const MyApp(),
     );

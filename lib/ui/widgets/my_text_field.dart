@@ -27,8 +27,8 @@ class MyTextField extends StatelessWidget {
           obscureText: obscureText,
           decoration: InputDecoration(
               focusedBorder: const OutlineInputBorder(
-                  borderSide:
-                  BorderSide(color: Colors.black26)),
+                  borderSide: BorderSide(color: Colors.black26)
+              ),
               border: InputBorder.none,
               filled: true,
               fillColor: Colors.white,
@@ -36,7 +36,8 @@ class MyTextField extends StatelessWidget {
               labelStyle: const TextStyle(
                   color: Colors.black87, fontSize: 17),
               hintText: hintText,
-              suffixIcon: icon
+              suffixIcon: icon,
+              suffixIconColor: Colors.white
           ),
           //The validator function returns a String? and receives a String?
           validator: validator

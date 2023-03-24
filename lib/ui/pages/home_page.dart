@@ -130,6 +130,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       bottomNavigationBar: _bottomNavigationBar(),
+      //Homepage content
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(left: 10, right: 10),
@@ -174,6 +175,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  //create the bottom navigation bar
   BottomNavigationBar _bottomNavigationBar() {
     return BottomNavigationBar(
       iconSize: 25,

@@ -1,6 +1,9 @@
+import 'package:alice_store/provider/google_sign_provider.dart';
+import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/ui/widgets/my_text_field.dart';
+import 'package:alice_store/utils/app_routes.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -30,6 +33,26 @@ class _LoginPageState extends State<LoginPage> {
               width: double.infinity,
               child:
                   Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+                //Skip text
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        //Close this screen first so that the user can't return
+                        Navigator.of(context).pop();
+                        Navigator.of(context).push(AppRoutes.createRoute(
+                            newPage: const HomePage()));
+                      },
+                      style: TextButton.styleFrom(backgroundColor: Colors.white),
+                      child: const Text(
+                        'Saltar',
+                        style: TextStyle(
+                            color: Colors.black87, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
                 //Lock icon
                 const Padding(
                   padding: EdgeInsets.all(20),
@@ -57,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         //Email field
                         MyTextField(
-                          obscureText: true,
+                          obscureText: false,
                           hintText: 'Introduce email',
                           labelText: 'Email',
                           controller: emailController,
@@ -75,10 +98,10 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(height: 15),
                         //Password field
                         MyTextField(
-                          obscureText: false,
+                          obscureText: true,
                           hintText: 'Introduce password',
                           labelText: 'Password',
-                          controller: emailController,
+                          controller: passwordController,
                           icon: const Icon(
                             Icons.password_outlined,
                             color: Colors.black87,
@@ -119,18 +142,8 @@ class _LoginPageState extends State<LoginPage> {
                         'O continua con',
                         style: TextStyle(color: Colors.black54),
                       ),
-                      InkWell(
-                        onTap: () {},
-                        child: Container(
-                          margin: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10)),
-                          padding: const EdgeInsets.all(15),
-                          child: Image.asset('assets/images/google.png',
-                              height: 40),
-                        ),
-                      ),
+                      //Google sign in button
+                      googleSignInButton(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -166,6 +179,22 @@ class _LoginPageState extends State<LoginPage> {
           'Iniciar sesión',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
+      ),
+    );
+  }
+
+  Widget googleSignInButton() {
+    //GoogleSignInProvider provider = Provider.of<GoogleSignInProvider>(context, listen: false);
+    return InkWell(
+      onTap: () {
+        Provider.of<GoogleSignInProvider>(context, listen: false).googleLogin();
+      },
+      child: Container(
+        margin: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(10)),
+        padding: const EdgeInsets.all(15),
+        child: Image.asset('assets/images/google.png', height: 40),
       ),
     );
   }
