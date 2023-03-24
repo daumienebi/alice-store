@@ -3,15 +3,16 @@ import 'package:alice_store/ui/pages/pages.dart';
 class AppRoutes{
   static RouteStrings routeStrings = RouteStrings();
   static final allRoutes = {
-    routeStrings.homepage : (_) => const HomePage(),
+    routeStrings.homepage : (_) => HomePage(),
     routeStrings.wishListPage: (_) => const WishListPage(),
     routeStrings.aboutProjectPage: (_) => const AboutProjectPage(),
     routeStrings.productPage: (_) => const ProductDetailPage(),
     routeStrings.noInternetPage: (_) => const NoInternetPage(),
     routeStrings.similarProducts: (_) => const SimilarProductsPage(),
-    routeStrings.loginPage: (_) => const LoginPage(),
-    routeStrings.xPage: (_) => const XPage(),
+    routeStrings.signInPage: (_) => const SignInPage(),
+    routeStrings.mainPage: (_) => const MainPage(),
     routeStrings.profilePage: (_) => ProfilePage(),
+    routeStrings.signUpPage: (_) => const SignUpPage(),
   };
 }
 
@@ -23,7 +24,8 @@ class RouteStrings {
   String get productPage => 'productDetails';
   String get noInternetPage => 'noInternet';
   String get similarProducts => 'similarProducts';
-  String get loginPage => 'loginPage';
-  String get xPage => 'xPage';
+  String get signInPage => 'signInPage';
+  String get mainPage => 'mainPage';
   String get profilePage => 'profilePage';
+  String get signUpPage => 'signUpPage';
 }

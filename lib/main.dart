@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isLoggedIn = false;
     return  MaterialApp(
       title: 'Alice Store',
       debugShowCheckedModeBanner: false,
@@ -32,8 +31,7 @@ class MyApp extends StatelessWidget {
           textTheme: GoogleFonts.varelaRoundTextTheme()
       ),
       routes: AppRoutes.allRoutes,
-      initialRoute: AppRoutes.routeStrings.xPage,
-      //initialRoute: isLoggedIn ? AppRoutes.routeStrings.homepage : AppRoutes.routeStrings.loginPage,
+      initialRoute: AppRoutes.routeStrings.mainPage,
       supportedLocales: L10n.all,
       localizationsDelegates: const [
         AppLocalizations.delegate,

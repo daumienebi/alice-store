@@ -1,3 +1,4 @@
+import 'package:alice_store/provider/google_signin_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/ui/widgets/custom_button.dart';
 import 'package:alice_store/utils/constants.dart';
@@ -6,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -16,7 +18,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //Get the current user
-    final user = FirebaseAuth.instance.currentUser!;
+    final user = firebaseAuth.currentUser!;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -32,7 +34,7 @@ class ProfilePage extends StatelessWidget {
         child: SizedBox(
           height: MediaQuery.of(context).size.height * 0.90,
           child: Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+            padding: const EdgeInsets.only(left: 10, right: 10),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -45,8 +47,10 @@ class ProfilePage extends StatelessWidget {
                   // name text
                   Container(
                       margin: const EdgeInsets.only(top: 10.0),
-                      child: Text(user.displayName!,
+                      child: Text(
+                          user.displayName!,
                           style: const TextStyle(
+                              overflow: TextOverflow.ellipsis,
                               fontSize: 18, fontWeight: FontWeight.bold))),
                   // email text
                   Container(
@@ -54,6 +58,11 @@ class ProfilePage extends StatelessWidget {
                       child: Text(user.email!,
                           style: const TextStyle(
                               fontSize: 18,color: Colors.black54))),
+
+                  Padding(
+                    padding: EdgeInsets.only(top: 10),
+                      child: Icon(Icons.verified,color: Colors.cyan,size: 50,)
+                  ),
 
                   //option list
                   const SizedBox(height: 10),
@@ -78,6 +87,7 @@ class ProfilePage extends StatelessWidget {
             title:  'Compras',
             onTap: () {}
           ),
+          /*
           //Credits
           optionListTile(
             context: context,
@@ -85,6 +95,8 @@ class ProfilePage extends StatelessWidget {
             title:  'Créditos',
             onTap: () {}
           ),
+           */
+
           //Privacy
           optionListTile(
             context: context,
@@ -143,7 +155,13 @@ class ProfilePage extends StatelessWidget {
             context: context,
             leading: const Icon(Icons.logout),
             title:  'Cerrar sesión',
-            onTap: (){}
+            onTap: () {
+              //log out logic
+              Provider.of<GoogleSignInProvider>(context,listen: false)
+                  .googleLogout();
+              //Close the current page after logging out
+              Navigator.of(context).pop();
+            }
           )
         ],
       ),
@@ -162,7 +180,7 @@ class ProfilePage extends StatelessWidget {
         textColor: Colors.black87,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         tileColor: Colors.white54,
-        trailing: const Icon(Icons.arrow_forward_ios_sharp),
+        trailing: const Icon(Icons.arrow_forward_ios_sharp,size: 15,),
         leading: leading,
         title: Text(title),
         onTap: ()=> onTap(),
@@ -171,15 +189,12 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  //Implement this share app option even though the app will not be published
-  //on the playstore
-
   /// List of the [SocialMedia] buttons
   List<Widget> socialMediaButtons(context) {
     //Very shitty work around
     // TODO : Change it later on
     List<Widget> items = [];
-    items.add(SizedBox(
+    items.add(const SizedBox(
       width: 10,
     ));
     items.add(socialButton(
@@ -279,4 +294,5 @@ class ProfilePage extends StatelessWidget {
     final url = Uri.parse(urls[platform]!);
     await launchUrl(url, mode: LaunchMode.externalApplication);
   }
+
 }

@@ -8,6 +8,7 @@ import 'package:badges/badges.dart' as badges;
 import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/ui/widgets/widgets.dart';
 import 'package:alice_store/utils/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,13 +18,16 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
+  HomePage({Key? key}) : super(key: key);
+  bool isUserSignedIn = false;
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  //Firebase auth
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
   late Future<List<Category>> fetchCategoriesFuture;
   int _selectedIndex = 0;
   final CategoryService categoryService = CategoryService();
@@ -33,10 +37,15 @@ class _HomePageState extends State<HomePage> {
     return Future.delayed(const Duration(seconds: 2),()=> categories);
   }
 
+  void checkUserSignedIn(){
+    widget.isUserSignedIn = firebaseAuth.currentUser != null;
+  }
+
   @override
   void initState() {
     super.initState();
     fetchCategoriesFuture = fetchAllCategories();
+    checkUserSignedIn();
   }
 
   @override
@@ -81,8 +90,15 @@ class _HomePageState extends State<HomePage> {
             return Padding(
               padding: const EdgeInsets.only(left: 10, top: 10),
               child: CustomButton(
-                  iconData: Icons.person,
-                  onPressed: ()=> Navigator.of(context).push(goToProfilePage()),
+                  iconData: Icons.person_outline,
+                  onPressed: (){
+                    widget.isUserSignedIn ? Navigator.of(context).push(goToProfilePage())
+                        : Navigator.of(context).push(
+                        NavigatorUtil.createRouteWithSlideAnimation(
+                            newPage: const SignInPage()
+                        )
+                    );
+                  }
               ),
             );
           },

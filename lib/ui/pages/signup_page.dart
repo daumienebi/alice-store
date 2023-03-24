@@ -6,16 +6,17 @@ import 'package:alice_store/utils/navigator_util.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   String _email = "";
   String _password = "";
+  String _confirmPassword = "";
 
   // form key
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -28,13 +29,14 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10, top: 50),
+          padding: const EdgeInsets.only(left: 10, right: 10, top: 30),
           child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.90,
+              height: MediaQuery.of(context).size.height * 1.00,
               width: double.infinity,
               child:
-                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+              Column(mainAxisAlignment: MainAxisAlignment.start, children: [
                 //Skip text
+                /*
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -43,17 +45,18 @@ class _LoginPageState extends State<LoginPage> {
                         //Close this screen first so that the user can't return
                         Navigator.of(context).pop();
                         Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(
-                            newPage: const HomePage()));
+                            newPage: HomePage()));
                       },
                       style: TextButton.styleFrom(backgroundColor: Colors.white),
                       child: const Text(
-                        'Saltar',
+                        'Continuar sin iniciar sesión',
                         style: TextStyle(
-                            color: Colors.black87, fontWeight: FontWeight.bold),
+                          color: Colors.black87,),
                       ),
                     ),
                   ],
                 ),
+                 */
                 //Lock icon
                 const Padding(
                   padding: EdgeInsets.all(20),
@@ -74,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(color: Colors.black54, fontSize: 16),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20, bottom: 10),
+                  padding: const EdgeInsets.only(top: 10,bottom: 10),
                   child: Form(
                     key: _formKey,
                     child: Column(
@@ -114,25 +117,31 @@ class _LoginPageState extends State<LoginPage> {
                             return '';
                           },
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            TextButton(
-                              onPressed: () {},
-                              child: const Text(
-                                'Olvidaste la contraseña ?',
-                                style: TextStyle(
-                                    color: Colors.blue,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            )
-                          ],
-                        )
+                        const SizedBox(height: 15),
+                        //Password field
+                        MyTextField(
+                          obscureText: true,
+                          hintText: 'Confirm password',
+                          labelText: 'Confirm Password',
+                          controller: passwordController,
+                          icon: const Icon(
+                            Icons.password_outlined,
+                            color: Colors.black87,
+                          ),
+                          validator: (String? value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Email error';
+                            }
+                            return '';
+                          },
+                        ),
+
                       ],
                     ),
                   ),
                 ),
-                signInButton(),
+
+                signUpButton(),
                 const SizedBox(height: 10),
                 //Google sign in + register button
                 Padding(
@@ -148,14 +157,19 @@ class _LoginPageState extends State<LoginPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('No tienes cuenta ? '),
-                          InkWell(
-                            onTap: () {},
+                          const Text('Ya tienes cuenta ? '),
+                          TextButton(
+                            onPressed: () {
+                              //Close this screen first so that the user can't return
+                              //Navigator.of(context).pop();
+                              Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(
+                                  newPage: const SignInPage()));
+                            },
+                            style: TextButton.styleFrom(backgroundColor: Colors.greenAccent),
                             child: const Text(
-                              'Registrate ya',
+                              'Inicia sesión',
                               style: TextStyle(
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.bold),
+                                color: Colors.black54,),
                             ),
                           )
                         ],
@@ -169,16 +183,19 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget signInButton() {
-    return SizedBox(
-      width: double.infinity,
-      child: TextButton(
-        onPressed: () {},
-        style: TextButton.styleFrom(
-            backgroundColor: Colors.black87, fixedSize: const Size(50, 60)),
-        child: const Text(
-          'Iniciar sesión',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+  Widget signUpButton() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 30),
+      child: SizedBox(
+        width: double.infinity,
+        child: TextButton(
+          onPressed: () {},
+          style: TextButton.styleFrom(
+              backgroundColor: Colors.black87, fixedSize: const Size(50, 60)),
+          child: const Text(
+            'Registrarse',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
         ),
       ),
     );
@@ -187,8 +204,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget googleSignInButton() {
     //GoogleSignInProvider provider = Provider.of<GoogleSignInProvider>(context, listen: false);
     return InkWell(
-      onTap: () {
-        Provider.of<GoogleSignInProvider>(context, listen: false).googleLogin();
+      onTap: () async{
+        await Provider.of<GoogleSignInProvider>(context, listen: false).googleLogin();
       },
       child: Container(
         margin: const EdgeInsets.all(10),
