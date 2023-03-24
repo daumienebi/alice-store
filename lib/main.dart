@@ -7,12 +7,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   //Initialize the firebase app
-  //await Firebase.initializeApp();
+  await Firebase.initializeApp();
 
   runApp(const AppState());
 }
