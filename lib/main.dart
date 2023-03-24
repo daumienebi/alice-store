@@ -1,67 +1,37 @@
-import 'dart:async';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/utils/app_routes.dart';
 import 'package:alice_store/utils/l10n/l10n.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() async{
-
   WidgetsFlutterBinding.ensureInitialized();
+  //Initialize the firebase app
+  //await Firebase.initializeApp();
+
   runApp(const AppState());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  late StreamSubscription connectivityStream;
-  bool _isConnected = true;
-
-  @override
-  void initState() {
-    super.initState();
-    setConnectivitySubscription();
-  }
-
-  @override
-  void dispose() {
-    connectivityStream.cancel();
-    super.dispose();
-  }
-
-  void setConnectivitySubscription() {
-    connectivityStream = Connectivity().onConnectivityChanged.listen(
-          (ConnectivityResult result) {
-        setState(() {
-          _isConnected = (result != ConnectivityResult.none);
-        });
-      },
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
+    bool isLoggedIn = false;
     return  MaterialApp(
       title: 'Alice Store',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        //scaffoldBackgroundColor: Colors.white
-        scaffoldBackgroundColor: Colors.cyan[100],
-        textTheme: GoogleFonts.varelaRoundTextTheme()
+          scaffoldBackgroundColor: Colors.cyan[100],
+          textTheme: GoogleFonts.varelaRoundTextTheme()
       ),
       routes: AppRoutes.allRoutes,
-      initialRoute: _isConnected ? AppRoutes.routeStrings.homepage
-          : AppRoutes.routeStrings.noInternetPage,
+      initialRoute: isLoggedIn ? AppRoutes.routeStrings.homepage : AppRoutes.routeStrings.loginPage,
       supportedLocales: L10n.all,
       localizationsDelegates: const [
         AppLocalizations.delegate,

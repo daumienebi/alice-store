@@ -9,6 +9,7 @@ class AppRoutes{
     routeStrings.productPage: (_) => const ProductDetailPage(),
     routeStrings.noInternetPage: (_) => const NoInternetPage(),
     routeStrings.similarProducts: (_) => const SimilarProductsPage(),
+    routeStrings.loginPage: (_) => const LoginPage(),
   };
 
   /// Simple PageRouteBuilder to navigate to another page with a FadeTransition
@@ -46,4 +47,5 @@ class RouteStrings {
   String get productPage => 'productDetails';
   String get noInternetPage => 'noInternet';
   String get similarProducts => 'similarProducts';
+  String get loginPage => 'loginPage';
 }
