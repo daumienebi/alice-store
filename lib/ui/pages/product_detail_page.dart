@@ -3,6 +3,7 @@ import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/ui/widgets/custom_button.dart';
 import 'package:alice_store/utils/app_routes.dart';
+import 'package:alice_store/utils/navigator_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
@@ -169,7 +170,7 @@ class ProductDetailPage extends StatelessWidget {
                     const Text('Producto elimindado a la lista de deseos'),
                     TextButton(
                         onPressed: () {
-                          Navigator.of(context).push(AppRoutes.createRoute(
+                          Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(
                               newPage: const WishListPage()));
                         },
                         child: const Text(

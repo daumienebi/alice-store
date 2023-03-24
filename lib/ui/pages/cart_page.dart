@@ -1,5 +1,8 @@
 import 'package:alice_store/models/product.dart';
 import 'package:alice_store/provider/cart_provider.dart';
+import 'package:alice_store/ui/pages/pages.dart';
+import 'package:alice_store/utils/app_routes.dart';
+import 'package:alice_store/utils/navigator_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -13,11 +16,11 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  List<Product> _cartProducts = [];
+  List<Product> cartProducts = [];
   @override
   Widget build(BuildContext context) {
     CartProvider provider = Provider.of<CartProvider>(context, listen: true);
-    _cartProducts = provider.getProducts;
+    cartProducts = provider.getProducts;
     return Scaffold(
       body: SizedBox(
         height: MediaQuery.of(context).size.height * 0.80,
@@ -25,7 +28,7 @@ class _CartPageState extends State<CartPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _cartProducts.isEmpty
+            cartProducts.isEmpty
                 ? Center(
                     child: Column(
                       children: [
@@ -40,98 +43,109 @@ class _CartPageState extends State<CartPage> {
                 : Expanded(
                     child: ListView.builder(
                       itemBuilder: (BuildContext context, index) {
+                        // split the price in two texts to apply a different
+                        // style
                         String price1 = '';
                         String price2 = '';
-                        var split = _cartProducts[index]
+                        var split = cartProducts[index]
                             .price
                             .toString()
                             .split('.');
                         price1 = split[0];
                         price2 = split[1];
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 7),
-                          child: Container(
+                        // product item
+                        return InkWell(
+                          onTap:(){
+                            Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(
+                                newPage: const ProductDetailPage(),
+                                arguments: cartProducts[index])
+                            );
+                          },
+                          child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 7),
-                            decoration: BoxDecoration(
-                                color: Colors.white54,
-                                borderRadius: BorderRadius.circular(12)),
-                            child: Row(
-                              children: [
-                                CachedNetworkImage(
-                                  placeholder: ((context, url) => Image.asset(
-                                      'assets/gifs/loading.gif'
-                                  )),
-                                  imageUrl: _cartProducts[index].image,
-                                  height: 120,
-                                  width: 100,
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        _cartProducts[index].name,
-                                        style: const TextStyle(fontSize: 18),
-                                      ),
-                                      const SizedBox(height: 5),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            price1,
-                                            style: const TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 22,
-                                                fontWeight:
-                                                FontWeight.bold),
-                                          ),
-                                          Text(
-                                            '.$price2€',
-                                            style: const TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 15
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 5),
-                                      const Text(
-                                        'Cantidad : 1',
-                                        style: TextStyle(
-                                            color: Colors.black54,
-                                            fontSize: 15
-                                        ),
-                                      ),
-                                      TextButton(
-                                          onPressed: () => provider
-                                              .removeProduct(_cartProducts[index]),
-                                          style: TextButton.styleFrom(
-                                              backgroundColor:
-                                              Colors.white,
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(10)
-                                              )
-                                          ),
-                                          child: Text(
-                                              'Eliminar producto',
-                                            style: TextStyle(
-                                                color: Colors.redAccent[200]
-                                            ),
-                                          )
-                                      )
-                                    ],
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 7),
+                              decoration: BoxDecoration(
+                                  color: Colors.white54,
+                                  borderRadius: BorderRadius.circular(12)),
+                              child: Row(
+                                children: [
+                                  CachedNetworkImage(
+                                    placeholder: ((context, url) => Image.asset(
+                                        'assets/gifs/loading.gif'
+                                    )),
+                                    imageUrl: cartProducts[index].image,
+                                    height: 120,
+                                    width: 100,
                                   ),
-                                ),
-                              ],
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          cartProducts[index].name,
+                                          style: const TextStyle(fontSize: 18),
+                                        ),
+                                        const SizedBox(height: 5),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              price1,
+                                              style: const TextStyle(
+                                                  color: Colors.black54,
+                                                  fontSize: 22,
+                                                  fontWeight:
+                                                  FontWeight.bold),
+                                            ),
+                                            Text(
+                                              '.$price2€',
+                                              style: const TextStyle(
+                                                  color: Colors.black54,
+                                                  fontSize: 15
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 5),
+                                        const Text(
+                                          'Cantidad : 1',
+                                          style: TextStyle(
+                                              color: Colors.black54,
+                                              fontSize: 15
+                                          ),
+                                        ),
+                                        TextButton(
+                                            onPressed: () => provider
+                                                .removeProduct(cartProducts[index]),
+                                            style: TextButton.styleFrom(
+                                                backgroundColor:
+                                                Colors.white,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                    BorderRadius.circular(10)
+                                                )
+                                            ),
+                                            child: Text(
+                                                'Eliminar producto',
+                                              style: TextStyle(
+                                                  color: Colors.redAccent[200]
+                                              ),
+                                            )
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         );
                       },
-                      itemCount: _cartProducts.length,
+                      itemCount: cartProducts.length,
                     ),
                   ),
             //Show the payment widget if the cart is not empty
-            _cartProducts.isEmpty ? Container() : _payNowWidget(provider)
+            cartProducts.isEmpty ? Container() : _payNowWidget(provider)
           ],
         ),
       ),

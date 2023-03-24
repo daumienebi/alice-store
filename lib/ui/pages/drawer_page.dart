@@ -1,4 +1,5 @@
 import 'package:alice_store/utils/app_routes.dart';
+import 'package:alice_store/utils/navigator_util.dart';
 import 'package:flutter/material.dart';
 
 import 'pages.dart';
@@ -26,7 +27,7 @@ class DrawerPage extends StatelessWidget {
                 leading: const Icon(Icons.favorite_border),
                 title: const Text('Lista de deseos'),
                 onTap: ()=> Navigator.of(context).push(
-                    AppRoutes.createRoute(newPage: const WishListPage())
+                    NavigatorUtil.createRouteWithFadeAnimation(newPage: const WishListPage())
                 ),
               ),
               const ListTile(

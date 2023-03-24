@@ -2,6 +2,7 @@ import 'package:alice_store/provider/google_signin_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/ui/widgets/my_text_field.dart';
 import 'package:alice_store/utils/app_routes.dart';
+import 'package:alice_store/utils/navigator_util.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -41,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () {
                         //Close this screen first so that the user can't return
                         Navigator.of(context).pop();
-                        Navigator.of(context).push(AppRoutes.createRoute(
+                        Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(
                             newPage: const HomePage()));
                       },
                       style: TextButton.styleFrom(backgroundColor: Colors.white),

@@ -4,6 +4,7 @@ import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/ui/widgets/widgets.dart';
 import 'package:alice_store/utils/app_routes.dart';
+import 'package:alice_store/utils/navigator_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
@@ -95,7 +96,7 @@ class _WishListPageState extends State<WishListPage> {
 
     return GestureDetector(
       onTap: ()=> Navigator.of(context).push(
-          AppRoutes.createRoute(
+          NavigatorUtil.createRouteWithFadeAnimation(
           newPage: const ProductDetailPage(),
           arguments: product)
       ),
@@ -156,7 +157,7 @@ class _WishListPageState extends State<WishListPage> {
                         child: TextButton(
                           onPressed: () {
                             Navigator.of(context).push(
-                              AppRoutes.createRoute(
+                                NavigatorUtil.createRouteWithFadeAnimation(
                                 //Pass the categoryId to fetch products of the
                                 //same category
                                   newPage: SimilarProductsPage(categoryId: product.categoryId,)

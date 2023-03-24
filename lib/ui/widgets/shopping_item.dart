@@ -2,6 +2,7 @@ import 'package:alice_store/models/product.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/utils/app_routes.dart';
+import 'package:alice_store/utils/navigator_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class ShoppingItem extends StatelessWidget {
     price1 = splitValue[0];
     price2 = splitValue[1];
     return GestureDetector(
-        onTap: () => Navigator.of(context).push(AppRoutes.createRoute(
+        onTap: () => Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(
             arguments: product, newPage: const ProductDetailPage())),
         child: Container(
           padding: const EdgeInsets.all(10),
@@ -97,7 +98,7 @@ class ShoppingItem extends StatelessWidget {
                           child: TextButton(
                             onPressed: () {
                               Navigator.of(context).push(
-                                  AppRoutes.createRoute(
+                                  NavigatorUtil.createRouteWithFadeAnimation(
                                     //Pass the categoryId to fetch products of the
                                     //same category
                                       newPage: SimilarProductsPage(
@@ -161,7 +162,7 @@ class ShoppingItem extends StatelessWidget {
                   const Text('Producto elimindado a la lista de deseos'),
                   TextButton(
                       onPressed: () {
-                        Navigator.of(context).push(AppRoutes.createRoute(
+                        Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(
                             newPage: const WishListPage()));
                       },
                       child: const Text(
@@ -184,7 +185,7 @@ class ShoppingItem extends StatelessWidget {
                   const Text('Producto agregado a la lista de deseos'),
                   TextButton(
                       onPressed: () {
-                        Navigator.of(context).push(AppRoutes.createRoute(
+                        Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(
                             newPage: const WishListPage()));
                       },
                       child: const Text(
