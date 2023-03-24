@@ -11,6 +11,7 @@ class AppRoutes{
     routeStrings.similarProducts: (_) => const SimilarProductsPage(),
     routeStrings.loginPage: (_) => const LoginPage(),
     routeStrings.xPage: (_) => const XPage(),
+    routeStrings.profilePage: (_) => ProfilePage(),
   };
 }
 
@@ -24,4 +25,5 @@ class RouteStrings {
   String get similarProducts => 'similarProducts';
   String get loginPage => 'loginPage';
   String get xPage => 'xPage';
+  String get profilePage => 'profilePage';
 }

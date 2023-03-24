@@ -19,15 +19,22 @@ class DrawerPage extends StatelessWidget {
         Expanded(
           child: ListView(
             children: [
-              const ListTile(
-                leading: Icon(Icons.person_outline),
-                title: Text('Mi Perfil'),
+              ListTile(
+                leading: const Icon(Icons.person_outline),
+                title: const Text('Mi Perfil'),
+                onTap: ()=> Navigator.of(context).push(
+                    NavigatorUtil.createRouteWithFadeAnimation(
+                        newPage: ProfilePage()
+                    )
+                ),
               ),
               ListTile(
                 leading: const Icon(Icons.favorite_border),
                 title: const Text('Lista de deseos'),
                 onTap: ()=> Navigator.of(context).push(
-                    NavigatorUtil.createRouteWithFadeAnimation(newPage: const WishListPage())
+                    NavigatorUtil.createRouteWithFadeAnimation(
+                        newPage: const WishListPage()
+                    )
                 ),
               ),
               const ListTile(

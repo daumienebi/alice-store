@@ -96,7 +96,7 @@ class _WishListPageState extends State<WishListPage> {
 
     return GestureDetector(
       onTap: ()=> Navigator.of(context).push(
-          NavigatorUtil.createRouteWithFadeAnimation(
+          NavigatorUtil.createRouteWithSlideAnimation(
           newPage: const ProductDetailPage(),
           arguments: product)
       ),

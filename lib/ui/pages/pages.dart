@@ -9,3 +9,4 @@ export 'package:alice_store/ui/pages/no_internet_page.dart';
 export 'package:alice_store/ui/pages/similar_products_page.dart';
 export 'package:alice_store/ui/pages/login_page.dart';
 export 'package:alice_store/ui/pages/x_page.dart';
+export 'package:alice_store/ui/pages/profile_page.dart';

@@ -2,21 +2,19 @@ import 'package:alice_store/models/category.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/services/category_service.dart';
 import 'package:alice_store/ui/widgets/product_search_delegate.dart';
+import 'package:alice_store/utils/app_routes.dart';
+import 'package:alice_store/utils/navigator_util.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/ui/widgets/widgets.dart';
-import 'package:alice_store/utils/app_routes.dart';
 import 'package:alice_store/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -50,46 +48,20 @@ class _HomePageState extends State<HomePage> {
       const AboutProjectPage()
     ];
     return Scaffold(
+      //Only show the floating action button the user is in the home page
       floatingActionButton: _selectedIndex == 0
           ? FloatingActionButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15)),
               backgroundColor: Colors.white,
-              child: const Icon(Icons.share_sharp, color: Colors.black),
+              child: const Icon(Icons.favorite, color: Colors.cyan),
               onPressed: () {
-                showModalBottomSheet(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Container(
-                        height: 110,
-                        color: Colors.white,
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Compartir la app',
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                    color: Colors.black54, fontSize: 20),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Expanded(
-                                child: ListView(
-                                  scrollDirection: Axis.horizontal,
-                                  children: socialMediaButtons(context),
-                                ),
-                              ),
-                            ]),
-                      );
-                    });
+                Navigator.of(context).push(
+                  NavigatorUtil.createRouteWithFadeAnimation(newPage: const WishListPage())
+                );
               },
             )
           : Container(),
-      drawer: const Drawer(
-        child: DrawerPage(),
-      ),
       appBar: AppBar(
         title: Text(
             "A L I C E S T O R E",
@@ -109,8 +81,9 @@ class _HomePageState extends State<HomePage> {
             return Padding(
               padding: const EdgeInsets.only(left: 10, top: 10),
               child: CustomButton(
-                  iconData: Icons.menu,
-                  onPressed: Scaffold.of(context).openDrawer),
+                  iconData: Icons.person,
+                  onPressed: ()=> Navigator.of(context).push(goToProfilePage()),
+              ),
             );
           },
         ),
@@ -228,94 +201,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  /// List of the [SocialMedia] buttons
-  List<Widget> socialMediaButtons(context) {
-    //Very shitty work around
-    // TODO : Change it later on
-    List<Widget> items = [];
-    items.add(const SizedBox(
-      width: 10,
-    ));
-    items.add(socialButton(
-        socialMedia: SocialMedia.Whatsapp.name,
-        icon: const Icon(
-          FontAwesomeIcons.whatsapp,
-          color: Colors.green,
-          size: 40,
-        ),
-        onClicked: () {
-          Navigator.pop(context);
-          share(SocialMedia.Whatsapp, context);
-        }));
-    items.add(const SizedBox(
-      width: 15,
-    ));
-    items.add(socialButton(
-        socialMedia: SocialMedia.Twitter.name,
-        icon: const Icon(
-          FontAwesomeIcons.twitter,
-          color: Colors.lightBlueAccent,
-          size: 40,
-        ),
-        onClicked: () {
-          Navigator.pop(context);
-          share(SocialMedia.Twitter, context);
-        }));
-    items.add(const SizedBox(
-      width: 15,
-    ));
-    items.add(socialButton(
-        socialMedia: SocialMedia.Facebook.name,
-        icon: const Icon(
-          FontAwesomeIcons.facebook,
-          color: Colors.indigo,
-          size: 40,
-        ),
-        onClicked: () {
-          Navigator.pop(context);
-          share(SocialMedia.Facebook, context);
-        }));
-    items.add(const SizedBox(
-      width: 15,
-    ));
-    items.add(socialButton(
-        socialMedia: 'Copiar Enlace',
-        icon: const Icon(
-          Icons.copy,
-          color: Colors.grey,
-          size: 40,
-        ),
-        onClicked: () async {
-          String appId = Constants.playStoreId;
-          final urlString =
-              'https://play.google.com/store/apps/details?id=$appId';
-          await Clipboard.setData(ClipboardData(text: urlString));
-          Navigator.pop(context);
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text('Enlace copiado !'),
-              duration: Duration(seconds: 2)));
-        }));
-    return items;
-  }
-
-  /// [SocialMedia] button
-  Widget socialButton({required String socialMedia,required Icon icon,
-      Function()? onClicked}) {
-    const listTextStyle = TextStyle(color: Colors.black54);
-    return Column(
-      children: [
-        InkWell(
-          onTap: onClicked,
-          child: icon,
-        ),
-        Text(
-          socialMedia,
-          style: listTextStyle,
-        ),
-      ],
-    );
-  }
-
   /// FutureBuilder for the [Category] card swiper, it returns the available
   /// categories or an error depending on the response
   FutureBuilder categoriesFutureBuilder() {
@@ -413,22 +298,23 @@ class _HomePageState extends State<HomePage> {
     return greetingsText;
   }
 
-  /// Method to launch each share option for the [SocialMedia]
-  Future share(SocialMedia platform, BuildContext context) async {
-    String text = 'Descarga esta app (Fix the text)';
-    String appId = Constants.playStoreId;
-    final urlString = 'https://play.google.com/store/apps/details?id=$appId';
-    final urlShare = Uri.encodeComponent(urlString);
-    final urls = {
-      SocialMedia.Facebook:
-          'https://www.facebook.com/sharer/sharer.php?u=$urlShare&t=$text',
-      SocialMedia.Twitter:
-          'https://twitter.com/intent/tweet?url=$urlShare&text=$text',
-      SocialMedia.Whatsapp:
-          'https://api.whatsapp.com/send?text=$text $urlShare',
-    };
-    final url = Uri.parse(urls[platform]!);
-    await launchUrl(url, mode: LaunchMode.externalApplication);
-  }
+  /// Random animation to navigate to the profile. Maybe refactor this crap
+  /// later
+  Route goToProfilePage() {
+    return PageRouteBuilder(
+      settings: RouteSettings(name: AppRoutes.routeStrings.profilePage,),
+      pageBuilder: (context, animation, secondaryAnimation) => ProfilePage(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(-1.5, 1);
+        const end = Offset.zero;
+        final tween = Tween(begin: begin, end: end);
+        final offsetAnimation = animation.drive(tween);
 
+        return SlideTransition(
+          position: offsetAnimation,
+          child: child,
+        );
+      },
+    );
+  }
 }
