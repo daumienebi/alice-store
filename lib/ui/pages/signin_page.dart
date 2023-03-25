@@ -62,7 +62,7 @@ class _SignInPageState extends State<SignInPage> {
                     child: Icon(
                       Icons.lock,
                       size: 100,
-                      color: Colors.black54,
+                      color: Colors.black87,
                     ),
                   ),
                 ),
@@ -174,25 +174,28 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   Widget signInButton() {
-    return SizedBox(
-      width: double.infinity,
-      child: TextButton(
-        onPressed: () {},
-        style: TextButton.styleFrom(
-            backgroundColor: Colors.black87, fixedSize: const Size(50, 60)),
-        child: const Text(
-          'Iniciar sesión',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+    return Padding(
+      padding: const EdgeInsets.only(left: 10,right: 10),
+      child: SizedBox(
+        width: double.infinity,
+        child: TextButton(
+          onPressed: () {},
+          style: TextButton.styleFrom(
+              backgroundColor: Colors.black87, fixedSize: const Size(50, 60)),
+          child: const Text(
+            'Iniciar sesión',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
         ),
       ),
     );
   }
 
   Widget googleSignInButton() {
-    //GoogleSignInProvider provider = Provider.of<GoogleSignInProvider>(context, listen: false);
+    GoogleSignInProvider provider = Provider.of<GoogleSignInProvider>(context, listen: false);
     return InkWell(
       onTap: () async{
-        await Provider.of<GoogleSignInProvider>(context, listen: false).googleLogin();
+        await provider.googleLogin();
       },
       child: Container(
         margin: const EdgeInsets.all(10),

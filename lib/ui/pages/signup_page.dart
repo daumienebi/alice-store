@@ -35,28 +35,6 @@ class _SignUpPageState extends State<SignUpPage> {
               width: double.infinity,
               child:
               Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                //Skip text
-                /*
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        //Close this screen first so that the user can't return
-                        Navigator.of(context).pop();
-                        Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(
-                            newPage: HomePage()));
-                      },
-                      style: TextButton.styleFrom(backgroundColor: Colors.white),
-                      child: const Text(
-                        'Continuar sin iniciar sesión',
-                        style: TextStyle(
-                          color: Colors.black87,),
-                      ),
-                    ),
-                  ],
-                ),
-                 */
                 //Lock icon
                 const Padding(
                   padding: EdgeInsets.all(20),
@@ -66,7 +44,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: Icon(
                       Icons.lock,
                       size: 100,
-                      color: Colors.black54,
+                      color: Colors.black87,
                     ),
                   ),
                 ),
@@ -161,7 +139,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           TextButton(
                             onPressed: () {
                               //Close this screen first so that the user can't return
-                              //Navigator.of(context).pop();
+                              Navigator.of(context).pop();
                               Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(
                                   newPage: const SignInPage()));
                             },
@@ -185,7 +163,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Widget signUpButton() {
     return Padding(
-      padding: const EdgeInsets.only(top: 30),
+      padding: const EdgeInsets.only(top: 30,left: 10,right: 10),
       child: SizedBox(
         width: double.infinity,
         child: TextButton(
@@ -202,10 +180,10 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Widget googleSignInButton() {
-    //GoogleSignInProvider provider = Provider.of<GoogleSignInProvider>(context, listen: false);
+    GoogleSignInProvider provider = Provider.of<GoogleSignInProvider>(context, listen: true);
     return InkWell(
       onTap: () async{
-        await Provider.of<GoogleSignInProvider>(context, listen: false).googleLogin();
+        await provider.googleLogin();
       },
       child: Container(
         margin: const EdgeInsets.all(10),

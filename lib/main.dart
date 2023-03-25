@@ -4,6 +4,7 @@ import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/utils/app_routes.dart';
 import 'package:alice_store/utils/l10n/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,6 +24,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //Make the status bar the same as the scaffold color
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.cyan[100],
+      systemNavigationBarDividerColor: Colors.transparent
+    ));
     return  MaterialApp(
       title: 'Alice Store',
       debugShowCheckedModeBanner: false,

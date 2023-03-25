@@ -13,7 +13,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Use a stream builder to listen to the user ignin/signout activities and
+      // Use a stream builder to listen to the user signin/signout activities and
       // return a page depending on the results
       body: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
