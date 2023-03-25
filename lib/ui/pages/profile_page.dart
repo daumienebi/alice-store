@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -32,41 +33,35 @@ class ProfilePage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.90,
+          height: MediaQuery.of(context).size.height * 0.85,
           child: Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // profile pic
-                  CircleAvatar(
-                    backgroundImage: NetworkImage(user.photoURL!),
-                    radius: 60,
-                  ),
-                  // name text
-                  Container(
-                      margin: const EdgeInsets.only(top: 10.0),
-                      child: Text(
-                          user.displayName!,
-                          style: const TextStyle(
-                              overflow: TextOverflow.ellipsis,
-                              fontSize: 18, fontWeight: FontWeight.bold))),
-                  // email text
-                  Container(
-                      margin: const EdgeInsets.only(top: 10.0),
-                      child: Text(user.email!,
-                          style: const TextStyle(
-                              fontSize: 18,color: Colors.black54))),
-
+                  userData(user),
+                  const SizedBox(height: 20),
+                  optionsListWidget(context),
+                  //Display the current app version
                   Padding(
-                    padding: EdgeInsets.only(top: 10),
-                      child: Icon(Icons.verified,color: Colors.cyan,size: 50,)
+                    padding: const EdgeInsets.only(top:10,bottom: 15),
+                    child: FutureBuilder(
+                        future: getVersion(),
+                        builder: (context, snapshot) {
+                          if(snapshot.hasData){
+                            return Text(
+                              'Version: ${snapshot.data.toString()}',
+                              style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black38
+                              ),
+                            );
+                          }else {
+                            return const Text("");
+                          }
+                        }),
                   ),
-
-                  //option list
-                  const SizedBox(height: 10),
-                  optionsListWidget(context)
                 ],
               ),
             ),
@@ -76,94 +71,124 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
+  Widget userData(User user){
+    return Column(
+      children: [
+        // profile pic
+        CircleAvatar(
+          backgroundImage: NetworkImage(user.photoURL!),
+          radius: 60,
+        ),
+        // name
+        Container(
+            margin: const EdgeInsets.only(top: 10.0),
+            child: Text(
+                user.displayName!,
+                style: const TextStyle(
+                    overflow: TextOverflow.ellipsis,
+                    fontSize: 18, fontWeight: FontWeight.bold))),
+        // email
+        Container(
+            margin: const EdgeInsets.only(top: 10.0),
+            child: Text(user.email!,
+                style: const TextStyle(
+                    fontSize: 18,color: Colors.black54))),
+      ],
+    );
+  }
   Widget optionsListWidget(BuildContext context){
     return Expanded(
-      child: ListView(
-        children: [
-          //Purchases
-          optionListTile(
-            context: context,
-            leading: const Icon(Icons.shopping_cart),
-            title:  'Compras',
-            onTap: () {}
-          ),
-          /*
-          //Credits
-          optionListTile(
-            context: context,
-            leading: const Icon(Icons.people_outline),
-            title:  'Créditos',
-            onTap: () {}
-          ),
-           */
-
-          //Privacy
-          optionListTile(
-            context: context,
-            leading: const Icon(Icons.privacy_tip_outlined),
-            title:  'Privacidad',
-            onTap: ()=> Navigator.of(context).push(
-                NavigatorUtil.createRouteWithFadeAnimation(
-                    newPage: ProfilePage()
-                )
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 20),
+        padding: const EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          color: Colors.white54,
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 15,
+                offset: const Offset(0, 3))
+          ],
+        ),
+        child: ListView(
+          children: [
+            //Purchases
+            optionListTile(
+              context: context,
+              leading: const Icon(Icons.shopping_cart),
+              title:  'Compras',
+              onTap: () {}
             ),
-          ),
-          //Share app
-          optionListTile(
-            context: context,
-            leading: const Icon(Icons.email_outlined),
-            title:  'Invitar un amigo',
-            onTap: (){
-              showModalBottomSheet(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return Container(
-                      height: 110,
-                      color: Colors.white,
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Compartir la app',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  color: Colors.black54, fontSize: 20),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Expanded(
-                              child: ListView(
-                                scrollDirection: Axis.horizontal,
-                                children: socialMediaButtons(context),
+            //Privacy
+            optionListTile(
+              context: context,
+              leading: const Icon(Icons.privacy_tip_outlined),
+              title:  'Privacidad',
+              onTap: ()=> Navigator.of(context).push(
+                  NavigatorUtil.createRouteWithFadeAnimation(
+                      newPage: ProfilePage()
+                  )
+              ),
+            ),
+            //Invite friend
+            optionListTile(
+              context: context,
+              leading: const Icon(Icons.email_outlined),
+              title:  'Invitar un amigo',
+              onTap: (){
+                showModalBottomSheet(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Container(
+                        height: 110,
+                        color: Colors.white,
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Compartir la app',
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                    color: Colors.black54, fontSize: 20),
                               ),
-                            ),
-                          ]),
-                    );
-                  });
-            },
-          ),
-          //About the app
-          optionListTile(
-            context: context,
-            leading: const Icon(Icons.info_outline),
-            title:  'Sobre la app',
-            onTap: () {},
-          ),
-          //Log out
-          optionListTile(
-            context: context,
-            leading: const Icon(Icons.logout),
-            title:  'Cerrar sesión',
-            onTap: () {
-              //log out logic
-              Provider.of<GoogleSignInProvider>(context,listen: false)
-                  .googleLogout();
-              //Close the current page after logging out
-              Navigator.of(context).pop();
-            }
-          )
-        ],
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Expanded(
+                                child: ListView(
+                                  scrollDirection: Axis.horizontal,
+                                  children: socialMediaButtons(context),
+                                ),
+                              ),
+                            ]),
+                      );
+                    });
+              },
+            ),
+            //About the app
+            optionListTile(
+              context: context,
+              leading: const Icon(Icons.info_outline),
+              title:  'Sobre la app',
+              onTap: () {},
+            ),
+            //Log out
+            optionListTile(
+              context: context,
+              leading: const Icon(Icons.logout),
+              title:  'Cerrar sesión',
+              onTap: () {
+                //log out logic
+                Provider.of<GoogleSignInProvider>(context,listen: false)
+                    .googleLogout();
+                //Close the current page after logging out
+                Navigator.of(context).pop();
+              }
+            )
+          ],
+        ),
       ),
     );
   }
@@ -177,9 +202,10 @@ class ProfilePage extends StatelessWidget {
         borderRadius: BorderRadius.circular(10)
       ),
       child: ListTile(
-        textColor: Colors.black87,
+        textColor: Colors.black,
+        iconColor: Colors.black,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        tileColor: Colors.white54,
+        tileColor: Colors.cyan,
         trailing: const Icon(Icons.arrow_forward_ios_sharp,size: 15,),
         leading: leading,
         title: Text(title),
@@ -294,5 +320,12 @@ class ProfilePage extends StatelessWidget {
     final url = Uri.parse(urls[platform]!);
     await launchUrl(url, mode: LaunchMode.externalApplication);
   }
+
+  Future<String> getVersion() async{
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    String version = packageInfo.version;
+    return Future.value(version);
+  }
+
 
 }
