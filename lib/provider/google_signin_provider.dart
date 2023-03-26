@@ -11,7 +11,8 @@ class GoogleSignInProvider extends ChangeNotifier{
   GoogleSignInAccount get user => _user!;
 
   //Method that is executed when the user clicks on the sign in with Google btn
-  Future googleLogin() async{
+  Future<bool> googleLogin() async{
+    bool loggedIn = false;
     try{
       final googleUser = await _googleSignIn.signIn();
       //make sure the user selected an account
@@ -25,17 +26,51 @@ class GoogleSignInProvider extends ChangeNotifier{
             idToken: googleAuth.idToken
         );
         await FirebaseAuth.instance.signInWithCredential(credential);
+        loggedIn = true;
       }
     }catch (error){
       dev.log(error.toString());
     }
+    return loggedIn;
     notifyListeners();
 
+  }
+
+  Future signInWithEmailAndPassword(String email,String password) async{
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password
+    );
+    notifyListeners();
+  }
+
+  Future createUserWithEmailAndPassword(String email,String password) async{
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password
+    );
+    notifyListeners();
+  }
+
+  /// Returns true if the verification code was sent to the user and false
+  /// if it wasn't
+  Future<bool>resetPassword(String email) async{
+    bool verificationSent = false;
+    try{
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      verificationSent = true;
+    } on FirebaseAuthException catch(error){
+
+      dev.log(error.toString());
+    }
+    notifyListeners();
+    return verificationSent;
   }
 
   /// Logout the user
   Future googleLogout() async{
     await _googleSignIn.disconnect();
-    FirebaseAuth.instance.signOut();
+    await FirebaseAuth.instance.signOut();
+    notifyListeners();
   }
 }

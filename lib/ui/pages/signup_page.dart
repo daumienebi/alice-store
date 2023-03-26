@@ -23,6 +23,16 @@ class _SignUpPageState extends State<SignUpPage> {
   // text editing controllers
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
+
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -167,7 +177,11 @@ class _SignUpPageState extends State<SignUpPage> {
       child: SizedBox(
         width: double.infinity,
         child: TextButton(
-          onPressed: () {},
+          onPressed: () {
+            if(_formKey.currentState!.validate()){
+              createUserWithEmailAndPassword();
+            }
+          },
           style: TextButton.styleFrom(
               backgroundColor: Colors.black87, fixedSize: const Size(50, 60)),
           child: const Text(
@@ -180,10 +194,11 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Widget googleSignInButton() {
-    GoogleSignInProvider provider = Provider.of<GoogleSignInProvider>(context, listen: true);
+    GoogleSignInProvider provider = Provider.of<GoogleSignInProvider>(context, listen: false);
     return InkWell(
       onTap: () async{
         await provider.googleLogin();
+        //NavigatorUtil.createRouteWithFadeAnimation(newPage: MainPage());
       },
       child: Container(
         margin: const EdgeInsets.all(10),
@@ -193,5 +208,23 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Image.asset('assets/images/google.png', height: 40),
       ),
     );
+  }
+
+  Future createUserWithEmailAndPassword() async{
+    _email = emailController.text.trim();
+    _password = passwordController.text.trim();
+    _confirmPassword = confirmPasswordController.text.trim();
+    if(passwordConfirmed()){
+      await Provider.of<GoogleSignInProvider>(context,listen: false)
+          .createUserWithEmailAndPassword(_email, _password);
+    }
+  }
+
+  bool passwordConfirmed(){
+    if(passwordController.text.trim() == confirmPasswordController.text.trim()){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

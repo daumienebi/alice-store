@@ -11,3 +11,4 @@ export 'package:alice_store/ui/pages/signin_page.dart';
 export 'package:alice_store/ui/pages/main_page.dart';
 export 'package:alice_store/ui/pages/profile_page.dart';
 export 'package:alice_store/ui/pages/signup_page.dart';
+export 'package:alice_store/ui/pages/forgot_password_page.dart';

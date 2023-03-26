@@ -13,6 +13,7 @@ class AppRoutes{
     routeStrings.mainPage: (_) => const MainPage(),
     routeStrings.profilePage: (_) => ProfilePage(),
     routeStrings.signUpPage: (_) => const SignUpPage(),
+    routeStrings.forgotPasswordPage: (_) => const ForgotPasswordPage(),
   };
 }
 
@@ -28,4 +29,5 @@ class RouteStrings {
   String get mainPage => 'mainPage';
   String get profilePage => 'profilePage';
   String get signUpPage => 'signUpPage';
+  String get forgotPasswordPage => 'forgotPasswordPage';
 }

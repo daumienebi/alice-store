@@ -23,6 +23,13 @@ class _SignInPageState extends State<SignInPage> {
   final TextEditingController passwordController = TextEditingController();
 
   @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
@@ -108,7 +115,10 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                           validator: (String? value) {
                             if (value == null || value.isEmpty) {
-                              return 'Email error';
+                              return 'Debe introducir una contraseña';
+                            }
+                            if(value.length < 7){
+                              return 'La contraseña debe contener 7 caracteres como minimo';
                             }
                             return '';
                           },
@@ -117,7 +127,10 @@ class _SignInPageState extends State<SignInPage> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(
+                                    newPage: const ForgotPasswordPage()));
+                              },
                               child: const Text(
                                 'Olvidaste la contraseña ?',
                                 style: TextStyle(
@@ -143,7 +156,7 @@ class _SignInPageState extends State<SignInPage> {
                         style: TextStyle(color: Colors.black54),
                       ),
                       //Google sign in button
-                      googleSignInButton(),
+                      googleSignInButton(context),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -179,7 +192,11 @@ class _SignInPageState extends State<SignInPage> {
       child: SizedBox(
         width: double.infinity,
         child: TextButton(
-          onPressed: () {},
+          onPressed: () async{
+            if(_formKey.currentState!.validate()){
+              await signInWithEmailAdnPassword();
+            }
+          },
           style: TextButton.styleFrom(
               backgroundColor: Colors.black87, fixedSize: const Size(50, 60)),
           child: const Text(
@@ -191,11 +208,19 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  Widget googleSignInButton() {
+  Widget googleSignInButton(context) {
     GoogleSignInProvider provider = Provider.of<GoogleSignInProvider>(context, listen: false);
     return InkWell(
       onTap: () async{
-        await provider.googleLogin();
+        bool loggedIn = await provider.googleLogin();
+        if(loggedIn){
+          Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(
+              newPage: const MainPage())
+          );
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text('Error iniciando sesión con Google')));
+        }
       },
       child: Container(
         margin: const EdgeInsets.all(10),
@@ -205,5 +230,12 @@ class _SignInPageState extends State<SignInPage> {
         child: Image.asset('assets/images/google.png', height: 40),
       ),
     );
+  }
+
+  Future signInWithEmailAdnPassword() async{
+    _email = emailController.text.trim();
+    _password = passwordController.text.trim();
+    await Provider.of<GoogleSignInProvider>(context,listen: false)
+        .signInWithEmailAndPassword(_email, _password);
   }
 }

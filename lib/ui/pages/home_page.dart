@@ -48,8 +48,10 @@ class _HomePageState extends State<HomePage> {
     checkUserSignedIn();
   }
 
+
   @override
   Widget build(BuildContext context) {
+    print(widget.isUserSignedIn);
     List<Widget> widgetOptions = <Widget>[
       categoriesFutureBuilder(),
       const ShoppingPage(),

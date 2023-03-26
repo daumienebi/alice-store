@@ -19,7 +19,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //Get the current user
-    final user = firebaseAuth.currentUser!;
+    final user = firebaseAuth.currentUser;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -40,7 +40,7 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  userData(user),
+                  userData(user!),
                   const SizedBox(height: 20),
                   optionsListWidget(context),
                   //Display the current app version
@@ -180,7 +180,7 @@ class ProfilePage extends StatelessWidget {
               leading: const Icon(Icons.logout),
               title:  'Cerrar sesión',
               onTap: () {
-                //log out logic
+                //crappy log out logic
                 Provider.of<GoogleSignInProvider>(context,listen: false)
                     .googleLogout();
                 //Close the current page after logging out
