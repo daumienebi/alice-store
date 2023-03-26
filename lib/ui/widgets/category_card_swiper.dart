@@ -1,11 +1,10 @@
 import 'package:alice_store/models/category.dart';
-import 'package:alice_store/models/product.dart';
-import 'package:alice_store/ui/pages/wishlist_page.dart';
+import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/utils/app_routes.dart';
+import 'package:alice_store/utils/navigator_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CategoryCardSwiper extends StatelessWidget {
   final List<Category> categories;
@@ -20,33 +19,35 @@ class CategoryCardSwiper extends StatelessWidget {
     return Column(children: [
       SizedBox(
         width: double.infinity,
-        height: size.height * 0.40,
+        height: size.height * 0.45,
         child: Swiper(
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
                   onTap: () async {
-                    Navigator.of(context)
-                        .push(_createRoute(arguments: categories[index]));
+                    // Move to the similar products page to view products of the
+                    // selected category
+                    Navigator.of(context).push(
+                        NavigatorUtil.createRouteWithFadeAnimation(
+                            newPage: SimilarProductsPage(
+                                categoryId: categories[index].id)
+                        )
+                    );
                   },
                   child: Hero(
-                    tag : UniqueKey(),//or find another way to use a unique tag
+                    tag: UniqueKey(), //or find another way to use a unique tag
                     child: Container(
                         margin: const EdgeInsets.only(
                           left: 10,
                           right: 10,
                         ),
                         padding: const EdgeInsets.all(5),
-                        decoration:BoxDecoration(
-                          color: Colors.white54,
-                          borderRadius: BorderRadius.circular(20)
-                        ),
+                        decoration: BoxDecoration(
+                            color: Colors.white54,
+                            borderRadius: BorderRadius.circular(20)),
                         child: CachedNetworkImage(
-                            placeholder:((context, url) => Image.asset(
-                                'assets/gifs/loading.gif'
-                            )),
-                            imageUrl: categories[index].image
-                        )
-                    ) ,
+                            placeholder: ((context, url) =>
+                                Image.asset('assets/gifs/loading.gif')),
+                            imageUrl: categories[index].image)),
                   ));
             },
             autoplay: true,
@@ -66,9 +67,9 @@ class CategoryCardSwiper extends StatelessWidget {
             ),
             */
             //layout: SwiperLayout.CUSTOM//strange behaviour sometimes on start
-            layout: SwiperLayout.DEFAULT//strange behaviour sometimes on start
-          //layout: SwiperLayout.TINDER,//strange behaviour sometimes on start
-        ),
+            layout: SwiperLayout.DEFAULT //strange behaviour sometimes on start
+            //layout: SwiperLayout.TINDER,//strange behaviour sometimes on start
+            ),
       ),
     ]);
   }
@@ -76,11 +77,9 @@ class CategoryCardSwiper extends StatelessWidget {
   Route _createRoute({required Object? arguments}) {
     return PageRouteBuilder(
       settings: RouteSettings(
-          name: AppRoutes.routeStrings.wishListPage,
-          arguments: arguments
-      ),
+          name: AppRoutes.routeStrings.wishListPage, arguments: arguments),
       pageBuilder: (context, animation, secondaryAnimation) =>
-      const WishListPage(),
+          const WishListPage(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return FadeTransition(
           opacity: animation,
@@ -91,19 +90,16 @@ class CategoryCardSwiper extends StatelessWidget {
   }
 
   /// Shit method for now
-  CustomLayoutOption getCustomLayoutOption({required int startIndex,required int stateCount}){
+  CustomLayoutOption getCustomLayoutOption(
+      {required int startIndex, required int stateCount}) {
     //Look into the method to build something useful
-    CustomLayoutOption customLayoutOption = CustomLayoutOption(
-      startIndex: startIndex,
-      stateCount: stateCount
-    );
-    customLayoutOption.addTranslate(
-      const [
-        Offset(6, 9),
-        Offset(7, 2),
-        Offset(6, 10),
-      ]
-    );
+    CustomLayoutOption customLayoutOption =
+        CustomLayoutOption(startIndex: startIndex, stateCount: stateCount);
+    customLayoutOption.addTranslate(const [
+      Offset(6, 9),
+      Offset(7, 2),
+      Offset(6, 10),
+    ]);
 
     return customLayoutOption;
     //customLayoutOption.builders.add(value)

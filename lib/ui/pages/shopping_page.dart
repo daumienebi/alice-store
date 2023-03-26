@@ -1,6 +1,5 @@
 import 'package:alice_store/models/product.dart';
 import 'package:alice_store/provider/product_provider.dart';
-import 'package:alice_store/services/product_service.dart';
 import 'package:alice_store/ui/widgets/widgets.dart';
 import 'package:alice_store/utils/constants.dart';
 import 'package:flutter/material.dart';
