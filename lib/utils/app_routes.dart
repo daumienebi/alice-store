@@ -1,4 +1,5 @@
 import 'package:alice_store/ui/pages/pages.dart';
+import 'package:alice_store/ui/pages/payment_page.dart';
 
 class AppRoutes{
   static RouteStrings routeStrings = RouteStrings();
@@ -13,11 +14,12 @@ class AppRoutes{
     routeStrings.mainPage: (_) => const MainPage(),
     routeStrings.profilePage: (_) => ProfilePage(),
     routeStrings.signUpPage: (_) => const SignUpPage(),
-    routeStrings.forgotPasswordPage: (_) => const ForgotPasswordPage(),
+    routeStrings.paymentPage: (_) => const PaymentPage(),
   };
 }
 
-/// Class to map all the pages in the app
+/// Class to map all the pages in the app,they can be used in the
+/// pushedNamed method of the [Navigator]
 class RouteStrings {
   String get homepage => 'home';
   String get wishListPage => 'wishList';
@@ -30,4 +32,5 @@ class RouteStrings {
   String get profilePage => 'profilePage';
   String get signUpPage => 'signUpPage';
   String get forgotPasswordPage => 'forgotPasswordPage';
+  String get paymentPage => 'paymentPage';
 }

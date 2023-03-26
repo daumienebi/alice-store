@@ -1,7 +1,6 @@
 import 'package:alice_store/models/product.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
-import 'package:alice_store/utils/app_routes.dart';
 import 'package:alice_store/utils/navigator_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -183,25 +182,28 @@ class _CartPageState extends State<CartPage> {
                 )
               ],
             ),
-            Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(13),
-                    border: Border.all(color: Colors.white70)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text(
-                      'Pagar',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios_sharp,
-                      size: 15,
-                      color: Colors.white,
-                    )
-                  ],
-                ))
+            InkWell(
+              onTap: ()=>Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(newPage: PaymentPage())),
+              child: Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(13),
+                      border: Border.all(color: Colors.white70)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text(
+                        'Pagar',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios_sharp,
+                        size: 15,
+                        color: Colors.white,
+                      )
+                    ],
+                  )),
+            )
           ],
         ),
       ),

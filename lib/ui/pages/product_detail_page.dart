@@ -88,9 +88,8 @@ class ProductDetailPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         SizedBox(
-          //use the available width, with the kValue
-          //2000000000 from the card_swiper value
-          width: kMaxValue.toDouble(),
+          //use the available width
+          width: double.infinity,
           child: TextButton(
             onPressed: () {
               //TODO : Fetch similar products
@@ -106,7 +105,7 @@ class ProductDetailPage extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width: kMaxValue.toDouble(),
+          width: double.infinity,
           child: TextButton(
             onPressed: () {
               Provider.of<CartProvider>(context, listen: false)

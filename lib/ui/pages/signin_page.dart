@@ -226,7 +226,8 @@ class _SignInPageState extends State<SignInPage> {
           );
         }else{
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text('Error iniciando sesión con Google')));
+            duration: Duration(seconds: 7),
+              content: Text('Error iniciando sesión con Google, revise su conexión a internet')));
         }
       },
       child: Container(
