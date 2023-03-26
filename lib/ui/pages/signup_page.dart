@@ -1,7 +1,7 @@
 import 'package:alice_store/provider/google_signin_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/ui/widgets/my_text_field.dart';
-import 'package:alice_store/utils/app_routes.dart';
+import 'package:alice_store/utils/dialogs.dart';
 import 'package:alice_store/utils/navigator_util.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -82,7 +82,11 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                           validator: (String? value) {
                             if (value == null || value.isEmpty) {
-                              return 'Email error';
+                              return 'Debe introducir un correo';
+                            }
+                            bool emailValid = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value);
+                            if(!emailValid){
+                              return 'Por favor, introduce un correo válido';
                             }
                             return '';
                           },
@@ -100,7 +104,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                           validator: (String? value) {
                             if (value == null || value.isEmpty) {
-                              return 'Email error';
+                              return 'Debe introducir una contraseña';
+                            }
+                            if(value.length < 7){
+                              return 'La contraseña debe contener 7 caracteres como minimo';
                             }
                             return '';
                           },
@@ -111,14 +118,20 @@ class _SignUpPageState extends State<SignUpPage> {
                           obscureText: true,
                           hintText: 'Confirm password',
                           labelText: 'Confirm Password',
-                          controller: passwordController,
+                          controller: confirmPasswordController,
                           icon: const Icon(
                             Icons.password_outlined,
                             color: Colors.black87,
                           ),
                           validator: (String? value) {
                             if (value == null || value.isEmpty) {
-                              return 'Email error';
+                              return 'Debe introducir una contraseña';
+                            }
+                            if(value.length < 7){
+                              return 'La contraseña debe contener 7 caracteres como minimo';
+                            }
+                            if(!passwordConfirmed()){
+                              return 'Las 2 contraseñas deben coincidir';
                             }
                             return '';
                           },
@@ -150,14 +163,15 @@ class _SignUpPageState extends State<SignUpPage> {
                             onPressed: () {
                               //Close this screen first so that the user can't return
                               Navigator.of(context).pop();
-                              Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(
+                              Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(
                                   newPage: const SignInPage()));
                             },
                             style: TextButton.styleFrom(backgroundColor: Colors.greenAccent),
                             child: const Text(
                               'Inicia sesión',
                               style: TextStyle(
-                                color: Colors.black54,),
+                                color: Colors.black54
+                              ),
                             ),
                           )
                         ],
@@ -178,9 +192,11 @@ class _SignUpPageState extends State<SignUpPage> {
         width: double.infinity,
         child: TextButton(
           onPressed: () {
-            if(_formKey.currentState!.validate()){
+            //minor patch so that the users can see the validation prompts
+            // but if(_formKey.currentState!.validate()){...} is not working
+            //correctly
+            _formKey.currentState!.validate();
               createUserWithEmailAndPassword();
-            }
           },
           style: TextButton.styleFrom(
               backgroundColor: Colors.black87, fixedSize: const Size(50, 60)),
@@ -211,15 +227,35 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Future createUserWithEmailAndPassword() async{
+    bool userCreated;
     _email = emailController.text.trim();
     _password = passwordController.text.trim();
     _confirmPassword = confirmPasswordController.text.trim();
     if(passwordConfirmed()){
-      await Provider.of<GoogleSignInProvider>(context,listen: false)
+      userCreated = await Provider.of<GoogleSignInProvider>(context,listen: false)
           .createUserWithEmailAndPassword(_email, _password);
+      if(userCreated){
+        //Close this page before going to the main page
+        Navigator.of(context).pop();
+        Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(
+          newPage: const MainPage())
+        );
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text('Bienvenido, su cuenta creada correctamente')
+        ));
+      }else{
+        Dialogs.messageDialog(
+            context: context,
+            messageIcon: const Icon(Icons.cancel,color: Colors.red),
+            title: 'Error :(',
+            message: 'No se ha podido crear la cuenta, revise su correo/contraseña y '
+                'su conexión a internet'
+        );
+      }
     }
   }
 
+  /// Checks if the two passwords match
   bool passwordConfirmed(){
     if(passwordController.text.trim() == confirmPasswordController.text.trim()){
       return true;

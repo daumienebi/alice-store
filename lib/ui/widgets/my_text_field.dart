@@ -13,7 +13,9 @@ class MyTextField extends StatelessWidget {
     required this.obscureText,
     required this.hintText,
     required this.labelText,
-    required this.controller, required this.icon, this.validator}) : super(key: key);
+    required this.controller,
+    required this.icon,
+    this.validator}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,36 +47,3 @@ class MyTextField extends StatelessWidget {
     );
   }
 }
-
-/*
-TextFormField(
-                            controller: passwordController,
-                            keyboardType: TextInputType.name,
-                            textCapitalization: TextCapitalization.words,
-                            cursorColor: Colors.black,
-                            decoration: InputDecoration(
-                                focusedBorder: const OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.black38)),
-                                border: OutlineInputBorder(
-                                  borderSide:
-                                      const BorderSide(color: Colors.black54),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                filled: true,
-                                fillColor: Colors.white,
-                                labelText: 'Password',
-                                labelStyle: const TextStyle(
-                                    color: Colors.black87, fontSize: 17),
-                                hintText: 'Introduce password',
-                                suffixIcon: const Icon(
-                                  Icons.password_outlined,
-                                  color: Colors.black87,
-                                )),
-                            validator: (String? value) {
-                              if (value == null || value.isEmpty) {
-                                return 'incorrect pass';
-                              }
-                              return null;
-                            }),
-* */

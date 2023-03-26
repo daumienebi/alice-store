@@ -20,6 +20,9 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     //Get the current user
     final user = firebaseAuth.currentUser;
+    if(user == null){
+      user == Provider.of<GoogleSignInProvider>(context).emailPasswordUser;
+    }
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -72,18 +75,24 @@ class ProfilePage extends StatelessWidget {
   }
 
   Widget userData(User user){
+    //Users who sign in with email and password instead of using the
+    // google_sign_in method wont have a displayName nor photoUrl
     return Column(
       children: [
         // profile pic
+        user.photoURL != null ?
         CircleAvatar(
           backgroundImage: NetworkImage(user.photoURL!),
           radius: 60,
+        ) : const CircleAvatar(
+          radius: 60,
+          child: Icon(Icons.person_outline,color: Colors.white,size: 70,),
         ),
         // name
         Container(
             margin: const EdgeInsets.only(top: 10.0),
             child: Text(
-                user.displayName!,
+                user.displayName != null ? user.displayName! : '',
                 style: const TextStyle(
                     overflow: TextOverflow.ellipsis,
                     fontSize: 18, fontWeight: FontWeight.bold))),

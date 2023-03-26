@@ -1,5 +1,6 @@
 import 'package:alice_store/provider/google_signin_provider.dart';
 import 'package:alice_store/ui/widgets/my_text_field.dart';
+import 'package:alice_store/utils/dialogs.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -84,36 +85,21 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     verificationSent = await Provider.of<GoogleSignInProvider>(context,listen: false)
         .resetPassword(emailController.text.trim());
     if(verificationSent){
-      messageDialog(
+      Dialogs.messageDialog(
+        context: context,
         messageIcon: const Icon(Icons.check_circle_outline,color: Colors.green),
         title: 'Enviado !',
         message: 'El enlace para restablecer su contraseña fue enviado '
             'corectamente, revise su correo.'
       );
     }else{
-      messageDialog(
+      Dialogs.messageDialog(
+          context:context,
           messageIcon: const Icon(Icons.cancel,color: Colors.red),
           title: 'Error',
           message: 'No se pudo enviar el código de verificacion, asegurese de '
               'haber introducido un correo válido'
       );
     }
-  }
-
-  Future messageDialog({Icon? messageIcon,required String title,required String message}){
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Row(
-              children: [
-                messageIcon ?? const Icon(Icons.info_outline),
-                Text(title)
-              ],
-            ),
-            content: Text(message),
-          );
-        },
-    );
   }
 }

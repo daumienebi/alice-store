@@ -1,6 +1,7 @@
 import 'package:alice_store/provider/google_signin_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/ui/widgets/my_text_field.dart';
+import 'package:alice_store/utils/dialogs.dart';
 import 'package:alice_store/utils/navigator_util.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,8 +25,8 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
+    //emailController.dispose();
+    //passwordController.dispose();
     super.dispose();
   }
 
@@ -36,7 +37,7 @@ class _SignInPageState extends State<SignInPage> {
         child: Padding(
           padding: const EdgeInsets.only(left: 10, right: 10, top: 50),
           child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.90,
+              height: MediaQuery.of(context).size.height * 1.00,
               width: double.infinity,
               child:
                   Column(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -97,7 +98,11 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                           validator: (String? value) {
                             if (value == null || value.isEmpty) {
-                              return 'Email error';
+                              return 'Debe introducir un correo válido';
+                            }
+                            bool emailValid = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value);
+                            if(!emailValid){
+                              return 'Por favor, introduce un correo válido';
                             }
                             return '';
                           },
@@ -116,9 +121,6 @@ class _SignInPageState extends State<SignInPage> {
                           validator: (String? value) {
                             if (value == null || value.isEmpty) {
                               return 'Debe introducir una contraseña';
-                            }
-                            if(value.length < 7){
-                              return 'La contraseña debe contener 7 caracteres como minimo';
                             }
                             return '';
                           },
@@ -165,7 +167,7 @@ class _SignInPageState extends State<SignInPage> {
                             onPressed: () {
                               //Close this screen first so that the user can't return
                               Navigator.of(context).pop();
-                              Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(
+                              Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(
                                   newPage: const SignUpPage()));
                             },
                             style: TextButton.styleFrom(backgroundColor: Colors.greenAccent),
@@ -192,10 +194,13 @@ class _SignInPageState extends State<SignInPage> {
       child: SizedBox(
         width: double.infinity,
         child: TextButton(
-          onPressed: () async{
-            if(_formKey.currentState!.validate()){
-              await signInWithEmailAdnPassword();
-            }
+          onPressed: () {
+            // was trying to check if the form is validated before signing in
+            // but its not working
+            //if(_formKey.currentState!.validate()){
+            //  await signInWithEmailAndPassword();
+            //}
+            signInWithEmailAndPassword();
           },
           style: TextButton.styleFrom(
               backgroundColor: Colors.black87, fixedSize: const Size(50, 60)),
@@ -214,6 +219,8 @@ class _SignInPageState extends State<SignInPage> {
       onTap: () async{
         bool loggedIn = await provider.googleLogin();
         if(loggedIn){
+          //If the user is logged in, navigate to the MainPage, for some reason
+          // it's not going to the page automatically
           Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(
               newPage: const MainPage())
           );
@@ -232,10 +239,26 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  Future signInWithEmailAdnPassword() async{
+  Future signInWithEmailAndPassword() async{
+    GoogleSignInProvider provider = Provider.of<GoogleSignInProvider>(context, listen: false);
+    bool signedIn;
     _email = emailController.text.trim();
     _password = passwordController.text.trim();
-    await Provider.of<GoogleSignInProvider>(context,listen: false)
-        .signInWithEmailAndPassword(_email, _password);
+    signedIn = await provider.signInWithEmailAndPassword(_email, _password);
+    if(signedIn){
+      // if the user is signed in, the MainPage StreamBuilder handles the
+      // page that will be shown, no need to explicitly call the MainPage
+      //Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(
+          //newPage: const MainPage())
+      //);
+    }else{
+      Dialogs.messageDialog(
+          context: context,
+          messageIcon: const Icon(Icons.cancel,color: Colors.red),
+          title: 'Error !',
+          message: 'No se ha podido iniciar sesión, revise su correo/contraseña y '
+              'su conexión a internet'
+      );
+    }
   }
 }
