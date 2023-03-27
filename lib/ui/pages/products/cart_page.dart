@@ -1,4 +1,4 @@
-import 'package:alice_store/models/product.dart';
+import 'package:alice_store/models/product_model.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/utils/navigator_util.dart';
@@ -15,7 +15,7 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  List<Product> cartProducts = [];
+  List<ProductModel> cartProducts = [];
   @override
   Widget build(BuildContext context) {
     CartProvider provider = Provider.of<CartProvider>(context, listen: true);

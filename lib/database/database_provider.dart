@@ -1,7 +1,7 @@
 /**** MODIFY IT LATER ON FOR THE PRODUCTS
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:yo_nunca/src/models/category.dart';
+import 'package:yo_nunca/src/models/category_model.dart';
 import 'package:yo_nunca/src/models/question.dart';
 //import 'dart:developer' as dev;
 import 'package:yo_nunca/src/utils/default_data.dart';

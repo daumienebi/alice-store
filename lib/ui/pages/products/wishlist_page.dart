@@ -1,9 +1,9 @@
-import 'package:alice_store/models/product.dart';
+import 'package:alice_store/models/product_model.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/ui/widgets/widgets.dart';
-import 'package:alice_store/utils/app_routes.dart';
+import 'package:alice_store/app_routes.dart';
 import 'package:alice_store/utils/navigator_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
@@ -20,7 +20,7 @@ class WishListPage extends StatefulWidget {
 }
 
 class _WishListPageState extends State<WishListPage> {
-  List<Product> _wishListProducts = [];
+  List<ProductModel> _wishListProducts = [];
   @override
   Widget build(BuildContext context) {
     ProductProvider provider =
@@ -87,7 +87,7 @@ class _WishListPageState extends State<WishListPage> {
     );
   }
 
-  Widget wishListTile(Product product, ProductProvider provider) {
+  Widget wishListTile(ProductModel product, ProductProvider provider) {
     String price1 = '';
     String price2 = '';
     var splitValue = product.price.toString().split('.');

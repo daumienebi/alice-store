@@ -1,8 +1,8 @@
-import 'package:alice_store/models/product.dart';
+import 'package:alice_store/models/product_model.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/ui/widgets/custom_button.dart';
-import 'package:alice_store/utils/app_routes.dart';
+import 'package:alice_store/app_routes.dart';
 import 'package:alice_store/utils/navigator_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
@@ -10,14 +10,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import 'pages.dart';
+import '../pages.dart';
 
 class ProductDetailPage extends StatelessWidget {
   const ProductDetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Product product = ModalRoute.of(context)!.settings.arguments as Product;
+    ProductModel product = ModalRoute.of(context)!.settings.arguments as ProductModel;
     return Scaffold(
         body: CustomScrollView(
       slivers: [
@@ -58,7 +58,7 @@ class ProductDetailPage extends StatelessWidget {
     ));
   }
 
-  productDetails(Product product, BuildContext context) {
+  productDetails(ProductModel product, BuildContext context) {
     //Not sure if this is the best way to implement this stuff
     //Current approach : Adding all the widgets in this block to the "widgets"
     // list then later passing the list to the SliverChildListDelegate
@@ -136,7 +136,7 @@ class ProductDetailPage extends StatelessWidget {
     );
   }
 
-  Widget productInWishListIcon(Product product, BuildContext context) {
+  Widget productInWishListIcon(ProductModel product, BuildContext context) {
     ProductProvider provider =
         Provider.of<ProductProvider>(context, listen: true);
 

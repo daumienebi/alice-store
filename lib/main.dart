@@ -1,7 +1,7 @@
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/google_signin_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
-import 'package:alice_store/utils/app_routes.dart';
+import 'package:alice_store/app_routes.dart';
 import 'package:alice_store/utils/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

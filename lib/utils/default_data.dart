@@ -1,21 +1,21 @@
-import 'package:alice_store/models/product.dart';
-import 'package:alice_store/models/category.dart';
+import 'package:alice_store/models/product_model.dart';
+import 'package:alice_store/models/category_model.dart';
 import 'package:flutter/material.dart';
 
 class DefaultData{
 
-  List<Category> _categories = [];
-  List<Product> _products = [];
+  List<CategoryModel> _categories = [];
+  List<ProductModel> _products = [];
 
-  List<Category> get getProductCategories => _getCategories();
-  List<Product> get  getProducts => _getProducts();
+  List<CategoryModel> get getProductCategories => _getCategories();
+  List<ProductModel> get  getProducts => _getProducts();
 
   _getCategories() {
-    return _categories = categories.map((e) => Category.fromMap(e)).toList();
+    return _categories = categories.map((e) => CategoryModel.fromMap(e)).toList();
   }
 
   _getProducts() {
-    return _products = products.map((e) => Product.fromMap(e)).toList();
+    return _products = products.map((e) => ProductModel.fromMap(e)).toList();
   }
 
   final categories = [

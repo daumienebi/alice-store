@@ -1,12 +1,12 @@
-import 'package:alice_store/models/product.dart';
+import 'package:alice_store/models/product_model.dart';
 import 'package:flutter/cupertino.dart';
 
 class CartProvider with ChangeNotifier{
 
-  final List<Product> _products = [];
+  final List<ProductModel> _products = [];
   double _totalPrice = 0.0;
 
-  List<Product> get getProducts{
+  List<ProductModel> get getProducts{
     return _products;
   }
 
@@ -14,7 +14,7 @@ class CartProvider with ChangeNotifier{
     return _totalPrice;
   }
 
-  addProduct(Product newProduct){
+  addProduct(ProductModel newProduct){
     if(!_products.contains(newProduct)){
       _products.add(newProduct);
     }
@@ -22,7 +22,7 @@ class CartProvider with ChangeNotifier{
     notifyListeners();
   }
 
-  removeProduct(Product oldProduct){
+  removeProduct(ProductModel oldProduct){
     _products.removeWhere((element) => element.id == oldProduct.id);
     calculateTotalPrice();
     notifyListeners();
@@ -30,7 +30,7 @@ class CartProvider with ChangeNotifier{
 
   calculateTotalPrice(){
     double totalPrice = 0.0;
-    for(Product product in _products){
+    for(ProductModel product in _products){
       totalPrice += product.price;
     }
     _totalPrice = totalPrice;

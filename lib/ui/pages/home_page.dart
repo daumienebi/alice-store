@@ -1,8 +1,8 @@
-import 'package:alice_store/models/category.dart';
+import 'package:alice_store/models/category_model.dart';
 import 'package:alice_store/provider/cart_provider.dart';
-import 'package:alice_store/services/category_service.dart';
+import 'package:alice_store/services/api/category_service.dart';
 import 'package:alice_store/ui/widgets/product_search_delegate.dart';
-import 'package:alice_store/utils/app_routes.dart';
+import 'package:alice_store/app_routes.dart';
 import 'package:alice_store/utils/navigator_util.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:alice_store/ui/pages/pages.dart';
@@ -28,12 +28,12 @@ class _HomePageState extends State<HomePage> {
   //Firebase auth
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-  late Future<List<Category>> fetchCategoriesFuture;
+  late Future<List<CategoryModel>> fetchCategoriesFuture;
   int _selectedIndex = 0;
   final CategoryService categoryService = CategoryService();
 
-  Future<List<Category>> fetchAllCategories() async {
-    List<Category> categories = await categoryService.fetchAllCategories();
+  Future<List<CategoryModel>> fetchAllCategories() async {
+    List<CategoryModel> categories = await categoryService.fetchAllCategories();
     return Future.delayed(const Duration(seconds: 2),()=> categories);
   }
 
@@ -219,7 +219,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  /// FutureBuilder for the [Category] card swiper, it returns the available
+  /// FutureBuilder for the [CategoryModel] card swiper, it returns the available
   /// categories or an error depending on the response
   FutureBuilder categoriesFutureBuilder() {
     //Try to use setState to rebuild the widget

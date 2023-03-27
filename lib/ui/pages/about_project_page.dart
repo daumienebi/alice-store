@@ -1,5 +1,5 @@
-import 'package:alice_store/models/project_feed.dart';
-import 'package:alice_store/services/project_feed_service.dart';
+import 'package:alice_store/models/project_feed_model.dart';
+import 'package:alice_store/services/api/project_feed_service.dart';
 import 'package:alice_store/utils/constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -16,10 +16,10 @@ class AboutProjectPage extends StatefulWidget {
 
 class _AboutProjectPageState extends State<AboutProjectPage> {
   final ProjectFeedService projectFeedService = ProjectFeedService();
-  late Future<List<ProjectFeed>> projectFeedsFuture;
+  late Future<List<ProjectFeedModel>> projectFeedsFuture;
 
-  Future<List<ProjectFeed>> fetchProjectFeeds() async {
-    List<ProjectFeed> projectFeeds =
+  Future<List<ProjectFeedModel>> fetchProjectFeeds() async {
+    List<ProjectFeedModel> projectFeeds =
         await projectFeedService.fetchProjectFeeds();
     return Future.delayed(const Duration(seconds: 1), () => projectFeeds);
   }
@@ -36,7 +36,7 @@ class _AboutProjectPageState extends State<AboutProjectPage> {
       child: FutureBuilder(
         future: projectFeedsFuture,
         builder:
-            (BuildContext context, AsyncSnapshot<List<ProjectFeed>> snapshot) {
+            (BuildContext context, AsyncSnapshot<List<ProjectFeedModel>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -151,7 +151,7 @@ class _AboutProjectPageState extends State<AboutProjectPage> {
     );
   }
 
-  Future imageViewer(ProjectFeed projectFeed, BuildContext context) {
+  Future imageViewer(ProjectFeedModel projectFeed, BuildContext context) {
     return showDialog(
         context: context,
         builder: (builder) {

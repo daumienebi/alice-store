@@ -1,8 +1,8 @@
-import 'package:alice_store/models/product.dart';
+import 'package:alice_store/models/product_model.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
-import 'package:alice_store/utils/app_routes.dart';
+import 'package:alice_store/app_routes.dart';
 import 'package:alice_store/utils/navigator_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
@@ -67,8 +67,8 @@ class ProductSearchDelegate extends SearchDelegate {
         Provider.of<ProductProvider>(context, listen: true);
     //Fetch the products and use them as suggestions
     provider.initializeProductsList();
-    List<Product> suggestions = provider.getProducts;
-    late Product product;
+    List<ProductModel> suggestions = provider.getProducts;
+    late ProductModel product;
     final suggestionList = query.isEmpty
         ? []
         : suggestions.where((product) => product.name.contains(query)).toList();
@@ -77,7 +77,7 @@ class ProductSearchDelegate extends SearchDelegate {
     } else if (suggestionList.isEmpty || query.isEmpty) {
       //To avoid an error when the searched item is not found, create a dummy
       //product
-      product = Product(
+      product = ProductModel(
           id: 0,
           name: '',
           categoryId: 0,
@@ -111,10 +111,10 @@ class ProductSearchDelegate extends SearchDelegate {
     ProductProvider provider = Provider.of<ProductProvider>(context, listen: false);
     //Fetch the products with the void method
     provider.initializeProductsList();
-    List<Product> productList = provider.getProducts;
+    List<ProductModel> productList = provider.getProducts;
     //Get the the products that match with the user input and return it in the
     //suggestionsList
-    List<Product> suggestionsList = productList.where((product) {
+    List<ProductModel> suggestionsList = productList.where((product) {
       final productName = product.name.toLowerCase();
       final userSearchInput = query.toLowerCase();
       return productName.contains(userSearchInput);
@@ -128,7 +128,7 @@ class ProductSearchDelegate extends SearchDelegate {
           if(snapshot.hasData){
             return ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
-                  final Product suggestion = suggestionsList[index];
+                  final ProductModel suggestion = suggestionsList[index];
                   return ListTile(
                     title: Text(
                       suggestion.name,
@@ -180,7 +180,7 @@ class ProductSearchDelegate extends SearchDelegate {
 }
 
 class ProductDetail extends StatelessWidget {
-  final Product product;
+  final ProductModel product;
   const ProductDetail({Key? key, required this.product}) : super(key: key);
 
   @override
@@ -224,7 +224,7 @@ class ProductDetail extends StatelessWidget {
     );
   }
 
-  productDetails(Product product, BuildContext context) {
+  productDetails(ProductModel product, BuildContext context) {
     //Not sure if this is the best way to implement this stuff
     //Current approach : Adding all the widgets in this block to the "widgets"
     //list then later passing the list to the SliverChildListDelegate
@@ -303,7 +303,7 @@ class ProductDetail extends StatelessWidget {
     );
   }
 
-  Widget productInWishListIcon(Product product, BuildContext context) {
+  Widget productInWishListIcon(ProductModel product, BuildContext context) {
     ProductProvider provider =
         Provider.of<ProductProvider>(context, listen: true);
 

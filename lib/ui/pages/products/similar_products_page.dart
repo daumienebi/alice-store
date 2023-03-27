@@ -1,6 +1,6 @@
-import 'package:alice_store/models/product.dart';
+import 'package:alice_store/models/product_model.dart';
 import 'package:alice_store/provider/product_provider.dart';
-import 'package:alice_store/services/product_service.dart';
+import 'package:alice_store/services/api/product_service.dart';
 import 'package:alice_store/ui/widgets/custom_button.dart';
 import 'package:alice_store/ui/widgets/shopping_item.dart';
 import 'package:alice_store/utils/constants.dart';
@@ -20,10 +20,10 @@ class SimilarProductsPage extends StatefulWidget {
 
 class _SimilarProductsPageState extends State<SimilarProductsPage> {
   final ProductProvider productProvider = ProductProvider();
-  late Future<List<Product>> fetchProductsFuture;
+  late Future<List<ProductModel>> fetchProductsFuture;
 
-  Future<List<Product>> fetchProducts() async {
-    List<Product> products =
+  Future<List<ProductModel>> fetchProducts() async {
+    List<ProductModel> products =
         await productProvider.fetchProductsFromCategory(widget.categoryId!);
     return Future.delayed(const Duration(seconds: 1), () => products);
   }

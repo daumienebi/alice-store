@@ -1,6 +1,7 @@
 import 'package:alice_store/ui/pages/pages.dart';
-import 'package:alice_store/ui/pages/payment_page.dart';
 
+/// Class to handle the navigation in case the Navigator..pushNamed(..) method
+/// is used
 class AppRoutes{
   static RouteStrings routeStrings = RouteStrings();
   static final allRoutes = {

@@ -2,7 +2,7 @@
     package="com.devdaumienebi.alice_store">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="alice_store"
+        android:label="Alice Store"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -1,7 +1,7 @@
-import 'package:alice_store/models/product.dart';
+import 'package:alice_store/models/product_model.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
-import 'package:alice_store/utils/app_routes.dart';
+import 'package:alice_store/app_routes.dart';
 import 'package:alice_store/utils/navigator_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import '../pages/pages.dart';
 
 class ShoppingItem extends StatelessWidget {
-  final Product product;
+  final ProductModel product;
   final bool showSimilarProductButton;
   const ShoppingItem({Key? key, required this.product,
     required this.showSimilarProductButton}) : super(key: key);
@@ -129,7 +129,7 @@ class ShoppingItem extends StatelessWidget {
 
   /// Displays the corresponding icon depending on if the product is available
   /// in the wish list or not
-  IconButton wishListIconButton(Product product, BuildContext context) {
+  IconButton wishListIconButton(ProductModel product, BuildContext context) {
     ProductProvider provider = Provider.of<ProductProvider>(context, listen: true);
     bool isInWishList = provider.getWishListProducts
         .where((element) => element.id == product.id)
@@ -203,7 +203,7 @@ class ShoppingItem extends StatelessWidget {
   }
 
   /// Add to cart button
-  TextButton addToCartButton(Product product, BuildContext context) {
+  TextButton addToCartButton(ProductModel product, BuildContext context) {
     CartProvider cartProvider =
         Provider.of<CartProvider>(context, listen: true);
     SnackBar snackBar;

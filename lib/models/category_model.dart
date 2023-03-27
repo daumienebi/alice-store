@@ -8,7 +8,7 @@ List<Category> categoryModelFromJson(String string) {
 }
 */
 
-class CategoryFields{
+class CategoryModelFields{
 
   static const String id = 'id';
   static const String name = 'name';
@@ -19,23 +19,23 @@ class CategoryFields{
   static final List <String> values =[id,name,image,description];
 }
 
-class Category{
+class CategoryModel{
   final int id;
   final String name;
   final String image;
   final String description;
 
   /// Create the constructor
-  Category({
+  CategoryModel({
     required this.id,
     required this.name,
     required this.image,
     required this.description,
   });
 
-  /// Convert a Map<String,dynamic> to a [Category] object
-  factory Category.fromMap(Map<String,dynamic> value){
-    return Category(
+  /// Convert a Map<String,dynamic> to a [CategoryModel] object
+  factory CategoryModel.fromMap(Map<String,dynamic> value){
+    return CategoryModel(
         id: value['id'],
         name: value['name'],
         image: value['image'],
@@ -43,32 +43,32 @@ class Category{
     );
   }
 
-  /// Convert a [Category] object to a Map<String,dynamic>
+  /// Convert a [CategoryModel] object to a Map<String,dynamic>
   Map<String,dynamic> toMap(){
     return {
-      CategoryFields.id : id,
-      CategoryFields.name : name,
-      CategoryFields.image : image,
-      CategoryFields.description : description,
+      CategoryModelFields.id : id,
+      CategoryModelFields.name : name,
+      CategoryModelFields.image : image,
+      CategoryModelFields.description : description,
     };
   }
 
-  factory Category.fromJson(dynamic json){
+  factory CategoryModel.fromJson(dynamic json){
     return
-      Category(
-          id: json[CategoryFields.id],
-          name: json[CategoryFields.name],
-          image: json[CategoryFields.image],
-          description: json[CategoryFields.description]
+      CategoryModel(
+          id: json[CategoryModelFields.id],
+          name: json[CategoryModelFields.name],
+          image: json[CategoryModelFields.image],
+          description: json[CategoryModelFields.description]
       );
   }
 
   /// Returns a list of Categories from each string of the decoded json
-  static List<Category> categoryModelFromJson(var jsonResponse){
+  static List<CategoryModel> categoryModelFromJson(var jsonResponse){
     //categories = jsonResponse.forEach((element) => Category.fromJson(element));
-    List<Category> categories = [];
+    List<CategoryModel> categories = [];
     for (var category in jsonResponse) {
-      categories.add(Category.fromJson(category));
+      categories.add(CategoryModel.fromJson(category));
     }
     return categories;
   }
