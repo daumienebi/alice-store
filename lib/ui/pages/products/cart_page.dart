@@ -34,7 +34,7 @@ class _CartPageState extends State<CartPage> {
                         Lottie.asset(
                           'assets/lottie_animations/empty-cart.json',
                         ),
-                        const Text('No hay productos en la cesta',
+                        const Text('There are no items in the cart',
                             style: TextStyle(fontSize: 15))
                       ],
                     ),
@@ -107,7 +107,7 @@ class _CartPageState extends State<CartPage> {
                                         ),
                                         const SizedBox(height: 5),
                                         const Text(
-                                          'Cantidad : 1',
+                                          'Quantity : 1',
                                           style: TextStyle(
                                               color: Colors.black54,
                                               fontSize: 15
@@ -125,7 +125,7 @@ class _CartPageState extends State<CartPage> {
                                                 )
                                             ),
                                             child: Text(
-                                                'Eliminar producto',
+                                                'Remove item',
                                               style: TextStyle(
                                                   color: Colors.redAccent[200]
                                               ),
@@ -166,7 +166,7 @@ class _CartPageState extends State<CartPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'Precio Total',
+                  'Total Price',
                   style: TextStyle(
                       fontSize: 15,
                       color: Colors.white70,
@@ -183,7 +183,7 @@ class _CartPageState extends State<CartPage> {
               ],
             ),
             InkWell(
-              onTap: ()=>Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(newPage: PaymentPage())),
+              onTap: ()=>Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(newPage: const PaymentPage())),
               child: Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
@@ -193,7 +193,7 @@ class _CartPageState extends State<CartPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
                       Text(
-                        'Pagar',
+                        'Pay',
                         style: TextStyle(color: Colors.white),
                       ),
                       Icon(

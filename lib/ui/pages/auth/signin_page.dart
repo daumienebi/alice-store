@@ -54,7 +54,7 @@ class _SignInPageState extends State<SignInPage> {
                       },
                       style: TextButton.styleFrom(backgroundColor: Colors.white),
                       child: const Text(
-                        'Continuar sin iniciar sesión',
+                        'Continue as guest',
                         style: TextStyle(
                             color: Colors.black87,),
                       ),
@@ -76,9 +76,9 @@ class _SignInPageState extends State<SignInPage> {
                 ),
                 //Welcome text
                 const Text(
-                  '¡Bienvenido te hemos echado de menos!',
+                  'Welcome back!',
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.black54, fontSize: 16),
+                  style: TextStyle(color: Colors.black54, fontSize: 20),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20, bottom: 10),
@@ -98,11 +98,11 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                           validator: (String? value) {
                             if (value == null || value.isEmpty) {
-                              return 'Debe introducir un correo válido';
+                              return 'You must input a valid email address';
                             }
                             bool emailValid = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value);
                             if(!emailValid){
-                              return 'Por favor, introduce un correo válido';
+                              return 'Please, introduce a valid email address';
                             }
                             return '';
                           },
@@ -120,7 +120,7 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                           validator: (String? value) {
                             if (value == null || value.isEmpty) {
-                              return 'Debe introducir una contraseña';
+                              return 'You must introduce a password';
                             }
                             return '';
                           },
@@ -134,7 +134,7 @@ class _SignInPageState extends State<SignInPage> {
                                     newPage: const ForgotPasswordPage()));
                               },
                               child: const Text(
-                                'Olvidaste la contraseña ?',
+                                'Forgot password ?',
                                 style: TextStyle(
                                     color: Colors.blue,
                                     fontWeight: FontWeight.bold),
@@ -154,7 +154,7 @@ class _SignInPageState extends State<SignInPage> {
                   child: Column(
                     children: [
                       const Text(
-                        'O continua con',
+                        'Or continue with',
                         style: TextStyle(color: Colors.black54),
                       ),
                       //Google sign in button
@@ -162,7 +162,7 @@ class _SignInPageState extends State<SignInPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('No tienes cuenta ? '),
+                          const Text('Not a member yet ? '),
                           TextButton(
                             onPressed: () {
                               //Close this screen first so that the user can't return
@@ -172,7 +172,7 @@ class _SignInPageState extends State<SignInPage> {
                             },
                             style: TextButton.styleFrom(backgroundColor: Colors.greenAccent),
                             child: const Text(
-                              'Registrate',
+                              'Sign Up',
                               style: TextStyle(
                                 color: Colors.black54,),
                             ),
@@ -205,7 +205,7 @@ class _SignInPageState extends State<SignInPage> {
           style: TextButton.styleFrom(
               backgroundColor: Colors.black87, fixedSize: const Size(50, 60)),
           child: const Text(
-            'Iniciar sesión',
+            'Sign In',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),
@@ -227,7 +227,7 @@ class _SignInPageState extends State<SignInPage> {
         }else{
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             duration: Duration(seconds: 7),
-              content: Text('Error iniciando sesión con Google, revise su conexión a internet')));
+              content: Text('Error signing in with Google, please checek your internet connection.')));
         }
       },
       child: Container(
@@ -257,8 +257,7 @@ class _SignInPageState extends State<SignInPage> {
           context: context,
           messageIcon: const Icon(Icons.cancel,color: Colors.red),
           title: 'Error !',
-          message: 'No se ha podido iniciar sesión, revise su correo/contraseña y '
-              'su conexión a internet'
+          message: 'Unable to sign in, please check email/password and your internet connection'
       );
     }
   }

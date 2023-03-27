@@ -1,6 +1,5 @@
 import 'package:alice_store/models/product_model.dart';
 import 'package:alice_store/provider/product_provider.dart';
-import 'package:alice_store/services/api/product_service.dart';
 import 'package:alice_store/ui/widgets/custom_button.dart';
 import 'package:alice_store/ui/widgets/shopping_item.dart';
 import 'package:alice_store/utils/constants.dart';
@@ -39,7 +38,7 @@ class _SimilarProductsPageState extends State<SimilarProductsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Productos similares",
+          "Similar products",
           style: GoogleFonts.albertSans(
             color: Colors.black,
             fontSize: 20,
@@ -74,7 +73,7 @@ class _SimilarProductsPageState extends State<SimilarProductsPage> {
                         ),
                       ),
                       const SizedBox(height: 5),
-                      const Text('Cargando prductos')
+                      const Text('Loading items')
                     ],
                   );
                 }
@@ -113,14 +112,14 @@ class _SimilarProductsPageState extends State<SimilarProductsPage> {
                       'assets/lottie_animations/error.json',
                     ),
                     const Text(
-                      'Servidor indisponible.',
+                      'Servidor error.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 17,
                           color: Colors.red,
                           fontWeight: FontWeight.bold),
                     ),
-                    const Text('Asegurese de disponer de conexión a internet.'),
+                    const Text('Make sure you have internet connection.'),
                     const SizedBox(height: 5),
                     ElevatedButton(
                       onPressed: () {
@@ -133,7 +132,7 @@ class _SimilarProductsPageState extends State<SimilarProductsPage> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25)),
                           fixedSize: const Size(140, 40)),
-                      child: const Text('Reintentar',
+                      child: const Text('Retry',
                           style:
                               TextStyle(color: Colors.black87, fontSize: 16)),
                     )

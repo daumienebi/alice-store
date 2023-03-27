@@ -51,7 +51,7 @@ class _AboutProjectPageState extends State<AboutProjectPage> {
                 ),
                 //LinearProgressIndicator(color: Colors.cyan),
                 const SizedBox(height: 5),
-                const Text('Cargando...')
+                const Text('Loading...')
               ],
             );
           }
@@ -71,7 +71,7 @@ class _AboutProjectPageState extends State<AboutProjectPage> {
                     const Padding(
                       padding: EdgeInsets.only(bottom: 5),
                       child: Text(
-                        'Detalles sobre el proyecto',
+                        'Details about the project...soon',
                         style: TextStyle(fontSize: 16),
                       ),
                     ),
@@ -114,7 +114,7 @@ class _AboutProjectPageState extends State<AboutProjectPage> {
                 'assets/lottie_animations/error.json',
               ),
               const Text(
-                'Servidor indisponible.',
+                'Server error.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 17,
@@ -122,7 +122,7 @@ class _AboutProjectPageState extends State<AboutProjectPage> {
                     fontWeight: FontWeight.bold
                 ),
               ),
-              const Text('Asegurese de disponer de conexión a internet.'),
+              const Text('Make sure you have internet connection'),
               const SizedBox(height: 5),
               ElevatedButton(
                 onPressed: (){
@@ -138,7 +138,7 @@ class _AboutProjectPageState extends State<AboutProjectPage> {
                     fixedSize: const Size(140,40)
                 ),
                 child: const Text(
-                    'Reintentar',
+                    'Retry',
                     style: TextStyle(color: Colors.black87,
                         fontSize:16
                     )
@@ -156,7 +156,7 @@ class _AboutProjectPageState extends State<AboutProjectPage> {
         context: context,
         builder: (builder) {
           return AlertDialog(
-            title: const Text('Detalle'),
+            title: const Text('Detail'),
             content: SizedBox(
               height: 350,
               child: SingleChildScrollView(
@@ -181,13 +181,9 @@ class _AboutProjectPageState extends State<AboutProjectPage> {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             actions: [
               TextButton(
-                  onPressed: () => _downloadImage(),
-                  child: const Text('Descargar imagen',
-                      style: TextStyle(color: Colors.green))),
-              TextButton(
                   onPressed: () => Navigator.of(context).pop(),
                   child:
-                      const Text('Cerrar', style: TextStyle(color: Colors.red)))
+                      const Text('Close', style: TextStyle(color: Colors.red)))
             ],
           );
         });

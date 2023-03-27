@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.isUserSignedIn);
+    //print(widget.isUserSignedIn);
     List<Widget> widgetOptions = <Widget>[
       categoriesFutureBuilder(),
       const ShoppingPage(),
@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                 showSearch(
                     context: context,
                     delegate:
-                    ProductSearchDelegate(hintText: 'Search products'));
+                    ProductSearchDelegate(hintText: 'Search for items'));
               },
             ),
           )
@@ -137,7 +137,11 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.symmetric(vertical: 10.0),
                           child: Text(
                             getGreetingText(),
-                            style: const TextStyle(fontSize: 19),
+                            style: const TextStyle(
+                                fontSize: 20,
+                                color: Colors.black87,
+                                fontWeight: FontWeight.bold
+                            ),
                           ),
                         ),
                         const Padding(
@@ -145,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                             bottom: 40,
                           ),
                           child: Text(
-                            'Desliza para explorar las categorías',
+                            'Swipe to explore the categories',
                             style:
                                 TextStyle(fontSize: 17, color: Colors.black54),
                           ),
@@ -175,15 +179,15 @@ class _HomePageState extends State<HomePage> {
       unselectedIconTheme: const IconThemeData(color: Colors.grey),
       selectedFontSize: 17,
       backgroundColor: Colors.cyan[200],
-      selectedItemColor: Colors.black,
+      selectedItemColor: Colors.black87,
       items: <BottomNavigationBarItem>[
         const BottomNavigationBarItem(
           icon: Icon(Icons.home_outlined),
-          label: 'Inicio',
+          label: 'Home',
         ),
         const BottomNavigationBarItem(
           icon: Icon(Icons.shopping_bag_outlined),
-          label: 'Tienda',
+          label: 'Shop',
         ),
         BottomNavigationBarItem(
             icon: badges.Badge(
@@ -199,11 +203,11 @@ class _HomePageState extends State<HomePage> {
               position: badges.BadgePosition.topEnd(top: -18),
               child: const Icon(Icons.shopping_cart_outlined),
             ),
-            label: AppLocalizations.of(context)!.cart
+            label: 'Cart'
         ),
-        BottomNavigationBarItem(
-            icon: const Icon(Icons.work_outline),
-            label: AppLocalizations.of(context)!.theProject
+        const BottomNavigationBarItem(
+            icon: Icon(Icons.work_outline),
+            label: 'Project'
         )
       ],
       currentIndex: _selectedIndex,
@@ -239,7 +243,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               const SizedBox(height: 10),
-              const Text('Cargando categorias...')
+              const Text('Loading categories...')
             ],
           );
         }
@@ -259,7 +263,7 @@ class _HomePageState extends State<HomePage> {
               'assets/lottie_animations/error.json',
             ),
             const Text(
-              'Servidor indisponible.',
+              'Server error',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 17,
@@ -267,7 +271,7 @@ class _HomePageState extends State<HomePage> {
                   fontWeight: FontWeight.bold
               ),
             ),
-            const Text('Asegurese de disponer de conexión a internet.'),
+            const Text('Make sure you have internet connection'),
             const SizedBox(height: 5),
             ElevatedButton(
               onPressed: (){
@@ -281,7 +285,7 @@ class _HomePageState extends State<HomePage> {
                   fixedSize: const Size(150,50)
               ),
               child: const Text(
-                  'Reintentar',
+                  'Retry',
                   style: TextStyle(color: Colors.black87,
                       fontSize:16
                   )
@@ -300,17 +304,17 @@ class _HomePageState extends State<HomePage> {
     final format = DateFormat.jm();
     String formattedString = format.format(now);
     if (formattedString.endsWith('AM')) {
-      greetingsText = 'Buenos días,';
+      greetingsText = 'Good morning,,';
       //greetingsText = AppLocalizations.of(context)!.goodMorning;
 
       //Example of a formattedString could be 6:54 PM, so we split the string
       //to get the item at the first index and compare if its past 8 o'clock
     } else if (formattedString.endsWith('PM') &&
         int.parse(formattedString.split(":")[0]) > 8) {
-      greetingsText = 'Buenas noches,';
+      greetingsText = 'Good night,';
       //greetingsText = AppLocalizations.of(context)!.goodNight;
     } else {
-      greetingsText = 'Buenas tardes,';
+      greetingsText = 'Good evening,';
       //greetingsText = AppLocalizations.of(context)!.goodEvening;
     }
     return greetingsText;

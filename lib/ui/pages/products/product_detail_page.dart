@@ -5,7 +5,6 @@ import 'package:alice_store/ui/widgets/custom_button.dart';
 import 'package:alice_store/app_routes.dart';
 import 'package:alice_store/utils/navigator_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -46,7 +45,7 @@ class ProductDetailPage extends StatelessWidget {
                 imageUrl: product.image),
             //centerTitle: true,
             title: Text(
-              '${product.name} Modelo Nuevo Pantera con funda XL (Verde)',
+              '${product.name} New Model test',
               style:
                   GoogleFonts.varelaRound(fontSize: 18, color: Colors.black87),
               textAlign: TextAlign.left,
@@ -99,7 +98,7 @@ class ProductDetailPage extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12))),
             child: const Text(
-              'Pagar ya',
+              'Pay now',
               style: TextStyle(color: Colors.black54),
             ),
           ),
@@ -112,7 +111,7 @@ class ProductDetailPage extends StatelessWidget {
                   .addProduct(product);
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                 duration: Duration(seconds: 2),
-                content: Text('Producto agregado a la cesta'),
+                content: Text('Item added to cart!'),
               ));
             },
             style: TextButton.styleFrom(
@@ -120,7 +119,7 @@ class ProductDetailPage extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12))),
             child: const Text(
-              'Añadir a la cesta',
+              'Add to cart',
               style: TextStyle(color: Colors.white),
             ),
           ),
@@ -166,14 +165,14 @@ class ProductDetailPage extends StatelessWidget {
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Producto elimindado a la lista de deseos'),
+                    const Text('Item removed from wishlist'),
                     TextButton(
                         onPressed: () {
                           Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(
                               newPage: const WishListPage()));
                         },
                         child: const Text(
-                          'Ver lista',
+                          'View wishlist',
                           style: TextStyle(color: Colors.lightGreen),
                         ))
                   ],
@@ -189,14 +188,14 @@ class ProductDetailPage extends StatelessWidget {
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Producto agregado a la lista de deseos'),
+                    const Text('Item added to wishlist'),
                     TextButton(
                         onPressed: () {
                           Navigator.of(context)
                               .pushNamed(AppRoutes.routeStrings.wishListPage);
                         },
                         child: const Text(
-                          'Ver lista',
+                          'View wishlist',
                           style: TextStyle(color: Colors.lightGreen),
                         ))
                   ],
@@ -217,11 +216,11 @@ class ProductDetailPage extends StatelessWidget {
 
   Text stockText(bool inStock) {
     var inStockText = const Text(
-      'En Stock',
+      'In Stock',
       style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
     );
     var notInStockText = const Text(
-      'No disponible',
+      'Out of stock',
       style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
     );
     return inStock ? inStockText : notInStockText;

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 enum SocialMedia { Facebook, Twitter, Instagram, Whatsapp,Enlace}
 class Constants{
   static ApiEndPoints apiEndPoints = ApiEndPoints();
-  static String playStoreId = 'com.devdaumienebi.alice_store';
+  static String playStoreId = 'com.devdaumienebi.yonunca';
   static List<Color> loadingIndicatorColors =
   [
     Colors.cyanAccent[200]!,

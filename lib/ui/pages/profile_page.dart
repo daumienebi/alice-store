@@ -1,5 +1,4 @@
 import 'package:alice_store/provider/google_signin_provider.dart';
-import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/ui/widgets/custom_button.dart';
 import 'package:alice_store/utils/constants.dart';
 import 'package:alice_store/utils/navigator_util.dart';
@@ -127,14 +126,14 @@ class ProfilePage extends StatelessWidget {
             optionListTile(
               context: context,
               leading: const Icon(Icons.shopping_cart),
-              title:  'Compras',
+              title:  'Purchases',
               onTap: () {}
             ),
             //Privacy
             optionListTile(
               context: context,
               leading: const Icon(Icons.privacy_tip_outlined),
-              title:  'Privacidad',
+              title:  'Privacy',
               onTap: ()=> Navigator.of(context).push(
                   NavigatorUtil.createRouteWithFadeAnimation(
                       newPage: ProfilePage()
@@ -145,7 +144,7 @@ class ProfilePage extends StatelessWidget {
             optionListTile(
               context: context,
               leading: const Icon(Icons.email_outlined),
-              title:  'Invitar un amigo',
+              title:  'Invite a friend',
               onTap: (){
                 showModalBottomSheet(
                     context: context,
@@ -157,7 +156,7 @@ class ProfilePage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               const Text(
-                                'Compartir la app',
+                                'Share the app',
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
                                     color: Colors.black54, fontSize: 20),
@@ -180,14 +179,14 @@ class ProfilePage extends StatelessWidget {
             optionListTile(
               context: context,
               leading: const Icon(Icons.info_outline),
-              title:  'Sobre la app',
+              title:  'About the app',
               onTap: () {},
             ),
             //Log out
             optionListTile(
               context: context,
               leading: const Icon(Icons.logout),
-              title:  'Cerrar sesión',
+              title:  'Log Out',
               onTap: () {
                 //crappy log out logic
                 Provider.of<GoogleSignInProvider>(context,listen: false)
@@ -275,7 +274,7 @@ class ProfilePage extends StatelessWidget {
       width: 15,
     ));
     items.add(socialButton(
-        socialMedia: 'Copiar Enlace',
+        socialMedia: 'Copy Link',
         icon: const Icon(
           Icons.copy,
           color: Colors.grey,
@@ -288,7 +287,7 @@ class ProfilePage extends StatelessWidget {
           await Clipboard.setData(ClipboardData(text: urlString));
           Navigator.pop(context);
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text('Enlace copiado !'),
+              content: Text('Link copied !'),
               duration: Duration(seconds: 2)));
         }));
     return items;
@@ -314,7 +313,7 @@ class ProfilePage extends StatelessWidget {
 
   /// Method to launch each share option for the [SocialMedia]
   Future share(SocialMedia platform, BuildContext context) async {
-    String text = 'Descarga esta app de AliceStore';
+    String text = 'Download the AliceStore app';
     String appId = Constants.playStoreId;
     final urlString = 'https://play.google.com/store/apps/details?id=$appId';
     final urlShare = Uri.encodeComponent(urlString);

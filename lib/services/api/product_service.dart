@@ -14,7 +14,7 @@ class ProductService{
     if (response != null) {
       products = ProductModel.productModelFromJson(response);
     }
-    dev.log('PRODUCTS :$products');
+    //dev.log('PRODUCTS :$products');
     return products;
   }
 
@@ -24,7 +24,7 @@ class ProductService{
     if(response != null){
       product = ProductModel.productModelFromJson(response).first;
     }
-    dev.log('PRODUCT : ${product.toString()}');
+    //dev.log('PRODUCT : ${product.toString()}');
     return product;
   }
 
@@ -35,7 +35,7 @@ class ProductService{
     if(response != null){
       products = ProductModel.productModelFromJson(response);
     }
-    dev.log('PRODUCT : ${products.toString()}');
+    //dev.log('PRODUCT : ${products.toString()}');
     return products;
   }
 
@@ -46,7 +46,7 @@ class ProductService{
     if(response != null){
       products = ProductModel.productModelFromJson(response);
     }
-    dev.log('PRODUCT : ${products.toString()}');
+    //dev.log('PRODUCT : ${products.toString()}');
     return products;
   }
 }

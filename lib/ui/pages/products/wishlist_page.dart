@@ -3,7 +3,6 @@ import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/ui/widgets/widgets.dart';
-import 'package:alice_store/app_routes.dart';
 import 'package:alice_store/utils/navigator_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
@@ -30,7 +29,7 @@ class _WishListPageState extends State<WishListPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Lista de deseos",
+          "Wishlist",
           style: GoogleFonts.albertSans(
             color: Colors.black,
             fontSize: 20,
@@ -59,7 +58,7 @@ class _WishListPageState extends State<WishListPage> {
                           'assets/lottie_animations/no-item-in-box.json',
                         ),
                         const Text(
-                          'No hay productos en la lista de deseos',
+                          'There a no items in the wishlist',
                           style: TextStyle(fontSize: 15),
                         ),
                       ])
@@ -169,7 +168,7 @@ class _WishListPageState extends State<WishListPage> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12))),
                           child: const Text(
-                            'Ver Productos similares',
+                            'View similar items',
                             style: TextStyle(color: Colors.black54),
                           ),
                         ),
@@ -184,7 +183,7 @@ class _WishListPageState extends State<WishListPage> {
                             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                               duration: Duration(seconds: 2),
                               content: Text(
-                                'Producto añadido a la cesta',
+                                'Item added cart!',
                               ),
                             ));
                           },
@@ -193,7 +192,7 @@ class _WishListPageState extends State<WishListPage> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12))),
                           child: const Text(
-                            'Mover a cesta',
+                            'Move to cart',
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
@@ -213,14 +212,14 @@ class _WishListPageState extends State<WishListPage> {
                     provider.removeFromWishList(product);
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content:
-                            Text('Producto eliminado de la lista de deseos !'),
+                            Text('Item removed from wishlist!'),
                         duration: Duration(seconds: 2)));
                   },
                   style: TextButton.styleFrom(
                       backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10))),
-                  child: Text('Eliminar producto',
+                  child: Text('Remove item',
                       style: TextStyle(color: Colors.redAccent[200]))),
             )
           ],
@@ -231,11 +230,11 @@ class _WishListPageState extends State<WishListPage> {
 
   Text stockText(bool inStock) {
     var inStockText = const Text(
-      'En Stock',
+      'In Stock',
       style: TextStyle(color: Colors.green),
     );
     var notInStockText = const Text(
-      'No disponible',
+      'Out of stock',
       style: TextStyle(color: Colors.red),
     );
 

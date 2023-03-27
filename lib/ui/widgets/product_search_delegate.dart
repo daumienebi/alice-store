@@ -210,7 +210,7 @@ class ProductDetail extends StatelessWidget {
                     imageUrl: product.image),
                 //centerTitle: true,
                 title: Text(
-                  '${product.name} Modelo Nuevo Pantera con funda XL (Verde)',
+                  '${product.name} New Model Test',
                   style: GoogleFonts.varelaRound(
                       fontSize: 18, color: Colors.black87),
                   textAlign: TextAlign.left,
@@ -266,7 +266,7 @@ class ProductDetail extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12))),
             child: const Text(
-              'Pagar ya',
+              'Pay now',
               style: TextStyle(color: Colors.black54),
             ),
           ),
@@ -279,7 +279,7 @@ class ProductDetail extends StatelessWidget {
                   .addProduct(product);
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                 duration: Duration(seconds: 2),
-                content: Text('Producto agregado a la cesta'),
+                content: Text('Item added to cart'),
               ));
             },
             style: TextButton.styleFrom(
@@ -287,7 +287,7 @@ class ProductDetail extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12))),
             child: const Text(
-              'Añadir a la cesta',
+              'Add to cart',
               style: TextStyle(color: Colors.white),
             ),
           ),
@@ -333,14 +333,14 @@ class ProductDetail extends StatelessWidget {
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Producto elimindado a la lista de deseos'),
+                    const Text('Item removed from wishlist'),
                     TextButton(
                         onPressed: () {
                           Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(
                               newPage: const WishListPage()));
                         },
                         child: const Text(
-                          'Ver lista',
+                          'View wishlist',
                           style: TextStyle(color: Colors.lightGreen),
                         ))
                   ],
@@ -356,14 +356,14 @@ class ProductDetail extends StatelessWidget {
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Producto agregado a la lista de deseos'),
+                    const Text('Item added to wishlist'),
                     TextButton(
                         onPressed: () {
                           Navigator.of(context)
                               .pushNamed(AppRoutes.routeStrings.wishListPage);
                         },
                         child: const Text(
-                          'Ver lista',
+                          'View wishlist',
                           style: TextStyle(color: Colors.lightGreen),
                         ))
                   ],
@@ -384,11 +384,11 @@ class ProductDetail extends StatelessWidget {
 
   Text stockText(bool inStock) {
     var inStockText = const Text(
-      'En Stock',
+      'In Stock',
       style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
     );
     var notInStockText = const Text(
-      'No disponible',
+      'Out of stock',
       style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
     );
     return inStock ? inStockText : notInStockText;

@@ -12,7 +12,7 @@ class ProjectFeedService{
     if (response != null) {
       projectFeeds = ProjectFeedModel.projectFeedModelFromJson(response);
     }
-    dev.log('PROJECT FEED :$projectFeeds');
+    //dev.log('PROJECT FEED :$projectFeeds');
     return projectFeeds;
   }
 }

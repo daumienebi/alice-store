@@ -36,7 +36,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-                'Introduce su correo aqui y le enviaremos un codigo verifiación.',
+                'Type in your email address below and a reset password link will be sent to you.',
               style: TextStyle(
                 fontSize: 25,
               ),
@@ -45,12 +45,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             const SizedBox(height: 10),
             MyTextField(
                 obscureText: false,
-                hintText: 'Introduce el correo',
+                hintText: 'Enter email',
                 labelText: 'Email',
                 controller: emailController,
                 validator: (value){
                   if(value == null || value.isEmpty){
-                    return 'Debe introducir un correo válido';
+                    return 'You must input a valid email address';
                   }
                   if('' == '') {
                     //add the pattern to match an email
@@ -67,7 +67,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               ),
                 onPressed: resetPassword,
                 child: const Text(
-                    'Enviar código',
+                    'Send link',
                     style: TextStyle(
                     color: Colors.black87
                 ))
@@ -88,17 +88,15 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       Dialogs.messageDialog(
         context: context,
         messageIcon: const Icon(Icons.check_circle_outline,color: Colors.green),
-        title: 'Enviado !',
-        message: 'El enlace para restablecer su contraseña fue enviado '
-            'corectamente, revise su correo.'
+        title: 'Link sent !',
+        message: 'The link to reset your password has been sent, please check your email.'
       );
     }else{
       Dialogs.messageDialog(
           context:context,
           messageIcon: const Icon(Icons.cancel,color: Colors.red),
           title: 'Error',
-          message: 'No se pudo enviar el código de verificacion, asegurese de '
-              'haber introducido un correo válido'
+          message: 'The reset password link could not be sent, please make sure you introduced a valid email address'
       );
     }
   }

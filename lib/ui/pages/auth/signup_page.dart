@@ -60,9 +60,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 //Welcome text
                 const Text(
-                  '¡Bienvenido te hemos echado de menos!',
+                  'Hello there',
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.black54, fontSize: 16),
+                  style: TextStyle(color: Colors.black54, fontSize: 20),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10,bottom: 10),
@@ -82,11 +82,11 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                           validator: (String? value) {
                             if (value == null || value.isEmpty) {
-                              return 'Debe introducir un correo';
+                              return 'You must input a valid email address';
                             }
                             bool emailValid = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value);
                             if(!emailValid){
-                              return 'Por favor, introduce un correo válido';
+                              return 'Please, introduce a valid email address';
                             }
                             return '';
                           },
@@ -104,10 +104,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                           validator: (String? value) {
                             if (value == null || value.isEmpty) {
-                              return 'Debe introducir una contraseña';
+                              return 'You must introduce a password';
                             }
                             if(value.length < 7){
-                              return 'La contraseña debe contener 7 caracteres como minimo';
+                              return 'The password must contain at least 7 characters';
                             }
                             return '';
                           },
@@ -125,13 +125,13 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                           validator: (String? value) {
                             if (value == null || value.isEmpty) {
-                              return 'Debe introducir una contraseña';
+                              return 'You must introduce a password';
                             }
                             if(value.length < 7){
-                              return 'La contraseña debe contener 7 caracteres como minimo';
+                              return 'The password must contain at least 7 characters';
                             }
                             if(!passwordConfirmed()){
-                              return 'Las 2 contraseñas deben coincidir';
+                              return 'The two passwords must match';
                             }
                             return '';
                           },
@@ -150,7 +150,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   child: Column(
                     children: [
                       const Text(
-                        'O continua con',
+                        'Or continue with',
                         style: TextStyle(color: Colors.black54),
                       ),
                       //Google sign in button
@@ -158,7 +158,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('Ya tienes cuenta ? '),
+                          const Text('Already a member ? '),
                           TextButton(
                             onPressed: () {
                               //Close this screen first so that the user can't return
@@ -168,7 +168,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             },
                             style: TextButton.styleFrom(backgroundColor: Colors.greenAccent),
                             child: const Text(
-                              'Inicia sesión',
+                              'Log In',
                               style: TextStyle(
                                 color: Colors.black54
                               ),
@@ -201,7 +201,7 @@ class _SignUpPageState extends State<SignUpPage> {
           style: TextButton.styleFrom(
               backgroundColor: Colors.black87, fixedSize: const Size(50, 60)),
           child: const Text(
-            'Registrarse',
+            'Sign Up',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),
@@ -241,15 +241,14 @@ class _SignUpPageState extends State<SignUpPage> {
           newPage: const MainPage())
         );
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text('Bienvenido, su cuenta creada correctamente')
+            content: Text('Welcome, your account was created successfully')
         ));
       }else{
         Dialogs.messageDialog(
             context: context,
             messageIcon: const Icon(Icons.cancel,color: Colors.red),
             title: 'Error :(',
-            message: 'No se ha podido crear la cuenta, revise su correo/contraseña y '
-                'su conexión a internet'
+            message: 'Unable to create your account, check your email/password and your internet connection'
         );
       }
     }

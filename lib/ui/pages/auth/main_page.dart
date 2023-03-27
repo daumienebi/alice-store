@@ -32,7 +32,7 @@ class _MainPageState extends State<MainPage> {
           }else if (snapshot.hasData){
             return HomePage();
           }else if (snapshot.hasError){
-            return const Center(child: Text('Error con el inicio de sesión'));
+            return const Center(child: Text('Error signing in'));
           }
           return const SignInPage();
         },

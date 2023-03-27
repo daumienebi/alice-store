@@ -22,7 +22,7 @@ class _PaymentPageState extends State<PaymentPage> {
     //double price = ModalRoute.of(context)!.settings.arguments as double;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Completar Pago'),
+        title: const Text('Complete payment'),
         elevation: 0,
         backgroundColor: Colors.cyan[100],
         foregroundColor: Colors.black54,
@@ -46,19 +46,19 @@ class _PaymentPageState extends State<PaymentPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Introduce la información del pago',
+              'Introduce payment information',
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16.0),
             TextFormField(
               decoration: const InputDecoration(
-                labelText: 'Nombre de tarjeta',
+                labelText: 'Card name',
               ),
             ),
             const SizedBox(height: 16.0),
             TextFormField(
               decoration: const InputDecoration(
-                labelText: 'Número de tarjeta',
+                labelText: 'Card number',
               ),
             ),
             const SizedBox(height: 16.0),
@@ -71,7 +71,7 @@ class _PaymentPageState extends State<PaymentPage> {
                     },
                     child: InputDecorator(
                       decoration: const InputDecoration(
-                        labelText: 'Fecha Caducidad',
+                        labelText: 'Expiry Date',
                         errorText: null,
                       ),
                       child: Text(
@@ -137,7 +137,7 @@ class _PaymentPageState extends State<PaymentPage> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12))
       ),
-      child: const Text('Pagar ahora',style: TextStyle(color: Colors.black87,fontSize: 17)),
+      child: const Text('Pay now',style: TextStyle(color: Colors.black87,fontSize: 17)),
     );
   }
 
@@ -147,7 +147,7 @@ class _PaymentPageState extends State<PaymentPage> {
     return TextButton(
       onPressed: () async{
         // Send an email to alicestore
-        String subject = 'Pedido de la tienda';
+        String subject = 'Store order';
         String orders = '';
         String mailUrl = 'mailto:orders.alicestore@gmail.com?subject=$subject';
         await _launchUrl(Uri.parse(mailUrl));
@@ -158,7 +158,7 @@ class _PaymentPageState extends State<PaymentPage> {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12))
       ),
-      child: const Text('Encargar por correo',style: TextStyle(color: Colors.white),),
+      child: const Text('Email order',style: TextStyle(color: Colors.white),),
     );
   }
 

@@ -46,7 +46,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
                 ),
               ),
               const SizedBox(height: 5),
-              const Text('Cargando prductos')
+              const Text('Loading items')
             ],
           );
         }
@@ -90,7 +90,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
               'assets/lottie_animations/error.json',
             ),
             const Text(
-              'Servidor indisponible.',
+              'Server error.',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 17,
@@ -98,7 +98,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
                   fontWeight: FontWeight.bold
               ),
             ),
-            const Text('Asegurese de disponer de conexión a internet.'),
+            const Text('Make sure you have internet connection.'),
             const SizedBox(height: 5),
             ElevatedButton(
                 onPressed: (){
@@ -114,7 +114,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
                 fixedSize: const Size(140,40)
               ),
                 child: const Text(
-                  'Reintentar',
+                  'Retry',
                   style: TextStyle(color: Colors.black87,
                     fontSize:16
                   )

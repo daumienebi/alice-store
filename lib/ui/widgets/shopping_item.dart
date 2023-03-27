@@ -1,7 +1,6 @@
 import 'package:alice_store/models/product_model.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
-import 'package:alice_store/app_routes.dart';
 import 'package:alice_store/utils/navigator_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
@@ -112,7 +111,7 @@ class ShoppingItem extends StatelessWidget {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12))),
                             child: const Text(
-                              'Ver Productos similares',
+                              'View similar items',
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -159,14 +158,14 @@ class ShoppingItem extends StatelessWidget {
               content: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Producto elimindado a la lista de deseos'),
+                  const Text('Item removed from wishlist'),
                   TextButton(
                       onPressed: () {
                         Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(
                             newPage: const WishListPage()));
                       },
                       child: const Text(
-                        'Ver lista',
+                        'View wishlist',
                         style: TextStyle(color: Colors.lightGreen),
                       ))
                 ],
@@ -182,14 +181,14 @@ class ShoppingItem extends StatelessWidget {
               content: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Producto agregado a la lista de deseos'),
+                  const Text('Item added to wishlist'),
                   TextButton(
                       onPressed: () {
                         Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(
                             newPage: const WishListPage()));
                       },
                       child: const Text(
-                        'Ver lista',
+                        'View wishlist',
                         style: TextStyle(color: Colors.lightGreen),
                       ))
                 ],
@@ -213,7 +212,7 @@ class ShoppingItem extends StatelessWidget {
           snackBar = const SnackBar(
             duration: Duration(seconds: 1),
             content: Text(
-              'Producto añadido a la cesta',
+              'Item added to cart',
             ),
           );
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -221,7 +220,7 @@ class ShoppingItem extends StatelessWidget {
         style: TextButton.styleFrom(
             backgroundColor: Colors.amber[600], shape: const StadiumBorder()),
         child: const Text(
-          'Añadir a cesta',
+          'Add to cart',
           style: TextStyle(color: Colors.white),
         ));
   }
