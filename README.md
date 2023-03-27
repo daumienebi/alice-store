@@ -1,16 +1,12 @@
-# alice_store
+# Alice Store
 
-Alice Store
+Simple project to simulate a Shopping App where users can view products, add products to wishlist, handle cart items,search for products etc..
 
-## Getting Started
+The app is part of a friend's final project of a Screen printing course. I decided to take on this task to broaden my knowledge and
+get to work with Firebase and polish my flutter skills.
 
-This project is a starting point for a Flutter application.
+Note : The app is not meant to be a real-world shopping app, it might be be taken down from the Playstore after the project is presented but
+the APK will be available here with the source code.
 
-A few resources to get you started if this is your first Flutter project:
+## Todo : Explain how to config for Firebase, the products server etc.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
