@@ -27,5 +27,6 @@ the APK will be available here with the source code.
 - Json_Server explanation in the [json_server branch](https://github.com/daumienebi/alice_store/tree/json_server)
 - store_data explanation in the [store_data branch](https://github.com/daumienebi/alice_store/tree/store_data)
 - Requirements
-- App github page
+- Polish App github page
+- Include credits
 
