@@ -258,9 +258,7 @@ class ProductDetail extends StatelessWidget {
           //2000000000 from the card_swiper value
           width: kMaxValue.toDouble(),
           child: TextButton(
-            onPressed: () {
-              //TODO : Fetch similar products
-            },
+            onPressed: ()=>Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(newPage: const PaymentPage())),
             style: TextButton.styleFrom(
                 backgroundColor: Colors.white,
                 shape: RoundedRectangleBorder(

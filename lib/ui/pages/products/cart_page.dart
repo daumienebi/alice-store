@@ -193,7 +193,7 @@ class _CartPageState extends State<CartPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
                       Text(
-                        'Pay',
+                        'Pay now',
                         style: TextStyle(color: Colors.white),
                       ),
                       Icon(

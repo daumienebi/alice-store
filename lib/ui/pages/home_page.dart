@@ -304,7 +304,7 @@ class _HomePageState extends State<HomePage> {
     final format = DateFormat.jm();
     String formattedString = format.format(now);
     if (formattedString.endsWith('AM')) {
-      greetingsText = 'Good morning,,';
+      greetingsText = 'Good morning,';
       //greetingsText = AppLocalizations.of(context)!.goodMorning;
 
       //Example of a formattedString could be 6:54 PM, so we split the string
@@ -324,7 +324,7 @@ class _HomePageState extends State<HomePage> {
   /// later
   Route goToProfilePage() {
     return PageRouteBuilder(
-      settings: RouteSettings(name: AppRoutes.routeStrings.profilePage,),
+      settings: RouteSettings(name: AppRoutes.routeStrings.profilePage),
       pageBuilder: (context, animation, secondaryAnimation) => ProfilePage(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(-1.5, 1);

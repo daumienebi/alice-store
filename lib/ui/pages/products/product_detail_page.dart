@@ -90,9 +90,7 @@ class ProductDetailPage extends StatelessWidget {
           //use the available width
           width: double.infinity,
           child: TextButton(
-            onPressed: () {
-              //TODO : Fetch similar products
-            },
+            onPressed: ()=>Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(newPage: const PaymentPage())),
             style: TextButton.styleFrom(
                 backgroundColor: Colors.white,
                 shape: RoundedRectangleBorder(

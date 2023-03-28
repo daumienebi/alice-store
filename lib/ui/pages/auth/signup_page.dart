@@ -39,7 +39,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10, top: 30),
+          padding: const EdgeInsets.only(left: 10, right: 10),
           child: SizedBox(
               height: MediaQuery.of(context).size.height * 1.00,
               width: double.infinity,
@@ -65,7 +65,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   style: TextStyle(color: Colors.black54, fontSize: 20),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 10,bottom: 10),
+                  padding: const EdgeInsets.only(top: 20),
                   child: Form(
                     key: _formKey,
                     child: Column(
@@ -136,6 +136,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             return '';
                           },
                         ),
+
 
                       ],
                     ),

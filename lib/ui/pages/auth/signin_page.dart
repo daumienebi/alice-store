@@ -35,7 +35,7 @@ class _SignInPageState extends State<SignInPage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10, top: 50),
+          padding: const EdgeInsets.only(left: 10, right: 10, top: 40),
           child: SizedBox(
               height: MediaQuery.of(context).size.height * 1.00,
               width: double.infinity,
@@ -81,7 +81,7 @@ class _SignInPageState extends State<SignInPage> {
                   style: TextStyle(color: Colors.black54, fontSize: 20),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20, bottom: 10),
+                  padding: const EdgeInsets.only(top: 20),
                   child: Form(
                     key: _formKey,
                     child: Column(
@@ -227,7 +227,7 @@ class _SignInPageState extends State<SignInPage> {
         }else{
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             duration: Duration(seconds: 7),
-              content: Text('Error signing in with Google, please checek your internet connection.')));
+              content: Text('Error signing in with Google, please check your internet connection.')));
         }
       },
       child: Container(
@@ -249,9 +249,9 @@ class _SignInPageState extends State<SignInPage> {
     if(signedIn){
       // if the user is signed in, the MainPage StreamBuilder handles the
       // page that will be shown, no need to explicitly call the MainPage
-      //Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(
-          //newPage: const MainPage())
-      //);
+      Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(
+          newPage: const MainPage())
+      );
     }else{
       Dialogs.messageDialog(
           context: context,
