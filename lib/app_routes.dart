@@ -1,3 +1,4 @@
+import 'package:alice_store/ui/pages/auth/delete_account_page.dart';
 import 'package:alice_store/ui/pages/pages.dart';
 
 /// Class to handle the navigation in case the Navigator..pushNamed(..) method
@@ -16,6 +17,7 @@ class AppRoutes{
     routeStrings.profilePage: (_) => ProfilePage(),
     routeStrings.signUpPage: (_) => const SignUpPage(),
     routeStrings.paymentPage: (_) => const PaymentPage(),
+    routeStrings.deleteAccountPage: (_) => const DeleteAccountPage(),
   };
 }
 
@@ -34,4 +36,5 @@ class RouteStrings {
   String get signUpPage => 'signUpPage';
   String get forgotPasswordPage => 'forgotPasswordPage';
   String get paymentPage => 'paymentPage';
+  String get deleteAccountPage => 'deleteAccountPage';
 }

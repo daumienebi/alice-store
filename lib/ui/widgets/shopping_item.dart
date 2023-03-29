@@ -108,8 +108,7 @@ class ShoppingItem extends StatelessWidget {
                             },
                             style: TextButton.styleFrom(
                                 backgroundColor: Colors.blueGrey[400],
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12))),
+                                shape: StadiumBorder()),
                             child: const Text(
                               'View similar items',
                               style: TextStyle(color: Colors.white),
@@ -218,7 +217,7 @@ class ShoppingItem extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         },
         style: TextButton.styleFrom(
-            backgroundColor: Colors.amber[600], shape: const StadiumBorder()),
+            backgroundColor: Colors.amber[700], shape: const StadiumBorder()),
         child: const Text(
           'Add to cart',
           style: TextStyle(color: Colors.white),

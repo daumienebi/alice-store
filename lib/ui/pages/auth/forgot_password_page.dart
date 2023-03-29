@@ -1,4 +1,4 @@
-import 'package:alice_store/provider/google_signin_provider.dart';
+import 'package:alice_store/provider/firebase_auth_provider.dart';
 import 'package:alice_store/ui/widgets/my_text_field.dart';
 import 'package:alice_store/utils/dialogs.dart';
 import 'package:flutter/material.dart';
@@ -82,7 +82,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   /// Reset a the password
   Future resetPassword() async{
     bool verificationSent;
-    verificationSent = await Provider.of<GoogleSignInProvider>(context,listen: false)
+    verificationSent = await Provider.of<FirebaseAuthProvider>(context,listen: false)
         .resetPassword(emailController.text.trim());
     if(verificationSent){
       Dialogs.messageDialog(

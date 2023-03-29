@@ -1,5 +1,5 @@
 import 'package:alice_store/provider/cart_provider.dart';
-import 'package:alice_store/provider/google_signin_provider.dart';
+import 'package:alice_store/provider/firebase_auth_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/app_routes.dart';
 import 'package:alice_store/utils/l10n/l10n.dart';
@@ -61,7 +61,7 @@ class AppState extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (_) => ProductProvider()),
           ChangeNotifierProvider(create: (_) => CartProvider()),
-          ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
+          ChangeNotifierProvider(create: (_) => FirebaseAuthProvider()),
         ],
       child: const MyApp(),
     );

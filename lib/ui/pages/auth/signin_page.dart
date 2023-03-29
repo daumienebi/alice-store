@@ -1,4 +1,4 @@
-import 'package:alice_store/provider/google_signin_provider.dart';
+import 'package:alice_store/provider/firebase_auth_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/ui/widgets/my_text_field.dart';
 import 'package:alice_store/utils/dialogs.dart';
@@ -214,7 +214,7 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   Widget googleSignInButton(context) {
-    GoogleSignInProvider provider = Provider.of<GoogleSignInProvider>(context, listen: false);
+    FirebaseAuthProvider provider = Provider.of<FirebaseAuthProvider>(context, listen: false);
     return InkWell(
       onTap: () async{
         bool loggedIn = await provider.googleLogin();
@@ -241,7 +241,7 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   Future signInWithEmailAndPassword() async{
-    GoogleSignInProvider provider = Provider.of<GoogleSignInProvider>(context, listen: false);
+    FirebaseAuthProvider provider = Provider.of<FirebaseAuthProvider>(context, listen: false);
     bool signedIn;
     _email = emailController.text.trim();
     _password = passwordController.text.trim();

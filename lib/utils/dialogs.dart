@@ -19,4 +19,39 @@ class Dialogs{
        },
      );
    }
+
+    /// Shows a dialog to confirm if the user wants to carry-out the action
+    /// Returne 1 if the user clicks 'Yes' and 0 for 'No'
+  static Future<int> confirmActionWidget({required BuildContext context,required String actionTitle,
+    required String content}) async {
+    int returnValue = 0;
+    await showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+              title: Text(actionTitle),
+              content:
+                  Text(content),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(
+                          context, 'Return value'); //Return value to the caller
+                    },
+                    child: Text(
+                      'No',
+                      style: TextStyle(color: Colors.red),
+                    )),
+                TextButton(
+                    onPressed: () {
+                      returnValue = 1;
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      'Yes',
+                      style: TextStyle(color: Colors.green),
+                    ))
+              ],
+            ));
+    return Future.value(returnValue);
+  }
 }

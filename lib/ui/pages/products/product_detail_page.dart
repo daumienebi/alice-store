@@ -113,7 +113,7 @@ class ProductDetailPage extends StatelessWidget {
               ));
             },
             style: TextButton.styleFrom(
-                backgroundColor: Colors.amber[600],
+                backgroundColor: Colors.amber[700],
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12))),
             child: const Text(
