@@ -68,13 +68,13 @@ class _SignInPageState extends State<SignInPage> {
             child: Icon(
               Icons.lock,
               size: 120,
-              color: Colors.cyan[700],
+              color: Colors.blueGrey,
             ),
           ),
                 ),
                 //Welcome text
                 const Text(
-          'Welcome back!',
+          'Log in to continue',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black54, fontSize: 20),
                 ),
@@ -92,7 +92,7 @@ class _SignInPageState extends State<SignInPage> {
                   controller: emailController,
                   icon: const Icon(
                     Icons.email_outlined,
-                    color: Colors.black87,
+                    color: Colors.black45,
                   ),
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
@@ -114,7 +114,7 @@ class _SignInPageState extends State<SignInPage> {
                   controller: passwordController,
                   icon: const Icon(
                     Icons.password_outlined,
-                    color: Colors.black87,
+                    color: Colors.black45,
                   ),
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {

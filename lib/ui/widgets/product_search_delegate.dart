@@ -312,10 +312,10 @@ class ProductDetail extends StatelessWidget {
     //Possible Icons
     var addToFavIcon = const Icon(
       Icons.favorite_border,
-      color: Colors.black,
+      color: Colors.black54,
     );
     var removeFromFavIcon =
-        const Icon(Icons.favorite_rounded, color: Colors.red);
+        Icon(Icons.favorite_rounded, color: Colors.cyan[300]);
 
     SnackBar snackBar;
     return Padding(

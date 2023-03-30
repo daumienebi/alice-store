@@ -41,14 +41,14 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
           //Lock icon
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 30),
+            padding: EdgeInsets.only(top: 50),
             child: SizedBox(
               height: 150,
               width: 100,
               child: Icon(
                 Icons.lock,
                 size: 120,
-                color: Colors.cyan[700],
+                color: Colors.blueGrey,
               ),
             ),
           ),
@@ -70,9 +70,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     hintText: 'Introduce email',
                     labelText: 'Email',
                     controller: emailController,
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.email_outlined,
-                      color: Colors.black87,
+                      color: Colors.black45,
                     ),
                     validator: (String? value) {
                       if (value == null || value.isEmpty) {
@@ -92,9 +92,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     hintText: 'Introduce password',
                     labelText: 'Password',
                     controller: passwordController,
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.password_outlined,
-                      color: Colors.black87,
+                      color: Colors.black45,
                     ),
                     validator: (String? value) {
                       if (value == null || value.isEmpty) {
@@ -113,9 +113,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     hintText: 'Confirm password',
                     labelText: 'Confirm Password',
                     controller: confirmPasswordController,
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.password_outlined,
-                      color: Colors.black87,
+                      color: Colors.black45,
                     ),
                     validator: (String? value) {
                       if (value == null || value.isEmpty) {

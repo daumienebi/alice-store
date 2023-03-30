@@ -140,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                             style: const TextStyle(
                                 fontSize: 20,
                                 color: Colors.black87,
-                                fontWeight: FontWeight.bold
+                                fontWeight: FontWeight.w400
                             ),
                           ),
                         ),
@@ -174,12 +174,12 @@ class _HomePageState extends State<HomePage> {
   BottomNavigationBar _bottomNavigationBar() {
     return BottomNavigationBar(
       iconSize: 25,
-      selectedIconTheme: const IconThemeData(color: Colors.lightBlue, size: 27),
+      selectedIconTheme: IconThemeData(color: Colors.cyan[300], size: 27),
       showSelectedLabels: true,
       unselectedIconTheme: const IconThemeData(color: Colors.grey),
       selectedFontSize: 17,
-      backgroundColor: Colors.cyan[200],
-      selectedItemColor: Colors.black87,
+      //backgroundColor: Colors.cyan[200],
+      selectedItemColor: Colors.black54,
       items: <BottomNavigationBarItem>[
         const BottomNavigationBarItem(
           icon: Icon(Icons.home_outlined),
@@ -212,7 +212,7 @@ class _HomePageState extends State<HomePage> {
       ],
       currentIndex: _selectedIndex,
       onTap: _onItemTapped,
-      type: BottomNavigationBarType.shifting,
+      type: BottomNavigationBarType.fixed,
       //selectedLabelStyle: TextStyle(color: Colors.black),
     );
   }

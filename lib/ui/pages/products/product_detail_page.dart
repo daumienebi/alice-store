@@ -147,7 +147,7 @@ class ProductDetailPage extends StatelessWidget {
       color: Colors.black,
     );
     var removeFromFavIcon =
-        const Icon(Icons.favorite_rounded, color: Colors.red);
+        Icon(Icons.favorite_rounded, color: Colors.cyan[300]);
 
     SnackBar snackBar;
     return Padding(

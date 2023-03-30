@@ -136,12 +136,12 @@ class ShoppingItem extends StatelessWidget {
     //Possible Icons
     var addToFavIcon = Icon(
       Icons.favorite_border,
-      color: Colors.cyan[200],
+      color: Colors.black54,
       size: 35,
     );
-    var removeFromFavIcon = const Icon(
+    var removeFromFavIcon = Icon(
       Icons.favorite_rounded,
-      color: Colors.red,
+      color: Colors.cyan[300],
       size: 35,
     );
 
