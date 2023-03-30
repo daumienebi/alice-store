@@ -44,37 +44,34 @@ class ProfilePage extends StatelessWidget {
         backgroundColor: Colors.cyan[100],
       ),
       body: SingleChildScrollView(
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.85,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  userData(user!),
-                  const SizedBox(height: 20),
-                  optionsListWidget(context, navigateToDeleteAccountPage),
-                  //Display the current app version
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10, bottom: 15),
-                    child: FutureBuilder(
-                        future: getVersion(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return Text(
-                              'Version: ${snapshot.data.toString()}',
-                              style: const TextStyle(
-                                  fontSize: 16, color: Colors.black38),
-                            );
-                          } else {
-                            return const Text("");
-                          }
-                        }),
-                  ),
-                ],
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              userData(user!),
+              const SizedBox(height: 20),
+              Container(
+                  height: 450,
+                  child: optionsListWidget(context, navigateToDeleteAccountPage)
               ),
-            ),
+              //Display the current app version
+              Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 15),
+                child: FutureBuilder(
+                    future: getVersion(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Text(
+                          'Version: ${snapshot.data.toString()}',
+                          style: const TextStyle(
+                              fontSize: 16, color: Colors.black38),
+                        );
+                      } else {
+                        return const Text("");
+                      }
+                    }),
+              ),
+            ],
           ),
         ),
       ),
@@ -94,6 +91,7 @@ class ProfilePage extends StatelessWidget {
               )
             : const CircleAvatar(
                 radius: 60,
+                backgroundColor: Colors.black87,
                 child: Icon(
                   Icons.person_outline,
                   color: Colors.white,
@@ -101,13 +99,16 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
         // name
+        // show the name if the user has a displayName, if not use an empty
+        // container to avoid the random space
+        user.displayName != null ?
         Container(
             margin: const EdgeInsets.only(top: 10.0),
-            child: Text(user.displayName != null ? user.displayName! : '',
+            child: Text(user.displayName!,
                 style: const TextStyle(
                     overflow: TextOverflow.ellipsis,
                     fontSize: 18,
-                    fontWeight: FontWeight.bold))),
+                    fontWeight: FontWeight.bold))) : Container(),
         // email
         Container(
             margin: const EdgeInsets.only(top: 10.0),
@@ -119,111 +120,109 @@ class ProfilePage extends StatelessWidget {
 
   Widget optionsListWidget(
       BuildContext context, bool navigateToDeleteAccountPage) {
-    return Expanded(
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 20),
-        padding: const EdgeInsets.all(15),
-        decoration: BoxDecoration(
-          color: Colors.white54,
-          borderRadius: const BorderRadius.all(Radius.circular(20)),
-          boxShadow: [
-            BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 5,
-                blurRadius: 15,
-                offset: const Offset(0, 3))
-          ],
-        ),
-        child: ListView(
-          children: [
-            //Purchases
-            optionListTile(
-                context: context,
-                leading: const Icon(Icons.shopping_cart),
-                title: 'Purchases',
-                onTap: () {}),
-            //Privacy
-            optionListTile(
+    return Container(
+      margin: const EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        color: Colors.white54,
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
+        boxShadow: [
+          BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 15,
+              offset: const Offset(0, 3))
+        ],
+      ),
+      child: ListView(
+        children: [
+          //Purchases
+          optionListTile(
               context: context,
-              leading: const Icon(Icons.privacy_tip_outlined),
-              title: 'Privacy',
-              onTap: () => Navigator.of(context).push(
-                  NavigatorUtil.createRouteWithFadeAnimation(
-                      newPage: ProfilePage())),
-            ),
-            //Invite friend
-            optionListTile(
+              leading: const Icon(Icons.shopping_cart),
+              title: 'Purchases',
+              onTap: () {}),
+          //Privacy
+          optionListTile(
+            context: context,
+            leading: const Icon(Icons.privacy_tip_outlined),
+            title: 'Privacy',
+            onTap: () => Navigator.of(context).push(
+                NavigatorUtil.createRouteWithFadeAnimation(
+                    newPage: ProfilePage())),
+          ),
+          //Invite friend
+          optionListTile(
+            context: context,
+            leading: const Icon(Icons.email_outlined),
+            title: 'Invite a friend',
+            onTap: () {
+              showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Container(
+                      height: 110,
+                      color: Colors.white,
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Share the app',
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  color: Colors.black54, fontSize: 20),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Expanded(
+                              child: ListView(
+                                scrollDirection: Axis.horizontal,
+                                children: socialMediaButtons(context),
+                              ),
+                            ),
+                          ]),
+                    );
+                  });
+            },
+          ),
+          //About the app
+          optionListTile(
+            context: context,
+            leading: const Icon(Icons.info_outline),
+            title: 'About the app',
+            onTap: () {},
+          ),
+          //Log out
+          optionListTile(
               context: context,
-              leading: const Icon(Icons.email_outlined),
-              title: 'Invite a friend',
+              leading: const Icon(Icons.logout),
+              title: 'Log Out',
               onTap: () {
-                showModalBottomSheet(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Container(
-                        height: 110,
-                        color: Colors.white,
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Share the app',
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                    color: Colors.black54, fontSize: 20),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Expanded(
-                                child: ListView(
-                                  scrollDirection: Axis.horizontal,
-                                  children: socialMediaButtons(context),
-                                ),
-                              ),
-                            ]),
-                      );
-                    });
-              },
-            ),
-            //About the app
-            optionListTile(
+                //crappy log out logic
+                Provider.of<FirebaseAuthProvider>(context, listen: false)
+                    .logout();
+                //Close the current page after logging out
+                Navigator.of(context).pop();
+              }),
+          //Delete user account
+          optionListTile(
               context: context,
-              leading: const Icon(Icons.info_outline),
-              title: 'About the app',
-              onTap: () {},
-            ),
-            //Log out
-            optionListTile(
-                context: context,
-                leading: const Icon(Icons.logout),
-                title: 'Log Out',
-                onTap: () {
-                  //crappy log out logic
-                  Provider.of<FirebaseAuthProvider>(context, listen: false)
-                      .logout();
-                  //Close the current page after logging out
-                  Navigator.of(context).pop();
-                }),
-            //Delete user account
-            optionListTile(
-                context: context,
-                leading: const Icon(Icons.delete),
-                title: 'Delete Account',
-                onTap: (){
-                  print(navigateToDeleteAccountPage);
-                  if (navigateToDeleteAccountPage) {
-                    //Make the user enter their password
-                    Navigator.of(context).push(
-                        NavigatorUtil.createRouteWithFadeAnimation(
-                            newPage: DeleteAccountPage()));
-                  } else {
-                    print('hye');
-                    deleteAccount(context);
-                  }
-                })
-          ],
-        ),
+              leading: const Icon(Icons.delete),
+              title: 'Delete Account',
+              onTap: (){
+                print(navigateToDeleteAccountPage);
+                if (navigateToDeleteAccountPage) {
+                  //Make the user enter their password
+                  Navigator.of(context).push(
+                      NavigatorUtil.createRouteWithFadeAnimation(
+                          newPage: DeleteAccountPage()));
+                } else {
+                  print('hye');
+                  deleteAccount(context);
+                }
+              })
+        ],
       ),
     );
   }
