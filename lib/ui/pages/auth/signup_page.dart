@@ -60,12 +60,12 @@ class _SignUpPageState extends State<SignUpPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'Sign Up,',
+                  'Sign Up',
                   textAlign: TextAlign.left,
                   style: TextStyle(color: Colors.black87, fontSize: 20,fontWeight: FontWeight.bold),
                 ),
                 const Text(
-                  'For a better experience',
+                  'for a better experience',
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.black54, fontSize: 15),
                 ),

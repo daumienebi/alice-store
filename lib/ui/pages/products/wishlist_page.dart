@@ -7,6 +7,7 @@ import 'package:alice_store/utils/navigator_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -35,6 +36,7 @@ class _WishListPageState extends State<WishListPage> {
             fontSize: 20,
           ),
         ),
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         leading: Padding(
           padding: const EdgeInsets.only(left: 10, top: 10),
           child: CustomButton(

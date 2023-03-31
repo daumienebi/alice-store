@@ -1,4 +1,5 @@
 import 'package:alice_store/provider/firebase_auth_provider.dart';
+import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/utils/constants.dart';
 import 'package:alice_store/ui/widgets/customed/dialogs.dart';
 import 'package:alice_store/utils/navigator_util.dart';
@@ -10,7 +11,6 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../pages/pages.dart';
 
 class SignedInUserDrawer extends StatelessWidget {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
@@ -37,7 +37,24 @@ class SignedInUserDrawer extends StatelessWidget {
         userData(user,context),
         Expanded(
           child: optionsListWidget(context,navigateToDeleteAccountPage),
-        )
+        ),
+        // display app version
+        Padding(
+          padding: const EdgeInsets.only(top: 10, bottom: 15),
+          child: FutureBuilder(
+              future: getVersion(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text(
+                    'Version: ${snapshot.data.toString()}',
+                    style: const TextStyle(
+                        fontSize: 16, color: Colors.black38),
+                  );
+                } else {
+                  return const Text("");
+                }
+              }),
+        ),
       ],
     );
   }

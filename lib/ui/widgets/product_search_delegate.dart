@@ -305,41 +305,48 @@ class ProductDetail extends StatelessWidget {
   }
 
   Widget moreProductDetails(){
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('More details',style: TextStyle(fontSize: 18,color: Colors.black54),),
-        ListTile(
-          leading: Icon(Icons.info),
-          title: Text('Material'),
-          trailing: Text('Wool'),
-        ),
-        ListTile(
-          leading: Icon(Icons.line_weight),
-          title: Text('Weight'),
-          trailing: Text('500g'),
-        ),
-        ListTile(
-          leading: Icon(Icons.branding_watermark),
-          title: Text('Brand'),
-          trailing: Text('ALICESTORE'),
-        ),
-        ListTile(
-          leading: Icon(Icons.water_drop),
-          title: Text('Washable'),
-          trailing: Text('Yes'),
-        ),
-        ListTile(
-          leading: Icon(Icons.money),
-          title: Text('Warranty'),
-          trailing: Text('Yes'),
-        ),
-        ListTile(
-          leading: Icon(Icons.handyman),
-          title: Text('Handmade'),
-          trailing: Text('No'),
-        )
-      ],
+    final trailingStyle =
+    TextStyle(color: Colors.cyan, fontWeight: FontWeight.bold);
+    return Container(
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(12)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('More details',style: TextStyle(fontSize: 18,color: Colors.black54),),
+          ListTile(
+            leading: Icon(Icons.info),
+            title: Text('Material'),
+            trailing: Text('Material name',style: trailingStyle),
+          ),
+          ListTile(
+            leading: Icon(Icons.line_weight),
+            title: Text('Weight'),
+            trailing: Text('500g',style: trailingStyle),
+          ),
+          ListTile(
+            leading: Icon(Icons.branding_watermark),
+            title: Text('Brand'),
+            trailing: Text('ALICESTORE',style: trailingStyle),
+          ),
+          ListTile(
+            leading: Icon(Icons.water_drop),
+            title: Text('Washable'),
+            trailing: Text('Yes',style: trailingStyle),
+          ),
+          ListTile(
+            leading: Icon(Icons.money),
+            title: Text('Warranty'),
+            trailing: Text('Yes',style: trailingStyle),
+          ),
+          ListTile(
+            leading: Icon(Icons.handyman),
+            title: Text('Handmade'),
+            trailing: Text('No',style: trailingStyle),
+          )
+        ],
+      ),
     );
   }
 

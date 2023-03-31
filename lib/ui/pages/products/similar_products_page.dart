@@ -4,6 +4,7 @@ import 'package:alice_store/ui/widgets/customed/custom_button.dart';
 import 'package:alice_store/ui/widgets/shopping_item.dart';
 import 'package:alice_store/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:lottie/lottie.dart';
@@ -44,6 +45,7 @@ class _SimilarProductsPageState extends State<SimilarProductsPage> {
             fontSize: 20,
           ),
         ),
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         leading: Padding(
           padding: const EdgeInsets.only(left: 10, top: 10),
           child: CustomButton(

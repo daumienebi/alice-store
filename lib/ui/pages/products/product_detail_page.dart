@@ -1,6 +1,7 @@
 import 'package:alice_store/models/product_model.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
+import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/ui/widgets/customed/custom_button.dart';
 import 'package:alice_store/app_routes.dart';
 import 'package:alice_store/utils/constants.dart';
@@ -11,8 +12,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import '../../widgets/widgets.dart';
-import '../pages.dart';
 
 class ProductDetailPage extends StatefulWidget {
   const ProductDetailPage({Key? key}) : super(key: key);

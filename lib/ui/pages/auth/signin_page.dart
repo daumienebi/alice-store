@@ -83,12 +83,12 @@ class _SignInPageState extends State<SignInPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Sign In,',
+                    'Sign In',
                     textAlign: TextAlign.left,
                     style: TextStyle(color: Colors.black87, fontSize: 20,fontWeight: FontWeight.bold),
                   ),
                   const Text(
-                    'Welcome back!, we missed you',
+                    'welcome back!, we missed you',
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.black54, fontSize: 15),
                   ),
