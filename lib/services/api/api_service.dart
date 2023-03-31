@@ -15,6 +15,7 @@ class ApiService{
       //Decode the response and return the json body to be mapped to any object
       responseJson = jsonDecode(response.body);
     } on SocketException catch (e){
+      print(baseApiUrl+url);
       // Handle the SocketException
       dev.log('Network connection error: $e');
     }catch(e){

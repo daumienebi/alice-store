@@ -181,7 +181,7 @@ class _WishListPageState extends State<WishListPage> {
                         width: kMaxValue.toDouble(),
                         child: TextButton(
                           onPressed: () {
-                            Provider.of<CartProvider>(context,listen: false).addProduct(product);
+                            Provider.of<CartProvider>(context,listen: false).addItem(product,1);
                             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                               duration: Duration(seconds: 2),
                               content: Text(

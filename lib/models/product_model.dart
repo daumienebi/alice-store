@@ -6,6 +6,12 @@ class ProductModelFields {
   static const String price = 'price';
   static const String inStock = 'in_stock';
   static const String description = 'description';
+  static const String material = 'material';
+  static const String weight = 'weight';
+  static const String brand = 'brand';
+  static const String washable = 'washable';
+  static const String warranty = 'warranty';
+  static const String handmade = 'handmade';
 
   //Static list with the name values to easily retrieve fields names from the DB
   static final List<String> values = [id, name, categoryId, image,price,inStock, description];
@@ -19,6 +25,12 @@ class ProductModel {
   final double price;
   final bool inStock;
   final String description;
+  final String material;
+  final String weight;
+  final String brand;
+  final String washable;
+  final String warranty;
+  final String handmade;
 
   /// Create the constructor
   ProductModel({
@@ -29,6 +41,12 @@ class ProductModel {
     required this.price,
     required this.inStock,
     required this.description,
+    required this.material,
+    required this.weight,
+    required this.brand,
+    required this.washable,
+    required this.warranty,
+    required this.handmade,
   });
 
   /// Convert a Map<String,dynamic> to a [ProductModel] object
@@ -41,6 +59,12 @@ class ProductModel {
       price: value['price'] as double,
       inStock: value['inStock'],
       description: value['description'],
+      material: value['material'],
+      weight: value['weight'],
+      brand: value['brand'],
+      washable: value['washable'],
+      warranty: value['warranty'],
+      handmade: value['handmade'],
     );
   }
 
@@ -54,6 +78,12 @@ class ProductModel {
       ProductModelFields.price: price,
       ProductModelFields.inStock: inStock,
       ProductModelFields.description: description,
+      ProductModelFields.material: material,
+      ProductModelFields.weight: weight,
+      ProductModelFields.brand: brand,
+      ProductModelFields.washable: washable,
+      ProductModelFields.warranty: warranty,
+      ProductModelFields.handmade: handmade,
     };
   }
 
@@ -66,6 +96,12 @@ class ProductModel {
       image: json[ProductModelFields.image],
       inStock: json[ProductModelFields.inStock],
       price: double.parse(json[ProductModelFields.price].toString()),
+      material: json[ProductModelFields.material],
+      weight: json[ProductModelFields.weight],
+      brand: json[ProductModelFields.brand],
+      washable: json[ProductModelFields.washable],
+      warranty: json[ProductModelFields.warranty],
+      handmade: json[ProductModelFields.handmade],
     );
   }
 

@@ -16,12 +16,10 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  List<ProductModel> cartProducts = [];
   List<CartItemModel> cartItems = [];
   @override
   Widget build(BuildContext context) {
     CartProvider provider = Provider.of<CartProvider>(context, listen: true);
-    cartProducts = provider.getProducts;
     cartItems = provider.getCartItems;
     return Scaffold(
       body: SizedBox(

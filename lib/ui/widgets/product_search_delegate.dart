@@ -84,7 +84,14 @@ class ProductSearchDelegate extends SearchDelegate {
           inStock: false,
           price: 0.0,
           description: '',
-          image: '');
+          image: '',
+          material: '',
+          warranty: '',
+          washable: '',
+          handmade: '',
+          weight: '',
+          brand: '',
+      );
     }
 
     //Since the id of the dummy product is 0 if no results were found, we carry
@@ -318,32 +325,32 @@ class ProductDetail extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.info),
             title: Text('Material'),
-            trailing: Text('Material name',style: trailingStyle),
+            trailing: Text(product.material, style: trailingStyle),
           ),
           ListTile(
             leading: Icon(Icons.line_weight),
             title: Text('Weight'),
-            trailing: Text('500g',style: trailingStyle),
+            trailing: Text(product.weight, style: trailingStyle),
           ),
           ListTile(
             leading: Icon(Icons.branding_watermark),
             title: Text('Brand'),
-            trailing: Text('ALICESTORE',style: trailingStyle),
+            trailing: Text(product.brand, style: trailingStyle),
           ),
           ListTile(
             leading: Icon(Icons.water_drop),
             title: Text('Washable'),
-            trailing: Text('Yes',style: trailingStyle),
+            trailing: Text(product.washable, style: trailingStyle),
           ),
           ListTile(
             leading: Icon(Icons.money),
             title: Text('Warranty'),
-            trailing: Text('Yes',style: trailingStyle),
+            trailing: Text(product.warranty, style: trailingStyle),
           ),
           ListTile(
             leading: Icon(Icons.handyman),
             title: Text('Handmade'),
-            trailing: Text('No',style: trailingStyle),
+            trailing: Text(product.handmade, style: trailingStyle),
           )
         ],
       ),

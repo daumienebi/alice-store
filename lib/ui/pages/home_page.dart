@@ -1,7 +1,7 @@
 import 'package:alice_store/models/category_model.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/services/api/category_service.dart';
-import 'package:alice_store/ui/widgets/not_signed_in_user_drawer.dart';
+import 'package:alice_store/ui/widgets/drawers/not_signed_in_user_drawer.dart';
 import 'package:alice_store/ui/widgets/product_search_delegate.dart';
 import 'package:alice_store/app_routes.dart';
 import 'package:alice_store/utils/navigator_util.dart';
