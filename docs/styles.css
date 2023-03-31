@@ -7,7 +7,7 @@ body {
     line-height: 1.45;
 }
 header {
-    color: #FFFFFF;
+    color: #1b1111;
     background-color: #B2EBF2;
     padding: 80px 0;
     text-align: center;
@@ -32,7 +32,7 @@ header {
     display: block;
 }
 .submenu a:hover {
-    background-color: #469486;
+    background-color: #1b1111;
 }
 
 /*Escondemos el submenu por defecto y solo se mostrará con el evento click*/
@@ -61,7 +61,7 @@ h2 {
     color: white;
     font-weight: 500;
     font-size: 20px;
-    background: #549DA0;
+    background: #1b1111;
     border: none;
     border-radius: 5px;
     padding: 12px 16px;

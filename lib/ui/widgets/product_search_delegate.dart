@@ -250,13 +250,23 @@ class ProductDetail extends StatelessWidget {
     widgets.add(const SizedBox(height: 7));
 
     //Row for PayNow and AddToCart button
-    widgets.add(Column(
+    widgets.add(payNowAndAddToCartButtons(context));
+    widgets.add(const SizedBox(height: 7));
+
+    widgets.add(moreProductDetails());
+    // SliverPadding to the whole content, a Padding cannot be used here
+    return SliverPadding(
+      padding: const EdgeInsets.all(10),
+      sliver: SliverList(delegate: SliverChildListDelegate(widgets)),
+    );
+  }
+
+  Widget payNowAndAddToCartButtons(BuildContext context){
+    return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         SizedBox(
-          //use the available width, with the kValue
-          //2000000000 from the card_swiper value
-          width: kMaxValue.toDouble(),
+          width: double.infinity,
           child: TextButton(
             onPressed: ()=>Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(newPage: const PaymentPage())),
             style: TextButton.styleFrom(
@@ -291,13 +301,45 @@ class ProductDetail extends StatelessWidget {
           ),
         ),
       ],
-    ));
-    widgets.add(const SizedBox(height: 7));
+    );
+  }
 
-    // SliverPadding to the whole content, a Padding cannot be used here
-    return SliverPadding(
-      padding: const EdgeInsets.all(10),
-      sliver: SliverList(delegate: SliverChildListDelegate(widgets)),
+  Widget moreProductDetails(){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('More details',style: TextStyle(fontSize: 18,color: Colors.black54),),
+        ListTile(
+          leading: Icon(Icons.info),
+          title: Text('Material'),
+          trailing: Text('Wool'),
+        ),
+        ListTile(
+          leading: Icon(Icons.line_weight),
+          title: Text('Weight'),
+          trailing: Text('500g'),
+        ),
+        ListTile(
+          leading: Icon(Icons.branding_watermark),
+          title: Text('Brand'),
+          trailing: Text('ALICESTORE'),
+        ),
+        ListTile(
+          leading: Icon(Icons.water_drop),
+          title: Text('Washable'),
+          trailing: Text('Yes'),
+        ),
+        ListTile(
+          leading: Icon(Icons.money),
+          title: Text('Warranty'),
+          trailing: Text('Yes'),
+        ),
+        ListTile(
+          leading: Icon(Icons.handyman),
+          title: Text('Handmade'),
+          trailing: Text('No'),
+        )
+      ],
     );
   }
 

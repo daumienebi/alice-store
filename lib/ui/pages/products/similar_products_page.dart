@@ -93,7 +93,6 @@ class _SimilarProductsPageState extends State<SimilarProductsPage> {
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 1,
-                                //I don't understand this line but it works
                                 childAspectRatio: 1 / 0.55),
                         itemBuilder: (context, index) => Padding(
                             padding: const EdgeInsets.only(

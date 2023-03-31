@@ -74,21 +74,6 @@ class CategoryCardSwiper extends StatelessWidget {
     ]);
   }
 
-  Route _createRoute({required Object? arguments}) {
-    return PageRouteBuilder(
-      settings: RouteSettings(
-          name: AppRoutes.routeStrings.wishListPage, arguments: arguments),
-      pageBuilder: (context, animation, secondaryAnimation) =>
-          const WishListPage(),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        return FadeTransition(
-          opacity: animation,
-          child: child,
-        );
-      },
-    );
-  }
-
   /// Shit method for now
   CustomLayoutOption getCustomLayoutOption(
       {required int startIndex, required int stateCount}) {

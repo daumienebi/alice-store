@@ -1,4 +1,3 @@
-import 'package:alice_store/ui/pages/auth/delete_account_page.dart';
 import 'package:alice_store/ui/pages/pages.dart';
 
 /// Class to handle the navigation in case the Navigator..pushNamed(..) method
