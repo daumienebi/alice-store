@@ -13,7 +13,6 @@ class AppRoutes{
     routeStrings.similarProducts: (_) => const SimilarProductsPage(),
     routeStrings.signInPage: (_) => const SignInPage(),
     routeStrings.mainPage: (_) => const MainPage(),
-    routeStrings.profilePage: (_) => ProfilePage(),
     routeStrings.signUpPage: (_) => const SignUpPage(),
     routeStrings.paymentPage: (_) => const PaymentPage(),
     routeStrings.deleteAccountPage: (_) => const DeleteAccountPage(),
@@ -31,7 +30,6 @@ class RouteStrings {
   String get similarProducts => 'similarProducts';
   String get signInPage => 'signInPage';
   String get mainPage => 'mainPage';
-  String get profilePage => 'profilePage';
   String get signUpPage => 'signUpPage';
   String get forgotPasswordPage => 'forgotPasswordPage';
   String get paymentPage => 'paymentPage';

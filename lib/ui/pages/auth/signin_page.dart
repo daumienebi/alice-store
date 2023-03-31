@@ -187,7 +187,7 @@ class _SignInPageState extends State<SignInPage> {
                       TextButton(
                         onPressed: () {
                           //Close this screen first so that the user can't return
-                          Navigator.of(context).pop();
+                          //Navigator.of(context).pop();
                           Navigator.of(context).push(
                               NavigatorUtil.createRouteWithFadeAnimation(
                                   newPage: const SignUpPage()));
@@ -278,6 +278,7 @@ class _SignInPageState extends State<SignInPage> {
     if (signedIn) {
       // if the user is signed in, the MainPage StreamBuilder handles the
       // page that will be shown, no need to explicitly call the MainPage
+      //Navigator.of(context).pop();
       Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(
           newPage: const MainPage()));
     } else {

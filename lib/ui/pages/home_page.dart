@@ -90,6 +90,8 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.cyan[100],
         //systemOverlayStyle: SystemUiOverlayStyle.dark,
         elevation: 0,
+        // Need to use a Builder to obtain the context, if not it throws an
+        // error
         leading: Builder(
           builder: (context) {
             return Padding(
@@ -103,28 +105,6 @@ class _HomePageState extends State<HomePage> {
             );
           }
         ),
-        /*
-        // Need to use a Builder to obtain the context, if not it throws an
-        // error
-        leading: Builder(
-          builder: (BuildContext context) {
-            return Padding(
-              padding: const EdgeInsets.only(left: 10, top: 10),
-              child: CustomButton(
-                  iconData: Icons.person_outline,
-                  onPressed: (){
-                    widget.isUserSignedIn ? Navigator.of(context).push(goToProfilePage())
-                        : Navigator.of(context).push(
-                        NavigatorUtil.createRouteWithSlideAnimation(
-                            newPage: const SignInPage()
-                        )
-                    );
-                  }
-              ),
-            );
-          },
-        ),
-         */
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10, top: 10),
@@ -338,25 +318,5 @@ class _HomePageState extends State<HomePage> {
       //greetingsText = AppLocalizations.of(context)!.goodEvening;
     }
     return greetingsText;
-  }
-
-  /// Random animation to navigate to the profile. Maybe refactor this crap
-  /// later
-  Route goToProfilePage() {
-    return PageRouteBuilder(
-      settings: RouteSettings(name: AppRoutes.routeStrings.profilePage),
-      pageBuilder: (context, animation, secondaryAnimation) => ProfilePage(),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(-1.5, 1);
-        const end = Offset.zero;
-        final tween = Tween(begin: begin, end: end);
-        final offsetAnimation = animation.drive(tween);
-
-        return SlideTransition(
-          position: offsetAnimation,
-          child: child,
-        );
-      },
-    );
   }
 }

@@ -200,9 +200,12 @@ class _SignUpPageState extends State<SignUpPage> {
         width: double.infinity,
         child: TextButton(
           onPressed: () {
-            if (_formKey.currentState!.validate()) {
-              createUserWithEmailAndPassword();
-            }
+            // the form validation is not working correctly
+            //if (_formKey.currentState!.validate()) {
+              //createUserWithEmailAndPassword();
+            //}
+            _formKey.currentState!.validate();
+            createUserWithEmailAndPassword();
           },
           style: TextButton.styleFrom(
               backgroundColor: Colors.black87, fixedSize: const Size(50, 60)),
@@ -221,7 +224,9 @@ class _SignUpPageState extends State<SignUpPage> {
     return InkWell(
       onTap: () async {
         await provider.googleLogin();
-        //NavigatorUtil.createRouteWithFadeAnimation(newPage: MainPage());
+        Navigator.of(context).push(
+            NavigatorUtil.createRouteWithSlideAnimation(
+                newPage: const MainPage()));
       },
       child: Container(
         margin: const EdgeInsets.all(10),
@@ -247,8 +252,15 @@ class _SignUpPageState extends State<SignUpPage> {
         Navigator.of(context).pop();
         Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(
             newPage: const MainPage()));
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text('Welcome, your account was created successfully')));
+        Dialogs.showIcon(
+            context: context,
+            messageIcon: Icon(Icons.check_circle,color: Colors.green),
+            title: ' Account created!',
+            content: LottieBuilder.asset(
+              'assets/lottie_animations/check.json',
+              repeat: true,
+            )
+        );
       } else {
         Dialogs.showMessage(
             context: context,

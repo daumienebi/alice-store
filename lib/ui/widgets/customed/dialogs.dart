@@ -20,8 +20,27 @@ class Dialogs{
      );
    }
 
-    /// Shows a dialog to confirm if the user wants to carry-out the action
-    /// Returne 1 if the user clicks 'Yes' and 0 for 'No'
+   /// Show a dialog with  a body for Animation of any other widget
+   static Future showIcon({Icon? messageIcon,required BuildContext context,
+     required String title,required Widget content}){
+     return showDialog(
+       context: context,
+       builder: (context) {
+         return AlertDialog(
+           title: Row(
+             children: [
+               messageIcon ?? const Icon(Icons.info_outline),
+               Text(title)
+             ],
+           ),
+           content: content,
+         );
+       },
+     );
+   }
+
+   /// Shows a dialog to confirm if the user wants to carry-out the action
+   /// Returne 1 if the user clicks 'Yes' and 0 for 'No'
   static Future<int> confirmAction({required BuildContext context,required String actionTitle,
     required String content}) async {
     int returnValue = 0;

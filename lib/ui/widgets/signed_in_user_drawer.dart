@@ -72,9 +72,7 @@ class SignedInUserDrawer extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.privacy_tip_outlined),
           title: Text('Privacy'),
-          onTap: () => Navigator.of(context).push(
-              NavigatorUtil.createRouteWithFadeAnimation(
-                  newPage: ProfilePage())),
+          onTap: (){},
         ),
         //Invite friend
         ListTile(

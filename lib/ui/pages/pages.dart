@@ -8,7 +8,6 @@ export 'package:alice_store/ui/pages/no_internet_page.dart';
 export 'package:alice_store/ui/pages/products/similar_products_page.dart';
 export 'package:alice_store/ui/pages/auth/signin_page.dart';
 export 'package:alice_store/ui/pages/auth/main_page.dart';
-export 'package:alice_store/ui/pages/profile_page.dart';
 export 'package:alice_store/ui/pages/auth/signup_page.dart';
 export 'package:alice_store/ui/pages/auth/forgot_password_page.dart';
 export 'package:alice_store/ui/pages/payment_page.dart';
