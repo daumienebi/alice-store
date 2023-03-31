@@ -256,7 +256,7 @@ class _SignInPageState extends State<SignInPage> {
           newPage: const MainPage())
       );
     }else{
-      Dialogs.messageDialog(
+      Dialogs.showMessage(
           context: context,
           messageIcon: const Icon(Icons.cancel,color: Colors.red),
           title: 'Error !',

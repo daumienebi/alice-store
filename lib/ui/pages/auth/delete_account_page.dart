@@ -92,7 +92,7 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
 
     // messages
     if(accountDeleted){
-      Dialogs.messageDialog(
+      Dialogs.showMessage(
         context: context,
         messageIcon: const Icon(Icons.check_circle_outline,color: Colors.green),
         title: 'Account deleted !',
@@ -101,7 +101,7 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
       // navigate back to the main page
       Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(newPage: const MainPage()));
     }else{
-      Dialogs.messageDialog(
+      Dialogs.showMessage(
           context:context,
           messageIcon: const Icon(Icons.cancel,color: Colors.red),
           title: 'Error',

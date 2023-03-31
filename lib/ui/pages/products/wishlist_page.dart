@@ -206,7 +206,7 @@ class _WishListPageState extends State<WishListPage> {
             SizedBox(
               //use the available width, with the kValue
               height: 40,
-              width: kMaxValue.toDouble(),
+              width: double.infinity,
               child: TextButton(
                   onPressed: () {
                     provider.removeFromWishList(product);

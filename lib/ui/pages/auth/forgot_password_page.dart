@@ -85,14 +85,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     verificationSent = await Provider.of<FirebaseAuthProvider>(context,listen: false)
         .resetPassword(emailController.text.trim());
     if(verificationSent){
-      Dialogs.messageDialog(
+      Dialogs.showMessage(
         context: context,
         messageIcon: const Icon(Icons.check_circle_outline,color: Colors.green),
         title: 'Link sent !',
         message: 'The link to reset your password has been sent, please check your email.'
       );
     }else{
-      Dialogs.messageDialog(
+      Dialogs.showMessage(
           context:context,
           messageIcon: const Icon(Icons.cancel,color: Colors.red),
           title: 'Error',

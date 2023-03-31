@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// Class for some custom message dialogs to be used throughout the app
 class Dialogs{
-   static Future messageDialog({Icon? messageIcon,required BuildContext context,
+   static Future showMessage({Icon? messageIcon,required BuildContext context,
    required String title,required String message}){
      return showDialog(
        context: context,
@@ -22,7 +22,7 @@ class Dialogs{
 
     /// Shows a dialog to confirm if the user wants to carry-out the action
     /// Returne 1 if the user clicks 'Yes' and 0 for 'No'
-  static Future<int> confirmActionWidget({required BuildContext context,required String actionTitle,
+  static Future<int> confirmAction({required BuildContext context,required String actionTitle,
     required String content}) async {
     int returnValue = 0;
     await showDialog(

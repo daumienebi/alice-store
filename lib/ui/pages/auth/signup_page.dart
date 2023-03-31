@@ -234,7 +234,7 @@ class _SignUpPageState extends State<SignUpPage> {
             content: Text('Welcome, your account was created successfully')
         ));
       }else{
-        Dialogs.messageDialog(
+        Dialogs.showMessage(
             context: context,
             messageIcon: const Icon(Icons.cancel,color: Colors.red),
             title: 'Error :(',

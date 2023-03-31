@@ -48,7 +48,7 @@ class ProfilePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              userData(user!),
+              userData(user),
               const SizedBox(height: 20),
               Container(
                   height: 450,
@@ -346,7 +346,7 @@ class ProfilePage extends StatelessWidget {
   Future deleteAccount(BuildContext context) async {
     bool accountDeleted = false;
     // show confirm dialog
-    int returnValue = await Dialogs.confirmActionWidget(
+    int returnValue = await Dialogs.confirmAction(
         context: context,
         actionTitle: 'Confirm deletion',
         content: 'Are you sure you want to delete your account ?');
@@ -357,7 +357,7 @@ class ProfilePage extends StatelessWidget {
               .deleteUserAccount();
       // messages
       if (accountDeleted) {
-        Dialogs.messageDialog(
+        Dialogs.showMessage(
             context: context,
             messageIcon:
                 const Icon(Icons.check_circle_outline, color: Colors.green),
@@ -367,7 +367,7 @@ class ProfilePage extends StatelessWidget {
         Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(
             newPage: const MainPage()));
       } else {
-        Dialogs.messageDialog(
+        Dialogs.showMessage(
             context: context,
             messageIcon: const Icon(Icons.cancel, color: Colors.red),
             title: 'Error',
