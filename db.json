@@ -30,7 +30,13 @@
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bag.png",
       "price" : 15.50,
       "in_stock" : true,
-      "description" : "Descripcion detallada de las bolsas hechas a mano."
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
     },
     {
       "id" : 2,
@@ -39,7 +45,13 @@
       "price" : 15.50,
       "in_stock" : true,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tela_prod1.png",
-      "description" : "Descripcion detallada ."
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucLorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
     },
     {
       "id" : 3,
@@ -48,7 +60,13 @@
       "price" : 17.00,
       "in_stock" : true,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tela_prod2.png",
-      "description" : "Descripcion detallada ."
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
     },
     {
       "id" : 4,
@@ -57,7 +75,13 @@
       "price" : 19.00,
       "in_stock" : true,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tela_prod5.png",
-      "description" : "Descripcion detallada ."
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
     },
     {
       "id" : 5,
@@ -66,7 +90,13 @@
       "price" : 17.00,
       "in_stock" : true,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/shirt.png",
-      "description" : "Descripcion detallada ."
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
     },
     {
       "id" : 6,
@@ -75,7 +105,13 @@
       "price" : 17.00,
       "in_stock" : true,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/camiseta_prod6.png",
-      "description" : "Descripcion detallada ."
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
     },
     {
       "id" : 7,
@@ -84,7 +120,13 @@
       "price" : 17.00,
       "in_stock" : true,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/camiseta_prod8.png",
-      "description" : "Descripcion detallada ."
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
     },
     {
       "id" : 8,
@@ -93,7 +135,13 @@
       "price" : 17.00,
       "in_stock" : false,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tejido_prod4.png",
-      "description" : "Descripcion detallada ."
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
     },
     {
       "id" : 9,
@@ -102,7 +150,13 @@
       "price" : 17.00,
       "in_stock" : true,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/knitting.png",
-      "description" : "Descripcion detallada ."
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
     },
     {
       "id" : 10,
@@ -111,7 +165,13 @@
       "price" : 17.00,
       "in_stock" : true,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tejido_prod9.png",
-      "description" : "Descripcion detallada ."
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
     },
     {
       "id" : 11,
@@ -120,7 +180,13 @@
       "price" : 20.00,
       "in_stock" : false,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tejido_prod10.png",
-      "description" : "Descripcion detallada ."
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
     },
     {
       "id" : 12,
@@ -129,7 +195,13 @@
       "price" : 13.00,
       "in_stock" : true,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tejido_prod11.png",
-      "description" : "Descripcion detallada ."
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
     }
 
   ],
