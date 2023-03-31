@@ -1,3 +1,4 @@
+import 'package:alice_store/models/cart_item_model.dart';
 import 'package:alice_store/models/product_model.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
@@ -207,7 +208,7 @@ class ShoppingItem extends StatelessWidget {
     SnackBar snackBar;
     return TextButton(
         onPressed: () {
-          cartProvider.addProduct(product);
+          cartProvider.addItem(product,1);
           snackBar = const SnackBar(
             duration: Duration(seconds: 1),
             content: Text(

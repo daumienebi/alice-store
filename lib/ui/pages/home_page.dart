@@ -193,7 +193,7 @@ class _HomePageState extends State<HomePage> {
             icon: badges.Badge(
               badgeContent: Consumer<CartProvider>(
                 builder: (context, cartProvider, child) {
-                  int productCount = cartProvider.getProducts.length;
+                  int productCount = cartProvider.getQuantity();
                   return Text(
                     productCount <= 9 ? productCount.toString() : '9+',
                     style: const TextStyle(color: Colors.white),

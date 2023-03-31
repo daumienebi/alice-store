@@ -147,7 +147,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           child: TextButton(
             onPressed: () {
               Provider.of<CartProvider>(context, listen: false)
-                  .addProduct(product);
+                  .addItem(product,1);
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                 duration: Duration(seconds: 2),
                 content: Text('Item added to cart!'),

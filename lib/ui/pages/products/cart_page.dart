@@ -1,3 +1,4 @@
+import 'package:alice_store/models/cart_item_model.dart';
 import 'package:alice_store/models/product_model.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
@@ -16,10 +17,12 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   List<ProductModel> cartProducts = [];
+  List<CartItemModel> cartItems = [];
   @override
   Widget build(BuildContext context) {
     CartProvider provider = Provider.of<CartProvider>(context, listen: true);
     cartProducts = provider.getProducts;
+    cartItems = provider.getCartItems;
     return Scaffold(
       body: SizedBox(
         height: MediaQuery.of(context).size.height * 0.80,
@@ -27,7 +30,7 @@ class _CartPageState extends State<CartPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            cartProducts.isEmpty
+            cartItems.isEmpty
                 ? Center(
                     child: Column(
                       children: [
@@ -46,7 +49,7 @@ class _CartPageState extends State<CartPage> {
                         // style
                         String price1 = '';
                         String price2 = '';
-                        var split = cartProducts[index]
+                        var split = cartItems[index].product
                             .price
                             .toString()
                             .split('.');
@@ -57,7 +60,7 @@ class _CartPageState extends State<CartPage> {
                           onTap:(){
                             Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(
                                 newPage: const ProductDetailPage(),
-                                arguments: cartProducts[index])
+                                arguments: cartItems[index].product)
                             );
                           },
                           child: Padding(
@@ -73,7 +76,7 @@ class _CartPageState extends State<CartPage> {
                                     placeholder: ((context, url) => Image.asset(
                                         'assets/gifs/loading.gif'
                                     )),
-                                    imageUrl: cartProducts[index].image,
+                                    imageUrl: cartItems[index].product.image,
                                     height: 120,
                                     width: 100,
                                   ),
@@ -82,7 +85,7 @@ class _CartPageState extends State<CartPage> {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          cartProducts[index].name,
+                                          cartItems[index].product.name,
                                           style: const TextStyle(fontSize: 18),
                                         ),
                                         const SizedBox(height: 5),
@@ -106,8 +109,8 @@ class _CartPageState extends State<CartPage> {
                                           ],
                                         ),
                                         const SizedBox(height: 5),
-                                        const Text(
-                                          'Quantity : 1',
+                                        Text(
+                                          'Quantity : ${cartItems[index].quantity}',
                                           style: TextStyle(
                                               color: Colors.black54,
                                               fontSize: 15
@@ -115,7 +118,7 @@ class _CartPageState extends State<CartPage> {
                                         ),
                                         TextButton(
                                             onPressed: () => provider
-                                                .removeProduct(cartProducts[index]),
+                                                .removeItem(cartItems[index].product.id),
                                             style: TextButton.styleFrom(
                                                 backgroundColor:
                                                 Colors.white,
@@ -140,11 +143,11 @@ class _CartPageState extends State<CartPage> {
                           ),
                         );
                       },
-                      itemCount: cartProducts.length,
+                      itemCount: cartItems.length,
                     ),
                   ),
             //Show the payment widget if the cart is not empty
-            cartProducts.isEmpty ? Container() : _payNowWidget(provider)
+            cartItems.isEmpty ? Container() : _payNowWidget(provider)
           ],
         ),
       ),

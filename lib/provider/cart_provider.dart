@@ -12,6 +12,9 @@ class CartProvider with ChangeNotifier{
   List<ProductModel> get getProducts{
     return _products;
   }
+  List<CartItemModel> get getCartItems{
+    return _cartItems;
+  }
 
   double  get getTotalPrice{
     return _totalPrice;
@@ -47,6 +50,14 @@ class CartProvider with ChangeNotifier{
         return;
       }
     }
+  }
+
+  getQuantity(){
+    int quantity = 0;
+    for(CartItemModel cartItem in _cartItems){
+      quantity += cartItem.quantity;
+    }
+    return quantity;
   }
 
   calculatePrice(){
