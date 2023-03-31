@@ -1,7 +1,7 @@
 import 'package:alice_store/provider/firebase_auth_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
-import 'package:alice_store/ui/widgets/my_text_field.dart';
-import 'package:alice_store/utils/dialogs.dart';
+import 'package:alice_store/ui/widgets/customed/my_text_field.dart';
+import 'package:alice_store/ui/widgets/customed/dialogs.dart';
 import 'package:alice_store/utils/navigator_util.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

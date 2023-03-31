@@ -1,7 +1,7 @@
 import 'package:alice_store/models/product_model.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
-import 'package:alice_store/ui/widgets/custom_button.dart';
+import 'package:alice_store/ui/widgets/customed/custom_button.dart';
 import 'package:alice_store/app_routes.dart';
 import 'package:alice_store/utils/constants.dart';
 import 'package:alice_store/utils/navigator_util.dart';
@@ -22,13 +22,12 @@ class ProductDetailPage extends StatefulWidget {
 }
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
-
   final ProductProvider productProvider = ProductProvider();
   late Future<List<ProductModel>> fetchProductsFuture;
 
   Future<List<ProductModel>> fetchProducts() async {
     List<ProductModel> products =
-    await productProvider.fetchProductsFromCategory(1);
+        await productProvider.fetchProductsFromCategory(1);
     return Future.delayed(const Duration(seconds: 1), () => products);
   }
 
@@ -40,7 +39,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    ProductModel product = ModalRoute.of(context)!.settings.arguments as ProductModel;
+    ProductModel product =
+        ModalRoute.of(context)!.settings.arguments as ProductModel;
     return Scaffold(
         body: CustomScrollView(
       slivers: [
@@ -111,7 +111,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
     // similar products
     widgets.add(similarProducts());
-    
+
     // more details
     widgets.add(moreProductDetails());
 
@@ -122,7 +122,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     );
   }
 
-  Widget payNowAndAddToCartButtons(ProductModel product){
+  Widget payNowAndAddToCartButtons(ProductModel product) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -130,7 +130,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           //use the available width
           width: double.infinity,
           child: TextButton(
-            onPressed: ()=>Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(newPage: const PaymentPage())),
+            onPressed: () => Navigator.of(context).push(
+                NavigatorUtil.createRouteWithSlideAnimation(
+                    newPage: const PaymentPage())),
             style: TextButton.styleFrom(
                 backgroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
@@ -166,176 +168,183 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     );
   }
 
-  Widget moreProductDetails(){
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('More details',style: TextStyle(fontSize: 18,color: Colors.black54),),
-        ListTile(
-          leading: Icon(Icons.info),
-          title: Text('Material'),
-          trailing: Text('Wool'),
-        ),
-        ListTile(
-          leading: Icon(Icons.line_weight),
-          title: Text('Weight'),
-          trailing: Text('500g'),
-        ),
-        ListTile(
-          leading: Icon(Icons.branding_watermark),
-          title: Text('Brand'),
-          trailing: Text('ALICESTORE'),
-        ),
-        ListTile(
-          leading: Icon(Icons.water_drop),
-          title: Text('Washable'),
-          trailing: Text('Yes'),
-        ),
-        ListTile(
-          leading: Icon(Icons.money),
-          title: Text('Warranty'),
-          trailing: Text('Yes'),
-        ),
-        ListTile(
-          leading: Icon(Icons.handyman),
-          title: Text('Handmade'),
-          trailing: Text('No'),
-        )
-      ],
+  Widget moreProductDetails() {
+    final trailingStyle =
+        TextStyle(color: Colors.cyan, fontWeight: FontWeight.bold);
+    return Container(
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(12)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'More details',
+            style: TextStyle(fontSize: 18, color: Colors.black54),
+          ),
+          ListTile(
+            leading: Icon(Icons.info),
+            title: Text('Material'),
+            trailing: Text('Wool', style: trailingStyle),
+          ),
+          ListTile(
+            leading: Icon(Icons.line_weight),
+            title: Text('Weight'),
+            trailing: Text('500g', style: trailingStyle),
+          ),
+          ListTile(
+            leading: Icon(Icons.branding_watermark),
+            title: Text('Brand'),
+            trailing: Text('ALICESTORE', style: trailingStyle),
+          ),
+          ListTile(
+            leading: Icon(Icons.water_drop),
+            title: Text('Washable'),
+            trailing: Text('Yes', style: trailingStyle),
+          ),
+          ListTile(
+            leading: Icon(Icons.money),
+            title: Text('Warranty'),
+            trailing: Text('Yes', style: trailingStyle),
+          ),
+          ListTile(
+            leading: Icon(Icons.handyman),
+            title: Text('Handmade'),
+            trailing: Text('No', style: trailingStyle),
+          )
+        ],
+      ),
     );
   }
 
-  Widget similarProducts(){
-    return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children:[
-          Padding(
-            padding: EdgeInsets.all(5),
-            child: Text(
-                'Similar products',
-                style: TextStyle(fontSize: 18,color: Colors.black54)
-            ),
-          ),
-          Container(
-            alignment: Alignment.center,
-            child: Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: FutureBuilder(
-                  future: fetchProductsFuture,
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 50,
-                            width: 100,
-                            child: LoadingIndicator(
-                              indicatorType: Indicator.ballPulseRise,
-                              colors: Constants.loadingIndicatorColors,
-                            ),
-                          ),
-                          const SizedBox(height: 5),
-                          const Text('Loading more items')
-                        ],
-                      );
-                    }
-                    // On error
-                    if (snapshot.hasError) {
-                      return Column(
-                        children: [Text(snapshot.error.toString())],
-                      );
-                    }
-                    //If data exists
-                    if (snapshot.hasData && snapshot.data.length > 0) {
-                      return SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.27,
-                          width: double.infinity,
-                          child: GridView.builder(
-                            itemCount: snapshot.data.length,
-                            gridDelegate:
+  Widget similarProducts() {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Padding(
+        padding: EdgeInsets.all(5),
+        child: Text('Similar products',
+            style: TextStyle(fontSize: 18, color: Colors.black54)),
+      ),
+      Container(
+        alignment: Alignment.center,
+        child: Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: FutureBuilder(
+              future: fetchProductsFuture,
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 50,
+                        width: 100,
+                        child: LoadingIndicator(
+                          indicatorType: Indicator.ballPulseRise,
+                          colors: Constants.loadingIndicatorColors,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      const Text('Loading more items')
+                    ],
+                  );
+                }
+                // On error
+                if (snapshot.hasError) {
+                  return Column(
+                    children: [Text(snapshot.error.toString())],
+                  );
+                }
+                //If data exists
+                if (snapshot.hasData && snapshot.data.length > 0) {
+                  return SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.27,
+                      width: double.infinity,
+                      child: GridView.builder(
+                        itemCount: snapshot.data.length,
+                        gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 1,
-                                childAspectRatio: 1 / 0.7),
-                            itemBuilder: (context, index) => Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 2, right: 2, top: 10),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                      color: Colors.white54
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      CachedNetworkImage(
-                                        placeholder: ((context, url) =>
-                                            Image.asset('assets/gifs/loading.gif')),
-                                        imageUrl: snapshot.data[index].image,
-                                        //alignment: Alignment.centerLeft,
-                                        height: 150,
-                                        width: 120,
-                                      ),
-                                      Text(
-                                        snapshot.data[index].name,
-                                        style: TextStyle(
-                                            overflow: TextOverflow.ellipsis,
-                                            fontSize: 15
-                                        ),
-                                      ),
-                                      SizedBox(height: 10),
-                                      Text(
-                                        '${snapshot.data[index].price.toString()}€',
-                                        style: TextStyle(
-                                            overflow: TextOverflow.ellipsis,
-                                            fontSize: 20
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                )
-                            ),
-                            scrollDirection: Axis.horizontal,
-
-                          ));
-                    }
-                    //Default
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Lottie.asset(
-                          'assets/lottie_animations/error.json',
-                        ),
-                        const Text(
-                          'Servidor error.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 17,
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        const Text('Make sure you have internet connection.'),
-                        const SizedBox(height: 5),
-                        ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              fetchProductsFuture = fetchProducts();
-                            });
-                          },
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.greenAccent,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(25)),
-                              fixedSize: const Size(140, 40)),
-                          child: const Text('Retry',
-                              style:
+                                crossAxisCount: 1, childAspectRatio: 1 / 0.7),
+                        itemBuilder: (context, index) => Padding(
+                            padding: const EdgeInsets.only(
+                                left: 2, right: 2, top: 10),
+                            child: InkWell(
+                              onTap: () => Navigator.of(context).push(
+                                  NavigatorUtil.createRouteWithFadeAnimation(
+                                      newPage: ProductDetailPage(),
+                                      arguments: snapshot.data[index])),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: Colors.white54),
+                                child: Column(
+                                  children: [
+                                    CachedNetworkImage(
+                                      placeholder: ((context, url) =>
+                                          Image.asset(
+                                              'assets/gifs/loading.gif')),
+                                      imageUrl: snapshot.data[index].image,
+                                      //alignment: Alignment.centerLeft,
+                                      height: 150,
+                                      width: 120,
+                                    ),
+                                    Text(
+                                      snapshot.data[index].name,
+                                      style: TextStyle(
+                                          overflow: TextOverflow.ellipsis,
+                                          fontSize: 15),
+                                    ),
+                                    SizedBox(height: 10),
+                                    Text(
+                                      '${snapshot.data[index].price.toString()}€',
+                                      style: TextStyle(
+                                          overflow: TextOverflow.ellipsis,
+                                          fontSize: 20),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )),
+                        scrollDirection: Axis.horizontal,
+                      ));
+                }
+                //Default
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Lottie.asset(
+                      'assets/lottie_animations/error.json',
+                    ),
+                    const Text(
+                      'Servidor error.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 17,
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const Text('Make sure you have internet connection.'),
+                    const SizedBox(height: 5),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          fetchProductsFuture = fetchProducts();
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.greenAccent,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25)),
+                          fixedSize: const Size(140, 40)),
+                      child: const Text('Retry',
+                          style:
                               TextStyle(color: Colors.black87, fontSize: 16)),
-                        )
-                      ],
-                    );
-                  },
-                )),
-          ),]
-    );
+                    )
+                  ],
+                );
+              },
+            )),
+      ),
+    ]);
   }
 
   Widget productInWishListIcon(ProductModel product, BuildContext context) {
@@ -371,8 +380,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     const Text('Item removed from wishlist'),
                     TextButton(
                         onPressed: () {
-                          Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(
-                              newPage: const WishListPage()));
+                          Navigator.of(context).push(
+                              NavigatorUtil.createRouteWithFadeAnimation(
+                                  newPage: const WishListPage()));
                         },
                         child: const Text(
                           'View wishlist',

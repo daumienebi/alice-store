@@ -1,9 +1,10 @@
 import 'package:alice_store/provider/firebase_auth_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
-import 'package:alice_store/ui/widgets/my_text_field.dart';
-import 'package:alice_store/utils/dialogs.dart';
+import 'package:alice_store/ui/widgets/customed/my_text_field.dart';
+import 'package:alice_store/ui/widgets/customed/dialogs.dart';
 import 'package:alice_store/utils/navigator_util.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -23,8 +24,8 @@ class _SignUpPageState extends State<SignUpPage> {
   // text editing controllers
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
-
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   @override
   void dispose() {
@@ -38,25 +39,38 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-          //Lock icon
-          Padding(
-            padding: EdgeInsets.only(top: 50),
-            child: SizedBox(
-              height: 150,
-              width: 100,
-              child: Icon(
-                Icons.lock,
-                size: 120,
-                color: Colors.blueGrey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start, children: [
+          //Lock animation
+          Center(
+            child: Padding(
+              padding: EdgeInsets.only(top: 10),
+              child: LottieBuilder.asset(
+                'assets/lottie_animations/auth.json',
+                height: MediaQuery.of(context).size.height * 0.30,
+                repeat: false,
               ),
             ),
           ),
-          //Welcome text
-          const Text(
-            'Hello there !',
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.black54, fontSize: 20),
+          //SignIn text
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Sign Up,',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(color: Colors.black87, fontSize: 20,fontWeight: FontWeight.bold),
+                ),
+                const Text(
+                  'For a better experience',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.black54, fontSize: 15),
+                ),
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 10),
@@ -78,8 +92,10 @@ class _SignUpPageState extends State<SignUpPage> {
                       if (value == null || value.isEmpty) {
                         return 'You must input a valid email address';
                       }
-                      bool emailValid = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value);
-                      if(!emailValid){
+                      bool emailValid =
+                          RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                              .hasMatch(value);
+                      if (!emailValid) {
                         return 'Please, introduce a valid email address';
                       }
                       return '';
@@ -100,7 +116,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       if (value == null || value.isEmpty) {
                         return 'You must introduce a password';
                       }
-                      if(value.length < 7){
+                      if (value.length < 7) {
                         return 'The password must contain at least 7 characters';
                       }
                       return '';
@@ -121,10 +137,10 @@ class _SignUpPageState extends State<SignUpPage> {
                       if (value == null || value.isEmpty) {
                         return 'You must introduce a password';
                       }
-                      if(value.length < 7){
+                      if (value.length < 7) {
                         return 'The password must contain at least 7 characters';
                       }
-                      if(!passwordConfirmed()){
+                      if (!passwordConfirmed()) {
                         return 'The two passwords must match';
                       }
                       return '';
@@ -156,15 +172,15 @@ class _SignUpPageState extends State<SignUpPage> {
                       onPressed: () {
                         //Close this screen first so that the user can't return
                         Navigator.of(context).pop();
-                        Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(
-                            newPage: const SignInPage()));
+                        Navigator.of(context).push(
+                            NavigatorUtil.createRouteWithFadeAnimation(
+                                newPage: const SignInPage()));
                       },
-                      style: TextButton.styleFrom(backgroundColor: Colors.greenAccent),
+                      style: TextButton.styleFrom(
+                          backgroundColor: Colors.greenAccent),
                       child: const Text(
                         'Log In',
-                        style: TextStyle(
-                          color: Colors.black54
-                        ),
+                        style: TextStyle(color: Colors.black54),
                       ),
                     )
                   ],
@@ -179,12 +195,12 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Widget signUpButton() {
     return Padding(
-      padding: const EdgeInsets.only(top: 30,left: 20,right: 20),
+      padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
       child: SizedBox(
         width: double.infinity,
         child: TextButton(
           onPressed: () {
-            if(_formKey.currentState!.validate()){
+            if (_formKey.currentState!.validate()) {
               createUserWithEmailAndPassword();
             }
           },
@@ -200,9 +216,10 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Widget googleSignInButton() {
-    FirebaseAuthProvider provider = Provider.of<FirebaseAuthProvider>(context, listen: false);
+    FirebaseAuthProvider provider =
+        Provider.of<FirebaseAuthProvider>(context, listen: false);
     return InkWell(
-      onTap: () async{
+      onTap: () async {
         await provider.googleLogin();
         //NavigatorUtil.createRouteWithFadeAnimation(newPage: MainPage());
       },
@@ -216,39 +233,39 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Future createUserWithEmailAndPassword() async{
+  Future createUserWithEmailAndPassword() async {
     bool userCreated;
     _email = emailController.text.trim();
     _password = passwordController.text.trim();
     _confirmPassword = confirmPasswordController.text.trim();
-    if(passwordConfirmed()){
-      userCreated = await Provider.of<FirebaseAuthProvider>(context,listen: false)
-          .createUserWithEmailAndPassword(_email, _password);
-      if(userCreated){
+    if (passwordConfirmed()) {
+      userCreated =
+          await Provider.of<FirebaseAuthProvider>(context, listen: false)
+              .createUserWithEmailAndPassword(_email, _password);
+      if (userCreated) {
         //Close this page before going to the main page
         Navigator.of(context).pop();
         Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(
-          newPage: const MainPage())
-        );
+            newPage: const MainPage()));
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text('Welcome, your account was created successfully')
-        ));
-      }else{
+            content: Text('Welcome, your account was created successfully')));
+      } else {
         Dialogs.showMessage(
             context: context,
-            messageIcon: const Icon(Icons.cancel,color: Colors.red),
+            messageIcon: const Icon(Icons.cancel, color: Colors.red),
             title: 'Error :(',
-            message: 'Unable to create your account, check your email/password and your internet connection'
-        );
+            message:
+                'Unable to create your account, check your email/password and your internet connection');
       }
     }
   }
 
   /// Checks if the two passwords match
-  bool passwordConfirmed(){
-    if(passwordController.text.trim() == confirmPasswordController.text.trim()){
+  bool passwordConfirmed() {
+    if (passwordController.text.trim() ==
+        confirmPasswordController.text.trim()) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }

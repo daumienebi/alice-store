@@ -1,8 +1,8 @@
 import 'package:alice_store/provider/firebase_auth_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
-import 'package:alice_store/ui/widgets/custom_button.dart';
+import 'package:alice_store/ui/widgets/customed/custom_button.dart';
 import 'package:alice_store/utils/constants.dart';
-import 'package:alice_store/utils/dialogs.dart';
+import 'package:alice_store/ui/widgets/customed/dialogs.dart';
 import 'package:alice_store/utils/navigator_util.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,7 @@ class ProfilePage extends StatelessWidget {
 
     // check to see if there is need to ask the user to confirm their password before deleting
     // temporal solution : check if the user has a photoUrl or not, users with photoUrl were authenticated
-    // with the google_sign_in, so in that case we only show a confirmation dialog.If the user doesnt have
+    // with the google_sign_in, so in that case we only show a confirmation dialog.If the user doesn't have
     // a photoUrl, in this case it means the user signed in with email and password so we prompt the user
     // to enter the password.
     final bool navigateToDeleteAccountPage = user!.photoURL == null;

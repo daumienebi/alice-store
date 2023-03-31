@@ -1,6 +1,7 @@
 import 'package:alice_store/models/category_model.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/services/api/category_service.dart';
+import 'package:alice_store/ui/widgets/not_signed_in_user_drawer.dart';
 import 'package:alice_store/ui/widgets/product_search_delegate.dart';
 import 'package:alice_store/app_routes.dart';
 import 'package:alice_store/utils/navigator_util.dart';
@@ -73,6 +74,12 @@ class _HomePageState extends State<HomePage> {
               },
             )
           : Container(),
+      drawer: Drawer(
+        // return a different type of drawer depending if the user is signed in
+        // or not
+        child: widget.isUserSignedIn ? SignedInUserDrawer()
+            : NotSignedInUserDrawer(),
+      ),
       appBar: AppBar(
         title: Text(
             "A L I C E S T O R E",
@@ -85,6 +92,20 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.cyan[100],
         //systemOverlayStyle: SystemUiOverlayStyle.dark,
         elevation: 0,
+        leading: Builder(
+          builder: (context) {
+            return Padding(
+              padding: const EdgeInsets.only(left: 10, top: 10),
+              child: CustomButton(
+                  iconData: Icons.person,
+                  onPressed: (){
+                    Scaffold.of(context).openDrawer();
+                  }
+              ),
+            );
+          }
+        ),
+        /*
         // Need to use a Builder to obtain the context, if not it throws an
         // error
         leading: Builder(
@@ -105,6 +126,7 @@ class _HomePageState extends State<HomePage> {
             );
           },
         ),
+         */
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10, top: 10),
