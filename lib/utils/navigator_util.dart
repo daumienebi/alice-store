@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-/// Util page to navigate through out the app
+/// Util page to navigate through out the app with different types of
+/// animations
 class NavigatorUtil{
 
   /// Simple PageRouteBuilder to navigate to another page with a FadeTransition

@@ -92,14 +92,14 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
 
     // messages
     if(accountDeleted){
+      // navigate back to the main page
+      Navigator.of(context).pushReplacement(NavigatorUtil.createRouteWithFadeAnimation(newPage: const MainPage()));
       Dialogs.showMessage(
         context: context,
         messageIcon: const Icon(Icons.check_circle_outline,color: Colors.green),
         title: 'Account deleted !',
-        message: 'Your accout has been deleted successfully.'
+        message: 'Your account has been deleted successfully.'
       );
-      // navigate back to the main page
-      Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(newPage: const MainPage()));
     }else{
       Dialogs.showMessage(
           context:context,

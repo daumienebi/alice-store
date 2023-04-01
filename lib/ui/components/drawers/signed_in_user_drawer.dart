@@ -19,7 +19,7 @@ class SignedInUserDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //Get the current user
+    // Get the current user
     final User? user = firebaseAuth.currentUser;
 
     // check to see if there is need to ask the user to confirm their password before deleting
@@ -128,15 +128,15 @@ class SignedInUserDrawer extends StatelessWidget {
               //crappy log out logic
               Provider.of<FirebaseAuthProvider>(context, listen: false)
                   .logout();
-              //Close the current page after logging out
-              Navigator.of(context).pop();
+              Navigator.of(context).pushReplacement(
+                NavigatorUtil.createRouteWithFadeAnimation(newPage: MainPage()),
+              );
             }),
         //Delete user account
         ListTile(
             leading: const Icon(Icons.delete),
             title: Text('Delete Account'),
             onTap: () {
-              print(navigateToDeleteAccountPage);
               if (navigateToDeleteAccountPage) {
                 //Make the user enter their password
                 Navigator.of(context).push(
@@ -157,13 +157,13 @@ class SignedInUserDrawer extends StatelessWidget {
     // if the user has a display name, show the display name, if not, get the
     // name from the email
     String displayName;
-    if (user.displayName!.isNotEmpty) {
+    if (user.displayName != null) {
       displayName = user.displayName!;
     } else {
       displayName = user.email!.split('@').first;
     }
     return Container(
-      margin: EdgeInsets.only(top: 30),
+      margin: EdgeInsets.only(top: 20),
       padding: EdgeInsets.all(10),
       height: 210,
       width: double.infinity,

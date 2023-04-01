@@ -82,7 +82,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     ));
   }
 
-  productDetails(ProductModel product, BuildContext context) {
+  Widget productDetails(ProductModel product, BuildContext context) {
     //Not sure if this is the best way to implement this stuff
     //Current approach : Adding all the widgets in this block to the "widgets"
     // list then later passing the list to the SliverChildListDelegate
@@ -90,7 +90,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
     //Price
     widgets.add(Text('${product.price.toString()} €',
-        style: const TextStyle(color: Colors.black87, fontSize: 35)));
+        style: TextStyle(color: Colors.cyan[700], fontSize: 35)));
     widgets.add(const SizedBox(height: 7));
 
     //InStock
@@ -181,7 +181,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   Widget moreProductDetails(ProductModel product) {
     final trailingStyle =
-        TextStyle(color: Colors.cyan, fontWeight: FontWeight.bold);
+        TextStyle(color: Colors.cyan, fontWeight: FontWeight.w500);
     return Container(
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.all(5),
@@ -269,13 +269,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 //If data exists
                 if (snapshot.hasData && snapshot.data.length > 0) {
                   return SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.27,
+                      height: MediaQuery.of(context).size.height * 0.30,
                       width: double.infinity,
                       child: GridView.builder(
                         itemCount: snapshot.data.length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 1, childAspectRatio: 1 / 0.7),
+                              //0.67 minor fix
+                                crossAxisCount: 1, childAspectRatio: 1 / 0.67),
                         itemBuilder: (context, index) => Padding(
                             padding: const EdgeInsets.only(
                                 left: 2, right: 2, top: 10),
@@ -309,8 +310,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     Text(
                                       '${snapshot.data[index].price.toString()}€',
                                       style: TextStyle(
+                                          color: Colors.deepOrange,
                                           overflow: TextOverflow.ellipsis,
-                                          fontSize: 20),
+                                          fontSize: 18),
                                     )
                                   ],
                                 ),

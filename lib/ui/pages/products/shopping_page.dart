@@ -61,10 +61,11 @@ class _ShoppingPageState extends State<ShoppingPage> {
         //If data exists
         if(snapshot.hasData && snapshot.data.length > 0){
           return SizedBox(
-              height: MediaQuery.of(context).size.height * 0.90,
+              height: MediaQuery.of(context).size.height,
               width: double.infinity,
               child: GridView.builder(
                 itemCount: snapshot.data.length,
+                padding: EdgeInsets.only(top: 5,bottom: 40),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 1,
                     //Set the Width to Height ratio, the height of the element

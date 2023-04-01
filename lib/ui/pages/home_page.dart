@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> widgetOptions = <Widget>[
+    List<Widget> bottomNavBarPages = <Widget>[
       categoriesFutureBuilder(),
       ShoppingPage(),
       const CartPage(),
@@ -69,6 +69,7 @@ class _HomePageState extends State<HomePage> {
                 .userIsAuthenticated
             ? SignedInUserDrawer()
             : NotSignedInUserDrawer(),
+        //backgroundColor: Colors.cyan[100],
       ),
       appBar: AppBar(
         title: Text("A L I C E S T O R E",
@@ -146,7 +147,7 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.80,
                 child: Center(
-                  child: widgetOptions[_selectedIndex],
+                  child: bottomNavBarPages[_selectedIndex],
                 ),
               ),
             ],

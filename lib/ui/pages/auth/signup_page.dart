@@ -170,9 +170,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     const Text('Already a member ? '),
                     TextButton(
                       onPressed: () {
-                        //Close this screen first so that the user can't return
-                        Navigator.of(context).pop();
-                        Navigator.of(context).push(
+                        Navigator.of(context).pushReplacement(
                             NavigatorUtil.createRouteWithFadeAnimation(
                                 newPage: const SignInPage()));
                       },
@@ -224,7 +222,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return InkWell(
       onTap: () async {
         await provider.googleLogin();
-        Navigator.of(context).push(
+        Navigator.of(context).pushReplacement(
             NavigatorUtil.createRouteWithSlideAnimation(
                 newPage: const MainPage()));
       },
@@ -248,9 +246,7 @@ class _SignUpPageState extends State<SignUpPage> {
           await Provider.of<FirebaseAuthProvider>(context, listen: false)
               .createUserWithEmailAndPassword(_email, _password);
       if (userCreated) {
-        //Close this page before going to the main page
-        Navigator.of(context).pop();
-        Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(
+        Navigator.of(context).pushReplacement(NavigatorUtil.createRouteWithSlideAnimation(
             newPage: const MainPage()));
         Dialogs.showIcon(
             context: context,

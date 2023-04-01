@@ -66,8 +66,9 @@ class NotSignedInUserDrawer extends StatelessWidget {
         TextButton(
             style: TextButton.styleFrom(backgroundColor: Colors.black87,fixedSize: Size(150,50)),
             onPressed: (){
-              Navigator.of(context).pop();
-              Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(newPage: SignInPage()));
+              Navigator.of(context).pushReplacement(
+                NavigatorUtil.createRouteWithFadeAnimation(newPage: SignInPage()),
+              );
             },
             child: Text('Sign In',style: TextStyle(color: Colors.white),)
         ),
@@ -85,8 +86,11 @@ class NotSignedInUserDrawer extends StatelessWidget {
         TextButton(
             style: TextButton.styleFrom(backgroundColor: Colors.greenAccent,fixedSize: Size(150,50)),
             onPressed: (){
-              Navigator.of(context).pop();
-              Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(newPage: SignUpPage()));
+              //double pop to close the current homepage....shitty work around for now
+              //Navigator.of(context).popUntil(ModalRoute.withName('/'));
+              Navigator.of(context).pushReplacement(
+                NavigatorUtil.createRouteWithFadeAnimation(newPage: SignUpPage()),
+              );
             },
             child: Text('Sign Up',style: TextStyle(color: Colors.black87),)
         ),

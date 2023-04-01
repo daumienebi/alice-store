@@ -22,11 +22,14 @@ class _CartPageState extends State<CartPage> {
     CartProvider provider = Provider.of<CartProvider>(context, listen: true);
     cartItems = provider.getCartItems;
     return Scaffold(
+      // show the payment button if there are any items in the cart
+      //floatingActionButton: cartItems.isEmpty ? Container() : _payNowWidget(provider),
+      //floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(bottom: 5),
           child: SizedBox(
-            height: MediaQuery.of(context).size.height * 0.80,
+            //height: MediaQuery.of(context).size.height * 0.90,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -64,6 +67,7 @@ class _CartPageState extends State<CartPage> {
     if(!userIsAuthenticated){
       widgets.add(
           Container(
+            height: MediaQuery.of(context).size.height,
         child: Center(
           child: Column(
             children: [
@@ -76,8 +80,9 @@ class _CartPageState extends State<CartPage> {
               SizedBox(height: 10),
               TextButton(
                 onPressed: (){
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(newPage: SignInPage()));
+                  Navigator.of(context).pushReplacement(
+                      NavigatorUtil.createRouteWithSlideAnimation(newPage: SignInPage())
+                  );
                 },
                 child: Text('Sign In',style: TextStyle(color: Colors.black87),),
                 style: TextButton.styleFrom(backgroundColor: Colors.greenAccent,fixedSize: Size(200,60)),
@@ -85,8 +90,9 @@ class _CartPageState extends State<CartPage> {
               SizedBox(height: 10),
               TextButton(
                   onPressed: (){
-                    Navigator.of(context).pop();
-                    Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(newPage: SignUpPage()));
+                    Navigator.of(context).pushReplacement(
+                        NavigatorUtil.createRouteWithSlideAnimation(newPage: SignUpPage())
+                    );
                   },
                   child: Text('Sign Up',style: TextStyle(color: Colors.white),),
                   style: TextButton.styleFrom(backgroundColor: Colors.black87,fixedSize: Size(200,60))
@@ -98,17 +104,22 @@ class _CartPageState extends State<CartPage> {
     }
 
     if(userIsAuthenticated){
-      widgets.add(
-        Expanded(
-          child: ListView.builder(
-            itemBuilder: (BuildContext context, index) {
-              return cartItemContainer(cartItems[index],provider);
-            },
-            itemCount: cartItems.length,
-          ),
+      widgets.add(SizedBox(
+        height: MediaQuery.of(context).size.height * 0.80,
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemBuilder: (BuildContext context, index) {
+                  return cartItemContainer(cartItems[index],provider);
+                },
+                itemCount: cartItems.length,
+              ),
+            ),
+            cartItems.isEmpty ? Container() : _payNowWidget(provider)
+          ],
         ),
-      );
-      widgets.add(cartItems.isEmpty ? Container() : _payNowWidget(provider));
+      ));
     }
     return widgets;
   }
@@ -207,17 +218,18 @@ class _CartPageState extends State<CartPage> {
 
   Widget _payNowWidget(CartProvider provider) {
     return Padding(
-      padding: const EdgeInsets.only(left: 5, right: 5),
+      padding: const EdgeInsets.only(left: 20, right: 20,bottom: 20),
       child: Container(
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15), color: Colors.green[500]),
         height: 85,
+        width: double.infinity,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Text(
                   'Total Price',

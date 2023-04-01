@@ -5,7 +5,6 @@ import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/ui/components/customed/dialogs.dart';
 import 'package:alice_store/utils/navigator_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../pages/pages.dart';
@@ -37,90 +36,93 @@ class ShoppingItem extends StatelessWidget {
           //Main column for the whole content
           child: Column(
             children: [
-              Row(
-                children: [
-                  CachedNetworkImage(
-                    placeholder: ((context, url) =>
-                        Image.asset('assets/gifs/loading.gif')),
-                    imageUrl: product.image,
-                    alignment: Alignment.centerLeft,
-                    height: 120,
-                    width: 100,
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          product.name,
-                          style: const TextStyle(
-                              fontSize: 20, overflow: TextOverflow.ellipsis),
-                        ),
-                        const SizedBox(height: 5),
-                        Row(
-                          children: [
-                            Text(
-                              price1,
-                              style: const TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              '.$price2€',
-                              style: const TextStyle(
-                                  color: Colors.black54, fontSize: 15),
-                            )
-                          ],
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          product.description,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        showSimilarProductButton ? const SizedBox() : const SizedBox(height: 50),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            //Add/Remove from wishlist icon
-                            wishListIconButton(product, context),
-                            //Add/remove from cart icon
-                            addToCartButton(product, context)
-                          ],
-                        ),
-                        //View Similar products button
-                        //Show the button if the bool values is set to 'true',
-                        //else return an empty SizedBox
-                        showSimilarProductButton ?
-                        SizedBox(
-                          //use the available width, with the kValue
-                          //2000000000 from the card_swiper value
-                          width: kMaxValue.toDouble(),
-                          child: TextButton(
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                  NavigatorUtil.createRouteWithFadeAnimation(
-                                    //Pass the categoryId to fetch products of the
-                                    //same category
-                                      newPage: SimilarProductsPage(
-                                        categoryId: product.categoryId
-                                      )
-                                  )
-                              );
-                            },
-                            style: TextButton.styleFrom(
-                                backgroundColor: Colors.blueGrey[400],
-                                shape: StadiumBorder()),
-                            child: const Text(
-                              'View similar items',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ) : const SizedBox(),
-                      ],
+              Expanded(
+                child: Row(
+                  children: [
+                    CachedNetworkImage(
+                      placeholder: ((context, url) =>
+                          Image.asset('assets/gifs/loading.gif')),
+                      imageUrl: product.image,
+                      alignment: Alignment.centerLeft,
+                      height: 120,
+                      width: 100,
                     ),
-                  ),
-                ],
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            product.name,
+                            style: const TextStyle(
+                                fontSize: 20, overflow: TextOverflow.ellipsis),
+                          ),
+                          const SizedBox(height: 5),
+                          Row(
+                            children: [
+                              Text(
+                                price1,
+                                style: const TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                '.$price2€',
+                                style: const TextStyle(
+                                    color: Colors.black54, fontSize: 15),
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            product.description,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          showSimilarProductButton ? const SizedBox() : const SizedBox(height: 50),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              //Add/Remove from wishlist icon
+                              wishListIconButton(product, context),
+                              //Add/remove from cart icon
+                              addToCartButton(product, context)
+                            ],
+                          ),
+                          //View Similar products button
+                          //Show the button if the bool values is set to 'true',
+                          //else return an empty SizedBox
+                          showSimilarProductButton ?
+                          Expanded(
+                            child: SizedBox(
+                              //use the available width
+                              width: double.infinity,
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                      NavigatorUtil.createRouteWithFadeAnimation(
+                                        //Pass the categoryId to fetch products of the
+                                        //same category
+                                          newPage: SimilarProductsPage(
+                                            categoryId: product.categoryId
+                                          )
+                                      )
+                                  );
+                                },
+                                style: TextButton.styleFrom(
+                                    backgroundColor: Colors.blueGrey[400],
+                                    shape: StadiumBorder()),
+                                child: const Text(
+                                  'View similar items',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ) : const SizedBox(),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

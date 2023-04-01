@@ -242,7 +242,7 @@ class ProductDetail extends StatelessWidget {
 
     //Price
     widgets.add(Text('${product.price.toString()} €',
-        style: const TextStyle(color: Colors.black87, fontSize: 35)));
+        style: TextStyle(color: Colors.cyan[700], fontSize: 35)));
     widgets.add(const SizedBox(height: 7));
 
     //InStock
