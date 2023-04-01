@@ -8,7 +8,8 @@ class AppRoutes{
     routeStrings.homepage : (_) => HomePage(),
     routeStrings.wishListPage: (_) => const WishListPage(),
     routeStrings.aboutProjectPage: (_) => const AboutProjectPage(),
-    routeStrings.productPage: (_) => const ProductDetailPage(),
+    // not adding the product detail page since it has a receive a parameter
+    //routeStrings.productPage: (_) => ProductDetailPage(),
     routeStrings.noInternetPage: (_) => const NoInternetPage(),
     routeStrings.similarProducts: (_) => const SimilarProductsPage(),
     routeStrings.signInPage: (_) => const SignInPage(),
@@ -25,7 +26,7 @@ class RouteStrings {
   String get homepage => 'home';
   String get wishListPage => 'wishList';
   String get aboutProjectPage => 'aboutProject';
-  String get productPage => 'productDetails';
+  //String get productPage => 'productDetails';
   String get noInternetPage => 'noInternet';
   String get similarProducts => 'similarProducts';
   String get signInPage => 'signInPage';

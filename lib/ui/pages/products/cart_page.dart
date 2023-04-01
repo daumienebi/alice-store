@@ -1,7 +1,8 @@
 import 'package:alice_store/models/cart_item_model.dart';
-import 'package:alice_store/models/product_model.dart';
+import 'package:alice_store/provider/auth_provider.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
+import 'package:alice_store/ui/widgets/customed/dialogs.dart';
 import 'package:alice_store/utils/navigator_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -27,126 +28,165 @@ class _CartPageState extends State<CartPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
+          children: bodyContent(provider)
+        ),
+      ),
+    );
+  }
+
+  /// List of widget to decide the content that will be displayed depending
+  /// on if the user is authenticated or if the cart is empty
+  List<Widget> bodyContent(CartProvider provider){
+    bool userIsAuthenticated = Provider.of<AuthProvider>(context).userIsAuthenticated;
+    List<Widget> widgets =  [];
+
+    // item to be returned if the cart is empty
+    if(cartItems.isEmpty && userIsAuthenticated){
+      widgets.add(
+          Center(
+        child: Column(
           children: [
-            cartItems.isEmpty
-                ? Center(
-                    child: Column(
+            Lottie.asset(
+              'assets/lottie_animations/empty-cart.json',
+            ),
+            const Text('There are no items in the cart',
+                style: TextStyle(fontSize: 15))
+          ],
+        ),
+      ));
+    }
+
+    // widget to be returned if the user is not authenticated
+    if(!userIsAuthenticated){
+      Container(
+        child: Column(
+          children: [
+            Text('Login to access your cart'),
+            TextButton(
+              onPressed: (){
+                Navigator.of(context).pop();
+                Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(newPage: SignInPage()));
+              },
+              child: Text('Sign In',style: TextStyle(color: Colors.black87),),
+              style: TextButton.styleFrom(backgroundColor: Colors.lightGreenAccent),
+            ),
+            TextButton(
+                onPressed: (){
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(newPage: SignUpPage()));
+                },
+                child: Text('Sign Up',style: TextStyle(color: Colors.white),),
+                style: TextButton.styleFrom(backgroundColor: Colors.black87)
+            )
+          ],
+        ),
+      );
+    }
+
+    if(userIsAuthenticated){
+      widgets.add(
+        Expanded(
+          child: ListView.builder(
+            itemBuilder: (BuildContext context, index) {
+              return cartItemContainer(cartItems[index],provider);
+            },
+            itemCount: cartItems.length,
+          ),
+        ),
+      );
+      widgets.add(cartItems.isEmpty ? Container() : _payNowWidget(provider));
+    }
+
+    return widgets;
+  }
+
+  // Widget to represent each cart item
+  Widget cartItemContainer(CartItemModel cartItem,CartProvider provider){
+    // split the price in two texts to apply a different
+    // style
+    String price1,price2 = '';
+    var split = cartItem.product.price.toString().split('.');
+    price1 = split[0];
+    price2 = split[1];
+    // product item
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(
+            NavigatorUtil.createRouteWithSlideAnimation(
+                newPage: ProductDetailPage(product : cartItem.product),
+                arguments: cartItem.product));
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 7),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 7),
+          decoration: BoxDecoration(
+              color: Colors.white54,
+              borderRadius: BorderRadius.circular(12)),
+          child: Row(
+            children: [
+              CachedNetworkImage(
+                placeholder: ((context, url) =>
+                    Image.asset('assets/gifs/loading.gif')),
+                imageUrl: cartItem.product.image,
+                height: 120,
+                width: 100,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment:
+                  CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      cartItem.product.name,
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                    const SizedBox(height: 5),
+                    Row(
                       children: [
-                        Lottie.asset(
-                          'assets/lottie_animations/empty-cart.json',
+                        Text(
+                          price1,
+                          style: const TextStyle(
+                              color: Colors.black54,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold),
                         ),
-                        const Text('There are no items in the cart',
-                            style: TextStyle(fontSize: 15))
+                        Text(
+                          '.$price2€',
+                          style: const TextStyle(
+                              color: Colors.black54,
+                              fontSize: 15),
+                        ),
                       ],
                     ),
-                  )
-                : Expanded(
-                    child: ListView.builder(
-                      itemBuilder: (BuildContext context, index) {
-                        // split the price in two texts to apply a different
-                        // style
-                        String price1 = '';
-                        String price2 = '';
-                        var split = cartItems[index].product
-                            .price
-                            .toString()
-                            .split('.');
-                        price1 = split[0];
-                        price2 = split[1];
-                        // product item
-                        return InkWell(
-                          onTap:(){
-                            Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(
-                                newPage: const ProductDetailPage(),
-                                arguments: cartItems[index].product)
-                            );
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 7),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(vertical: 7),
-                              decoration: BoxDecoration(
-                                  color: Colors.white54,
-                                  borderRadius: BorderRadius.circular(12)),
-                              child: Row(
-                                children: [
-                                  CachedNetworkImage(
-                                    placeholder: ((context, url) => Image.asset(
-                                        'assets/gifs/loading.gif'
-                                    )),
-                                    imageUrl: cartItems[index].product.image,
-                                    height: 120,
-                                    width: 100,
-                                  ),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          cartItems[index].product.name,
-                                          style: const TextStyle(fontSize: 18),
-                                        ),
-                                        const SizedBox(height: 5),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              price1,
-                                              style: const TextStyle(
-                                                  color: Colors.black54,
-                                                  fontSize: 22,
-                                                  fontWeight:
-                                                  FontWeight.bold),
-                                            ),
-                                            Text(
-                                              '.$price2€',
-                                              style: const TextStyle(
-                                                  color: Colors.black54,
-                                                  fontSize: 15
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 5),
-                                        Text(
-                                          'Quantity : ${cartItems[index].quantity}',
-                                          style: TextStyle(
-                                              color: Colors.black54,
-                                              fontSize: 15
-                                          ),
-                                        ),
-                                        TextButton(
-                                            onPressed: () => provider
-                                                .removeItem(cartItems[index].product.id),
-                                            style: TextButton.styleFrom(
-                                                backgroundColor:
-                                                Colors.white,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                    BorderRadius.circular(10)
-                                                )
-                                            ),
-                                            child: Text(
-                                                'Remove item',
-                                              style: TextStyle(
-                                                  color: Colors.redAccent[200]
-                                              ),
-                                            )
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                      itemCount: cartItems.length,
+                    const SizedBox(height: 5),
+                    Text(
+                      'Quantity : ${cartItem.quantity}',
+                      style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 15),
                     ),
-                  ),
-            //Show the payment widget if the cart is not empty
-            cartItems.isEmpty ? Container() : _payNowWidget(provider)
-          ],
+                    TextButton(
+                        onPressed: () => provider
+                            .removeItem(cartItem
+                            .product
+                            .id),
+                        style: TextButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                BorderRadius.circular(
+                                    10))),
+                        child: Text(
+                          'Remove item',
+                          style: TextStyle(
+                              color: Colors.redAccent[200]),
+                        ))
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -184,7 +224,9 @@ class _CartPageState extends State<CartPage> {
               ],
             ),
             InkWell(
-              onTap: ()=>Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(newPage: const PaymentPage())),
+              onTap: () => Navigator.of(context).push(
+                  NavigatorUtil.createRouteWithSlideAnimation(
+                      newPage: const PaymentPage())),
               child: Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(

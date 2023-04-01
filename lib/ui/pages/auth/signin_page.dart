@@ -280,7 +280,7 @@ class _SignInPageState extends State<SignInPage> {
       // page that will be shown, no need to explicitly call the MainPage
       //Navigator.of(context).pop();
       Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(
-          newPage: const MainPage()));
+          newPage: MainPage()));
     } else {
       Dialogs.showMessage(
           context: context,

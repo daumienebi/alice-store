@@ -8,6 +8,7 @@ class ProductService{
 
   final ApiService _apiService = ApiService();
 
+  /// Fetch the list of all existing products
   Future<List<ProductModel>> fetchAllProducts() async{
     List<ProductModel> products= [];
     dynamic response = await _apiService.getResponse(Constants.apiEndPoints.productsEndPoint);
@@ -18,6 +19,7 @@ class ProductService{
     return products;
   }
 
+  /// Fetch a specific product given the [id]
   Future<ProductModel> fetchProduct(int id) async{
     late ProductModel product;
     dynamic response = await _apiService.getResponse('${Constants.apiEndPoints.productsEndPoint}/$id');

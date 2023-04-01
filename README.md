@@ -31,17 +31,17 @@ for Flutter, you can choose the Flutter option and follow the FlutterFire instru
 to the `alice_store/android/app/` folder. The project won't connect to firebase without that file.
   
   ### Resources
-  - [Firebase setup page](https://firebase.google.com/docs/android/setup?hl=es-419) for more help or reference
+  - [Firebase setup page](https://firebase.google.com/docs/android/setup?hl=es-419) for more help or reference.
   - Follow this [Youtube Tutorial](https://www.youtube.com/watch?v=1k-gITZA9CI&t=1s) on HeyFlutter / Johannes Mike channel to set it up easily.
   
-In case you get any error while compiling the app, you might need to add the SHA-1 and SHA-245 Fingerprints to the app if you haven't added them yet. Check out [How to generate SHA Fingerprints](https://developers.google.com/android/guides/client-auth?hl=es-419) and [How to add SHA Fingerprints to Firebase for Android app](https://www.geeksforgeeks.org/how-to-add-sha-fingerprints-for-your-firebase-android-app/)
+In case you get any error while compiling the app, you might need to add the SHA-1 and SHA-256 Fingerprints to the app if you haven't added them yet. Check out [How to generate SHA Fingerprints](https://developers.google.com/android/guides/client-auth?hl=es-419) and [How to add SHA Fingerprints to Firebase for Android app](https://www.geeksforgeeks.org/how-to-add-sha-fingerprints-for-your-firebase-android-app/)
 for more info on how to generate the fingerprints and add them to your Firebase project.
 
 For debug mode Fingerprints, you can use
 
-- `keytool -list -v -alias androiddebugkey -keystore ~/.android/debug.keystore` for Mac/Linux
+- `keytool -list -v -alias androiddebugkey -keystore ~/.android/debug.keystore` for Mac/Linux.
 
-- `keytool -list -v -alias androiddebugkey -keystore %USERPROFILE%\.android\debug.keystore` for Windows
+- `keytool -list -v -alias androiddebugkey -keystore %USERPROFILE%\.android\debug.keystore` for Windows.
 
 ## Data
   ### API
@@ -51,7 +51,7 @@ For debug mode Fingerprints, you can use
   
   ### Images
   
-  The images are hosted here on github in different folders in the store_data branch, detailes here : in this [branch](https://github.com/daumienebi/alice_store/tree/store_data)
+  The images are hosted here on github in different folders in the store_data branch, details here : in this [branch](https://github.com/daumienebi/alice_store/tree/store_data)
 
 ## Todo :
 
@@ -70,4 +70,5 @@ For debug mode Fingerprints, you can use
   - Requirements
   - Polish App github page
   - Include credits
+  - Extra [Building and Releasing and Android app](https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration)
 

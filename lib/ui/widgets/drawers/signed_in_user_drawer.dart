@@ -62,6 +62,8 @@ class SignedInUserDrawer extends StatelessWidget {
   Widget optionsListWidget(
       BuildContext context, bool navigateToDeleteAccountPage) {
     return ListView(
+      // 0 to remove the random white space that was appearing
+      padding: EdgeInsets.only(top: 0),
       children: [
         //Purchases
         ListTile(
@@ -137,7 +139,6 @@ class SignedInUserDrawer extends StatelessWidget {
                     NavigatorUtil.createRouteWithFadeAnimation(
                         newPage: DeleteAccountPage()));
               } else {
-                print('hye');
                 deleteAccount(context);
               }
             })

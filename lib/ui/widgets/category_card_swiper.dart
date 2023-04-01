@@ -1,6 +1,5 @@
 import 'package:alice_store/models/category_model.dart';
 import 'package:alice_store/ui/pages/pages.dart';
-import 'package:alice_store/app_routes.dart';
 import 'package:alice_store/utils/navigator_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';

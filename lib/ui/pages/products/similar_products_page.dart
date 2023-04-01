@@ -10,6 +10,7 @@ import 'package:loading_indicator/loading_indicator.dart';
 import 'package:lottie/lottie.dart';
 
 //Make sure internet connection error is not thrown when a category is not found
+//wtf
 class SimilarProductsPage extends StatefulWidget {
   final int? categoryId;
   const SimilarProductsPage({Key? key, this.categoryId}) : super(key: key);

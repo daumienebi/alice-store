@@ -6,14 +6,9 @@ import 'package:loading_indicator/loading_indicator.dart';
 
 // This main page to determine the main screen that will displayed to the user
 // depending on the auth state
-class MainPage extends StatefulWidget {
+class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
 
-  @override
-  State<MainPage> createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

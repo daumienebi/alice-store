@@ -1,8 +1,10 @@
 import 'package:alice_store/models/product_model.dart';
+import 'package:alice_store/provider/auth_provider.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/app_routes.dart';
+import 'package:alice_store/ui/widgets/customed/dialogs.dart';
 import 'package:alice_store/utils/navigator_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
@@ -268,14 +270,24 @@ class ProductDetail extends StatelessWidget {
     );
   }
 
-  Widget payNowAndAddToCartButtons(BuildContext context){
+  Widget payNowAndAddToCartButtons(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         SizedBox(
+          //use the available width
           width: double.infinity,
           child: TextButton(
-            onPressed: ()=>Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(newPage: const PaymentPage())),
+            onPressed: (){
+              // make sure the user is authenticated
+              if(Provider.of<AuthProvider>(context,listen: false).userIsAuthenticated){
+                Navigator.of(context).push(
+                    NavigatorUtil.createRouteWithSlideAnimation(
+                        newPage: const PaymentPage()));
+              }else{
+                Dialogs.authPrompt(context);
+              }
+            },
             style: TextButton.styleFrom(
                 backgroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
@@ -287,15 +299,19 @@ class ProductDetail extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width: kMaxValue.toDouble(),
+          width: double.infinity,
           child: TextButton(
             onPressed: () {
-              Provider.of<CartProvider>(context, listen: false)
-                  .addItem(product,1);
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                duration: Duration(seconds: 2),
-                content: Text('Item added to cart'),
-              ));
+              if(Provider.of<AuthProvider>(context,listen: false).userIsAuthenticated){
+                Provider.of<CartProvider>(context, listen: false)
+                    .addItem(product,1);
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  duration: Duration(seconds: 2),
+                  content: Text('Item added to cart!'),
+                ));
+              }else{
+                Dialogs.authPrompt(context);
+              }
             },
             style: TextButton.styleFrom(
                 backgroundColor: Colors.amber[700],

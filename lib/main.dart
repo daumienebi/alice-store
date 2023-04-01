@@ -1,3 +1,4 @@
+import 'package:alice_store/provider/auth_provider.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/firebase_auth_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
@@ -62,6 +63,11 @@ class AppState extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => ProductProvider()),
           ChangeNotifierProvider(create: (_) => CartProvider()),
           ChangeNotifierProvider(create: (_) => FirebaseAuthProvider()),
+          // call the listenToAuthChanges here, it will be used to check the auth
+          // state before realizing certain actions in the app
+          // the .. is called a cascade operator so it allows us to perform an
+          //operation on the AuthProvider object.
+          ChangeNotifierProvider(create: (_) => AuthProvider()..listenToAuthChanges()),
         ],
       child: const MyApp(),
     );

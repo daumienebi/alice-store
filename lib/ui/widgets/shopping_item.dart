@@ -1,7 +1,8 @@
-import 'package:alice_store/models/cart_item_model.dart';
 import 'package:alice_store/models/product_model.dart';
+import 'package:alice_store/provider/auth_provider.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
+import 'package:alice_store/ui/widgets/customed/dialogs.dart';
 import 'package:alice_store/utils/navigator_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
@@ -24,7 +25,7 @@ class ShoppingItem extends StatelessWidget {
     price2 = splitValue[1];
     return GestureDetector(
         onTap: () => Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(
-            arguments: product, newPage: const ProductDetailPage())),
+            arguments: product, newPage: ProductDetailPage(product: product))),
         child: Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
@@ -149,52 +150,57 @@ class ShoppingItem extends StatelessWidget {
     SnackBar snackBar;
     return IconButton(
         onPressed: () {
-          if (isInWishList) {
-            provider.removeFromWishList(product);
-            snackBar = SnackBar(
-              duration: const Duration(seconds: 2),
-              //Snack bar content with the message and the view
-              //wishlist page button
-              content: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text('Item removed from wishlist'),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(
-                            newPage: const WishListPage()));
-                      },
-                      child: const Text(
-                        'View wishlist',
-                        style: TextStyle(color: Colors.lightGreen),
-                      ))
-                ],
-              ),
-            );
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          } else {
-            provider.addToWishList(product);
-            snackBar = SnackBar(
-              duration: const Duration(seconds: 2),
-              //Snack bar content with the message and the view
-              //wishlist page button
-              content: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text('Item added to wishlist'),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(
-                            newPage: const WishListPage()));
-                      },
-                      child: const Text(
-                        'View wishlist',
-                        style: TextStyle(color: Colors.lightGreen),
-                      ))
-                ],
-              ),
-            );
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          //check if the user is signed in to test
+          if(Provider.of<AuthProvider>(context,listen: false).userIsAuthenticated){
+            if (isInWishList) {
+              provider.removeFromWishList(product);
+              snackBar = SnackBar(
+                duration: const Duration(seconds: 2),
+                //Snack bar content with the message and the view
+                //wishlist page button
+                content: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Item removed from wishlist'),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(
+                              newPage: const WishListPage()));
+                        },
+                        child: const Text(
+                          'View wishlist',
+                          style: TextStyle(color: Colors.lightGreen),
+                        ))
+                  ],
+                ),
+              );
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            } else {
+              provider.addToWishList(product);
+              snackBar = SnackBar(
+                duration: const Duration(seconds: 2),
+                //Snack bar content with the message and the view
+                //wishlist page button
+                content: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Item added to wishlist'),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(
+                              newPage: const WishListPage()));
+                        },
+                        child: const Text(
+                          'View wishlist',
+                          style: TextStyle(color: Colors.lightGreen),
+                        ))
+                  ],
+                ),
+              );
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            }
+          }else{
+            Dialogs.authPrompt(context);
           }
         },
         icon: isInWishList ? removeFromFavIcon : addToFavIcon
@@ -204,18 +210,23 @@ class ShoppingItem extends StatelessWidget {
   /// Add to cart button
   TextButton addToCartButton(ProductModel product, BuildContext context) {
     CartProvider cartProvider =
-        Provider.of<CartProvider>(context, listen: true);
+        Provider.of<CartProvider>(context, listen: false);
     SnackBar snackBar;
     return TextButton(
         onPressed: () {
-          cartProvider.addItem(product,1);
-          snackBar = const SnackBar(
-            duration: Duration(seconds: 1),
-            content: Text(
-              'Item added to cart',
-            ),
-          );
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          // only carry out the action is the user is authenticated
+          if(Provider.of<AuthProvider>(context,listen: false).userIsAuthenticated){
+            cartProvider.addItem(product,1);
+            snackBar = const SnackBar(
+              duration: Duration(seconds: 1),
+              content: Text(
+                'Item added to cart',
+              ),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          }else{
+            Dialogs.authPrompt(context);
+          }
         },
         style: TextButton.styleFrom(
             backgroundColor: Colors.amber[700], shape: const StadiumBorder()),

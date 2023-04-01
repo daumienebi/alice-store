@@ -98,8 +98,7 @@ class _WishListPageState extends State<WishListPage> {
     return GestureDetector(
       onTap: ()=> Navigator.of(context).push(
           NavigatorUtil.createRouteWithSlideAnimation(
-          newPage: const ProductDetailPage(),
-          arguments: product)
+          newPage: ProductDetailPage(product: product))
       ),
       child: Container(
         padding: const EdgeInsets.all(10),
@@ -176,9 +175,8 @@ class _WishListPageState extends State<WishListPage> {
                         ),
                       ),
                       SizedBox(
-                        //use the available width, with the kValue
-                        //2000000000 from the card_swiper value
-                        width: kMaxValue.toDouble(),
+                        //use the available width
+                        width: double.infinity,
                         child: TextButton(
                           onPressed: () {
                             Provider.of<CartProvider>(context,listen: false).addItem(product,1);
