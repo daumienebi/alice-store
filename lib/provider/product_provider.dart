@@ -53,4 +53,8 @@ class ProductProvider with ChangeNotifier{
     return await _productService.fetchProduct(id);
   }
 
+  clearData(){
+    _wishListProducts.clear();
+    notifyListeners();
+  }
 }

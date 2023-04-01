@@ -58,29 +58,39 @@ class _CartPageState extends State<CartPage> {
 
     // widget to be returned if the user is not authenticated
     if(!userIsAuthenticated){
-      Container(
-        child: Column(
-          children: [
-            Text('Login to access your cart'),
-            TextButton(
-              onPressed: (){
-                Navigator.of(context).pop();
-                Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(newPage: SignInPage()));
-              },
-              child: Text('Sign In',style: TextStyle(color: Colors.black87),),
-              style: TextButton.styleFrom(backgroundColor: Colors.lightGreenAccent),
-            ),
-            TextButton(
+      widgets.add(
+          Container(
+        child: Center(
+          child: Column(
+            children: [
+              LottieBuilder.asset(
+                'assets/lottie_animations/auth.json',
+                repeat: false,
+              ),
+              Text('Sign In to access your cart if you already have an account, or Sign Up to create a new account in few seconds',
+                style: TextStyle(fontSize: 17),textAlign: TextAlign.center),
+              SizedBox(height: 10),
+              TextButton(
                 onPressed: (){
                   Navigator.of(context).pop();
-                  Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(newPage: SignUpPage()));
+                  Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(newPage: SignInPage()));
                 },
-                child: Text('Sign Up',style: TextStyle(color: Colors.white),),
-                style: TextButton.styleFrom(backgroundColor: Colors.black87)
-            )
-          ],
+                child: Text('Sign In',style: TextStyle(color: Colors.black87),),
+                style: TextButton.styleFrom(backgroundColor: Colors.greenAccent,fixedSize: Size(200,60)),
+              ),
+              SizedBox(height: 10),
+              TextButton(
+                  onPressed: (){
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(newPage: SignUpPage()));
+                  },
+                  child: Text('Sign Up',style: TextStyle(color: Colors.white),),
+                  style: TextButton.styleFrom(backgroundColor: Colors.black87,fixedSize: Size(200,60))
+              )
+            ],
+          ),
         ),
-      );
+      ));
     }
 
     if(userIsAuthenticated){
@@ -96,7 +106,6 @@ class _CartPageState extends State<CartPage> {
       );
       widgets.add(cartItems.isEmpty ? Container() : _payNowWidget(provider));
     }
-
     return widgets;
   }
 

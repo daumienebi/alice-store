@@ -1,4 +1,6 @@
+import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/firebase_auth_provider.dart';
+import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/utils/constants.dart';
 import 'package:alice_store/ui/widgets/customed/dialogs.dart';
@@ -121,6 +123,9 @@ class SignedInUserDrawer extends StatelessWidget {
             leading: const Icon(Icons.logout),
             title: Text('Log Out'),
             onTap: () {
+              //clear useless data for now
+              Provider.of<CartProvider>(context,listen: false).clearData();
+              Provider.of<ProductProvider>(context,listen: false).clearData();
               //crappy log out logic
               Provider.of<FirebaseAuthProvider>(context, listen: false)
                   .logout();

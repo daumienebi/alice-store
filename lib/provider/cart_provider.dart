@@ -63,4 +63,9 @@ class CartProvider with ChangeNotifier{
     }
     _totalPrice = totalPrice;
   }
+
+  clearData(){
+    _cartItems.clear();
+    notifyListeners();
+  }
 }
