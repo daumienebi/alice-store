@@ -2,7 +2,6 @@ import 'package:alice_store/models/cart_item_model.dart';
 import 'package:alice_store/provider/auth_provider.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
-import 'package:alice_store/ui/widgets/customed/dialogs.dart';
 import 'package:alice_store/utils/navigator_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -23,12 +22,14 @@ class _CartPageState extends State<CartPage> {
     CartProvider provider = Provider.of<CartProvider>(context, listen: true);
     cartItems = provider.getCartItems;
     return Scaffold(
-      body: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.80,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: bodyContent(provider)
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.only(bottom: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: bodyContent(provider)
+          ),
         ),
       ),
     );

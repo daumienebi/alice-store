@@ -4,7 +4,7 @@ import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/app_routes.dart';
-import 'package:alice_store/ui/widgets/customed/dialogs.dart';
+import 'package:alice_store/ui/components/customed/dialogs.dart';
 import 'package:alice_store/utils/navigator_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
@@ -332,8 +332,9 @@ class ProductDetail extends StatelessWidget {
     TextStyle(color: Colors.cyan, fontWeight: FontWeight.bold);
     return Container(
       padding: EdgeInsets.all(10),
+      margin: EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(12)),
+          color: Colors.white, borderRadius: BorderRadius.circular(10)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

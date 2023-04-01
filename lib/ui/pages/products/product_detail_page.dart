@@ -3,9 +3,9 @@ import 'package:alice_store/provider/auth_provider.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
-import 'package:alice_store/ui/widgets/customed/custom_button.dart';
+import 'package:alice_store/ui/components/customed/custom_button.dart';
 import 'package:alice_store/app_routes.dart';
-import 'package:alice_store/ui/widgets/customed/dialogs.dart';
+import 'package:alice_store/ui/components/customed/dialogs.dart';
 import 'package:alice_store/utils/constants.dart';
 import 'package:alice_store/utils/navigator_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -184,8 +184,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         TextStyle(color: Colors.cyan, fontWeight: FontWeight.bold);
     return Container(
       padding: EdgeInsets.all(10),
+      margin: EdgeInsets.all(5),
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(12)),
+          color: Colors.white, borderRadius: BorderRadius.circular(10)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -284,6 +285,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                       newPage: ProductDetailPage(product : widget.product),
                                       arguments: snapshot.data[index])),
                               child: Container(
+                                margin: EdgeInsets.all(5),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15),
                                     color: Colors.white54),
@@ -295,14 +297,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                               'assets/gifs/loading.gif')),
                                       imageUrl: snapshot.data[index].image,
                                       //alignment: Alignment.centerLeft,
-                                      height: 150,
-                                      width: 120,
+                                      width: 140,
                                     ),
                                     Text(
                                       snapshot.data[index].name,
                                       style: TextStyle(
                                           overflow: TextOverflow.ellipsis,
-                                          fontSize: 15),
+                                          fontSize: 14),
                                     ),
                                     SizedBox(height: 10),
                                     Text(

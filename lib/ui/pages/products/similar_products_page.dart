@@ -1,7 +1,7 @@
 import 'package:alice_store/models/product_model.dart';
 import 'package:alice_store/provider/product_provider.dart';
-import 'package:alice_store/ui/widgets/customed/custom_button.dart';
-import 'package:alice_store/ui/widgets/shopping_item.dart';
+import 'package:alice_store/ui/components/customed/custom_button.dart';
+import 'package:alice_store/ui/components/shopping_item.dart';
 import 'package:alice_store/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
