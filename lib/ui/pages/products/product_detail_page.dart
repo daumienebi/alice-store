@@ -370,7 +370,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     //Possible Icons
     var addToFavIcon = const Icon(
       Icons.favorite_border,
-      color: Colors.black,
+      color: Colors.black54,
     );
     var removeFromFavIcon =
         Icon(Icons.favorite_rounded, color: Colors.cyan[300]);
@@ -438,7 +438,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               height: 40,
               width: 40,
               decoration: BoxDecoration(
-                  color: Colors.white30,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(10)),
               child: isInWishList ? removeFromFavIcon : addToFavIcon),
         ));

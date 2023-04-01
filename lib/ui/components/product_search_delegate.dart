@@ -447,7 +447,7 @@ class ProductDetail extends StatelessWidget {
               height: 40,
               width: 40,
               decoration: BoxDecoration(
-                  color: Colors.white30,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(10)),
               child: isInWishList ? removeFromFavIcon : addToFavIcon),
         ));

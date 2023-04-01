@@ -248,6 +248,7 @@ class _SignInPageState extends State<SignInPage> {
         if (loggedIn) {
           //If the user is logged in, navigate to the MainPage, for some reason
           // it's not going to the page automatically
+          Navigator.of(context).pop();
           Navigator.of(context).push(
               NavigatorUtil.createRouteWithSlideAnimation(
                   newPage: const MainPage()));
@@ -278,7 +279,7 @@ class _SignInPageState extends State<SignInPage> {
     if (signedIn) {
       // if the user is signed in, the MainPage StreamBuilder handles the
       // page that will be shown, no need to explicitly call the MainPage
-      //Navigator.of(context).pop();
+      Navigator.of(context).pop();
       Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(
           newPage: MainPage()));
     } else {

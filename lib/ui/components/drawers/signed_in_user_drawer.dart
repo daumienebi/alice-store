@@ -13,7 +13,6 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 class SignedInUserDrawer extends StatelessWidget {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   SignedInUserDrawer({Key? key}) : super(key: key);
@@ -33,12 +32,13 @@ class SignedInUserDrawer extends StatelessWidget {
   }
 
   /// The drawer that is returned for a user that is signed in
-  Widget drawerContents(User user,BuildContext context,bool navigateToDeleteAccountPage){
+  Widget drawerContents(
+      User user, BuildContext context, bool navigateToDeleteAccountPage) {
     return Column(
       children: [
-        userData(user,context),
+        userData(user, context),
         Expanded(
-          child: optionsListWidget(context,navigateToDeleteAccountPage),
+          child: optionsListWidget(context, navigateToDeleteAccountPage),
         ),
         // display app version
         Padding(
@@ -49,8 +49,7 @@ class SignedInUserDrawer extends StatelessWidget {
                 if (snapshot.hasData) {
                   return Text(
                     'Version: ${snapshot.data.toString()}',
-                    style: const TextStyle(
-                        fontSize: 16, color: Colors.black38),
+                    style: const TextStyle(fontSize: 16, color: Colors.black38),
                   );
                 } else {
                   return const Text("");
@@ -76,7 +75,7 @@ class SignedInUserDrawer extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.privacy_tip_outlined),
           title: Text('Privacy'),
-          onTap: (){},
+          onTap: () {},
         ),
         //Invite friend
         ListTile(
@@ -95,8 +94,8 @@ class SignedInUserDrawer extends StatelessWidget {
                           const Text(
                             'Share the app',
                             textAlign: TextAlign.left,
-                            style: TextStyle(
-                                color: Colors.black54, fontSize: 20),
+                            style:
+                                TextStyle(color: Colors.black54, fontSize: 20),
                           ),
                           const SizedBox(
                             height: 5,
@@ -124,8 +123,8 @@ class SignedInUserDrawer extends StatelessWidget {
             title: Text('Log Out'),
             onTap: () {
               //clear useless data for now
-              Provider.of<CartProvider>(context,listen: false).clearData();
-              Provider.of<ProductProvider>(context,listen: false).clearData();
+              Provider.of<CartProvider>(context, listen: false).clearData();
+              Provider.of<ProductProvider>(context, listen: false).clearData();
               //crappy log out logic
               Provider.of<FirebaseAuthProvider>(context, listen: false)
                   .logout();
@@ -136,7 +135,7 @@ class SignedInUserDrawer extends StatelessWidget {
         ListTile(
             leading: const Icon(Icons.delete),
             title: Text('Delete Account'),
-            onTap: (){
+            onTap: () {
               print(navigateToDeleteAccountPage);
               if (navigateToDeleteAccountPage) {
                 //Make the user enter their password
@@ -151,13 +150,22 @@ class SignedInUserDrawer extends StatelessWidget {
     );
   }
 
-  Widget userData(User user,BuildContext context) {
+  Widget userData(User user, BuildContext context) {
     //Users who sign in with email and password instead of using the
     // google_sign_in method wont have a displayName nor photoUrl
+
+    // if the user has a display name, show the display name, if not, get the
+    // name from the email
+    String displayName;
+    if (user.displayName!.isNotEmpty) {
+      displayName = user.displayName!;
+    } else {
+      displayName = user.email!.split('@').first;
+    }
     return Container(
       margin: EdgeInsets.only(top: 30),
       padding: EdgeInsets.all(10),
-      height: MediaQuery.of(context).size.height * 0.25,
+      height: 210,
       width: double.infinity,
       color: Colors.cyan[100],
       child: Column(
@@ -167,29 +175,26 @@ class SignedInUserDrawer extends StatelessWidget {
           // profile pic
           user.photoURL != null
               ? CircleAvatar(
-            backgroundImage: NetworkImage(user.photoURL!),
-            radius: 60,
-          )
+                  backgroundImage: NetworkImage(user.photoURL!),
+                  radius: 60,
+                )
               : const CircleAvatar(
-            radius: 60,
-            backgroundColor: Colors.black87,
-            child: Icon(
-              Icons.person_outline,
-              color: Colors.white,
-              size: 70,
-            ),
-          ),
-          // name
-          // show the name if the user has a displayName, if not use an empty
-          // container to avoid the random space
-          user.displayName != null ?
+                  radius: 60,
+                  backgroundColor: Colors.black87,
+                  child: Icon(
+                    Icons.person_outline,
+                    color: Colors.white,
+                    size: 70,
+                  ),
+                ),
+          // display name
           Container(
               margin: const EdgeInsets.only(top: 10.0),
-              child: Text(user.displayName!,
+              child: Text(displayName,
                   style: const TextStyle(
                       overflow: TextOverflow.ellipsis,
                       fontSize: 18,
-                      fontWeight: FontWeight.bold))) : Container(),
+                      fontWeight: FontWeight.bold))),
           // email
           Container(
               margin: const EdgeInsets.only(top: 10.0),
@@ -204,7 +209,6 @@ class SignedInUserDrawer extends StatelessWidget {
   List<Widget> socialMediaButtons(context) {
     //Very shitty work around
     // Todo : Change it later on
-
     List<Widget> items = [];
     items.add(const SizedBox(
       width: 10,
@@ -271,10 +275,8 @@ class SignedInUserDrawer extends StatelessWidget {
   }
 
   /// [SocialMedia] button
-  Widget socialButton(
-      {required String socialMedia,
-        required Icon icon,
-        Function()? onClicked}) {
+  Widget socialButton({required String socialMedia,required Icon icon,
+      Function()? onClicked}) {
     const listTextStyle = TextStyle(color: Colors.black54);
     return Column(
       children: [
@@ -298,17 +300,16 @@ class SignedInUserDrawer extends StatelessWidget {
         context: context,
         actionTitle: 'Confirm deletion',
         content: 'Are you sure you want to delete your account ?');
-
     if (returnValue == 1) {
       accountDeleted =
-      await Provider.of<FirebaseAuthProvider>(context, listen: false)
-          .deleteUserAccount();
+          await Provider.of<FirebaseAuthProvider>(context, listen: false)
+              .deleteUserAccount();
       // messages
       if (accountDeleted) {
         Dialogs.showMessage(
             context: context,
             messageIcon:
-            const Icon(Icons.check_circle_outline, color: Colors.green),
+                const Icon(Icons.check_circle_outline, color: Colors.green),
             title: 'Account deleted !',
             message: 'Your accout has been deleted successfully.');
         // navigate back to the main page
@@ -332,11 +333,11 @@ class SignedInUserDrawer extends StatelessWidget {
     final urlShare = Uri.encodeComponent(urlString);
     final urls = {
       SocialMedia.Facebook:
-      'https://www.facebook.com/sharer/sharer.php?u=$urlShare&t=$text',
+          'https://www.facebook.com/sharer/sharer.php?u=$urlShare&t=$text',
       SocialMedia.Twitter:
-      'https://twitter.com/intent/tweet?url=$urlShare&text=$text',
+          'https://twitter.com/intent/tweet?url=$urlShare&text=$text',
       SocialMedia.Whatsapp:
-      'https://api.whatsapp.com/send?text=$text $urlShare',
+          'https://api.whatsapp.com/send?text=$text $urlShare',
     };
     final url = Uri.parse(urls[platform]!);
     await launchUrl(url, mode: LaunchMode.externalApplication);

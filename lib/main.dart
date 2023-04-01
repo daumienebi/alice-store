@@ -63,10 +63,10 @@ class AppState extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => ProductProvider()),
           ChangeNotifierProvider(create: (_) => CartProvider()),
           ChangeNotifierProvider(create: (_) => FirebaseAuthProvider()),
-          // call the listenToAuthChanges here, it will be used to check the auth
-          // state before realizing certain actions in the app
-          // the .. is called a cascade operator so it allows us to perform an
-          //operation on the AuthProvider object.
+          // Call the listenToAuthChanges here, it will be used to check the auth
+          // state before realizing certain actions in the app.
+          // The '..' is called a Cascade Operator, it allows us to perform an
+          // operation on the [AuthProvider] object.
           ChangeNotifierProvider(create: (_) => AuthProvider()..listenToAuthChanges()),
         ],
       child: const MyApp(),

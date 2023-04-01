@@ -24,11 +24,14 @@ class _CartPageState extends State<CartPage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(bottom: 15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: bodyContent(provider)
+          padding: EdgeInsets.only(bottom: 5),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height * 0.80,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: bodyContent(provider)
+            ),
           ),
         ),
       ),
@@ -110,7 +113,7 @@ class _CartPageState extends State<CartPage> {
     return widgets;
   }
 
-  // Widget to represent each cart item
+  /// Widget to represent each cart item
   Widget cartItemContainer(CartItemModel cartItem,CartProvider provider){
     // split the price in two texts to apply a different
     // style
