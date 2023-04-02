@@ -269,7 +269,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 //If data exists
                 if (snapshot.hasData && snapshot.data.length > 0) {
                   return SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.30,
+                      height: 180,
                       width: double.infinity,
                       child: GridView.builder(
                         itemCount: snapshot.data.length,
@@ -283,8 +283,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             child: InkWell(
                               onTap: () => Navigator.of(context).push(
                                   NavigatorUtil.createRouteWithFadeAnimation(
-                                      newPage: ProductDetailPage(product : widget.product),
-                                      arguments: snapshot.data[index])),
+                                      newPage: ProductDetailPage(product : snapshot.data[index]))
+                              ),
                               child: Container(
                                 margin: EdgeInsets.all(5),
                                 decoration: BoxDecoration(

@@ -78,7 +78,9 @@ class ShoppingItem extends StatelessWidget {
                             product.description,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          showSimilarProductButton ? const SizedBox() : const SizedBox(height: 50),
+                          // the similar product button needs to be hidden then
+                          // use a Space to push the two buttons to the end of Column
+                          showSimilarProductButton ? const SizedBox() : const Spacer(),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
