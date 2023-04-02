@@ -2,7 +2,7 @@ import 'package:alice_store/models/category_model.dart';
 import 'package:alice_store/provider/auth_provider.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/services/api/category_service.dart';
-import 'package:alice_store/ui/components/customed/dialogs.dart';
+import 'package:alice_store/ui/components/dialogs.dart';
 import 'package:alice_store/ui/components/drawers/not_signed_in_user_drawer.dart';
 import 'package:alice_store/ui/components/product_search_delegate.dart';
 import 'package:alice_store/utils/navigator_util.dart';

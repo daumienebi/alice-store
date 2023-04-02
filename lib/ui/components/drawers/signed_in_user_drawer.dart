@@ -3,7 +3,7 @@ import 'package:alice_store/provider/firebase_auth_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/utils/constants.dart';
-import 'package:alice_store/ui/components/customed/dialogs.dart';
+import 'package:alice_store/ui/components/dialogs.dart';
 import 'package:alice_store/utils/navigator_util.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
