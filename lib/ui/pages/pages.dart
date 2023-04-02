@@ -12,3 +12,4 @@ export 'package:alice_store/ui/pages/auth/signup_page.dart';
 export 'package:alice_store/ui/pages/auth/forgot_password_page.dart';
 export 'package:alice_store/ui/pages/payment_page.dart';
 export 'package:alice_store/ui/pages/auth/delete_account_page.dart';
+export 'package:alice_store/ui/pages/about_app_page.dart';

@@ -42,7 +42,7 @@ class Dialogs{
    }
 
    /// Shows a dialog to confirm if the user wants to carry-out the action
-   /// Returne 1 if the user clicks 'Yes' and 0 for 'No'
+   /// Return 1 if the user clicks 'Yes' and 0 for 'No'
   static Future<int> confirmAction({required BuildContext context,required String actionTitle,
     required String content}) async {
     int returnValue = 0;
@@ -93,19 +93,19 @@ class Dialogs{
              TextButton(
                  onPressed: (){
                    Navigator.of(context).pop();
-                   Navigator.of(context).pop();
-                   Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(newPage: SignInPage()));
+                   Navigator.of(context).pushReplacement(
+                       NavigatorUtil.createRouteWithSlideAnimation(newPage: SignInPage())
+                   );
                  },
                  child: Text('Sign In',style: TextStyle(color: Colors.black87),),
                style: TextButton.styleFrom(backgroundColor: Colors.lightGreenAccent),
              ),
              TextButton(
                  onPressed: (){
-                   // call the pop() method to close the dialog, calling it
-                   // twice will close the dialog and the actual shopping page
                    Navigator.of(context).pop();
-                   Navigator.of(context).pop();
-                   Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(newPage: SignUpPage()));
+                   Navigator.of(context).pushReplacement(
+                       NavigatorUtil.createRouteWithSlideAnimation(newPage: SignUpPage())
+                   );
                  },
                  child: Text('Sign Up',style: TextStyle(color: Colors.white),),
                  style: TextButton.styleFrom(backgroundColor: Colors.black87)

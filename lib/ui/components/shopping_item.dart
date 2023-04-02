@@ -31,7 +31,7 @@ class ShoppingItem extends StatelessWidget {
             // Set a different shade of white depending if this widget will be
             // viewed from the SimilarProductPage or shoppingPage
               color: showSimilarProductButton ? Colors.white : Colors.white70,
-              borderRadius: BorderRadius.circular(12)
+              borderRadius: BorderRadius.circular(15)
           ),
           //Main column for the whole content
           child: Column(

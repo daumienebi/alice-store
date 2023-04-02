@@ -75,7 +75,10 @@ class SignedInUserDrawer extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.privacy_tip_outlined),
           title: Text('Privacy'),
-          onTap: () {},
+          onTap: (){
+            final url = Uri.parse('https://daumienebi.github.io/alice_store/policy.html');
+            _launchUrl(url);
+          },
         ),
         //Invite friend
         ListTile(
@@ -115,7 +118,11 @@ class SignedInUserDrawer extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.info_outline),
           title: Text('About the app'),
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(
+              NavigatorUtil.createRouteWithFadeAnimation(newPage: AboutAppPage()),
+            );
+          },
         ),
         //Log out
         ListTile(
@@ -165,7 +172,7 @@ class SignedInUserDrawer extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(top: 20),
       padding: EdgeInsets.all(10),
-      height: 210,
+      height: 220,
       width: double.infinity,
       color: Colors.cyan[100],
       child: Column(
@@ -347,5 +354,9 @@ class SignedInUserDrawer extends StatelessWidget {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     String version = packageInfo.version;
     return Future.value(version);
+  }
+
+  _launchUrl(Uri url) async{
+    await launchUrl(url,mode:LaunchMode.externalApplication);
   }
 }

@@ -17,6 +17,7 @@ class AppRoutes{
     routeStrings.signUpPage: (_) => const SignUpPage(),
     routeStrings.paymentPage: (_) => const PaymentPage(),
     routeStrings.deleteAccountPage: (_) => const DeleteAccountPage(),
+    routeStrings.aboutAppPage: (_) => const AboutAppPage(),
   };
 }
 
@@ -35,4 +36,5 @@ class RouteStrings {
   String get forgotPasswordPage => 'forgotPasswordPage';
   String get paymentPage => 'paymentPage';
   String get deleteAccountPage => 'deleteAccountPage';
+  String get aboutAppPage => 'aboutAppPage';
 }
