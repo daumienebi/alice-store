@@ -37,7 +37,7 @@ class AboutAppPage extends StatelessWidget {
             padding: EdgeInsets.all(15),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
@@ -50,7 +50,7 @@ class AboutAppPage extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  'Welcome to our store! We are a small, independent retailer specializing in unique and high-quality screenprinted products. From clothing to home decor, we\'ve got something for everyone.',
+                  'Welcome to our store! We are a small, independent retailer specializing in unique and high-quality screenprinted products.',
                   textAlign: TextAlign.justify,
                   style: style,
                 ),
@@ -79,6 +79,21 @@ class AboutAppPage extends StatelessWidget {
                   style: style,
                 ),
                 SizedBox(height: 10),
+                RichText(text: TextSpan(
+                  children: [
+                    TextSpan(text:'Disclaimer : ',
+                        style: TextStyle(
+                            color: Colors.redAccent,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20
+                        )
+                    ),
+                    TextSpan(
+                        text: 'This app is not designed to be a real world app, it\'s built for educational purposes. The current data is just used as a placeholder.',
+                      style: TextStyle(color: Colors.black54,fontStyle: FontStyle.italic,fontSize: 18)
+                    )
+                  ]
+                )),
               ],
             ),
           ),

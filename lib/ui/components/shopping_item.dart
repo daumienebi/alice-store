@@ -17,11 +17,11 @@ class ShoppingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String price1 = '';
-    String price2 = '';
+    String part1 = '';
+    String part2 = '';
     var splitValue = product.price.toString().split('.');
-    price1 = splitValue[0];
-    price2 = splitValue[1];
+    part1 = splitValue[0];
+    part2 = splitValue[1];
     return GestureDetector(
         onTap: () => Navigator.of(context).push(NavigatorUtil.createRouteWithSlideAnimation(
             arguments: product, newPage: ProductDetailPage(product: product))),
@@ -60,14 +60,14 @@ class ShoppingItem extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                price1,
+                                part1,
                                 style: const TextStyle(
                                     color: Colors.black54,
                                     fontSize: 22,
                                     fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                '.$price2€',
+                                '.$part2€',
                                 style: const TextStyle(
                                     color: Colors.black54, fontSize: 15),
                               )
@@ -111,8 +111,9 @@ class ShoppingItem extends StatelessWidget {
                                   );
                                 },
                                 style: TextButton.styleFrom(
-                                    backgroundColor: Colors.blueGrey[400],
-                                    shape: StadiumBorder()),
+                                    backgroundColor: Colors.blueGrey[500],
+                                    shape: StadiumBorder(),
+                                ),
                                 child: const Text(
                                   'View similar items',
                                   style: TextStyle(color: Colors.white),

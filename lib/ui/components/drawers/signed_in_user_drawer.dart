@@ -66,11 +66,16 @@ class SignedInUserDrawer extends StatelessWidget {
       // 0 to remove the random white space that was appearing
       padding: EdgeInsets.only(top: 0),
       children: [
-        //Purchases
+        //About the app
         ListTile(
-            leading: const Icon(Icons.shopping_cart),
-            title: Text('Purchases'),
-            onTap: () {}),
+          leading: const Icon(Icons.info_outline),
+          title: Text('About the app'),
+          onTap: () {
+            Navigator.of(context).push(
+              NavigatorUtil.createRouteWithFadeAnimation(newPage: AboutAppPage()),
+            );
+          },
+        ),
         //Privacy
         ListTile(
           leading: const Icon(Icons.privacy_tip_outlined),
@@ -112,16 +117,6 @@ class SignedInUserDrawer extends StatelessWidget {
                         ]),
                   );
                 });
-          },
-        ),
-        //About the app
-        ListTile(
-          leading: const Icon(Icons.info_outline),
-          title: Text('About the app'),
-          onTap: () {
-            Navigator.of(context).push(
-              NavigatorUtil.createRouteWithFadeAnimation(newPage: AboutAppPage()),
-            );
           },
         ),
         //Log out

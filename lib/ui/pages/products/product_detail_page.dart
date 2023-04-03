@@ -329,7 +329,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       'assets/lottie_animations/error.json',
                     ),
                     const Text(
-                      'Servidor error.',
+                      'Server error.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 17,

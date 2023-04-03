@@ -25,6 +25,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // key for the Scaffold, it will be used to open the Drawer
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  late bool userIsAuthenticated;
   late Future<List<CategoryModel>> fetchCategoriesFuture;
   int _selectedIndex = 0;
   final CategoryService categoryService = CategoryService();
@@ -34,9 +37,20 @@ class _HomePageState extends State<HomePage> {
     return Future.delayed(const Duration(seconds: 2), () => categories);
   }
 
+  void openDrawer(){
+    // open the drawer by calling the setState method first so that the
+    // userIsAuthenticated is updated. Without doing it this way, for some reason
+    // the drawers were not showing correctly
+    setState(() {
+      userIsAuthenticated = Provider.of<AuthProvider>(context, listen: false).userIsAuthenticated;
+    });
+    _scaffoldKey.currentState!.openDrawer();
+  }
+
   @override
   void initState() {
     super.initState();
+    userIsAuthenticated = Provider.of<AuthProvider>(context, listen: false).userIsAuthenticated;
     fetchCategoriesFuture = fetchAllCategories();
   }
 
@@ -68,13 +82,11 @@ class _HomePageState extends State<HomePage> {
               },
             )
           : Container(),
+      key: _scaffoldKey,
       drawer: Drawer(
         // return a different type of drawer depending if the user is signed in
         // or not
-        child: Provider.of<AuthProvider>(context, listen: true)
-                .userIsAuthenticated
-            ? SignedInUserDrawer()
-            : NotSignedInUserDrawer(),
+        child: userIsAuthenticated ? SignedInUserDrawer() : NotSignedInUserDrawer(),
         //backgroundColor: Colors.cyan[100],
       ),
       appBar: AppBar(
@@ -89,16 +101,15 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
         // Need to use a Builder to obtain the context, if not it throws an
         // error
-        leading: Builder(builder: (context) {
-          return Padding(
-            padding: const EdgeInsets.only(left: 10, top: 10),
-            child: CustomButton(
-                iconData: Icons.person,
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                }),
-          );
-        }),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 10, top: 10),
+          child: CustomButton(
+              iconData: Icons.person,
+              onPressed: () {
+                //_scaffoldKey.currentState!.openDrawer();
+                openDrawer();
+              }),
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10, top: 10),
