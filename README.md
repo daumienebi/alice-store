@@ -2,17 +2,17 @@
 
 Simple project to simulate a Shopping App where users can view products, add products to wishlist, handle cart items,search for products etc..
 
-The app is part of a friend's final project of a Screen printing course. I decided to take on this task to broaden my knowledge and
-get to work with Firebase and polish my flutter skills.
+The app is part of a friend's final project of a Screen printing course. I decided to take on this task to broaden my knowledge,get to work
+with Firebase and polish my flutter skills.
 
-Note : The app is not meant to be a real-world shopping app, it might be be taken down from the Playstore after the project is presented but
+**Note** : The app is not meant to be a real-world shopping app, it might be be taken down from the Playstore after the project is presented but
 the APK will be available here with the source code.
 
 ## Features
 
 - [x] View products.
-- [x] Add items to wishlist (remaining persistence).
-- [x] Wishlist (remaining persistence).
+- [x] Add items to cart (remaining persistence).
+- [x] Wishlist items (remaining persistence).
 - [x] User Authentication
 - [x] Search for items.
 - [x] Delete user account.
@@ -56,10 +56,8 @@ For debug mode Fingerprints, you can use
   The images are hosted here on github in different folders in the store_data branch, details here : in this [branch](https://github.com/daumienebi/alice_store/tree/store_data)
 
 ## Todo :
-
-  ### App Todo :
-  - Complete Firestore implementation (Cart and wishlist)
-  - Implement exceptions
-  - Privacy
-  - Translation
+ - Complete Firestore implementation (Cart and wishlist)
+ - Implement custom exceptions
+ - Privacy
+ - Localization
 
