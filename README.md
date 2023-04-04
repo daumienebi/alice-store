@@ -6,6 +6,7 @@ The app is currently using the [json_server](https://github.com/typicode/json-se
 - `npm run server` - to run the server on localhost:3000. To access it from the android emulator or physical device,
     `localhost` needs to be swapped with your `YOUR_IP_ADDRESS`
 - `Ctrl + C` to shut down the server. (On Windows)
+- `npm install json-server` if you don't have it installed already so that the appropriate `node_modules` files can be generated for your project.
 
 ## API Endpoints
 - `/products`
