@@ -18,10 +18,11 @@ the APK will be available here with the source code.
 - [x] Delete user account.
 
 ## Screenshots
-  📸                         | 📸                           | 📸                                       | 📸 
-|:--------------------------:|:-----------------------------:|:-----------------------------------------:|:----------------------------------:|
-![file1](https://user-images.githubusercontent.com/90214727/228094562-c356f513-6634-48dd-83e3-177281f668b7.png) | ![Screenshot_1679960908](https://user-images.githubusercontent.com/90214727/228094701-9800794a-2c6d-49ae-a361-4b219aba7575.png) | ![Screenshot_1679960612](https://user-images.githubusercontent.com/90214727/228094736-72ad1a2e-49c5-4cc1-9596-51a8f99e09cc.png) | ![Screenshot_1679960915](https://user-images.githubusercontent.com/90214727/228095326-aef4af1c-c692-40a4-a084-276c1154fff2.png) |
-![Screenshot_1679960641](https://user-images.githubusercontent.com/90214727/228095404-c8feed59-8509-476b-8658-e090dbf8d0b9.png) | ![Screenshot_1679960654](https://user-images.githubusercontent.com/90214727/228095475-ca45d346-62c7-4a83-aef9-4ef95b226493.png) | ![Screenshot_1679960728](https://user-images.githubusercontent.com/90214727/228095531-53e98ce2-8172-4a98-b0cf-7e434183734e.png) | ![Screenshot_1679960700](https://user-images.githubusercontent.com/90214727/228095583-525b18b5-8691-45f8-a5ba-923a78628783.png)
+
+| 📸 | 📸 | 📸 |
+|:---:|:---:|:---:|
+| ![file2](https://user-images.githubusercontent.com/90214727/229847111-99e16d3b-93b9-4bdd-a3a2-5be6696a7a6a.png) | ![file3](https://user-images.githubusercontent.com/90214727/229847126-63afc6c4-0bbf-4ea1-8904-050684fce0d2.png) | ![file4](https://user-images.githubusercontent.com/90214727/229847134-331e23ac-c440-4af7-82df-a3b0b941dc15.png) |
+| ![file5](https://user-images.githubusercontent.com/90214727/229847141-0e3ae3fb-cb52-4664-9575-c7ef6caac89c.png) | ![file6](https://user-images.githubusercontent.com/90214727/229847148-cc0192b4-999c-4436-8a08-a37abb09f2ca.png) | ![file7](https://user-images.githubusercontent.com/90214727/229847152-17748ef4-9764-462f-b026-1757536a1b09.png) |
 
 ## Configure Firebase for the project
 To modify the app for your personal use you have to create your own Firebase project for the developement and configure it correctly.
