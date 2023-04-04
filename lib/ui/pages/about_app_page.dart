@@ -1,5 +1,6 @@
 import 'package:alice_store/ui/components/components.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AboutAppPage extends StatelessWidget {
@@ -29,6 +30,7 @@ class AboutAppPage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
       body: SingleChildScrollView(
         child: Padding(
