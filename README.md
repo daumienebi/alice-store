@@ -34,6 +34,7 @@ to the `alice_store/android/app/` folder. The project won't connect to firebase 
   ### Resources
   - [Firebase setup page](https://firebase.google.com/docs/android/setup?hl=es-419) for more help or reference.
   - Follow this [Youtube Tutorial](https://www.youtube.com/watch?v=1k-gITZA9CI&t=1s) on HeyFlutter / Johannes Mike channel to set it up easily.
+  - Extra [Building and Releasing and Android app](https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration)
   
 In case you get any error while compiling the app, you might need to add the SHA-1 and SHA-256 Fingerprints to the app if you haven't added them yet. Check out [How to generate SHA Fingerprints](https://developers.google.com/android/guides/client-auth?hl=es-419) and [How to add SHA Fingerprints to Firebase for Android app](https://www.geeksforgeeks.org/how-to-add-sha-fingerprints-for-your-firebase-android-app/)
 for more info on how to generate the fingerprints and add them to your Firebase project.
@@ -57,19 +58,8 @@ For debug mode Fingerprints, you can use
 ## Todo :
 
   ### App Todo :
-  - Multiple items to the cart
   - Complete Firestore implementation (Cart and wishlist)
   - Implement exceptions
-  - About app page
   - Privacy
   - Translation
-
-  ### README Todo : 
-  - Explain how to configure the project for Firebase
-  - Json_Server explanation in the [json_server branch](https://github.com/daumienebi/alice_store/tree/json_server)
-  - store_data explanation in the [store_data branch](https://github.com/daumienebi/alice_store/tree/store_data)
-  - Requirements
-  - Polish App github page
-  - Include credits
-  - Extra [Building and Releasing and Android app](https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration)
 
