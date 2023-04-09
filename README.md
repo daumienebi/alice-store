@@ -49,7 +49,7 @@ For debug mode Fingerprints, you can use
   ### API
   
   The app uses the [Json Server](https://github.com/typicode/json-server) for the data. Details on how to configure it the
-  [branch(https://github.com/daumienebi/alice_store/tree/json_server)
+  [branch](https://github.com/daumienebi/alice_store/tree/json_server)
   
   ### Images
   
