@@ -60,4 +60,6 @@ For debug mode Fingerprints, you can use
  - Implement custom exceptions
  - Privacy
  - Localization
+ - Fix issues
+ - Publish to playstore if finally required.
 
