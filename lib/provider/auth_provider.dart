@@ -7,6 +7,9 @@ class AuthProvider with ChangeNotifier{
   //check if the user is authenticated
   bool get userIsAuthenticated => _currentUser != null;
 
+  // obtain the current user
+  User? get currentUser => _currentUser;
+
   // listen to the auth changes to obtain the state of the user
   void listenToAuthChanges(){
     FirebaseAuth.instance.authStateChanges().listen((user) {

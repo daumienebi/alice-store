@@ -158,7 +158,7 @@ class SignedInUserDrawer extends StatelessWidget {
 
     // if the user has a display name, show the display name, if not, get the
     // name from the email
-    String displayName;
+    String displayName = '';
     if (user.displayName != null) {
       displayName = user.displayName!;
     } else {

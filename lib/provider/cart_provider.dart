@@ -1,9 +1,11 @@
 import 'package:alice_store/models/cart_item_model.dart';
 import 'package:alice_store/models/product_model.dart';
+import 'package:alice_store/services/firestore/firestore_service.dart';
 import 'package:flutter/cupertino.dart';
 
 class CartProvider with ChangeNotifier{
 
+  final FirestoreService _firestoreService = FirestoreService();
   final List<CartItemModel> _cartItems = [];
   double _totalPrice = 0.0;
   List<CartItemModel> get getCartItems{
@@ -14,6 +16,9 @@ class CartProvider with ChangeNotifier{
     return _totalPrice;
   }
 
+  addItemFireStore(String userId, CartItemModel cartItemModel) async{
+    await _firestoreService.addToCart(userId, cartItemModel);
+  }
   addItem(ProductModel product,int quantity){
     for(CartItemModel cartItem in _cartItems){
       if(cartItem.product.id == product.id){
@@ -30,7 +35,7 @@ class CartProvider with ChangeNotifier{
     notifyListeners();
   }
 
-  removeItem(itemId){
+  removeItem(int itemId){
     _cartItems.removeWhere((cartItem) => cartItem.product.id == itemId);
     calculateTotalPrice();
     notifyListeners();
@@ -47,7 +52,7 @@ class CartProvider with ChangeNotifier{
     }
   }
 
-  getQuantity(){
+  int getQuantity(){
     int quantity = 0;
     for(CartItemModel cartItem in _cartItems){
       quantity += cartItem.quantity;
@@ -64,7 +69,7 @@ class CartProvider with ChangeNotifier{
     _totalPrice = totalPrice;
   }
 
-  clearData(){
+  void clearData(){
     _cartItems.clear();
     notifyListeners();
   }

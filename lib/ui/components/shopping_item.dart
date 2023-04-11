@@ -1,3 +1,4 @@
+import 'package:alice_store/models/cart_item_model.dart';
 import 'package:alice_store/models/product_model.dart';
 import 'package:alice_store/provider/auth_provider.dart';
 import 'package:alice_store/provider/cart_provider.dart';
@@ -221,7 +222,8 @@ class ShoppingItem extends StatelessWidget {
         onPressed: () {
           // only carry out the action is the user is authenticated
           if(Provider.of<AuthProvider>(context,listen: false).userIsAuthenticated){
-            cartProvider.addItem(product,1);
+            //cartProvider.addItem(product,1);
+            cartProvider.addItemFireStore(Provider.of<AuthProvider>(context,listen: false).currentUser!.uid.toString(),CartItemModel(product:product,quantity: 1));
             snackBar = const SnackBar(
               duration: Duration(seconds: 1),
               content: Text(

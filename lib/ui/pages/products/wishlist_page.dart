@@ -183,7 +183,7 @@ class _WishListPageState extends State<WishListPage> {
                             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                               duration: Duration(seconds: 2),
                               content: Text(
-                                'Item added cart!',
+                                'Item added to cart!',
                               ),
                             ));
                           },

@@ -146,8 +146,9 @@ class _PaymentPageState extends State<PaymentPage> {
     double buttonWidth = MediaQuery.of(context).size.width * 0.60;
     return TextButton(
       onPressed: () async{
-        // Send an email to alicestore
+        // Send an email to Alice Store
         String subject = 'Store order';
+        // TODO: Get the orders and send them through e-mail
         String orders = '';
         String mailUrl = 'mailto:orders.alicestore@gmail.com?subject=$subject';
         await _launchUrl(Uri.parse(mailUrl));

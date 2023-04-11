@@ -4,7 +4,7 @@ import 'package:alice_store/utils/private_constants.dart';
 import 'package:http/http.dart' as http;
 import 'dart:developer' as dev;
 
-//Util class to get general response from the API
+/// Util class to get general response from the API
 class ApiService{
   //final String baseApiUrl = 'http://${PrivateConstants.ip}:3000';
   final String baseApiUrl = PrivateConstants.serverUrl;

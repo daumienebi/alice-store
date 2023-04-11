@@ -122,7 +122,7 @@ class FirebaseAuthProvider extends ChangeNotifier {
         // case users who signed in with email and password
         AuthCredential credentials = EmailAuthProvider.credential(
             email: currentUser.email!, password: password!);
-        // reauthenticate the user because the delete() method requires the user to have recently signed in
+        // re-authenticate the user because the delete() method requires the user to have recently signed in
         await currentUser.reauthenticateWithCredential(credentials);
         await currentUser.delete();
         accountDeleted = true;
