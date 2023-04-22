@@ -12,6 +12,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import 'provider/wishlist_provider.dart';
+
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   //Initialize the firebase app
@@ -63,6 +65,7 @@ class AppState extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => ProductProvider()),
           ChangeNotifierProvider(create: (_) => CartProvider()),
           ChangeNotifierProvider(create: (_) => FirebaseAuthProvider()),
+          ChangeNotifierProvider(create: (_) => WishListProvider()),
           // Call the listenToAuthChanges here, it will be used to check the auth
           // state before realizing certain actions in the app.
           // The '..' is called a Cascade Operator, it allows us to perform an

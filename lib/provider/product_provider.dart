@@ -18,6 +18,7 @@ class ProductProvider with ChangeNotifier{
     return _wishListProducts;
   }
 
+  /*
   addToWishList (ProductModel product) async{
     if(!_wishListProducts.contains(product)){
       _wishListProducts.add(product);
@@ -29,6 +30,7 @@ class ProductProvider with ChangeNotifier{
     _wishListProducts.removeWhere((element) => element.id == product.id);
     notifyListeners();
   }
+   */
 
   /// Method to initialize the products
   void initializeProductsList() async{

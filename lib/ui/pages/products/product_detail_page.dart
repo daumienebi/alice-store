@@ -3,6 +3,7 @@ import 'package:alice_store/models/product_model.dart';
 import 'package:alice_store/provider/auth_provider.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
+import 'package:alice_store/provider/wishlist_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/ui/components/custom_button.dart';
 import 'package:alice_store/app_routes.dart';
@@ -364,9 +365,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   }
 
   Widget productInWishListIcon(ProductModel product, BuildContext context) {
-    ProductProvider provider =
-        Provider.of<ProductProvider>(context, listen: true);
-
+    WishListProvider provider =
+        Provider.of<WishListProvider>(context, listen: true);
+    String userId = Provider.of<AuthProvider>(context,listen: false).currentUser!.uid.toString();
+    provider.fetchWishListProducts(userId);
     bool isInWishList = provider.getWishListProducts
         .where((element) => element.id == product.id)
         .isNotEmpty;
@@ -386,8 +388,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           onTap: () {
             // check if the user is authenticated
             if(Provider.of<AuthProvider>(context,listen: false).userIsAuthenticated){
+              String userId = Provider.of<AuthProvider>(context,listen: false).currentUser!.uid.toString();
               if (isInWishList) {
-                provider.removeFromWishList(product);
+                provider.removeFromWishList(userId,product);
                 snackBar = SnackBar(
                   backgroundColor: Colors.green[500],
                   duration: const Duration(seconds: 2),
@@ -412,7 +415,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               } else {
-                provider.addToWishList(product);
+                provider.addToWishList(userId,product);
                 snackBar = SnackBar(
                   backgroundColor: Colors.green[500],
                   duration: const Duration(seconds: 2),

@@ -3,6 +3,7 @@ import 'package:alice_store/models/product_model.dart';
 import 'package:alice_store/provider/auth_provider.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
+import 'package:alice_store/provider/wishlist_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/ui/components/components.dart';
 import 'package:alice_store/utils/navigator_util.dart';
@@ -25,8 +26,10 @@ class _WishListPageState extends State<WishListPage> {
   List<ProductModel> _wishListProducts = [];
   @override
   Widget build(BuildContext context) {
-    ProductProvider provider =
-        Provider.of<ProductProvider>(context, listen: true);
+    WishListProvider provider =
+        Provider.of<WishListProvider>(context, listen: true);
+    String userId = Provider.of<AuthProvider>(context,listen: false).currentUser!.uid.toString();
+    provider.fetchWishListProducts(userId);
     _wishListProducts = provider.getWishListProducts;
 
     return Scaffold(
@@ -90,7 +93,7 @@ class _WishListPageState extends State<WishListPage> {
     );
   }
 
-  Widget wishListTile(ProductModel product, ProductProvider provider) {
+  Widget wishListTile(ProductModel product, WishListProvider provider) {
     String price1 = '';
     String price2 = '';
     var splitValue = product.price.toString().split('.');
@@ -213,7 +216,8 @@ class _WishListPageState extends State<WishListPage> {
               width: double.infinity,
               child: TextButton(
                   onPressed: () {
-                    provider.removeFromWishList(product);
+                    String userId = Provider.of<AuthProvider>(context,listen: false).currentUser!.uid.toString();
+                    provider.removeFromWishList(userId,product);
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         backgroundColor: Colors.green[500],
                         content:

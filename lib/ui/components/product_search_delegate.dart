@@ -3,6 +3,7 @@ import 'package:alice_store/models/product_model.dart';
 import 'package:alice_store/provider/auth_provider.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
+import 'package:alice_store/provider/wishlist_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
 import 'package:alice_store/app_routes.dart';
 import 'package:alice_store/ui/components/dialogs.dart';
@@ -377,9 +378,10 @@ class ProductDetail extends StatelessWidget {
   }
 
   Widget productInWishListIcon(ProductModel product, BuildContext context) {
-    ProductProvider provider =
-        Provider.of<ProductProvider>(context, listen: true);
-
+    WishListProvider provider =
+        Provider.of<WishListProvider>(context, listen: true);
+    String userId = Provider.of<AuthProvider>(context,listen: false).currentUser!.uid.toString();
+    provider.fetchWishListProducts(userId);
     bool isInWishList = provider.getWishListProducts
         .where((element) => element.id == product.id)
         .isNotEmpty;
@@ -397,55 +399,60 @@ class ProductDetail extends StatelessWidget {
         padding: const EdgeInsets.only(right: 10, top: 10),
         child: GestureDetector(
           onTap: () {
-            if (isInWishList) {
-              provider.removeFromWishList(product);
-              snackBar = SnackBar(
-                backgroundColor: Colors.green[500],
-                duration: const Duration(seconds: 2),
-                //Snack bar content with the message and the view
-                //wishlist page button
-                content: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text('Item removed from wishlist'),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(
-                              newPage: const WishListPage()));
-                        },
-                        child: const Text(
-                          'View wishlist',
-                          style: TextStyle(color: Colors.lightGreen),
-                        ))
-                  ],
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            } else {
-              provider.addToWishList(product);
-              snackBar = SnackBar(
-                backgroundColor: Colors.green[500],
-                duration: const Duration(seconds: 2),
-                //Snack bar content with the message and the view
-                //wishlist page button
-                content: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text('Item added to wishlist'),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.of(context)
-                              .pushNamed(AppRoutes.routeStrings.wishListPage);
-                        },
-                        child: const Text(
-                          'View wishlist',
-                          style: TextStyle(color: Colors.lightGreen),
-                        ))
-                  ],
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            if(Provider.of<AuthProvider>(context,listen: false).userIsAuthenticated){
+              String userId = Provider.of<AuthProvider>(context,listen: false).currentUser!.uid.toString();
+              if (isInWishList) {
+                String userId = Provider.of<AuthProvider>(context,listen: false).currentUser!.uid.toString();
+                provider.removeFromWishList(userId,product);
+                snackBar = SnackBar(
+                  backgroundColor: Colors.green[500],
+                  duration: const Duration(seconds: 2),
+                  //Snack bar content with the message and the view
+                  //wishlist page button
+                  content: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text('Item removed from wishlist'),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(
+                                newPage: const WishListPage()));
+                          },
+                          child: const Text(
+                            'View wishlist',
+                            style: TextStyle(color: Colors.lightGreen),
+                          ))
+                    ],
+                  ),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              } else {
+                provider.addToWishList(userId,product);
+                snackBar = SnackBar(
+                  backgroundColor: Colors.green[500],
+                  duration: const Duration(seconds: 2),
+                  //Snack bar content with the message and the view
+                  //wishlist page button
+                  content: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text('Item added to wishlist'),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pushNamed(AppRoutes.routeStrings.wishListPage);
+                          },
+                          child: const Text(
+                            'View wishlist',
+                            style: TextStyle(color: Colors.lightGreen),
+                          ))
+                    ],
+                  ),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              }
             }
+
           },
           child: Container(
               height: 40,

@@ -4,7 +4,7 @@ import 'package:alice_store/services/api/product_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-/// This class will serve the purpose of carrying out the CRUD operations
+/// This class will serve the purpose of carrying out the basic CRUD operations
 /// by the [User]s, mainly for the cart and wishlist items.
 class FirestoreService {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -64,33 +64,80 @@ class FirestoreService {
     // Get all cart items for the user
     final cartQuery = await cartReference.get(GetOptions(source: Source.serverAndCache));
     final cartDocs = cartQuery.docs;
-    //print(cartDocs.length); //3
     for (final cartDoc in cartDocs) {
       //get the data from the doc
       final cartData = cartDoc.data();
       //fetch the product, only the cart model is stored in Firestore[id & quantity]
       final product = await productService.fetchProduct(cartData['productId']);
-      final cartItem = CartItemModel(product: product!, quantity: cartData['quantity']);
+      final cartItem = CartItemModel(product: product, quantity: cartData['quantity']);
       items.add(cartItem);
     }
     return Future.value(items);
   }
 
-  Future<bool> addItemToWishList(String userId, ProductModel product) {
-    List<int> items = [];
-
-    return Future.value(true);
+  addItemToWishList(String userId, ProductModel product) async{
+    // get the wishlist reference
+    final wishListReference =
+    firestore.collection('users').doc(userId).collection('wishlist');
+    // add the new wishlist item
+    final wishListQuery = await wishListReference.where('productId', isEqualTo: product.id)
+        .get(GetOptions(source: Source.serverAndCache));
+    final wishListDocs = wishListQuery.docs;
+    // only add the item if it does not exist in the wishlist
+    if(wishListDocs.isEmpty){
+      await wishListReference.add({
+        'productId': product.id,
+      });
+    }
   }
 
-  Future<bool> removeItemFromWishList(String userId, ProductModel product) {
-    //List<int> items = [];
-
-    return Future.value(true);
+  removeItemFromWishList(String userId, ProductModel product) async{
+    // get the wishlist reference
+    final wishListReference =
+    firestore.collection('users').doc(userId).collection('wishlist');
+    final wishListQuery = await wishListReference.where('productId', isEqualTo: product.id)
+        .get(GetOptions(source: Source.serverAndCache));
+    final wishListDocs = wishListQuery.docs;
+    for (final wishListDoc in wishListDocs) {
+      final wishListData = wishListDoc.data();
+      final productId = wishListData['productId'];
+      if (productId == product.id) {
+        await wishListDoc.reference.delete();
+        break;
+      }
+    }
   }
 
-  Future<List<int>> getWishListItems(String userId) {
-    List<int> items = [];
-
+  Future<List<ProductModel>> getWishListItems(String userId) async{
+    List<ProductModel> items = [];
+    final wishListReference = firestore.collection('users').doc(userId).collection('wishlist');
+    // Get all cart items for the user
+    final wishListQuery = await wishListReference.get(GetOptions(source: Source.serverAndCache));
+    final wishListDocs = wishListQuery.docs;
+    for (final wishListDoc in wishListDocs) {
+      //get the data from the doc
+      final wishListData = wishListDoc.data();
+      //fetch the product, only the cart model is stored in Firestore[id & quantity]
+      final product = await productService.fetchProduct(wishListData['productId']);
+      items.add(product);
+    }
     return Future.value(items);
+  }
+
+  Future<bool>isInWishList(String userId, ProductModel product) async{
+    bool isInWishList = false;
+    // get the wishlist reference
+    final wishListReference =
+    firestore.collection('users').doc(userId).collection('wishlist');
+    // add the new wishlist item
+    final wishListQuery = await wishListReference.where('productId', isEqualTo: product.id)
+        .get(GetOptions(source: Source.serverAndCache));
+    final wishListDocs = wishListQuery.docs;
+    // only add the item if it does not exist in the wishlist
+    if(!wishListDocs.isEmpty){
+      isInWishList = true;
+    }
+
+    return Future.value(isInWishList);
   }
 }
