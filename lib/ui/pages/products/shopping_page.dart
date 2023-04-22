@@ -5,6 +5,7 @@ import 'package:alice_store/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
 class ShoppingPage extends StatefulWidget {
   const ShoppingPage({Key? key}) : super(key: key);
@@ -14,11 +15,10 @@ class ShoppingPage extends StatefulWidget {
 }
 
 class _ShoppingPageState extends State<ShoppingPage> {
-  final ProductProvider productProvider = ProductProvider();
   late Future<List<ProductModel>> fetchProductsFuture;
 
   Future<List<ProductModel>> fetchProducts() async {
-    List<ProductModel> products = await productProvider.fetchAllProducts();
+    List<ProductModel> products = await Provider.of<ProductProvider>(context,listen:false).fetchAllProducts();
     return Future.delayed(const Duration(seconds: 1),()=> products);
   }
 

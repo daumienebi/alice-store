@@ -125,8 +125,8 @@ class SignedInUserDrawer extends StatelessWidget {
             title: Text('Log Out'),
             onTap: () {
               //clear useless data for now
-              Provider.of<CartProvider>(context, listen: false).clearData();
-              Provider.of<ProductProvider>(context, listen: false).clearData();
+              //Provider.of<CartProvider>(context, listen: false).clearData();
+              //Provider.of<ProductProvider>(context, listen: false).clearData();
               //crappy log out logic
               Provider.of<FirebaseAuthProvider>(context, listen: false)
                   .logout();

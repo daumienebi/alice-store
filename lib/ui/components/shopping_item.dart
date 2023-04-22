@@ -161,6 +161,7 @@ class ShoppingItem extends StatelessWidget {
             if (isInWishList) {
               provider.removeFromWishList(product);
               snackBar = SnackBar(
+                backgroundColor: Colors.green[500],
                 duration: const Duration(seconds: 2),
                 //Snack bar content with the message and the view
                 //wishlist page button
@@ -184,6 +185,7 @@ class ShoppingItem extends StatelessWidget {
             } else {
               provider.addToWishList(product);
               snackBar = SnackBar(
+                backgroundColor: Colors.green[500],
                 duration: const Duration(seconds: 2),
                 //Snack bar content with the message and the view
                 //wishlist page button
@@ -222,9 +224,10 @@ class ShoppingItem extends StatelessWidget {
         onPressed: () {
           // only carry out the action is the user is authenticated
           if(Provider.of<AuthProvider>(context,listen: false).userIsAuthenticated){
-            //cartProvider.addItem(product,1);
-            cartProvider.addItemFireStore(Provider.of<AuthProvider>(context,listen: false).currentUser!.uid.toString(),CartItemModel(product:product,quantity: 1));
-            snackBar = const SnackBar(
+            String userId = Provider.of<AuthProvider>(context,listen: false).currentUser!.uid.toString();
+            cartProvider.addItem(userId,CartItemModel(product:product,quantity: 1));
+            snackBar = SnackBar(
+              backgroundColor: Colors.green[500],
               duration: Duration(seconds: 1),
               content: Text(
                 'Item added to cart',

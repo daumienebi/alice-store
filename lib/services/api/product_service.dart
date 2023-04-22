@@ -15,19 +15,23 @@ class ProductService{
     if (response != null) {
       products = ProductModel.productModelFromJson(response);
     }
-    //dev.log('PRODUCTS :$products');
     return products;
   }
 
   /// Fetch a specific product given the [id]
-  Future<ProductModel> fetchProduct(int id) async{
-    late ProductModel product;
-    dynamic response = await _apiService.getResponse('${Constants.apiEndPoints.productsEndPoint}/$id');
-    if(response != null){
-      product = ProductModel.productModelFromJson(response).first;
+  Future<ProductModel> fetchProduct(int id) async {
+    ProductModel? product;
+    try {
+      dynamic response = await _apiService.getResponse('${Constants.apiEndPoints.productsEndPoint}/$id');
+      if (response != null) {
+        // use the fromJson method directly since only 1 product will be fetched
+        product = ProductModel.fromJson(response);
+        //product = ProductModel.productModelFromJson(response).first;
+      }
+    } catch (e) {
+      dev.log('Error fetching product: $e');
     }
-    //dev.log('PRODUCT : ${product.toString()}');
-    return product;
+    return product!;
   }
 
   /// Fetch products that match a certain category
@@ -37,7 +41,6 @@ class ProductService{
     if(response != null){
       products = ProductModel.productModelFromJson(response);
     }
-    //dev.log('PRODUCT : ${products.toString()}');
     return products;
   }
 
@@ -48,7 +51,6 @@ class ProductService{
     if(response != null){
       products = ProductModel.productModelFromJson(response);
     }
-    //dev.log('PRODUCT : ${products.toString()}');
     return products;
   }
 }

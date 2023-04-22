@@ -1,4 +1,6 @@
+import 'package:alice_store/models/cart_item_model.dart';
 import 'package:alice_store/models/product_model.dart';
+import 'package:alice_store/provider/auth_provider.dart';
 import 'package:alice_store/provider/cart_provider.dart';
 import 'package:alice_store/provider/product_provider.dart';
 import 'package:alice_store/ui/pages/pages.dart';
@@ -179,8 +181,10 @@ class _WishListPageState extends State<WishListPage> {
                         width: double.infinity,
                         child: TextButton(
                           onPressed: () {
-                            Provider.of<CartProvider>(context,listen: false).addItem(product,1);
-                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                            String userId = Provider.of<AuthProvider>(context,listen: false).currentUser!.uid.toString();
+                            Provider.of<CartProvider>(context, listen: false).addItem(userId,CartItemModel(product:product,quantity: 1));
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              backgroundColor: Colors.green[500],
                               duration: Duration(seconds: 2),
                               content: Text(
                                 'Item added to cart!',
@@ -210,7 +214,8 @@ class _WishListPageState extends State<WishListPage> {
               child: TextButton(
                   onPressed: () {
                     provider.removeFromWishList(product);
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        backgroundColor: Colors.green[500],
                         content:
                             Text('Item removed from wishlist!'),
                         duration: Duration(seconds: 2)));

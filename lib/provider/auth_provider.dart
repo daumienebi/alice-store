@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class AuthProvider with ChangeNotifier{
   User? _currentUser;
 
-  //check if the user is authenticated
+  // check if the user is authenticated
   bool get userIsAuthenticated => _currentUser != null;
 
   // obtain the current user

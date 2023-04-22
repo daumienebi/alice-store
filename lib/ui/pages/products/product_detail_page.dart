@@ -1,3 +1,4 @@
+import 'package:alice_store/models/cart_item_model.dart';
 import 'package:alice_store/models/product_model.dart';
 import 'package:alice_store/provider/auth_provider.dart';
 import 'package:alice_store/provider/cart_provider.dart';
@@ -155,9 +156,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           child: TextButton(
             onPressed: () {
               if(Provider.of<AuthProvider>(context,listen: false).userIsAuthenticated){
-                Provider.of<CartProvider>(context, listen: false)
-                    .addItem(product,1);
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                String userId = Provider.of<AuthProvider>(context,listen: false).currentUser!.uid.toString();
+                Provider.of<CartProvider>(context, listen: false).addItem(userId,CartItemModel(product:product,quantity: 1));
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  backgroundColor: Colors.green[500],
                   duration: Duration(seconds: 2),
                   content: Text('Item added to cart!'),
                 ));
@@ -387,6 +389,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               if (isInWishList) {
                 provider.removeFromWishList(product);
                 snackBar = SnackBar(
+                  backgroundColor: Colors.green[500],
                   duration: const Duration(seconds: 2),
                   //Snack bar content with the message and the view
                   //wishlist page button
@@ -411,6 +414,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               } else {
                 provider.addToWishList(product);
                 snackBar = SnackBar(
+                  backgroundColor: Colors.green[500],
                   duration: const Duration(seconds: 2),
                   //Snack bar content with the message and the view
                   //wishlist page button

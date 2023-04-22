@@ -98,7 +98,7 @@ class FirebaseAuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Delete the current users account. Require the users password to reauthenticate
+  /// Delete the current users account. Require the users password to re-authenticate
   /// and delete the account
   Future deleteUserAccount({String? password}) async {
     // this method is currently called from the profile page which is only displayed
@@ -109,7 +109,7 @@ class FirebaseAuthProvider extends ChangeNotifier {
       
       //delete google signed in user
       if (await _googleSignIn.isSignedIn()) {
-        //refresh the users token incase it expired
+        //refresh the users token in case it expired
         await currentUser.reload();
         AuthCredential credentials = GoogleAuthProvider.credential(
           //forceRefresh = true to make the token to be refreshed

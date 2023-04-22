@@ -49,12 +49,7 @@ class ProductProvider with ChangeNotifier{
     return await _productService.fetchProductsFromCategory(categoryId);
   }
 
-  Future<ProductModel> fetchProduct(int id) async{
+  Future<ProductModel?> fetchProduct(int id) async{
     return await _productService.fetchProduct(id);
-  }
-
-  clearData(){
-    _wishListProducts.clear();
-    notifyListeners();
   }
 }
