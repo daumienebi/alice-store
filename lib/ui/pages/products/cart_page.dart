@@ -31,11 +31,12 @@ class _CartPageState extends State<CartPage> {
           .toString();
 
       products = await Provider.of<CartProvider>(context,listen: false).fetchItems(userId);
-      cartItems = products;
+      //cartItems = products;
+      return Future.delayed(const Duration(seconds: 1), () => products);
     }else{
       cartItems = [];
     }
-    return Future.delayed(const Duration(seconds: 1), () => products);
+    return Future.delayed(const Duration(seconds: 1), () => []);
   }
 
   @override

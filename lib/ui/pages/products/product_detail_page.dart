@@ -382,10 +382,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   Widget productInWishListIcon(ProductModel product, BuildContext context) {
     WishListProvider provider =
         Provider.of<WishListProvider>(context, listen: true);
-    String userId = Provider.of<AuthProvider>(context, listen: false)
-        .currentUser!
-        .uid
-        .toString();
+    String userId = '';
+    if(Provider.of<AuthProvider>(context,listen: false).userIsAuthenticated){
+      userId = Provider.of<AuthProvider>(context,listen: false).currentUser!.uid.toString();
+    }
     return FutureBuilder<bool>(
         future: checkIfProductIsInWishList(userId, context, product),
         builder: (context, snapshot) {
@@ -473,6 +473,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       );
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     }
+                  }else{
+                    Dialogs.authPrompt(context);
                   }
                 },
                 child: Container(

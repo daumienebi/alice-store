@@ -394,10 +394,10 @@ class ProductDetail extends StatelessWidget {
   Widget productInWishListIcon(ProductModel product, BuildContext context) {
     WishListProvider provider =
         Provider.of<WishListProvider>(context, listen: true);
-    String userId = Provider.of<AuthProvider>(context, listen: false)
-        .currentUser!
-        .uid
-        .toString();
+    String userId = '';
+    if(Provider.of<AuthProvider>(context,listen: false).userIsAuthenticated){
+      userId = Provider.of<AuthProvider>(context,listen: false).currentUser!.uid.toString();
+    }
     return FutureBuilder<bool>(
         future: checkIfProductIsInWishList(userId, context, product),
         builder: (context, snapshot) {
@@ -415,8 +415,7 @@ class ProductDetail extends StatelessWidget {
               padding: const EdgeInsets.only(right: 10, top: 10),
               child: GestureDetector(
                 onTap: () {
-                  if (Provider.of<AuthProvider>(context, listen: false)
-                      .userIsAuthenticated) {
+                  if (Provider.of<AuthProvider>(context, listen: false).userIsAuthenticated) {
                     String userId =
                         Provider.of<AuthProvider>(context, listen: false)
                             .currentUser!
@@ -485,6 +484,8 @@ class ProductDetail extends StatelessWidget {
                       );
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     }
+                  }else{
+                    Dialogs.authPrompt(context);
                   }
                 },
                 child: Container(

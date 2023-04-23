@@ -144,8 +144,10 @@ class ShoppingItem extends StatelessWidget {
   /// in the wish list or not
   Widget wishListIconButton(ProductModel product, BuildContext context) {
     WishListProvider provider = Provider.of<WishListProvider>(context, listen: true);
-    String userId = Provider.of<AuthProvider>(context,listen: false).currentUser!.uid.toString();
-
+    String userId = '';
+    if(Provider.of<AuthProvider>(context,listen: false).userIsAuthenticated){
+      userId = Provider.of<AuthProvider>(context,listen: false).currentUser!.uid.toString();
+    }
     return FutureBuilder<bool>(
       future: checkIfProductIsInWishList(userId,context, product),
       builder: (context, snapshot) {

@@ -7,6 +7,7 @@ class CartProvider with ChangeNotifier{
   final FirestoreService _firestoreService = FirestoreService();
   List<CartItemModel> _cartItems = [];
   double _totalPrice = 0.0;
+  int _quantity = 0;
 
   List<CartItemModel> get getCartItems{
     return _cartItems;
@@ -14,8 +15,11 @@ class CartProvider with ChangeNotifier{
 
   double  get getTotalPrice => _totalPrice;
 
+  int get getQuantity => _quantity;
+
   void addItem(String userId, CartItemModel cartItemModel) async{
     await _firestoreService.addToCart(userId, cartItemModel);
+    setQuantity();
     notifyListeners();
   }
 
@@ -23,6 +27,7 @@ class CartProvider with ChangeNotifier{
     final cartItems = await _firestoreService.getUserCartItems(userId);
     _cartItems = cartItems;
     calculateTotalPrice();
+    setQuantity();
     notifyListeners();
     return cartItems;
   }
@@ -30,15 +35,16 @@ class CartProvider with ChangeNotifier{
   void removeItem(String userId,CartItemModel cartItem) async{
     await _firestoreService.removeFromCart(userId, cartItem);
     calculateTotalPrice();
+    setQuantity();
     notifyListeners();
   }
 
-  int getQuantity(){
+  void setQuantity(){
     int quantity = 0;
     for(CartItemModel cartItem in _cartItems){
       quantity += cartItem.quantity;
     }
-    return quantity;
+    _quantity = quantity;
   }
 
   calculateTotalPrice(){

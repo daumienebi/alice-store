@@ -204,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                         .uid
                         .toString();
                     cartProvider.fetchItems(userId);
-                    productCount = cartProvider.getQuantity();
+                    productCount = cartProvider.getQuantity;
                   }
                   return Text(
                     productCount <= 9 ? productCount.toString() : '9+',
