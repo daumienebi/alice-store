@@ -27,9 +27,9 @@ class ProductSearchDelegate extends SearchDelegate {
 
   @override
   TextStyle get searchFieldStyle => TextStyle(
-    fontSize: 16,
-    color: Colors.grey[800],
-  );
+        fontSize: 16,
+        color: Colors.grey[800],
+      );
 
   @override
   TextInputType get keyboardType => TextInputType.name;
@@ -62,7 +62,6 @@ class ProductSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-
     if (query.isEmpty) {
       return Container();
     }
@@ -82,19 +81,19 @@ class ProductSearchDelegate extends SearchDelegate {
       //To avoid an error when the searched item is not found, create a dummy
       //product
       product = ProductModel(
-          id: 0,
-          name: '',
-          categoryId: 0,
-          inStock: false,
-          price: 0.0,
-          description: '',
-          image: '',
-          material: '',
-          warranty: '',
-          washable: '',
-          handmade: '',
-          weight: '',
-          brand: '',
+        id: 0,
+        name: '',
+        categoryId: 0,
+        inStock: false,
+        price: 0.0,
+        description: '',
+        image: '',
+        material: '',
+        warranty: '',
+        washable: '',
+        handmade: '',
+        weight: '',
+        brand: '',
       );
     }
 
@@ -103,8 +102,7 @@ class ProductSearchDelegate extends SearchDelegate {
     return SingleChildScrollView(
         child: product.id != 0
             ? ProductDetail(product: product)
-            : resultNotFoundWidget()
-    );
+            : resultNotFoundWidget());
   }
 
   @override
@@ -119,7 +117,8 @@ class ProductSearchDelegate extends SearchDelegate {
       return Container();
     }
 
-    ProductProvider provider = Provider.of<ProductProvider>(context, listen: false);
+    ProductProvider provider =
+        Provider.of<ProductProvider>(context, listen: false);
     //Fetch the products with the void method
     provider.initializeProductsList();
     List<ProductModel> productList = provider.getProducts;
@@ -132,11 +131,11 @@ class ProductSearchDelegate extends SearchDelegate {
     }).toList();
     //Checkout for FutureBuilder vs StreamBuilder
     return StreamBuilder(
-        initialData: productList,//the initialData line below also works,IDKW
+        initialData: productList, //the initialData line below also works,IDKW
         //initialData: const [],
         //stream: provider.searchProductsByName(query).asStream(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if(snapshot.hasData){
+          if (snapshot.hasData) {
             return ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
                   final ProductModel suggestion = suggestionsList[index];
@@ -148,9 +147,8 @@ class ProductSearchDelegate extends SearchDelegate {
                     leading: Container(
                       padding: EdgeInsets.symmetric(vertical: 5),
                       child: CachedNetworkImage(
-                        placeholder: (context, url) => Image.asset(
-                          'assets/gifs/loading.gif'
-                        ),
+                        placeholder: (context, url) =>
+                            Image.asset('assets/gifs/loading.gif'),
                         imageUrl: suggestion.image,
                         height: 50,
                         width: 50,
@@ -162,13 +160,11 @@ class ProductSearchDelegate extends SearchDelegate {
                     },
                   );
                 },
-                itemCount: suggestionsList.length
-            );
-          }else{
+                itemCount: suggestionsList.length);
+          } else {
             return Container();
           }
-        }
-        );
+        });
     //NOTE :  snapshot.data.length ~/ 2 (Integer truncate value).
     //Round up to the nearest int without remainders
   }
@@ -182,8 +178,7 @@ class ProductSearchDelegate extends SearchDelegate {
         const Text(
           'No results found.',
           textAlign: TextAlign.center,
-          style: TextStyle(
-              fontSize: 17, color: Colors.black87),
+          style: TextStyle(fontSize: 17, color: Colors.black87),
         ),
       ]),
     );
@@ -214,7 +209,8 @@ class ProductDetail extends StatelessWidget {
                 centerTitle: true,
                 //make the title adjust properly and not fill the whole place
                 expandedTitleScale: 1, //
-                titlePadding: const EdgeInsets.only(top: 10, left: 10, right: 10),
+                titlePadding:
+                    const EdgeInsets.only(top: 10, left: 10, right: 10),
                 background: CachedNetworkImage(
                     placeholder: ((context, url) =>
                         Image.asset('assets/gifs/loading.gif')),
@@ -280,13 +276,14 @@ class ProductDetail extends StatelessWidget {
           //use the available width
           width: double.infinity,
           child: TextButton(
-            onPressed: (){
+            onPressed: () {
               // make sure the user is authenticated
-              if(Provider.of<AuthProvider>(context,listen: false).userIsAuthenticated){
+              if (Provider.of<AuthProvider>(context, listen: false)
+                  .userIsAuthenticated) {
                 Navigator.of(context).push(
                     NavigatorUtil.createRouteWithSlideAnimation(
                         newPage: const PaymentPage()));
-              }else{
+              } else {
                 Dialogs.authPrompt(context);
               }
             },
@@ -304,15 +301,21 @@ class ProductDetail extends StatelessWidget {
           width: double.infinity,
           child: TextButton(
             onPressed: () {
-              if(Provider.of<AuthProvider>(context,listen: false).userIsAuthenticated){
-                String userId = Provider.of<AuthProvider>(context,listen: false).currentUser!.uid.toString();
-                Provider.of<CartProvider>(context, listen: false).addItem(userId,CartItemModel(product:product,quantity: 1));
+              if (Provider.of<AuthProvider>(context, listen: false)
+                  .userIsAuthenticated) {
+                String userId =
+                    Provider.of<AuthProvider>(context, listen: false)
+                        .currentUser!
+                        .uid
+                        .toString();
+                Provider.of<CartProvider>(context, listen: false).addItem(
+                    userId, CartItemModel(product: product, quantity: 1));
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   backgroundColor: Colors.green[500],
                   duration: Duration(seconds: 2),
                   content: Text('Item added to cart!'),
                 ));
-              }else{
+              } else {
                 Dialogs.authPrompt(context);
               }
             },
@@ -330,9 +333,9 @@ class ProductDetail extends StatelessWidget {
     );
   }
 
-  Widget moreProductDetails(){
+  Widget moreProductDetails() {
     final trailingStyle =
-    TextStyle(color: Colors.cyan, fontWeight: FontWeight.bold);
+        TextStyle(color: Colors.cyan, fontWeight: FontWeight.bold);
     return Container(
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.only(bottom: 10),
@@ -341,7 +344,10 @@ class ProductDetail extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('More details',style: TextStyle(fontSize: 18,color: Colors.black54),),
+          Text(
+            'More details',
+            style: TextStyle(fontSize: 18, color: Colors.black54),
+          ),
           ListTile(
             leading: Icon(Icons.info),
             title: Text('Material'),
@@ -377,91 +383,119 @@ class ProductDetail extends StatelessWidget {
     );
   }
 
+  Future<bool> checkIfProductIsInWishList(
+      String userId, BuildContext context, ProductModel product) async {
+    WishListProvider provider =
+        Provider.of<WishListProvider>(context, listen: false);
+    bool isInWishList = await provider.isInWishList(userId, product);
+    return isInWishList;
+  }
+
   Widget productInWishListIcon(ProductModel product, BuildContext context) {
     WishListProvider provider =
         Provider.of<WishListProvider>(context, listen: true);
-    String userId = Provider.of<AuthProvider>(context,listen: false).currentUser!.uid.toString();
-    provider.fetchWishListProducts(userId);
-    bool isInWishList = provider.getWishListProducts
-        .where((element) => element.id == product.id)
-        .isNotEmpty;
+    String userId = Provider.of<AuthProvider>(context, listen: false)
+        .currentUser!
+        .uid
+        .toString();
+    return FutureBuilder<bool>(
+        future: checkIfProductIsInWishList(userId, context, product),
+        builder: (context, snapshot) {
+          bool isInWishList = snapshot.data ?? false;
+          //Possible Icons
+          var addToFavIcon = const Icon(
+            Icons.favorite_border,
+            color: Colors.black54,
+          );
+          var removeFromFavIcon =
+              Icon(Icons.favorite_rounded, color: Colors.cyan[300]);
 
-    //Possible Icons
-    var addToFavIcon = const Icon(
-      Icons.favorite_border,
-      color: Colors.black54,
-    );
-    var removeFromFavIcon =
-        Icon(Icons.favorite_rounded, color: Colors.cyan[300]);
-
-    SnackBar snackBar;
-    return Padding(
-        padding: const EdgeInsets.only(right: 10, top: 10),
-        child: GestureDetector(
-          onTap: () {
-            if(Provider.of<AuthProvider>(context,listen: false).userIsAuthenticated){
-              String userId = Provider.of<AuthProvider>(context,listen: false).currentUser!.uid.toString();
-              if (isInWishList) {
-                String userId = Provider.of<AuthProvider>(context,listen: false).currentUser!.uid.toString();
-                provider.removeFromWishList(userId,product);
-                snackBar = SnackBar(
-                  backgroundColor: Colors.green[500],
-                  duration: const Duration(seconds: 2),
-                  //Snack bar content with the message and the view
-                  //wishlist page button
-                  content: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text('Item removed from wishlist'),
-                      TextButton(
-                          onPressed: () {
-                            Navigator.of(context).push(NavigatorUtil.createRouteWithFadeAnimation(
-                                newPage: const WishListPage()));
-                          },
-                          child: const Text(
-                            'View wishlist',
-                            style: TextStyle(color: Colors.lightGreen),
-                          ))
-                    ],
-                  ),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              } else {
-                provider.addToWishList(userId,product);
-                snackBar = SnackBar(
-                  backgroundColor: Colors.green[500],
-                  duration: const Duration(seconds: 2),
-                  //Snack bar content with the message and the view
-                  //wishlist page button
-                  content: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text('Item added to wishlist'),
-                      TextButton(
-                          onPressed: () {
-                            Navigator.of(context)
-                                .pushNamed(AppRoutes.routeStrings.wishListPage);
-                          },
-                          child: const Text(
-                            'View wishlist',
-                            style: TextStyle(color: Colors.lightGreen),
-                          ))
-                    ],
-                  ),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              }
-            }
-
-          },
-          child: Container(
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10)),
-              child: isInWishList ? removeFromFavIcon : addToFavIcon),
-        ));
+          SnackBar snackBar;
+          return Padding(
+              padding: const EdgeInsets.only(right: 10, top: 10),
+              child: GestureDetector(
+                onTap: () {
+                  if (Provider.of<AuthProvider>(context, listen: false)
+                      .userIsAuthenticated) {
+                    String userId =
+                        Provider.of<AuthProvider>(context, listen: false)
+                            .currentUser!
+                            .uid
+                            .toString();
+                    if (isInWishList) {
+                      String userId =
+                          Provider.of<AuthProvider>(context, listen: false)
+                              .currentUser!
+                              .uid
+                              .toString();
+                      provider.removeFromWishList(userId, product);
+                      snackBar = SnackBar(
+                        backgroundColor: Colors.green[500],
+                        duration: const Duration(seconds: 2),
+                        //Snack bar content with the message and the view
+                        //wishlist page button
+                        content: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text('Item removed from wishlist',style: TextStyle(fontSize: 15)),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(NavigatorUtil
+                                      .createRouteWithFadeAnimation(
+                                          newPage: const WishListPage()));
+                                },
+                                style: TextButton.styleFrom(
+                                    backgroundColor: Colors.white,
+                                    shape: StadiumBorder()
+                                ),
+                                child: const Text(
+                                  'View wishlist',
+                                  style: TextStyle(color: Colors.black),
+                                ))
+                          ],
+                        ),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    } else {
+                      provider.addToWishList(userId, product);
+                      snackBar = SnackBar(
+                        backgroundColor: Colors.green[500],
+                        duration: const Duration(seconds: 2),
+                        //Snack bar content with the message and the view
+                        //wishlist page button
+                        content: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text('Item added to wishlist',style: TextStyle(fontSize: 16),),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pushNamed(
+                                      AppRoutes.routeStrings.wishListPage);
+                                },
+                                style: TextButton.styleFrom(
+                                    backgroundColor: Colors.white,
+                                    shape: StadiumBorder()
+                                ),
+                                child: const Text(
+                                  'View wishlist',
+                                  style: TextStyle(color: Colors.black),
+                                ))
+                          ],
+                        ),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }
+                  }
+                },
+                child: Container(
+                    height: 40,
+                    width: 40,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: isInWishList ? removeFromFavIcon : addToFavIcon),
+              ));
+        });
   }
 
   Text stockText(bool inStock) {

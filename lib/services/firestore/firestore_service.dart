@@ -69,7 +69,7 @@ class FirestoreService {
       final cartData = cartDoc.data();
       //fetch the product, only the cart model is stored in Firestore[id & quantity]
       final product = await productService.fetchProduct(cartData['productId']);
-      final cartItem = CartItemModel(product: product, quantity: cartData['quantity']);
+      final cartItem = CartItemModel(product: product!, quantity: cartData['quantity']);
       items.add(cartItem);
     }
     return Future.value(items);
@@ -124,7 +124,7 @@ class FirestoreService {
     return Future.value(items);
   }
 
-  Future<bool>isInWishList(String userId, ProductModel product) async{
+  isInWishList(String userId, ProductModel product) async{
     bool isInWishList = false;
     // get the wishlist reference
     final wishListReference =
@@ -137,7 +137,6 @@ class FirestoreService {
     if(!wishListDocs.isEmpty){
       isInWishList = true;
     }
-
-    return Future.value(isInWishList);
+    return isInWishList;
   }
 }

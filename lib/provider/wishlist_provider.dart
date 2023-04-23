@@ -22,9 +22,8 @@ class WishListProvider with ChangeNotifier{
     notifyListeners();
   }
 
-  Future<bool> isInWishList(String userId,ProductModel product) async{
-    bool isInWishList = await _firestoreService.isInWishList(userId,product);
-    return isInWishList;
+  isInWishList(String userId,ProductModel product) async{
+    return await _firestoreService.isInWishList(userId,product);
   }
 
   fetchWishListProducts(String userId) async{
@@ -33,15 +32,4 @@ class WishListProvider with ChangeNotifier{
     notifyListeners();
   }
 
-  /*
-  checkIfProductIsInWishList(context,product)async{
-    WishListProvider provider =
-    Provider.of<WishListProvider>(context, listen: true);
-    String userId = Provider.of<AuthProvider>(context,listen: false).currentUser!.uid.toString();
-    provider.fetchWishListProducts(userId);
-    bool isInWishList = await provider.isInWishList(userId, product);
-    return isInWishList;
-  }
-  bool isInWishList = checkIfProductIsInWishList(context,product);
-   */
 }

@@ -25,7 +25,6 @@ class _CartPageState extends State<CartPage> {
   Future<List<CartItemModel>>fetchCartItems() async{
     List<CartItemModel> products = [];
     if(userIsAuthenticated){
-      print('wtfd');
       String userId = Provider.of<AuthProvider>(context, listen: false)
           .currentUser!
           .uid

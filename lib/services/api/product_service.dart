@@ -20,18 +20,14 @@ class ProductService{
 
   /// Fetch a specific product given the [id]
   Future<ProductModel> fetchProduct(int id) async {
-    ProductModel? product;
-    try {
-      dynamic response = await _apiService.getResponse('${Constants.apiEndPoints.productsEndPoint}/$id');
-      if (response != null) {
-        // use the fromJson method directly since only 1 product will be fetched
-        product = ProductModel.fromJson(response);
-        //product = ProductModel.productModelFromJson(response).first;
-      }
-    } catch (e) {
-      dev.log('Error fetching product: $e');
+    late ProductModel product;
+    dynamic response = await _apiService.getResponse('${Constants.apiEndPoints.productsEndPoint}/$id');
+    if (response != null) {
+      // use the fromJson method directly since only 1 product will be fetched
+      product = ProductModel.fromJson(response);
+      //product = ProductModel.productModelFromJson(response).first;
     }
-    return product!;
+    return product;
   }
 
   /// Fetch products that match a certain category

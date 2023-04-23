@@ -18,20 +18,6 @@ class ProductProvider with ChangeNotifier{
     return _wishListProducts;
   }
 
-  /*
-  addToWishList (ProductModel product) async{
-    if(!_wishListProducts.contains(product)){
-      _wishListProducts.add(product);
-    }
-    notifyListeners();
-  }
-
-  removeFromWishList (ProductModel product) async{
-    _wishListProducts.removeWhere((element) => element.id == product.id);
-    notifyListeners();
-  }
-   */
-
   /// Method to initialize the products
   void initializeProductsList() async{
     final products =  await _productService.fetchAllProducts();
