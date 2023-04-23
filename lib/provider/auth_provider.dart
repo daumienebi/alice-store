@@ -18,3 +18,15 @@ class AuthProvider with ChangeNotifier{
     notifyListeners();
   }
 }
+/*
+class AuthState extends ChangeNotifier {
+  bool _isAuthenticated = false;
+
+  bool get isAuthenticated => _isAuthenticated;
+
+  set isAuthenticated(bool value) {
+    _isAuthenticated = value;
+    notifyListeners();
+  }
+}
+* */

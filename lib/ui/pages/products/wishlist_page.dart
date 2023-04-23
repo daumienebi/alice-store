@@ -65,7 +65,7 @@ class _WishListPageState extends State<WishListPage> {
                           'assets/lottie_animations/no-item-in-box.json',
                         ),
                         const Text(
-                          'There a no items in the wishlist',
+                          'There are no items in the wishlist',
                           style: TextStyle(fontSize: 15),
                         ),
                       ])

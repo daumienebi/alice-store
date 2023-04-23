@@ -197,19 +197,27 @@ class _HomePageState extends State<HomePage> {
             icon: badges.Badge(
               badgeContent: Consumer<CartProvider>(
                 builder: (context, cartProvider, child) {
-                  int productCount = 0;
                   if(userIsAuthenticated){
+                    print('User is authenticated');
+                    int productCount = cartProvider.getQuantity();
                     String userId = Provider.of<AuthProvider>(context, listen: false)
                         .currentUser!
                         .uid
                         .toString();
+                    // call the fetch items method so that the cartItems list
+                    // can be initialized
                     cartProvider.fetchItems(userId);
-                    productCount = cartProvider.getQuantity;
+                    productCount = cartProvider.getQuantity();
+                    return Text(
+                      productCount <= 9 ? productCount.toString() : '9+',
+                      style: const TextStyle(color: Colors.white),
+                    );
+                  }else{
+                    return Text(
+                      '0',
+                      style: const TextStyle(color: Colors.white),
+                    );
                   }
-                  return Text(
-                    productCount <= 9 ? productCount.toString() : '9+',
-                    style: const TextStyle(color: Colors.white),
-                  );
                 },
               ),
               position: badges.BadgePosition.topEnd(top: -18),

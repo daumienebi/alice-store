@@ -3,10 +3,8 @@ import 'package:alice_store/services/firestore/firestore_service.dart';
 import 'package:flutter/cupertino.dart';
 
 class WishListProvider with ChangeNotifier{
-
   final FirestoreService _firestoreService = FirestoreService();
   List<ProductModel> _wishListProducts = [];
-
 
   List<ProductModel> get getWishListProducts{
     return _wishListProducts;
@@ -31,5 +29,4 @@ class WishListProvider with ChangeNotifier{
     _wishListProducts = products;
     notifyListeners();
   }
-
 }
