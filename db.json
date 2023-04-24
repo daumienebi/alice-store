@@ -3,19 +3,19 @@
 
     {
       "id" : 1,
-      "name" : "Bolsas",
+      "name" : "Bags",
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/categories/bag.png",
       "description" : "Descripcion detallada de las bolsas hechas a mano."
     },
     {
       "id" : 2,
-      "name" : "Camisetas",
+      "name" : "Shirts",
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/categories/shirt.png",
       "description" : "Camisetas Alice con un diseño curado combinando los penkos."
     },
     {
       "id" : 3,
-      "name" : "Tejido de punto",
+      "name" : "Knitted bags",
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/categories/categoria_tejido.png",
       "description" : "Tejido de punto, bolsas especiales."
     }
@@ -25,7 +25,7 @@
 
     {
       "id" : 1,
-      "name" : "Bolsa 1",
+      "name" : "Bag 1",
       "categoryId" : 1,
       "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bag.png",
       "price" : 15.50,
@@ -40,7 +40,7 @@
     },
     {
       "id" : 2,
-      "name" : "Bolsa 2",
+      "name" : "Bag 2",
       "categoryId" : 1,
       "price" : 15.50,
       "in_stock" : true,
@@ -55,7 +55,7 @@
     },
     {
       "id" : 3,
-      "name" : "Bolsa 3",
+      "name" : "Bag 3",
       "categoryId" : 1,
       "price" : 17.00,
       "in_stock" : true,
@@ -70,7 +70,7 @@
     },
     {
       "id" : 4,
-      "name" : "Bolsa 4",
+      "name" : "Bag 4",
       "categoryId" : 1,
       "price" : 19.00,
       "in_stock" : true,
@@ -85,7 +85,7 @@
     },
     {
       "id" : 5,
-      "name" : "Camiseta 1",
+      "name" : "Shirt 1",
       "categoryId" : 2,
       "price" : 17.00,
       "in_stock" : true,
@@ -100,7 +100,7 @@
     },
     {
       "id" : 6,
-      "name" : "Camiseta 2",
+      "name" : "Shirt 2",
       "categoryId" : 2,
       "price" : 17.00,
       "in_stock" : true,
@@ -115,7 +115,7 @@
     },
     {
       "id" : 7,
-      "name" : "Camiseta 3",
+      "name" : "Shirt 3",
       "categoryId" : 2,
       "price" : 17.00,
       "in_stock" : true,
@@ -130,7 +130,7 @@
     },
     {
       "id" : 8,
-      "name" : "Bolsa Tejido 1",
+      "name" : "Knitted bag 1",
       "categoryId" : 3,
       "price" : 17.00,
       "in_stock" : false,
@@ -145,7 +145,7 @@
     },
     {
       "id" : 9,
-      "name" : "Bolsa Tejido 2",
+      "name" : "Knitted bag 2",
       "categoryId" : 3,
       "price" : 17.00,
       "in_stock" : true,
@@ -160,7 +160,7 @@
     },
     {
       "id" : 10,
-      "name" : "Bolsa Tejido 3",
+      "name" : "Knitted bag 3",
       "categoryId" : 3,
       "price" : 17.00,
       "in_stock" : true,
@@ -175,7 +175,7 @@
     },
     {
       "id" : 11,
-      "name" : "Bolsa Tejido 4",
+      "name" : "Knitted bag 4",
       "categoryId" : 3,
       "price" : 20.00,
       "in_stock" : false,
@@ -190,7 +190,7 @@
     },
     {
       "id" : 12,
-      "name" : "Bolsa Tejido 5",
+      "name" : "Knitted bag 5",
       "categoryId" : 3,
       "price" : 13.00,
       "in_stock" : true,
