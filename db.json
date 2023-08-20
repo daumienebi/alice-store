@@ -1,0 +1,287 @@
+{
+    "categories" : [
+
+    {
+      "id" : 1,
+      "name" : "Bags",
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/categories/bag.png",
+      "description" : "Descripcion detallada de las bolsas hechas a mano."
+    },
+    {
+      "id" : 2,
+      "name" : "Shirts",
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/categories/shirt.png",
+      "description" : "Camisetas Alice con un diseño curado combinando los penkos."
+    },
+    {
+      "id" : 3,
+      "name" : "Knitted bags",
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/categories/categoria_tejido.png",
+      "description" : "Tejido de punto, bolsas especiales."
+    }
+  ],
+
+  "products": [
+
+    {
+      "id" : 1,
+      "name" : "Bag 1",
+      "categoryId" : 1,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bag.png",
+      "price" : 15.50,
+      "in_stock" : true,
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    },
+    {
+      "id" : 2,
+      "name" : "Bag 2",
+      "categoryId" : 1,
+      "price" : 15.50,
+      "in_stock" : true,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tela_prod1.png",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucLorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    },
+    {
+      "id" : 3,
+      "name" : "Bag 3",
+      "categoryId" : 1,
+      "price" : 17.00,
+      "in_stock" : true,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tela_prod2.png",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    },
+    {
+      "id" : 4,
+      "name" : "Bag 4",
+      "categoryId" : 1,
+      "price" : 19.00,
+      "in_stock" : true,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tela_prod5.png",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    },
+    {
+      "id" : 5,
+      "name" : "Shirt 1",
+      "categoryId" : 2,
+      "price" : 17.00,
+      "in_stock" : true,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/shirt.png",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    },
+    {
+      "id" : 6,
+      "name" : "Shirt 2",
+      "categoryId" : 2,
+      "price" : 17.00,
+      "in_stock" : true,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/camiseta_prod6.png",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    },
+    {
+      "id" : 7,
+      "name" : "Shirt 3",
+      "categoryId" : 2,
+      "price" : 17.00,
+      "in_stock" : true,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/camiseta_prod8.png",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    },
+    {
+      "id" : 8,
+      "name" : "Knitted bag 1",
+      "categoryId" : 3,
+      "price" : 17.00,
+      "in_stock" : false,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tejido_prod4.png",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    },
+    {
+      "id" : 9,
+      "name" : "Knitted bag 2",
+      "categoryId" : 3,
+      "price" : 17.00,
+      "in_stock" : true,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/knitting.png",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    },
+    {
+      "id" : 10,
+      "name" : "Knitted bag 3",
+      "categoryId" : 3,
+      "price" : 17.00,
+      "in_stock" : true,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tejido_prod9.png",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    },
+    {
+      "id" : 11,
+      "name" : "Knitted bag 4",
+      "categoryId" : 3,
+      "price" : 20.00,
+      "in_stock" : false,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tejido_prod10.png",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    },
+    {
+      "id" : 12,
+      "name" : "Knitted bag 5",
+      "categoryId" : 3,
+      "price" : 13.00,
+      "in_stock" : true,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tejido_prod11.png",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    }
+
+  ],
+
+  "project_feeds" :
+  [
+    { 
+      "id" : 1,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image11.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 2,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image12.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 3,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image3.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 4,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image4.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 5,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image5.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 6,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image6.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 7,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image7.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 8,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image8.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 9,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image9.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 10,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image13.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 11,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image14.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 12,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image15.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 13,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image16.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 14,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image17.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    },
+    { 
+      "id" : 15,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/project_feed/image18.jpg",
+      "description" :"Random text to describe the image above, i dont know what to insert here so just leave this shitty text here for now i guess :)"
+    }
+  ]
+}
