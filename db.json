@@ -1,0 +1,207 @@
+{
+    "categories" : [
+
+    {
+      "id" : 1,
+      "name" : "Bags",
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/categories/bag.png",
+      "description" : "Descripcion detallada de las bolsas hechas a mano."
+    },
+    {
+      "id" : 2,
+      "name" : "Shirts",
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/categories/shirt.png",
+      "description" : "Camisetas Alice con un diseño curado combinando los penkos."
+    },
+    {
+      "id" : 3,
+      "name" : "Knitted bags",
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/categories/categoria_tejido.png",
+      "description" : "Tejido de punto, bolsas especiales."
+    }
+  ],
+
+  "products": [
+
+    {
+      "id" : 1,
+      "name" : "Bag 1",
+      "categoryId" : 1,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bag.png",
+      "price" : 15.50,
+      "in_stock" : true,
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    },
+    {
+      "id" : 2,
+      "name" : "Bag 2",
+      "categoryId" : 1,
+      "price" : 15.50,
+      "in_stock" : true,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tela_prod1.png",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucLorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    },
+    {
+      "id" : 3,
+      "name" : "Bag 3",
+      "categoryId" : 1,
+      "price" : 17.00,
+      "in_stock" : true,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tela_prod2.png",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    },
+    {
+      "id" : 4,
+      "name" : "Bag 4",
+      "categoryId" : 1,
+      "price" : 19.00,
+      "in_stock" : true,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tela_prod5.png",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    },
+    {
+      "id" : 5,
+      "name" : "Shirt 1",
+      "categoryId" : 2,
+      "price" : 17.00,
+      "in_stock" : true,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/shirt.png",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    },
+    {
+      "id" : 6,
+      "name" : "Shirt 2",
+      "categoryId" : 2,
+      "price" : 17.00,
+      "in_stock" : true,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/camiseta_prod6.png",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    },
+    {
+      "id" : 7,
+      "name" : "Shirt 3",
+      "categoryId" : 2,
+      "price" : 17.00,
+      "in_stock" : true,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/camiseta_prod8.png",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    },
+    {
+      "id" : 8,
+      "name" : "Knitted bag 1",
+      "categoryId" : 3,
+      "price" : 17.00,
+      "in_stock" : false,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tejido_prod4.png",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    },
+    {
+      "id" : 9,
+      "name" : "Knitted bag 2",
+      "categoryId" : 3,
+      "price" : 17.00,
+      "in_stock" : true,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/knitting.png",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    },
+    {
+      "id" : 10,
+      "name" : "Knitted bag 3",
+      "categoryId" : 3,
+      "price" : 17.00,
+      "in_stock" : true,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tejido_prod9.png",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    },
+    {
+      "id" : 11,
+      "name" : "Knitted bag 4",
+      "categoryId" : 3,
+      "price" : 20.00,
+      "in_stock" : false,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tejido_prod10.png",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    },
+    {
+      "id" : 12,
+      "name" : "Knitted bag 5",
+      "categoryId" : 3,
+      "price" : 13.00,
+      "in_stock" : true,
+      "image" : "https://raw.githubusercontent.com/daumienebi/alice_store/store_data/images/products/bolsa_tejido_prod11.png",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, felis finibus venenatis cursus, urna massa laoreet lectus, aliquet consectetur dui ipsum ac justo. Morbi dictum, nibh ut consectetur dignissim, dolor enim consequat enim, in faucibus sem nunc at dolor.",
+      "material" : "Material",
+      "weight" : "520g",
+      "brand" : "ALICESTORE",
+      "washable" : "Yes",
+      "warranty" : "No",
+      "handmade" : "Yes"
+    }
+  ]
+}
